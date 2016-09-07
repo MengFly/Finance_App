@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Finance_App</string>
+
+    <string name="versionName">1.0.3</string>
+
+    <!-- 全局的一些字符串 -->
+    <string name="btn_back">退出</string>
+    <string name="text_vip">VIP</string>
+    <string name="btn_ok">确定</string>
+    <string name="user_login_name">用户名1\-20个字符</string>
+
+    <!-- Splash界面 -->
+    <string name="act_splash_text_tip_tv">ENew\n\n不一样的生活</string>
+    <!-- 主界面 -->
+    <string name="main_activity_refresh_btn">刷新</string>
+    <string name="main_activity_voice_btn">语音</string>
+    <string name="main_activity_channel_add_btn">频道</string>
+    <string name="main_activity_user_btn">用户</string>
+
+    <!-- 用户登陆界面 -->
+    <string name="act_user_login_username_tv">用户名：</string>
+    <string name="act_user_login_password_tv">密   码：</string>
+    <string name="act_user_login_password_ev">请输入密码</string>
+    <string name="act_user_login_login_btn">登录</string>
+    <string name="act_user_login_nologin_btn">跳过登录</string>
+    <string name="act_user_login_regist_tv">点击注册</string>
+
+    <!-- 用户注册界面 -->
+    <string name="act_regist_title_tv">注册</string>
+    <string name="act_regist_username_tv">用户名</string>
+    <string name="act_regist_username_et">请输入您的电话号码</string>
+    <string name="act_regist_password_tv">密码</string>
+    <string name="act_regist_password_et">请输入密码大于6个字符</string>
+    <string name="act_regist_password_ok_tv">确认密码</string>
+    <string name="act_regist_password_ok_et">请再次输入密码</string>
+
+    <!-- 用户界面 -->
+    <string name="act_user_username_tv">未登录</string>
+    <string name="act_user_userlogin_tv">用户</string>
+    <string name="act_user_settingpush_tv">设置消息接收时间</string>
+    <string name="act_user_repeatvoice_tv">消息重读</string>
+    <string name="act_user_setpwd_tv">修改密码</string>
+    <string name="act_user_logout_tv">用户注销</string>
+
+    <!-- 添加频道界面 -->
+    <string name="act_add_channel_title_tv">自定义频道</string>
+    <string name="act_add_channel_select_style_tv">请选择检索方式</string>
+    <string name="act_add_channel_exchange_btn">确定添加</string>
+
+    <!-- 修改密码界面 -->
+    <string name="act_set_password_title_tv">修改用户密码</string>
+    <string name="act_set_password_old_pwd_tv">旧密码</string>
+    <string name="act_set_password_old_pwd_et">请输入您当前的密码</string>
+    <string name="act_set_password_new_pwd_tv">新密码</string>
+    <string name="act_set_password_new_pwd_et">请输入密码大于6个字符</string>
+    <string name="act_set_password_new_pwd2_tv">请再次输入密码</string>
+
+    <!-- 设置推送时间的 -->
+    <string name="act_set_time_title_tv">设置接收推送时间</string>
+    <string name="act_set_time_monday_cb">星期一</string>
+    <string name="act_set_time_tuesday_cb">星期二</string>
+    <string name="act_set_time_wednesday_cb">星期三</string>
+    <string name="act_set_time_friday_cb">星期五</string>
+    <string name="act_set_time_thursday_cb">星期四</string>
+    <string name="act_set_time_saturday_cb">星期六</string>
+    <string name="act_set_time_sunday_cb">星期日</string>
+    <string name="act_set_time_start_tv">开始推送时间</string>
+    <string name="act_set_time_end_tv">结束推送时间</string>
+    <string name="act_set_time_type_cb">24小时</string>
+    <string name="act_set_time_type_tv">接收时间段</string>
+    <string name="act_set_time_set_date_tv">接收日期设置</string>
+
+    <!-- Menu -->
+    <string name="menu_main_share_app">分享App</string>
+
+    <!-- 自定义频道界面 -->
+    <string name="act_add_channel_futures_tv">期货</string>
+    <string name="act_add_channel_stock_tv">股票</string>
+    <string name="act_add_channel_exchange_tv">"外汇 "</string>
+    <string name="act_add_channel_special_tv">特殊</string>
+    <string name="act_add_channel_money_tv">理财</string>
+    <string name="act_add_channel_funds_tv">基金</string>
+    <string name="copyright_fiance">CopyRight©Fiance</string>
+</resources>

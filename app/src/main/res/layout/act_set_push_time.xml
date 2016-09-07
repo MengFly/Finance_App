@@ -1,0 +1,161 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tv_back"
+            android:padding="10dp"
+            android:text="@string/act_set_time_title_tv"
+            android:textColor="@android:color/background_light" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dip"
+            android:orientation="vertical"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/act_set_time_set_date_tv"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <CheckBox
+                        android:id="@+id/act_set_time_monday_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/act_set_time_monday_cb"
+                        android:textSize="@dimen/text_size_default" />
+
+                    <CheckBox
+                        android:id="@+id/act_set_time_tuesday_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/act_set_time_tuesday_cb"
+                        android:textSize="@dimen/text_size_default" />
+
+                    <CheckBox
+                        android:id="@+id/act_set_time_wednesday_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/act_set_time_wednesday_cb"
+                        android:textSize="@dimen/text_size_default" />
+
+                    <CheckBox
+                        android:id="@+id/act_set_time_thursday_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/act_set_time_thursday_cb"
+                        android:textSize="@dimen/text_size_default" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <CheckBox
+                        android:id="@+id/act_set_time_friday_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/act_set_time_friday_cb"
+                        android:textSize="@dimen/text_size_default" />
+
+                    <CheckBox
+                        android:id="@+id/act_set_time_saturday_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/act_set_time_saturday_cb"
+                        android:textSize="@dimen/text_size_default" />
+
+                    <CheckBox
+                        android:id="@+id/act_set_time_sunday_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/act_set_time_sunday_cb"
+                        android:textSize="@dimen/text_size_default" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/act_set_time_type_tv"
+                    android:textSize="@dimen/text_size_default" />
+
+                <CheckBox
+                    android:id="@+id/timeRule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/act_set_time_type_cb" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act_set_time_start_tv"
+                android:textSize="@dimen/text_size_default" />
+
+            <TimePicker
+                android:id="@+id/start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act_set_time_end_tv"
+                android:textSize="@dimen/text_size_default" />
+
+            <TimePicker
+                android:id="@+id/end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/bu_setTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:background="@drawable/btn_back"
+                android:text="@string/btn_ok" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

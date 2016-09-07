@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:scrollbars="none" >
+
+    <!-- 这个界面用来展示升级成Vip后的好处 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_vip_1"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/ic_vip_1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="申请为Vip后可以接收Vip消息"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_vip_2"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_vip_2"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="申请为Vip自定义频道列表，定制频道后，会根据你定制的频道给您推送相应的消息"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_vip_3"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/ic_vip_3"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Vip用户定制的频道都在这个列表里面，进行统一管理，长按即可删除"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_user_setvip_back"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/act_set_vip_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="50dp"
+            android:focusable="false"
+            android:gravity="center_horizontal"
+            android:inputType="text" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/act_set_vip_user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:gravity="end"
+            android:hint="输入账号"
+            android:text="切换账号"
+            android:textColor="#f00"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:alpha="0.7"
+            android:background="@drawable/tv_back"
+            android:padding="10dp" >
+
+            <Button
+                android:id="@+id/act_set_vip_regist_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_back"
+                android:text="立即注册Vip" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        layout="@layout/vip_notify" />
+
+</LinearLayout>

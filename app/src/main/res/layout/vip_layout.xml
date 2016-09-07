@@ -1,0 +1,12 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vip_tv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableLeft="@drawable/item_vip_back"
+    android:drawablePadding="5dp"
+    android:drawableStart="@drawable/item_vip_back"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="@string/text_vip"
+    android:textColor="@android:color/holo_blue_bright"
+    android:textSize="@dimen/text_size_default" />

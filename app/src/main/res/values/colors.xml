@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="default_btn_back">#00B2EE</color>
+    <color name="select_btn_back">#00868B</color>
+    <color name="swipe_color_1">#00ff00</color>
+    <color name="swipe_color_2">#0000ff</color>
+    <color name="swipe_color_3">#ff0000</color>
+    <color name="none">#0000</color>
+    <color name="lightGray">#fccc</color>
+    <color name="HeightLightGray">#5dacee</color>
+    <color name="white">#fff</color>
+    <color name="app_theme_back">#5CACEE</color>
+    <color name="item_back_1">#AAEA025F</color>
+    <color name="item_back_2">#AA029ABC</color>
+    <color name="item_back_3">#AA754EA9</color>
+    <color name="item_back_4">#AA127D12</color>
+    <color name="item_back_5">#AAA5CC2A</color>
+
+    <!-- Color -->
+    <color name="color_red">#F60E21</color>
+
+    <!-- Text -->
+    <color name="text_link_color">#D52FA8</color>
+    <color name="text_white">#fff</color>
+</resources>

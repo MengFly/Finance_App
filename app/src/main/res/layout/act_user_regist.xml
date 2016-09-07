@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#1E90FF"
+        android:gravity="center"
+        android:text="@string/act_regist_title_tv"
+        android:textColor="#fff"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/act_regist_username_tv"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/text_size_default" />
+
+            <EditText
+                android:id="@+id/act_regist_user_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/et_back"
+                android:gravity="center_vertical"
+                android:hint="@string/act_regist_username_et"
+                android:inputType="number"
+                android:padding="5dp"
+                android:textSize="@dimen/text_size_small" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/act_regist_password_tv"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/text_size_default"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/act_regist_user_password_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/et_back"
+                android:gravity="center_vertical"
+                android:hint="@string/act_regist_password_et"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                android:textSize="@dimen/text_size_small" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/act_regist_password_ok_tv"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/text_size_default" />
+
+            <EditText
+                android:id="@+id/act_regist_user_password2_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/et_back"
+                android:gravity="center_vertical"
+                android:hint="@string/act_regist_password_ok_et"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                android:textSize="@dimen/text_size_small" />
+        </TableRow>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/act_regist_sure_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_back"
+        android:text="@string/act_regist_title_tv" />
+
+</LinearLayout>
