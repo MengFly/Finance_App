@@ -1,25 +1,26 @@
-package com.example.econonew.channel.object;
+package com.example.econonew.entity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
- * ChannelStock
+ * ChannelFunds
  * @author agnes
- *股票频道添加类
+ *基金频道添加类
  */
-public class ChannelStock extends AddChannel{
+public class ChannelFunds extends AddChannel {
 	private String name;   //频道名字
 	private JSONObject channelInfo;	//频道信息
 	private String type;	//类型
 	private String attribute;	//属性
 	private String code;	//交易代码
 
-	public ChannelStock(String name, JSONObject channelInfo) {
+	public ChannelFunds(String name, JSONObject channelInfo) {
 		super(name, channelInfo);
 		// TODO Auto-generated constructor stub
 		this.name=name;
+		this.channelInfo=channelInfo;
 		try {
-			type=channelInfo.get("股票名称").toString();
+			type=channelInfo.get("基金名称").toString();
 			attribute=channelInfo.get("信息类型").toString();
 			code=channelInfo.get("交易代码").toString();
 		} catch (JSONException e) {
@@ -27,19 +28,24 @@ public class ChannelStock extends AddChannel{
 			e.printStackTrace();
 			System.out.print("数据取出错误");
 		}
-		this.channelInfo=channelInfo;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public JSONObject getChannelInfo() {
 		return channelInfo;
 	}
-	/*设置频道信息
-	 * (non-Javadoc)
-	 * @see com.example.ob.ChannelInter#setChannelInfo()
-	 */
+
 	public boolean setChannelInfo() {
 		JSONObject obj=new JSONObject();
 		try {
-			obj.put("股票名称", type);
+			obj.put("基金名称", type);
 			obj.put("外汇类型：", attribute);
 			obj.put("交易代码：", code);
 			channelInfo.put(name, obj);
@@ -50,12 +56,6 @@ public class ChannelStock extends AddChannel{
 			return false;
 		}
 		return true;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public String getCode() {
 		return code;

@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.activity.User;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.econonew.R;
+import com.example.econonew.activity.BaseActivity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;

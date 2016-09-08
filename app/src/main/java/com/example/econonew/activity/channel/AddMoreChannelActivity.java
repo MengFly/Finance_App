@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.activity.channel;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
+import com.example.econonew.activity.BaseActivity;
 import com.example.econonew.customview.FlowLayout;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.main.object.AllMessage;

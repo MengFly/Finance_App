@@ -1,4 +1,4 @@
-package com.example.econonew.channel.object;
+package com.example.econonew.entity;
 
 import org.json.JSONObject;
 /**

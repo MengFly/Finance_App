@@ -91,7 +91,7 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
      * 通知Fragment停止刷新操作
      */
     public void stopFreash() {
-        mFragment.stopFreash();
+        mFragment.stopFresh();
     }
 
     /**

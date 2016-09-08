@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.econonew.R;
+import com.example.econonew.activity.main.MainActivity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
 

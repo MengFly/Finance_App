@@ -1,4 +1,4 @@
-package com.example.econonew.channel.object;
+package com.example.econonew.entity;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,22 +12,17 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.example.econonew.activity.BaseActivity;
-import com.example.econonew.activity.ChannelAddActivity;
-import com.example.econonew.activity.FinanceApplication;
-import com.example.econonew.activity.MainActivity;
+import com.example.econonew.activity.channel.ChannelAddActivity;
+import com.example.econonew.activity.main.MainActivity;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.main.object.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;
-import com.example.econonew.server.JsonCast;
-import com.example.econonew.server.NetClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 

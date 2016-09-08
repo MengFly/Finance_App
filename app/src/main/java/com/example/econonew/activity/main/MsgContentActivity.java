@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.activity.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.econonew.R;
+import com.example.econonew.activity.BaseActivity;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MsgContentActivity extends BaseActivity {

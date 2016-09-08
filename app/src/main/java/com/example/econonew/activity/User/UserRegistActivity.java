@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.activity.User;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
+import com.example.econonew.activity.BaseActivity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;

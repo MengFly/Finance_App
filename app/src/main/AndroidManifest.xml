@@ -42,7 +42,7 @@
         android:name=".activity.FinanceApplication"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".activity.main.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -52,53 +52,53 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ChannelAddActivity"
+            android:name=".activity.channel.ChannelAddActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.main.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.UserActivity"
+            android:name=".activity.User.UserActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".activity.UserSetPwdActivity"
+            android:name=".activity.User.UserSetPwdActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.UserLoginActivity"
+            android:name=".activity.User.UserLoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".activity.UserRegistActivity"
+            android:name=".activity.User.UserRegistActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.econonew.channel.view.ExchangeActivity"
+            android:name=".activity.channel.ExchangeActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.econonew.channel.view.StockActivity"
+            android:name=".activity.channel.StockActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.econonew.channel.view.FundsActivity"
+            android:name=".activity.channel.FundsActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.econonew.channel.view.MoneyActivity"
+            android:name=".activity.channel.MoneyActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.econonew.channel.view.FuturesActivity"
+            android:name=".activity.channel.FuturesActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.econonew.channel.view.SpecialActivity"
+            android:name=".activity.channel.SpecialActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -106,7 +106,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MsgContentActivity"
+            android:name=".activity.main.MsgContentActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -115,11 +115,11 @@
         </activity>
         <activity
             android:theme="@style/AppTheme"
-            android:name=".activity.AddMoreChannelActivity"
+            android:name=".activity.channel.AddMoreChannelActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.UserSetVipActivity"
+            android:name=".activity.User.UserSetVipActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>

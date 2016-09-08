@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.activity.channel;
 
 
 import android.content.Intent;
@@ -9,12 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.channel.view.ExchangeActivity;
-import com.example.econonew.channel.view.FundsActivity;
-import com.example.econonew.channel.view.FuturesActivity;
-import com.example.econonew.channel.view.MoneyActivity;
-import com.example.econonew.channel.view.SpecialActivity;
-import com.example.econonew.channel.view.StockActivity;
+import com.example.econonew.activity.BaseActivity;
+import com.example.econonew.activity.main.MainActivity;
 
 /**
  * ChannelAddActivity ������Ҫ��ʵ��ѡ���ǩ������Ƶ�������ҷ��ؽ����MainActivity

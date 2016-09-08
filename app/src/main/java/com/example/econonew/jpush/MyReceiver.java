@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.econonew.activity.SplashActivity;
+import com.example.econonew.activity.main.SplashActivity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.main.object.AllMessage;
 

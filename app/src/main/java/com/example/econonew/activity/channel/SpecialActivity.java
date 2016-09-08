@@ -1,4 +1,4 @@
-package com.example.econonew.channel.view;
+package com.example.econonew.activity.channel;
 
 
 import android.os.Bundle;

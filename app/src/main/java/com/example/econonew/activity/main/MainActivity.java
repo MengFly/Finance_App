@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.activity.main;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.econonew.R;
+import com.example.econonew.activity.BaseActivity;
+import com.example.econonew.activity.FinanceApplication;
+import com.example.econonew.activity.User.UserActivity;
+import com.example.econonew.activity.channel.ChannelAddActivity;
 import com.example.econonew.customview.ViewPagerIndicator;
 import com.example.econonew.main.object.AllMessage;
 import com.example.econonew.resource.Constant;
