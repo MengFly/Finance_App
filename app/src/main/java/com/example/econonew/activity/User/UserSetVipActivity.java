@@ -16,6 +16,7 @@ import com.example.econonew.activity.BaseActivity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.tools.URLManager;
 
 import org.json.JSONObject;
 
@@ -38,8 +39,7 @@ public class UserSetVipActivity extends BaseActivity {
 
 	@Override
 	protected void initDatas() {
-		userNameEt
-				.setText(Constant.user == null ? "" : Constant.user.getName());
+		userNameEt.setText(Constant.user == null ? "" : Constant.user.getName());
 	}
 
 	private void initListener() {
@@ -103,8 +103,7 @@ public class UserSetVipActivity extends BaseActivity {
 		showProDialog();
 		new Thread() {
 			public void run() {
-				String url = Constant.URL + "/" + Constant.OPERATION_SET_VIP
-						+ "?phone=" + userName;
+				String url = URLManager.getSetVipURL(userName);
 				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
 
 					@Override

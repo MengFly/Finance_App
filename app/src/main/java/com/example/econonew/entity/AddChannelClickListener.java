@@ -20,6 +20,7 @@ import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.tools.URLManager;
 
 import org.json.JSONObject;
 
@@ -67,10 +68,8 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 	}
 
 	private void addChannelThread() {
-		final String msg = encodeParams();// 获取转码后的url
-		Log.v("channel_info", msg);
 		((BaseActivity) mContext).showProDialog();
-		final String url = Constant.URL + "/" + Constant.OPERATION_SETCHNL + "?" + msg;
+		final String url = URLManager.getSetChannelURL(Constant.user.getName(), mAddChannel);
 		final NetClient.OnResultListener responseListener = new NetClient.OnResultListener() {
 
 			@Override
@@ -105,26 +104,6 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 			};
 		}.start();
 
-	}
-
-	// 对咬传输的Url进行转码
-	private String encodeParams() {
-		StringBuilder msg = new StringBuilder();
-		try {
-			msg.append("phone=");
-			msg.append(Constant.user.getName());
-			msg.append("&typeName=");
-			msg.append(URLEncoder.encode(mAddChannel.getName(), "utf-8"));
-			msg.append("&domainName=");
-			msg.append(URLEncoder.encode(mAddChannel.getType(), "utf-8"));
-			msg.append("&stairName=");
-			msg.append(URLEncoder.encode(mAddChannel.getAttribute(), "utf-8"));
-			msg.append("&stockCode=");
-			msg.append(URLEncoder.encode(mAddChannel.getCode(), "utf-8"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return msg.toString();
 	}
 
 	private DialogInterface.OnClickListener okListener, cancelListener;

@@ -16,6 +16,7 @@ import com.example.econonew.jpush.ExampleUtil;
 import com.example.econonew.jpush.PushSwitch;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.tools.URLManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,16 +33,15 @@ import cn.jpush.android.api.JPushInterface;
 public class SplashActivity extends BaseActivity {
 
 	private TextView textTipTv;// 显示提示的文字
-	private TextView versionNameTv;
+	private TextView versionNameTv;//版本信息
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.activity_splash);
 		textTipTv = (TextView) findViewById(R.id.act_splash_test_tip_tv);
 		versionNameTv = (TextView) findViewById(R.id.act_splash_version);
-		versionNameTv.setText(versionNameTv.getText().toString() + " V " + getVersionName());
-		ObjectAnimator animator = ObjectAnimator.ofFloat(textTipTv, "alpha",
-				0.0f, 1.0f);
+		versionNameTv.setText(getVersionName());
+		ObjectAnimator animator = ObjectAnimator.ofFloat(textTipTv, "alpha", 0.0f, 1.0f);
 		animator.setDuration(1000).setStartDelay(500);
 		animator.start();
 	}
@@ -60,8 +60,9 @@ public class SplashActivity extends BaseActivity {
 		initTimer();
 	}
 
+	//获取版本号信息
 	public String getVersionName() {
-		return getResources().getString(R.string.versionName);
+		return versionNameTv.getText().toString() + " V " + getResources().getString(R.string.versionName);
 	}
 
 	/** 设置时间延迟 */
@@ -76,9 +77,7 @@ public class SplashActivity extends BaseActivity {
 					intent.setClass(mContext, UserLoginActivity.class);
 				} else {
 					Constant.user = getUserInfo();
-					String url = Constant.URL + "/" + Constant.OPERATION_LOGIN
-							+ "?phone=" + Constant.user.getName()
-							+ "&password=" + Constant.user.getPwd();
+					String url = URLManager.getLoginURL(Constant.user);
 					NetClient.getInstance().excuteGetForString(mContext, url, null);// 模拟登录
 					intent.setClass(mContext, MainActivity.class);
 				}
@@ -90,11 +89,7 @@ public class SplashActivity extends BaseActivity {
 
 	/** 判断Cookie是否过期 */
 	public boolean cookieIsGuoqi() {
-		if (getUserInfo() == null) {// 如果本地存储本地存储的User为空，则Cookie过期
-			return true;
-		} else {
-			return false;
-		}
+		return getUserInfo() == null;// 如果本地存储本地存储的User为空，则Cookie过期
 	}
 
 	// for receive customer msg from jpush server

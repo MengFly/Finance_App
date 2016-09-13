@@ -18,6 +18,7 @@ import com.example.econonew.resource.Constant;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.tools.EncodeStrTool;
+import com.example.econonew.tools.URLManager;
 
 import org.json.JSONObject;
 /**
@@ -38,6 +39,7 @@ public class UserSetPwdActivity extends BaseActivity {
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_user_setpwd);
+		initActionBar("修改密码",true);
 		oldPwdEt = (EditText) findViewById(R.id.act_set_password_old_pwd_et);
 		newPwdEt = (EditText) findViewById(R.id.act_set_password_new_pwd_et);
 		newPwd2Et = (EditText) findViewById(R.id.act_set_password_new_pwd2_tv);
@@ -80,9 +82,7 @@ public class UserSetPwdActivity extends BaseActivity {
 		showProDialog();
 		String oldEncodePass = EncodeStrTool.getInstance().getEncodeMD5Str(old_pwd);
 		String newEncodePass = EncodeStrTool.getInstance().getEncodeMD5Str(new_pwd1);
-		final String url = Constant.URL + "/" + Constant.OPERATION_SETPWD
-				+ "?phone=" + Constant.user.getName() + "&password=" + newEncodePass
-				+ "&oldPswd=" + oldEncodePass;
+		final String url = URLManager.getSetPassWordURL(Constant.user.getName(), oldEncodePass, newEncodePass);
 
 		final DialogInterface.OnClickListener setPwdOkListener = new DialogInterface.OnClickListener() {
 

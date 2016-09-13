@@ -25,5 +25,7 @@
 
     <!-- Text -->
     <color name="text_link_color">#D52FA8</color>
+    <color name="text_hint_color">#aaa4a4</color>
     <color name="text_white">#fff</color>
+    <color name="text_black">#000</color>
 </resources>

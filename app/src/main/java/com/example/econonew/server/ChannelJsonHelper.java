@@ -21,6 +21,8 @@ import static com.example.econonew.server.JsonCast.*;
  */
 public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 
+	private static final String TAG = "ChannelJsonHelper";
+	
 	public ChannelJsonHelper(Context context) {
 		super(context);
 	}
@@ -34,9 +36,11 @@ public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 	@Override
 	public List<ChannelEntity> getItemAllFromJson(String jsonString) {
 		List<ChannelEntity> channels = new ArrayList<>();
-		Log.v("json", jsonString);
 		JSONObject channelObj = getJsonObject(jsonString);
 		JSONArray channelArray = getJsonArray(channelObj, "result");
+		if(channelArray == null) {
+			return channels;
+		}
 		for (int i = 0; i < channelArray.length(); i++) {
 			JSONObject obj = getJsonObject(channelArray, i);
 			ChannelEntity entity = getChannel(obj);
@@ -45,32 +49,29 @@ public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 		return channels;
 	}
 
-	/** ��JsonObject�����ȡChannel */
 	private ChannelEntity getChannel(JSONObject obj) {
 		JSONObject businessTypeObj = getJSONObject(obj, "businessType");
 		JSONObject businessDomainObj = getJSONObject(obj, "businessDomain");
 		JSONObject stairObj = getJSONObject(obj, "stair");
-		String channelName = null;
-		String channelType = null;
-		String channelAttribute = null;
-		if (businessTypeObj != null) {
-			channelName = getString(businessTypeObj, "name");
-		}
-		if (businessDomainObj != null) {
-			channelType = getString(businessDomainObj, "name");
-		}
-		if (stairObj != null) {
-			channelAttribute = getString(stairObj, "name");
-		}
+		String channelName = getString(businessTypeObj, "name");;
+		String channelType =  getString(businessDomainObj, "name");
+		String channelAttribute = getString(stairObj, "name");
+		int channelId = getInt(obj, "id");
+		int businessTypeId = getInt(businessTypeObj, "id");
+		int businessDomainId = getInt(businessDomainObj, "id");
+		int stairId = getInt(stairObj, "id");
 		String code = getString(obj, "stock");
-		int id = getInt(obj, "id");
-		Log.v("testUtils", id + "");
+		Log.d(TAG, "getChannel: " + "channelId " + channelId + " typeId " + businessTypeId + "domainId " + businessDomainId + " stairId " + stairId);
+		
 		ChannelEntity entity = new ChannelEntity();
+		entity.setBusinessTypeId(businessTypeId);
+		entity.setBusinessDomainId(businessDomainId);
+		entity.setStairId(stairId);
 		entity.setName(channelName);
 		entity.setType(channelType);
 		entity.setAttribute(channelAttribute);
 		entity.setCode(code);
-		entity.setId(id);
+		entity.setId(channelId);
 		return entity;
 	}
 

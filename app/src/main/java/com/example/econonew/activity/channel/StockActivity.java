@@ -78,7 +78,7 @@ public class StockActivity extends BaseActivity implements OnClickListener {
 				dialogName.setDialog();
 				break;
 			case R.id.stock_info:
-				DialogTool dialogInfo = new DialogTool(this, ChannelListManager.getChannelSecondLable(), stock_info_show);
+				DialogTool dialogInfo = new DialogTool(this, ChannelListManager.getChannelSecondLabel(), stock_info_show);
 				dialogInfo.setDialog();
 				break;
 			default:

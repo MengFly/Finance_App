@@ -99,7 +99,6 @@ public abstract class JsonHelperImpl<T> implements JsonHelper<T> {
 			public void run() {
 				Toast.makeText(context, errorTip == null ? "连接失败" : errorTip,
 						Toast.LENGTH_SHORT).show();
-
 			}
 		});
 	}

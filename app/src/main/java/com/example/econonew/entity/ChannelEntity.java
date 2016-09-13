@@ -17,6 +17,36 @@ public class ChannelEntity {
 
 	private int id;// 频道的id。删除频道的时候要用到
 
+	private int businessDomainId;
+
+	private int businessTypeId;
+
+	private int stairId;
+
+	public void setBusinessDomainId(int businessDomainId) {
+		this.businessDomainId = businessDomainId;
+	}
+
+	public void setBusinessTypeId(int businessTypeId) {
+		this.businessTypeId = businessTypeId;
+	}
+
+	public void setStairId(int stairId) {
+		this.stairId = stairId;
+	}
+
+	public int getBusinessDomainId() {
+		return businessDomainId;
+	}
+
+	public int getBusinessTypeId() {
+		return businessTypeId;
+	}
+
+	public int getStairId() {
+		return stairId;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -33,14 +33,14 @@ public class ChannelListManager {
 	 *
 	 * @param channelName
 	 *            频道的类型
-	 * @return
+	 * @return 频道对应的一级标签
 	 */
 	public static String[] getChannelFirstLable(String channelName) {
 		return channelInfo.get(channelName);
 	}
 
 	/** 获取二级标签 */
-	public static String[] getChannelSecondLable() {
+	public static String[] getChannelSecondLabel() {
 		return CHANNEL_LABEL;
 	}
 

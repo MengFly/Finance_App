@@ -80,7 +80,7 @@ public class FuturesActivity extends BaseActivity implements OnClickListener {
 				dialogName.setDialog();
 				break;
 			case R.id.futures_info:
-				DialogTool dialogInfo = new DialogTool(this, ChannelListManager.getChannelSecondLable(), futures_info_show);
+				DialogTool dialogInfo = new DialogTool(this, ChannelListManager.getChannelSecondLabel(), futures_info_show);
 				dialogInfo.setDialog();
 				break;
 			default:

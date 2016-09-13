@@ -20,6 +20,7 @@ import com.example.econonew.resource.Constant;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.tools.ChannelListManager;
+import com.example.econonew.tools.URLManager;
 
 import org.json.JSONObject;
 
@@ -104,7 +105,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 		for (String channelName : Constant.publicItemNames) {
 			String[] channelFistLabels = ChannelListManager.getChannelFirstLable(channelName);
 			for (String channelFistLabel : channelFistLabels) {
-				String[] secondLabels = ChannelListManager.getChannelSecondLable();
+				String[] secondLabels = ChannelListManager.getChannelSecondLabel();
 				for (String secondLabel : secondLabels) {
 					ChannelEntity entity = new ChannelEntity();
 					entity.setName(channelName);
@@ -121,9 +122,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	// 判断频道是否添加过了
 	private boolean isAdded(ChannelEntity channel) {
 		for (ChannelEntity addedChannel : mAddedChannelList) {
-			if (addedChannel.equals(channel)) {
-				return true;
-			}
+			return addedChannel.equals(channel);
 		}
 		return false;
 	}
@@ -191,7 +190,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 				for (int i = 0; i < addList.size(); i++) {
 					final int max = addList.size();
 					final ChannelEntity entity = addList.get(i);
-					final String url = Constant.URL + "/" + Constant.OPERATION_SETCHNL + "?" + encodeParams(entity);
+					final String url = URLManager.getSetChannelURL(Constant.user.getName(), entity);
 					NetClient.getInstance().excuteGetForString(mContext, url, new NetClient.OnResultListener() {
 
 						@Override
@@ -247,25 +246,4 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 			showTipDialog("添加完成", tipMessage, null, null);
 		}
 	}
-
-	// 对要传输的URL进行转码
-	private String encodeParams(ChannelEntity entity) {
-		StringBuilder msg = new StringBuilder();
-		try {
-			msg.append("phone=");
-			msg.append(Constant.user.getName());
-			msg.append("&typeName=");
-			msg.append(URLEncoder.encode(entity.getName(), "utf-8"));
-			msg.append("&domainName=");
-			msg.append(URLEncoder.encode(entity.getType(), "utf-8"));
-			msg.append("&stairName=");
-			msg.append(URLEncoder.encode(entity.getAttribute(), "utf-8"));
-			msg.append("&stockCode=");
-			msg.append(URLEncoder.encode(entity.getCode(), "utf-8"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return msg.toString();
-	}
-
 }

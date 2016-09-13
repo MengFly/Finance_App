@@ -1,6 +1,9 @@
 
 package com.example.econonew.resource;
 
+import com.example.econonew.entity.ChannelEntity;
+import com.example.econonew.entity.MsgItemEntity;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -11,19 +14,6 @@ import java.util.Map;
  */
 public class Constant {
 
-    // 中间层服务器的常量
-    public static final String URL = "http://115.28.188.113:8080/Finance_Server1.0.0"; // 中间服务器地址
-    public static final String OPERATION_CONNECTION = "connect.action"; // 连接操作
-    public static final String OPERATION_LOGIN = "login.action"; // 登录操作
-    public static final String OPERATION_LOGOUT = "logout.action"; // 注销操作
-    public static final String OPERATION_REGIST = "regist.action"; // 注册操作
-    public static final String OPERATION_SETCHNL = "setchnl.action"; // 设置频道操作
-    public static final String OPERATION_GETCHNL = "getchnl.action"; // 获取自定义频道操作
-    public static final String OPERATION_SETPWD = "uppswd.action"; // 修改密码的操作
-    public static final String OPERATION_MSG = "message.action";// 显示消息内容的操作
-    public static final String OPERATION_SET_VIP = "setvip.action";
-    public static final String OPERATION_DELETE_CHANNEL = "delchnl.action";// 删除频道操作
-
     public static final String SPF_KEY_USER = "userInfo";
     public static final String SPF_KEY_UPDATE_DATE = "updateDate";
 
@@ -31,6 +21,11 @@ public class Constant {
 
     // 用户对象
     public static UserInfo user;
+
+    //对用户频道的缓存
+    public static List<ChannelEntity> cacheUserChannelList;
+    //对公共信息的缓存
+    public static Map<String, List<MsgItemEntity>> cachePublicMsgList;
 
     /**
      * 各个公共栏目的名称

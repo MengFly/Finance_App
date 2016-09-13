@@ -82,7 +82,7 @@ public class ExchangeActivity extends BaseActivity implements OnClickListener {
                 dialogName.setDialog();
                 break;
             case R.id.exchange_info:
-                DialogTool dialogInfo = new DialogTool(this, ChannelListManager.getChannelSecondLable(),
+                DialogTool dialogInfo = new DialogTool(this, ChannelListManager.getChannelSecondLabel(),
                         exchange_info_show);
                 dialogInfo.setDialog();
                 break;

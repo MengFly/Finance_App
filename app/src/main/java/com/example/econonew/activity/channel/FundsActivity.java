@@ -79,7 +79,7 @@ public class FundsActivity extends BaseActivity implements OnClickListener {
 				dialogName.setDialog();
 				break;
 			case R.id.funds_info:
-				DialogTool dialoginfo = new DialogTool(this, ChannelListManager.getChannelSecondLable(), funds_info_show);
+				DialogTool dialoginfo = new DialogTool(this, ChannelListManager.getChannelSecondLabel(), funds_info_show);
 				dialoginfo.setDialog();
 				break;
 			default:

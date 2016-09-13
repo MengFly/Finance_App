@@ -21,6 +21,9 @@ public class JsonCast {
 
 	public static JSONArray getJsonArray(JSONObject obj, String where) {
 		try {
+			if(obj == null) {
+				return null;
+			}
 			return obj.getJSONArray(where);
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, "JSONException in getJsonArray", e);
@@ -28,9 +31,12 @@ public class JsonCast {
 		}
 	}
 
-	public static JSONObject getJsonObject(JSONArray josnArray, int i) {
+	public static JSONObject getJsonObject(JSONArray jsonArray, int i) {
 		try {
-			return josnArray.getJSONObject(i);
+			if(jsonArray == null) {
+				return null;
+			}
+			return jsonArray.getJSONObject(i);
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, "JSONException in getJsonObject", e);
 			return null;
@@ -48,7 +54,11 @@ public class JsonCast {
 
 	public static String getString(JSONObject obj, String where) {
 		try {
-			return obj.getString(where);
+			if(obj == null) {
+				return null;
+			} else {
+				return obj.getString(where);
+			}
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, "JSONException in getString", e);
 			return null;
@@ -57,6 +67,9 @@ public class JsonCast {
 	
 	public static JSONObject getJSONObject(JSONObject obj, String string) {
 		try {
+			if(obj == null) {
+				return null;
+			}
 			return obj.getJSONObject(string);
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, "JSONException in getJSONObject", e);
@@ -66,6 +79,9 @@ public class JsonCast {
 	
 	public static int getInt(JSONObject obj, String string) {
 		try {
+			if(obj == null) {
+				return 0;
+			}
 			return obj.getInt(string);
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, "JSONException in getInt", e);

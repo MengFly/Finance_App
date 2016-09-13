@@ -22,6 +22,7 @@ import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.tools.URLManager;
 
 import org.json.JSONObject;
 
@@ -218,6 +219,8 @@ public class UserActivity extends BaseActivity {
 	private void userLogoutClick() {
 		if (Constant.user != null) {
 			showProDialog();
+			userRigistTv.setClickable(true);
+			userLoginTv.setClickable(true);
 			userLogoutThread(Constant.user);// 进入注销的线程
 		} else {
 			DialogInterface.OnClickListener loginListener = new DialogInterface.OnClickListener() {
@@ -233,8 +236,7 @@ public class UserActivity extends BaseActivity {
 
 	/** 开启一个用户注销的线程 启动线程链接服务器根据用户名以及电话号码进行注销操作 */
 	private void userLogoutThread(UserInfo user) {
-		final String url = Constant.URL + "/" + Constant.OPERATION_LOGOUT + "?"
-				+ "phone=" + Constant.user.getName();
+		final String url = URLManager.getLogoutURL(user.getName());
 		final NetClient.OnResultListener requestListener = new NetClient.OnResultListener() {// 注销成功后的回调事件
 
 			@Override

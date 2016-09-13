@@ -19,6 +19,9 @@ import com.example.econonew.resource.UserInfo;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.UserJsonHelper;
 import com.example.econonew.tools.EncodeStrTool;
+import com.example.econonew.tools.URLManager;
+
+import java.net.URL;
 
 /**
  * UserLoginActivity 此类是用户管理用户登录的类，并且提供用户注册的接口
@@ -90,7 +93,6 @@ public class UserLoginActivity extends BaseActivity {
             noLoginBtn.setVisibility(View.GONE);
         }
         initActionBar("登录", !isStartLogin);
-
     }
 
     // 注册按钮的点击事件函数
@@ -116,8 +118,7 @@ public class UserLoginActivity extends BaseActivity {
      */
     private void loginThread(final String userNameStr, final String userPasswordStr) {
         final String encodePass = EncodeStrTool.getInstance().getEncodeMD5Str(userPasswordStr);
-        final String url = Constant.URL + "/" + Constant.OPERATION_LOGIN
-                + "?phone=" + userNameStr + "&password=" + encodePass;
+        final String url = URLManager.getLoginURL(userNameStr, encodePass);
         final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {

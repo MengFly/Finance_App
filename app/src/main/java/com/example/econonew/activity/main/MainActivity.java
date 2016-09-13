@@ -63,8 +63,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		boolean isLoadedData = SettingManager.getInstance().isLoadedDatas();
 		if (!isLoadedData) {// 如果之前没有加载过数据，则加载数据
 			showProDialog();
+			FinanceApplication.getInstance().refreshUserData(Constant.user);//先初始化用户数据，便于对以后的数据过滤
 			FinanceApplication.getInstance().refreshPublicData();
-			FinanceApplication.getInstance().refreshUserData(Constant.user);
 		}
 
 	}

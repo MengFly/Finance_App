@@ -21,6 +21,7 @@ import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.ResponseJsonHelper;
 import com.example.econonew.tools.SettingManager;
+import com.example.econonew.tools.URLManager;
 import com.example.econonew.utils.MsgListUtils;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
@@ -37,6 +38,8 @@ import java.util.List;
 public class FinanceApplication extends Application {
 
 	public static final int HANDLER_STATE_OK = 0x09786;
+
+	private static final String TAG = "FinanceApplication";
 
 	public static FinanceApplication app = null;
 
@@ -56,8 +59,7 @@ public class FinanceApplication extends Application {
 	public void refreshPublicData() {
 		new Thread() {
 			public void run() {
-				String url = Constant.URL + "/" + Constant.OPERATION_CONNECTION + "?phone=''";// ����http����
-
+				String url = URLManager.getConnectURL();
 				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
 
 					@Override
@@ -72,7 +74,6 @@ public class FinanceApplication extends Application {
 						new ResponseJsonHelper().handleInfomation(map);
 					};
 				};
-
 				NetClient.getInstance().excuteGetForString(app, url, listener);
 			};
 		}.start();
@@ -81,7 +82,6 @@ public class FinanceApplication extends Application {
 	public void refreshUserData(UserInfo user) {
 		List<ChannelEntity> channelList = null;
 		if (user != null && user.isVIP()) {
-			Log.v("testUtils", "not null && isVip");
 			channelList = new DB_Information(app).getChannel(user);
 			if (!todayIsUppdate(user.getName())) {
 				getChannelFromNet(user);
@@ -98,10 +98,7 @@ public class FinanceApplication extends Application {
 		SharedPreferences spf = getSharedPreferences(Constant.SPF_KEY_UPDATE_DATE, MODE_PRIVATE);
 		String updateDate = spf.getString(userName, null);
 		String nowDate = SimpleDateFormat.getDateInstance().format(new Date());
-		if (nowDate.equals(updateDate)) {
-			return true;
-		}
-		return false;
+		return nowDate.equals(updateDate);
 	}
 
 	private void saveUpdateDate(String userName) {
@@ -111,13 +108,17 @@ public class FinanceApplication extends Application {
 		edit.apply();
 	}
 
+	/**
+	 * 	从网络上面获取用户的频道信息
+	 * @param user 用户
+	 */
 	public void getChannelFromNet(final UserInfo user) {
-		final String url = Constant.URL + "/" + Constant.OPERATION_GETCHNL + "?phone=" + user.getName();
+		final String url = URLManager.getChannelURL(user.getName());
 		final NetClient.OnResultListener responseListener = new NetClient.OnResultListener() {
 
 			@Override
 			public void onSuccess(String response) {
-				// writeFile(response);
+				Log.d(TAG, "onSuccess: " + response);
 				saveUpdateDate(user.getName());
 				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
 				List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);

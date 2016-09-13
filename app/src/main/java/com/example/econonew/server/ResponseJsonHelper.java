@@ -3,6 +3,7 @@ package com.example.econonew.server;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.main.object.AllMessage;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.tools.URLManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +65,7 @@ public class ResponseJsonHelper {
 		String msgItemTitle = object.getString("title");
 		String msgItemContent = object.getString("context");
 		int msgItemId = object.getInt("id");
-		String msgItemContentUrl = Constant.URL + "/" + Constant.OPERATION_MSG + "?id=" + msgItemId;
+		String msgItemContentUrl = URLManager.getMsgContentURL(msgItemId);
 		String msgItemGeneral = getMsgGeneralByContent(msgItemContent);
 		String msgItemImageUrl = object.getString("picture");
 		int level = object.getInt("level");

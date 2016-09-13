@@ -9,10 +9,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -45,18 +45,21 @@ import java.util.Map;
  * @author agnes 用来创建viewpager的Fragment 在MyViewPager中使用
  */
 public class MsgListFragment extends Fragment implements OnItemClickListener,
-        OnItemLongClickListener {
+        OnItemLongClickListener,AbsListView.OnScrollListener {
 
+    private static final String TAG = "MsgListFragment";
+
+    //用于存储已经实例化的Fragment，下次再需要的时候可以直接从Map里面进行获取，提高效率
     private static Map<String, MsgListFragment> fragmentManager = new HashMap<>();
 
     private String fragmentName;
     private AllMessage mMessage;
 
-    private ListView msgList_lv;
+    private ListView msgListLV;
     private MsgListViewAdapter msgAdapter;
-    private List<MsgItemEntity> msgList = new ArrayList<MsgItemEntity>();
+    private List<MsgItemEntity> msgList = new ArrayList<>();
 
-    private List<ChannelEntity> channelList = new ArrayList<ChannelEntity>();
+    private List<ChannelEntity> channelList = new ArrayList<>();
     private ChannelListViewAdapter channelAdapter;
 
     // 刷新视图
@@ -79,8 +82,6 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
                 hintProDialog();
             }
         }
-
-        ;
     };
 
     @Override
@@ -109,34 +110,31 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
 
         noMsgTip = (TextView) view.findViewById(R.id.msg_no_tip_tv);
 
-        msgList_lv = (ListView) view.findViewById(R.id.msg_listview);
+        msgListLV = (ListView) view.findViewById(R.id.msg_listview);
         if (fragmentName.equals("自定义")) {
             channelAdapter = new ChannelListViewAdapter(getActivity(),
                     channelList);
-            msgList_lv.setAdapter(channelAdapter);
+            msgListLV.setAdapter(channelAdapter);
         } else {
             msgAdapter = new MsgListViewAdapter(getActivity(), msgList,
-                    msgList_lv, fragmentName);
-            msgList_lv.setAdapter(msgAdapter); // 给listView添加适配器
-
+                    msgListLV, fragmentName);
+            msgListLV.setAdapter(msgAdapter);
         }
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.msg_fresh);
         refreshLayout.setColorSchemeResources(R.color.swipe_color_1,
                 R.color.swipe_color_2, R.color.swipe_color_3);
         refreshLayout.setSize(SwipeRefreshLayout.LARGE);
-        refreshLayout.setProgressViewEndTarget(true, 100);
 
         initListener();
     }
 
     private void initListener() {
         if (fragmentName.equals("自定义")) {
-            msgList_lv.setOnItemLongClickListener(this);
+            msgListLV.setOnItemLongClickListener(this);
         } else {
-            Log.v("testUtils", "setOnItemClickListener");
-            msgList_lv.setOnItemClickListener(this);
+            msgListLV.setOnItemClickListener(this);
         }
-
+        msgListLV.setOnScrollListener(this);
         refreshLayout
                 .setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
@@ -153,6 +151,11 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
 
     }
 
+    //从本地数据库加载数据
+    private void loadDatasFromDatabases() {
+        //TODO 还没有实现的方法
+    }
+
     /**
      * 为列表项设置内容，或者用于刷新
      *
@@ -164,6 +167,11 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
         handler.sendEmptyMessage(FinanceApplication.HANDLER_STATE_OK);
     }
 
+    /**
+     * 为列表项设置内容，或者用于刷新
+     *
+     * @param list 列表项的内容
+     */
     public void setChannelList(List<ChannelEntity> list) {
         this.channelList.clear();
         this.channelList.addAll(list);
@@ -180,7 +188,6 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
         Bundle bundle = getArguments();
         if (bundle != null) {
             fragmentName = bundle.getString("name");
-            Log.v("test", fragmentName);
             mMessage = AllMessage.getInstance(fragmentName);
             if (fragmentName.equals("自定义")) {
                 setChannelList(mMessage.getChannelList());
@@ -234,9 +241,7 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
 
     //请求删除频道的线程
     private void deleteChannelThread(final ChannelEntity entity) {
-        final String url = Constant.URL + "/"
-                + Constant.OPERATION_DELETE_CHANNEL + "?phone="
-                + Constant.user.getName() + "&channelId=" + entity.getId();
+        final String url = URLManager.getDeleteChannelURL(Constant.user.getName(), entity);
         final NetClient.OnResultListener listener = new NetClient.OnResultListener() {
 
             @Override
@@ -288,7 +293,6 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
         } else {
             Bundle bundle = new Bundle();
             bundle.putString("name", fragmentName);
-            Log.v("testLog", fragmentName);
             MsgListFragment fragment = new MsgListFragment();
             fragment.setArguments(bundle);
             new AllMessage(context, fragment, fragmentName);
@@ -344,4 +348,15 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
 
     }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (firstVisibleItem + visibleItemCount == totalItemCount) {
+            loadDatasFromDatabases();//从本地数据库加载数据
+        }
+    }
 }
