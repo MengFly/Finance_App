@@ -12,10 +12,9 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.econonew.activity.BaseActivity;
-import com.example.econonew.activity.channel.ChannelAddActivity;
-import com.example.econonew.activity.main.MainActivity;
-import com.example.econonew.entity.ChannelEntity;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.channel.ChannelAddActivity;
+import com.example.econonew.view.activity.main.MainActivity;
 import com.example.econonew.main.object.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;

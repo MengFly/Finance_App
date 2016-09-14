@@ -29,6 +29,35 @@ public class MsgItemEntity implements Serializable {
 
 	private boolean isLove;// 是否收藏
 
+	private int businessDomainId;
+
+	private int businessTypeId;
+
+	private int stairId;
+
+	public void setBusinessDomainId(int businessDomainId) {
+		this.businessDomainId = businessDomainId;
+	}
+
+	public void setBusinessTypeId(int businessTypeId) {
+		this.businessTypeId = businessTypeId;
+	}
+
+	public void setStairId(int stairId) {
+		this.stairId = stairId;
+	}
+
+	public int getBusinessDomainId() {
+		return businessDomainId;
+	}
+
+	public int getBusinessTypeId() {
+		return businessTypeId;
+	}
+
+	public int getStairId() {
+		return stairId;
+	}
 
 	/**
 	 * @param msgTitle

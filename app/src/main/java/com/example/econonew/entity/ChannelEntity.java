@@ -3,7 +3,7 @@ package com.example.econonew.entity;
 
 import android.text.TextUtils;
 
-import com.example.econonew.activity.BaseActivity;
+import com.example.econonew.view.activity.BaseActivity;
 
 public class ChannelEntity {
 

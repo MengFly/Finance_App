@@ -1,13 +1,12 @@
 package com.example.econonew.main.object;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;
-import com.example.econonew.tools.MsgListFragment;
+import com.example.econonew.view.fragment.MsgListFragment;
 import com.example.econonew.tools.Voice;
 
 import org.json.JSONObject;
@@ -34,6 +33,7 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
 
     private Voice voice;
     private List<MsgItemEntity> mAllList;// 消息列表
+    private List<MsgItemEntity> mVipList;//Vip消息列表
     private List<MsgItemEntity> mNotVipList; // 不是VIP的列表
 
     private List<ChannelEntity> mChannelList; // 自定义频道的列表
@@ -56,6 +56,7 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
         } else {
             mAllList = new ArrayList<>();
             mNotVipList = new ArrayList<>();
+            mVipList = new ArrayList<>();
         }
         this.voice = new Voice(context);
         this.dataBaseManager = new DB_Information(context);
@@ -96,8 +97,6 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
 
     /**
      * 获得频道的名称
-     *
-     * @return
      */
     public String getName() {
         return allMsgName;
@@ -105,7 +104,7 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
 
     public List<MsgItemEntity> getMsgList() {
         if (Constant.user != null && Constant.user.isVIP()) {
-            return mAllList;
+            return mVipList;
         } else {
             return mNotVipList;
         }
@@ -131,19 +130,56 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
         if (!isAddEnd) {
             mAllList.clear();
             mNotVipList.clear();
+            mVipList.clear();
         }
         if (list != null) {
-            for (MsgItemEntity msgItemEntity : list) {
-                mAllList.add(msgItemEntity);
-                if (!msgItemEntity.isVip()) {
-                    mNotVipList.add(msgItemEntity);
-                }
-            }
+            mAllList.addAll(list);
+            mNotVipList.addAll(getNotVipMsgList(list));
+            mVipList.addAll(getVipMsgList(list));
         }
         sentMsgToUiAndVoice();
         if (isSaveToDataBase) {
             dataBaseManager.saveAllMsg(Constant.getTableName(allMsgName), list);// 如果保存，就保存道数据库面
         }
+    }
+
+    private List<MsgItemEntity> getVipMsgList(List<MsgItemEntity> list) {
+        //TODO AUTO 这里要添加过滤消息的逻辑
+        List<MsgItemEntity> vipList = new ArrayList<>();
+        for (MsgItemEntity entity : list) {
+            if(!entity.isVip()) {
+                vipList.add(entity);
+            } else if(isDingZhiMsg(entity)) {//如果是定制的消息就添加到列表里面
+                vipList.add(entity);
+            }
+        }
+        return vipList;
+    }
+
+    private boolean isDingZhiMsg(MsgItemEntity entity) {
+        AllMessage channelMessage = AllMessage.getInstance("自定义");
+        if(channelMessage!= null) {
+            List<ChannelEntity> channels = channelMessage.getChannelList();
+            for (ChannelEntity channelEntity : channels) {
+                return channelEntity.getBusinessDomainId() == entity.getBusinessDomainId() &&
+                        channelEntity.getBusinessTypeId() == entity.getBusinessTypeId() &&
+                            channelEntity.getStairId() == entity.getStairId();
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+
+    private List<MsgItemEntity> getNotVipMsgList(List<MsgItemEntity> allList) {
+        List<MsgItemEntity> notVipMsgList = new ArrayList<>();
+        for (MsgItemEntity msgItemEntity : allList) {
+            if (!msgItemEntity.isVip()) {
+                notVipMsgList.add(msgItemEntity);
+            }
+        }
+        return notVipMsgList;
     }
 
     /**
@@ -167,7 +203,6 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
         }
         sentMsgToUiAndVoice();
         if (isSaveToDataBase) {
-            Log.v("json", "" + list.size());
             dataBaseManager.saveAllChannel(list);
         }
     }
@@ -179,7 +214,7 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
      */
     public int getMsgCount() {
         if (Constant.user != null && Constant.user.isVIP()) {
-            return mAllList.size();
+            return mVipList.size();
         } else {
             return mNotVipList.size();
         }
@@ -223,8 +258,8 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
             this.mFragment.setChannelList(mChannelList);
         } else {
             if (Constant.user != null && Constant.user.isVIP()) {
-                this.mFragment.setList(mAllList);
-                voice.setList(mAllList);
+                this.mFragment.setList(mVipList);
+                voice.setList(mVipList);
             } else {
                 this.mFragment.setList(mNotVipList);
                 voice.setList(mNotVipList);
@@ -255,7 +290,7 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
      */
     public static void refreshPublicMsg() {
         for (AllMessage message : msgManager.values()) {
-            if (message.getName() != "自定义") {
+            if (message.getName().equals("自定义")) {
                 message.sentMsgToUiAndVoice();
             }
         }

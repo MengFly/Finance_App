@@ -11,7 +11,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.example.econonew.activity.FinanceApplication;
+import com.example.econonew.view.activity.FinanceApplication;
 
 import java.util.List;
 

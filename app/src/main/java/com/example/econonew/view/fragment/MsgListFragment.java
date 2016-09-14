@@ -1,4 +1,4 @@
-package com.example.econonew.tools;
+package com.example.econonew.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,9 +22,12 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
-import com.example.econonew.activity.BaseActivity;
-import com.example.econonew.activity.FinanceApplication;
-import com.example.econonew.activity.main.MsgContentActivity;
+import com.example.econonew.tools.ChannelListViewAdapter;
+import com.example.econonew.tools.MsgListViewAdapter;
+import com.example.econonew.tools.URLManager;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.FinanceApplication;
+import com.example.econonew.view.activity.main.MsgContentActivity;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.main.object.AllMessage;

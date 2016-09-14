@@ -6,7 +6,7 @@
 
     <include layout="@layout/activity_title_bar" />
 
-    <com.example.econonew.customview.ViewPagerIndicator
+    <com.example.econonew.view.customview.ViewPagerIndicator
         android:id="@+id/act_main_viewpager_indicator"
         android:layout_width="match_parent"
         android:layout_height="35dp"

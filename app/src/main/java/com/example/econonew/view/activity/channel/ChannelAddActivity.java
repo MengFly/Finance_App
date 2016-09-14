@@ -1,4 +1,4 @@
-package com.example.econonew.activity.channel;
+package com.example.econonew.view.activity.channel;
 
 
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.activity.BaseActivity;
-import com.example.econonew.activity.main.MainActivity;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.main.MainActivity;
 
 /**
  * ChannelAddActivity ������Ҫ��ʵ��ѡ���ǩ������Ƶ�������ҷ��ؽ����MainActivity
@@ -32,7 +32,7 @@ public class ChannelAddActivity extends BaseActivity implements OnClickListener 
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_addchannel);
+		setContentView(R.layout.act_addchannel);
 
 		exchange_choose = (Button) findViewById(R.id.exchange_choose);
 		stock_choose = (Button) findViewById(R.id.stock_choose);

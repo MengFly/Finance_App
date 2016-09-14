@@ -1,4 +1,4 @@
-package com.example.econonew.activity.channel;
+package com.example.econonew.view.activity.channel;
 
 
 import android.content.DialogInterface;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.econonew.activity.BaseActivity;
+import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.R;
 import com.example.econonew.entity.AddChannelClickListener;
 import com.example.econonew.entity.ChannelEntity;

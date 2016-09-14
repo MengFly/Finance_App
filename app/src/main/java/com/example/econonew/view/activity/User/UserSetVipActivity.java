@@ -1,4 +1,4 @@
-package com.example.econonew.activity.User;
+package com.example.econonew.view.activity.User;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,15 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.activity.BaseActivity;
+import com.example.econonew.presenter.UserPresenter;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.server.JsonCast;
-import com.example.econonew.server.NetClient;
-import com.example.econonew.tools.URLManager;
 
-import org.json.JSONObject;
-
-public class UserSetVipActivity extends BaseActivity {
+public class UserSetVipActivity extends BaseUserActivity {
 
 	private EditText userNameEt;
 	private TextView setUserNameTv;
@@ -33,12 +28,13 @@ public class UserSetVipActivity extends BaseActivity {
 		userNameEt.setFocusable(false);
 		setUserNameTv = (TextView) findViewById(R.id.act_set_vip_user_name_tv);
 		vipRegistBtn = (Button) findViewById(R.id.act_set_vip_regist_btn);
-		initActionBar("注册VIP", true);
 		initListener();
 	}
 
 	@Override
 	protected void initDatas() {
+		initActionBar("注册VIP", true);
+		bindPresenter(new UserPresenter(this));
 		userNameEt.setText(Constant.user == null ? "" : Constant.user.getName());
 	}
 
@@ -51,18 +47,15 @@ public class UserSetVipActivity extends BaseActivity {
 				if (TextUtils.isEmpty(userName)) {
 					showToast("用户名为空");
 				} else {
-					if (userName.equals(Constant.user == null ? null
-							: Constant.user.getName())) {
-						registVip(userName);
+					if (userName.equals(Constant.user == null ? null : Constant.user.getName())) {
+						mPresenter.userSetVipThread(userName);
 					} else {
-						showTipDialog("提示", "输入的用户名和当前用户名不一致，请确认，是否要为"
-										+ userName + "开启会员？",
+						showTipDialog("提示", "输入的用户名和当前用户名不一致，请确认，是否要为" + userName + "开启会员？",
 								new DialogInterface.OnClickListener() {
 
 									@Override
-									public void onClick(DialogInterface dialog,
-														int which) {
-										registVip(userName);
+									public void onClick(DialogInterface dialog, int which) {
+										mPresenter.userSetVipThread(userName);
 									}
 								}, null);
 					}
@@ -99,38 +92,4 @@ public class UserSetVipActivity extends BaseActivity {
 
 	}
 
-	private void registVip(final String userName) {
-		showProDialog();
-		new Thread() {
-			public void run() {
-				String url = URLManager.getSetVipURL(userName);
-				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
-
-					@Override
-					public void onSuccess(String response) {
-						JSONObject obj = JsonCast.getJsonObject(response);
-						if (obj == null) {
-							showToast("链接失败");
-						} else {
-							String result = JsonCast.getString(obj, "result");
-							if ("success".equals(result)) {
-								showTipDialog(null, "Vip注册成功", null, null);
-								Constant.user.setVIP(true);
-								saveUserInfo(Constant.user);
-							} else {
-								showTipDialog(null, result, null, null);
-							}
-						}
-						hintProDialog();
-					}
-
-					public void onError(com.android.volley.VolleyError error) {
-						super.onError(error);
-						hintProDialog();
-					};
-				};
-				NetClient.getInstance().excuteGetForString(mContext, url, listener);
-			};
-		}.start();
-	}
 }

@@ -1,4 +1,4 @@
-package com.example.econonew.activity.main;
+package com.example.econonew.view.activity.main;
 
 import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.econonew.R;
-import com.example.econonew.activity.BaseActivity;
-import com.example.econonew.activity.User.UserLoginActivity;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.User.UserLoginActivity;
 import com.example.econonew.jpush.ExampleUtil;
 import com.example.econonew.jpush.PushSwitch;
 import com.example.econonew.resource.Constant;

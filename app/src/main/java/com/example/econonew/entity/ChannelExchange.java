@@ -16,7 +16,6 @@ public class ChannelExchange extends AddChannel {
 
 	public ChannelExchange(String name, JSONObject channelInfo) {
 		super(name, channelInfo);
-		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.channelInfo = channelInfo;
 		try {
@@ -24,7 +23,7 @@ public class ChannelExchange extends AddChannel {
 			attribute = channelInfo.get("信息类型").toString();
 			code = channelInfo.get("交易代码").toString();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 			e.printStackTrace();
 			System.out.print("数据取出错误");
 		}
@@ -47,7 +46,6 @@ public class ChannelExchange extends AddChannel {
 			obj.put("交易代码：", code);
 			channelInfo.put(name, obj);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.print("输入数据有错误");
 			return false;

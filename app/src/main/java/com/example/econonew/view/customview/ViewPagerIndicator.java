@@ -1,4 +1,4 @@
-package com.example.econonew.customview;
+package com.example.econonew.view.customview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

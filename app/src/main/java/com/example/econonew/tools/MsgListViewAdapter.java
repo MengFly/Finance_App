@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.econonew.activity.FinanceApplication;
+import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.R;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;

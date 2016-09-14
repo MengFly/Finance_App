@@ -26,7 +26,6 @@ public class ChannelFutures extends AddChannel {
 			attribute = channelInfo.get("信息类型").toString();
 			code = channelInfo.get("交易代码").toString();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.print("数据取出错误");
 		}
@@ -44,7 +43,6 @@ public class ChannelFutures extends AddChannel {
 			obj.put("交易代码：", code);
 			channelInfo.put(name, obj);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.print("输入数据有错误");
 			return false;

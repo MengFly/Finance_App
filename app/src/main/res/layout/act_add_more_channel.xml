@@ -53,7 +53,7 @@
                 android:text="已添加"
                 android:textColor="@color/text_white" />
 
-            <com.example.econonew.customview.FlowLayout
+            <com.example.econonew.view.customview.FlowLayout
                 android:id="@+id/act_add_more_channel_added_ly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:text="未添加"
                 android:textColor="@color/text_white" />
 
-            <com.example.econonew.customview.FlowLayout
+            <com.example.econonew.view.customview.FlowLayout
                 android:id="@+id/act_add_more_channel_notadd_ly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

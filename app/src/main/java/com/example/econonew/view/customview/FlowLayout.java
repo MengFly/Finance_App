@@ -1,8 +1,7 @@
-package com.example.econonew.customview;
+package com.example.econonew.view.customview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -89,9 +88,6 @@ public class FlowLayout extends ViewGroup
 			}
 		}
 
-		Log.e("TAG", "sizeWidth = " + sizeWidth);
-		Log.e("TAG", "sizeHeight = " + sizeHeight);
-
 		setMeasuredDimension(
 				//
 				modeWidth == MeasureSpec.EXACTLY ? sizeWidth : width + getPaddingLeft() + getPaddingRight(),
@@ -103,11 +99,11 @@ public class FlowLayout extends ViewGroup
 	/**
 	 * 存储所有的View
 	 */
-	private List<List<View>> mAllViews = new ArrayList<List<View>>();
+	private List<List<View>> mAllViews = new ArrayList<>();
 	/**
 	 * 每一行的高度
 	 */
-	private List<Integer> mLineHeight = new ArrayList<Integer>();
+	private List<Integer> mLineHeight = new ArrayList<>();
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b)
@@ -121,7 +117,7 @@ public class FlowLayout extends ViewGroup
 		int lineWidth = 0;
 		int lineHeight = 0;
 
-		List<View> lineViews = new ArrayList<View>();
+		List<View> lineViews = new ArrayList<>();
 
 		int cCount = getChildCount();
 
@@ -146,7 +142,7 @@ public class FlowLayout extends ViewGroup
 				lineWidth = 0;
 				lineHeight = childHeight + lp.topMargin + lp.bottomMargin;
 				// 重置我们的View集合
-				lineViews = new ArrayList<View>();
+				lineViews = new ArrayList<>();
 			}
 			lineWidth += childWidth + lp.leftMargin + lp.rightMargin;
 			lineHeight = Math.max(lineHeight, childHeight + lp.topMargin
@@ -159,13 +155,10 @@ public class FlowLayout extends ViewGroup
 		mAllViews.add(lineViews);
 
 		// 设置子View的位置
-
 		int left = getPaddingLeft();
 		int top = getPaddingTop();
-
 		// 行数
 		int lineNum = mAllViews.size();
-
 		for (int i = 0; i < lineNum; i++)
 		{
 			// 当前行的所有的View
@@ -180,18 +173,14 @@ public class FlowLayout extends ViewGroup
 				{
 					continue;
 				}
-
 				MarginLayoutParams lp = (MarginLayoutParams) child
 						.getLayoutParams();
-
 				int lc = left + lp.leftMargin;
 				int tc = top + lp.topMargin;
 				int rc = lc + child.getMeasuredWidth();
 				int bc = tc + child.getMeasuredHeight();
-
 				// 为子View进行布局
 				child.layout(lc, tc, rc, bc);
-
 				left += child.getMeasuredWidth() + lp.leftMargin
 						+ lp.rightMargin;
 			}

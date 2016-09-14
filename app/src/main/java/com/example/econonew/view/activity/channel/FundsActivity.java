@@ -1,4 +1,4 @@
-package com.example.econonew.activity.channel;
+package com.example.econonew.view.activity.channel;
 
 
 import android.content.DialogInterface;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.econonew.activity.BaseActivity;
+import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.R;
 import com.example.econonew.entity.AddChannelClickListener;
 import com.example.econonew.entity.ChannelEntity;
@@ -21,32 +21,31 @@ import com.example.econonew.tools.DialogTool;
  *
  * @date 创建时间：2015-10-22 下午4:22:33 在channelActivity中调用共同生成频道添加界面 按股票搜索
  */
-public class FuturesActivity extends BaseActivity implements OnClickListener {
-	private Button futures_name;
-	private Button futures_info;
-	private TextView futures_name_show;
-	private TextView futures_info_show;
-	private EditText futures_code_input;
+public class FundsActivity extends BaseActivity implements OnClickListener {
+	private Button funds_name;
+	private Button funds_info;
+	private TextView funds_name_show;
+	private TextView funds_info_show;
+	private EditText funds_code_input;
 	private Button channel_sure; // 确认按钮
 
-	private String channelName = "期货";
-
+	private String channelName = "基金";
 	private String[] channelFirstLabel = ChannelListManager.getChannelFirstLable(channelName);
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_addchannel_futures);
+		setContentView(R.layout.activity_addchannel_funds);
 
-		futures_name = (Button) findViewById(R.id.futures_name);
-		futures_info = (Button) findViewById(R.id.futures_info);
-		channel_sure = (Button) findViewById(R.id.futures_channel_sure);
-		futures_info_show = (TextView) findViewById(R.id.futures_info_show);
-		futures_name_show = (TextView) findViewById(R.id.futures_name_show);
-		futures_code_input = (EditText) findViewById(R.id.futures_code_input);
+		funds_name = (Button) findViewById(R.id.funds_name);
+		funds_info = (Button) findViewById(R.id.funds_info);
+		channel_sure = (Button) findViewById(R.id.funds_channel_sure);
+		funds_info_show = (TextView) findViewById(R.id.funds_info_show);
+		funds_name_show = (TextView) findViewById(R.id.funds_name_show);
+		funds_code_input = (EditText) findViewById(R.id.funds_code_input);
 
 		channel_sure.setOnClickListener(this);
-		futures_info.setOnClickListener(this);
-		futures_name.setOnClickListener(this);
+		funds_info.setOnClickListener(this);
+		funds_name.setOnClickListener(this);
 	}
 
 	@Override
@@ -57,10 +56,10 @@ public class FuturesActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View view) {
 		int id = view.getId();
 		switch (id) {
-			case R.id.futures_channel_sure:
-				String type = futures_name_show.getText().toString();
-				String attribute = futures_info_show.getText().toString();
-				String code = futures_code_input.getText().toString();
+			case R.id.funds_channel_sure:
+				String type = funds_name_show.getText().toString();
+				String attribute = funds_info_show.getText().toString();
+				String code = funds_code_input.getText().toString();
 				String channelType = type.equals("请选择") ? "" : type;
 				String channelAttribute = attribute.equals("请选择") ? "" : attribute;
 				ChannelEntity channelEntity = new ChannelEntity();
@@ -70,18 +69,18 @@ public class FuturesActivity extends BaseActivity implements OnClickListener {
 				channelEntity.setCode(code);
 				if (channelEntity.isAddChannel(type, attribute, code, this)) {
 					DialogInterface.OnClickListener listener = new AddChannelClickListener(channelEntity,
-							FuturesActivity.this);
+							FundsActivity.this);
 					showTipDialog(null, "是否确定添加频道：" + channelEntity.getName() + "," + channelEntity.getType() + ","
 							+ channelEntity.getAttribute() + "," + channelEntity.getCode(), listener, null);
 				}
 				break;
-			case R.id.futures_name:
-				DialogTool dialogName = new DialogTool(this, channelFirstLabel, futures_name_show);
+			case R.id.funds_name:
+				DialogTool dialogName = new DialogTool(this, channelFirstLabel, funds_name_show);
 				dialogName.setDialog();
 				break;
-			case R.id.futures_info:
-				DialogTool dialogInfo = new DialogTool(this, ChannelListManager.getChannelSecondLabel(), futures_info_show);
-				dialogInfo.setDialog();
+			case R.id.funds_info:
+				DialogTool dialoginfo = new DialogTool(this, ChannelListManager.getChannelSecondLabel(), funds_info_show);
+				dialoginfo.setDialog();
 				break;
 			default:
 				break;

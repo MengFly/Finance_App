@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.view.activity;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -64,6 +64,7 @@ public class FinanceApplication extends Application {
 
 					@Override
 					public void onSuccess(String response) {
+						Log.d(TAG, "onSuccess: " + response);
 						JSONObject map = JsonCast.getJsonObject(response);
 						new ResponseJsonHelper().handleInfomation(map);
 					}

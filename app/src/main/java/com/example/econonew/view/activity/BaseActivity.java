@@ -1,4 +1,4 @@
-package com.example.econonew.activity;
+package com.example.econonew.view.activity;
 
 
 import android.app.ProgressDialog;
@@ -14,7 +14,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.econonew.R;
-import com.example.econonew.activity.main.MainActivity;
+import com.example.econonew.view.activity.main.MainActivity;
+import com.example.econonew.presenter.BasePresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
 
@@ -27,7 +28,9 @@ import cn.jpush.android.api.JPushInterface;
  * @author mengfei
  *
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+
+	protected  T mPresenter;
 
 	private AlertDialog.Builder builder;
 	private ProgressDialog mProDialog;
@@ -44,10 +47,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 		FinanceApplication.getInstance().getmActManager().add(this);
 	}
 
+
+	protected void bindPresenter(T presenter) {
+		this.mPresenter = presenter;
+	}
+
 	/**
 	 * 初始化界面的控件所需要的方法，所有继承BaseActivity的类都要实现这个方法 另外setContentView方法也要在这个方法里面声明
-	 *
-	 * @param savedInstanceState
 	 */
 	abstract protected void initView(Bundle savedInstanceState);
 
@@ -59,8 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 	/**
 	 * 展示一个Dialog给用户提示这几个参数均可为空
 	 */
-	public void showTipDialog(String title, String message, OnClickListener okListener,
-							  OnClickListener cancelListener) {
+	public void showTipDialog(String title, String message, OnClickListener okListener, OnClickListener cancelListener) {
 		if (null == builder) {
 			builder = new Builder(this);
 			builder.setCancelable(true);
@@ -102,6 +107,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * 初始化标题栏
+	 * @param title	ActionBar的标题
+	 * @param isBack	是否可以返回到MainActivity
+     */
 	protected void initActionBar(String title, boolean isBack) {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
@@ -113,17 +123,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 		}
 	}
 
-	// 向缓存中设置user信息
-	// 用户登录成功后调用这个方法
-	protected void saveUserInfo(UserInfo userInfo) {
-		SharedPreferences pref = getSharedPreferences(Constant.SPF_KEY_USER, MODE_PRIVATE);
-		SharedPreferences.Editor editor = pref.edit();
-
-		editor.putString("userName", userInfo.getName());
-		editor.putString("userPassWord", userInfo.getPwd());
-		editor.putBoolean("user_vip", userInfo.isVIP());
-		editor.apply();
-	}
 
 	// 从缓存中获取用户信息，如果用户之前注销过，则缓存中没有用户信息
 	// 此时获取信息信息为空
@@ -156,6 +155,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 	}
 
 	/**
+	 * 打开另一个Activity
+	 * @param actClass	另一个Activity
+	 * @param isFinish	打开另一个Activit后此Activity是否退出
+     */
+	public void openOtherActivity(Class<?> actClass, boolean isFinish) {
+		Intent intent = new Intent(mContext, actClass);
+		mContext.startActivity(intent);
+		if(isFinish) {
+			mContext.finish();
+		}
+	}
+
+	/**
 	 * 用于在用户注销的时候移除缓存中的用户信息
 	 */
 	public void removeUserAndCookie() {
@@ -171,8 +183,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 	}
 
 	/** 回到主界面 */
-	protected void backHomeActivity() {
-		Intent intent = new Intent(this, MainActivity.class);
+	public void backHomeActivity() {
+		Intent intent = new Intent(mContext, MainActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
@@ -186,6 +198,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 	@Override
 	protected void onDestroy() {
 		FinanceApplication.getInstance().getmActManager().remove(this);
+		if(mPresenter != null) {
+			mPresenter.onDestroy();
+		}
 		super.onDestroy();
 	}
 
