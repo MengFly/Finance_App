@@ -1,11 +1,15 @@
 package com.example.econonew.tools;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
+import com.example.econonew.view.activity.FinanceApplication;
 
 import java.net.URLEncoder;
-import java.nio.channels.Channel;
 
 /**
  * 用于管理URL和生成URL
@@ -26,11 +30,25 @@ public class URLManager {
     public static final String OPERATION_SET_VIP = "setvip.action";
     public static final String OPERATION_DELETE_CHANNEL = "delchnl.action";// 删除频道操作
 
+    public static String  getURL() {
+        if(Constant.isDeBug) {
+            SharedPreferences spf = FinanceApplication.getInstance().getSharedPreferences("ip", Context.MODE_PRIVATE);
+            String currentIp = spf.getString("current_ip", null);
+            if(!TextUtils.isEmpty(currentIp)) {
+                return "http://" + currentIp + ":8080/Finance_Server1.0.0";
+            } else {
+                return URL;
+            }
+        } else {
+            return URL;
+        }
+    }
+
     /**
      * 获取获取消息的URL
      */
     public static String getConnectURL() {
-        return URL + "/" + OPERATION_CONNECTION + "?phone=''";
+        return getURL() + "/" + OPERATION_CONNECTION + "?phone=''";
     }
 
     /**
@@ -40,7 +58,7 @@ public class URLManager {
      * @return  用户登录的URL
      */
     public static String getLoginURL(String userName, String userPass) {
-        return URL + "/" + OPERATION_LOGIN  + "?phone=" + userName
+        return getURL() + "/" + OPERATION_LOGIN  + "?phone=" + userName
                 + "&password=" + userPass;
     }
 
@@ -60,7 +78,7 @@ public class URLManager {
      * @return  注册的URL
      */
     public static String getRegistURL(String registName,String registPass) {
-       return  URL + "/" + OPERATION_REGIST
+       return  getURL() + "/" + OPERATION_REGIST
                 + "?phone=" + registName + "&password=" + registPass;
     }
 
@@ -70,7 +88,7 @@ public class URLManager {
      * @return 用户注销的URL
      */
     public static String getLogoutURL(String userName) {
-        return URL + "/" + OPERATION_LOGOUT + "?" + "phone=" + userName;
+        return getURL() + "/" + OPERATION_LOGOUT + "?" + "phone=" + userName;
     }
 
     /**
@@ -81,7 +99,7 @@ public class URLManager {
      * @return 用户修改密码的URL
      */
     public static String getSetPassWordURL(String userName, String oldPass, String newPass) {
-        return URL + "/" + OPERATION_SETPWD
+        return getURL() + "/" + OPERATION_SETPWD
                 + "?phone=" + userName + "&password=" + newPass
                 + "&oldPswd=" + oldPass;
     }
@@ -93,7 +111,7 @@ public class URLManager {
      * @return  用户注册VIp的URL
      */
     public static String getSetVipURL(String userName) {
-       return  URL + "/" + OPERATION_SET_VIP + "?phone=" + userName;
+       return  getURL() + "/" + OPERATION_SET_VIP + "?phone=" + userName;
     }
 
     /**
@@ -102,7 +120,7 @@ public class URLManager {
      * @return  获取用户频道的URL
      */
     public static String getChannelURL(String userName) {
-        return URL + "/" + OPERATION_GETCHNL + "?phone=" + userName;
+        return getURL() + "/" + OPERATION_GETCHNL + "?phone=" + userName;
     }
 
     /**
@@ -113,7 +131,7 @@ public class URLManager {
      */
     public static String getSetChannelURL(String userName, ChannelEntity entity) {
 
-        StringBuilder msg = new StringBuilder(URL+ "/" + OPERATION_SETCHNL + "?");
+        StringBuilder msg = new StringBuilder(getURL()+ "/" + OPERATION_SETCHNL + "?");
         try {
             msg.append("phone=");
             msg.append(userName);
@@ -138,7 +156,7 @@ public class URLManager {
      * @return 删除频道URL
      */
     public static String getDeleteChannelURL(String userName, ChannelEntity entity) {
-       return URL + "/" + OPERATION_DELETE_CHANNEL + "?phone="
+       return getURL() + "/" + OPERATION_DELETE_CHANNEL + "?phone="
                 + userName + "&channelId=" + entity.getId();
     }
 
@@ -148,6 +166,8 @@ public class URLManager {
      * @return  消息内容的URL
      */
     public static String getMsgContentURL(int msgId) {
-        return URL + "/" + OPERATION_MSG + "?id=" + msgId;
+        return getURL() + "/" + OPERATION_MSG + "?id=" + msgId;
     }
+
+
 }

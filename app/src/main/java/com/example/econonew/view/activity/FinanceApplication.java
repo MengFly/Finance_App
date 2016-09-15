@@ -81,17 +81,20 @@ public class FinanceApplication extends Application {
 	}
 
 	public void refreshUserData(UserInfo user) {
-		List<ChannelEntity> channelList = null;
+//		List<ChannelEntity> channelList = null;
 		if (user != null && user.isVIP()) {
-			channelList = new DB_Information(app).getChannel(user);
-			if (!todayIsUppdate(user.getName())) {
-				getChannelFromNet(user);
-			} else {
+			getChannelFromNet(user);
+//			channelList = new DB_Information(app).getChannel(user);
+//			if (!todayIsUppdate(user.getName())) {
+//				getChannelFromNet(user);
+//			} else {
+//				AllMessage.getInstance("自定义").setChannels(channelList, false, false);
+//			}
+		} else {
+			if (SettingManager.getInstance().isInitDataFinsh()) {
+				List<ChannelEntity> channelList = new DB_Information(app).getChannel(user);
 				AllMessage.getInstance("自定义").setChannels(channelList, false, false);
 			}
-		} else {
-			if (SettingManager.getInstance().isInitDataFinsh())
-				AllMessage.getInstance("自定义").setChannels(new ArrayList<ChannelEntity>(), false, false);
 		}
 	}
 
@@ -119,7 +122,6 @@ public class FinanceApplication extends Application {
 
 			@Override
 			public void onSuccess(String response) {
-				Log.d(TAG, "onSuccess: " + response);
 				saveUpdateDate(user.getName());
 				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
 				List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
@@ -129,8 +131,14 @@ public class FinanceApplication extends Application {
 					new DB_Information(app).removeSelfChannel(user.getName());
 					AllMessage.getInstance("自定义").setChannels(channels, false, true);
 				}
+				FinanceApplication.getInstance().refreshPublicData();
 			}
 
+			@Override
+			public void onError(VolleyError error) {
+				super.onError(error);
+				AllMessage.getInstance("自定义").stopFreash();
+			}
 		};
 		new Thread() {
 			public void run() {

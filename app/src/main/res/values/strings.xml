@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Finance_App</string>
 
-    <string name="versionName">1.0.3</string>
+    <string name="versionName">1.0.4</string>
 
     <!-- 全局的一些字符串 -->
     <string name="btn_back">退出</string>

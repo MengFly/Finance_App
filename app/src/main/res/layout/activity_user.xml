@@ -181,6 +181,19 @@
                 android:padding="10dp"
                 android:text="@string/act_user_logout_tv"
                 android:textSize="@dimen/text_size_default" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/act_user_set_ip_tv"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawablePadding="10dp"
+                android:gravity="end"
+                android:padding="10dp"
+                android:text="设置IP地址"
+                android:textSize="@dimen/text_size_default" />
         </LinearLayout>
     </ScrollView>
 

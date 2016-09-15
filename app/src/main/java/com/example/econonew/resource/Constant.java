@@ -17,6 +17,8 @@ public class Constant {
     public static final String SPF_KEY_USER = "userInfo";
     public static final String SPF_KEY_UPDATE_DATE = "updateDate";
 
+    public static boolean isDeBug = true;
+
     public static final List<String> tabList = Arrays.asList("股票", "理财", "基金", "期货", "外汇", "自定义");
 
     // 用户对象

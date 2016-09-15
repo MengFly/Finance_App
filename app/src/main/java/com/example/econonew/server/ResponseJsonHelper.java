@@ -43,7 +43,7 @@ public class ResponseJsonHelper {
 				ArrayList<MsgItemEntity> msgList = new ArrayList<>();
 				JSONArray array = json.getJSONArray(allMessage.getName());
 				for (int j = 0; j < array.length(); j++) {
-					JSONObject object = (JSONObject) array.getJSONObject(j);
+					JSONObject object =  array.getJSONObject(j);
 					MsgItemEntity mi = getEntityFromJson(object);
 					msgList.add(mi);
 				}
@@ -69,7 +69,13 @@ public class ResponseJsonHelper {
 		String msgItemGeneral = getMsgGeneralByContent(msgItemContent);
 		String msgItemImageUrl = object.getString("picture");
 		int level = object.getInt("level");
+		int businessDomainId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessDomain"), "id");
+		int businessTypeId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessType"), "id");
+		int stairId = JsonCast.getInt(JsonCast.getJSONObject(object, "stair"), "id");
 		MsgItemEntity entity = new MsgItemEntity(msgItemTitle, msgItemContent, msgItemContentUrl, msgItemGeneral, msgItemImageUrl);
+		entity.setBusinessDomainId(businessDomainId);
+		entity.setBusinessTypeId(businessTypeId);
+		entity.setStairId(stairId);
 		if(level == 1) {
 			entity.setVip(true);
 		}

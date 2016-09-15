@@ -13,6 +13,7 @@ import com.example.econonew.R;
 import com.example.econonew.jpush.SettingActivity;
 import com.example.econonew.presenter.UserPresenter;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.utils.URLSettingActivity;
 
 
 /**
@@ -27,6 +28,8 @@ public class UserActivity extends BaseUserActivity {
 	// 用户登录的一系列选项
 	private LinearLayout userLayout;
 	private TextView userTv, userLoginTv, userRigistTv, userSetVipTv;
+
+	private TextView setIpTv;
 
 	private Button regist_btn;
 	private TextView text_user;
@@ -53,6 +56,17 @@ public class UserActivity extends BaseUserActivity {
 
 		vipTv = (TextView) findViewById(R.id.vip_tv);
 		vipTv.setVisibility(View.GONE);
+
+		setIpTv = (TextView) findViewById(R.id.act_user_set_ip_tv);
+		if(Constant.isDeBug) {
+			setIpTv.setVisibility(View.VISIBLE);
+			setIpTv.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openOtherActivity(URLSettingActivity.class, false);
+				}
+			});
+		}
 
 		initListener();
 		initActionBar("用户", true);

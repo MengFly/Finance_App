@@ -77,7 +77,7 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 					if ("success".equals(JsonCast.getString(obj, "status"))) {
 						int id = JsonCast.getInt(obj, "result");
 						mAddChannel.setId(id);
-						addData(Constant.user.getName(), mAddChannel);
+						addData(mAddChannel);
 					} else {
 						Toast.makeText(mContext, JsonCast.getString(obj, "result"), Toast.LENGTH_LONG).show();
 						((BaseActivity) mContext).showTipDialog(null, JsonCast.getString(obj, "result"), null, null);
@@ -106,9 +106,10 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 
 	private DialogInterface.OnClickListener okListener, cancelListener;
 
-	private void addData(String name, ChannelEntity entity) {
+	private void addData(ChannelEntity entity) {
 		List<ChannelEntity> list = Arrays.asList(entity);
 		AllMessage.getInstance("自定义").setChannels(list, true, true);// 将设置的频道信息设置到自定义信息里面并进行存储
+		FinanceApplication.getInstance().refreshUserData(Constant.user);
 		initListener();
 		((BaseActivity) mContext).showTipDialog(null, "设置成功，是否再次设置", okListener, cancelListener);
 	}

@@ -201,8 +201,7 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (!msgList.isEmpty()) {
             MsgItemEntity item = msgList.get(position);
             Intent intent = new Intent(getActivity(), MsgContentActivity.class);
@@ -213,8 +212,7 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                   final int position, long id) {
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
         final ChannelEntity entity = channelList.get(position);
         ((BaseActivity) getActivity()).showTipDialog("提示！",
                 "是否要删除频道" + entity.getName() + ":" + entity.getType() + ":"
@@ -236,6 +234,7 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
         if (Constant.user != null) {
             showProDialog();
             deleteChannelThread(entity);// 开启一个删除频道的线程
+            mMessage.removeChannel(entity);
         } else {
             Toast.makeText(getContext(), "当前还没有登录，不能进行删除频道的操作",
                     Toast.LENGTH_SHORT).show();
@@ -255,7 +254,6 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
                     if (result != null) {
                         if ("success".equals(result)) {
                             if (channelAdapter != null) {
-                                mMessage.removeChannel(entity);
                                 showTipDialog("频道删除成功");
                             }
                         } else {

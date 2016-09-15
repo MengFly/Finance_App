@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
 import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.customview.FlowLayout;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.main.object.AllMessage;
@@ -243,6 +244,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 		if (addedCount == max) {
 			hintProDialog();
 			showTipDialog("添加完成", tipMessage, null, null);
+			FinanceApplication.getInstance().refreshUserData(Constant.user);
 		}
 	}
 }

@@ -126,6 +126,12 @@
             android:theme="@style/AppTheme" >
         </activity>
 
+        <activity
+            android:name=".utils.URLSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+
         <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"

@@ -201,6 +201,9 @@ public class DB_Information extends SQLiteOpenHelper {
      */
     public List<ChannelEntity> getChannel(UserInfo user) {
         List<ChannelEntity> channels = new ArrayList<>();
+        if(user == null) {
+            return channels;
+        }
         SQLiteDatabase db = getReadableDatabase();
         for (String channelTableName : Constant.selfDataTableNames) {
             // 根据用户的名称来获得用户指定的信息

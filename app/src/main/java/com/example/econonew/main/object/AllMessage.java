@@ -1,6 +1,7 @@
 package com.example.econonew.main.object;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
@@ -144,7 +145,6 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
     }
 
     private List<MsgItemEntity> getVipMsgList(List<MsgItemEntity> list) {
-        //TODO AUTO 这里要添加过滤消息的逻辑
         List<MsgItemEntity> vipList = new ArrayList<>();
         for (MsgItemEntity entity : list) {
             if(!entity.isVip()) {
@@ -160,10 +160,17 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
         AllMessage channelMessage = AllMessage.getInstance("自定义");
         if(channelMessage!= null) {
             List<ChannelEntity> channels = channelMessage.getChannelList();
+            Log.d("json", "isDingZhiMsg: " + channels.size());
             for (ChannelEntity channelEntity : channels) {
-                return channelEntity.getBusinessDomainId() == entity.getBusinessDomainId() &&
+                Log.d("json", "isDingZhiMsg: " + channelEntity.getBusinessDomainId() + "&" + entity.getBusinessDomainId()
+                        + " " + channelEntity.getBusinessTypeId() + "&" + entity.getBusinessTypeId() + " "
+                        + channelEntity.getStairId() + "&" + entity.getStairId());
+                boolean isAddMsg = channelEntity.getBusinessDomainId() == entity.getBusinessDomainId() &&
                         channelEntity.getBusinessTypeId() == entity.getBusinessTypeId() &&
-                            channelEntity.getStairId() == entity.getStairId();
+                        channelEntity.getStairId() == entity.getStairId();
+               if(isAddMsg) {
+                   return true;
+               }
             }
             return false;
         } else {
