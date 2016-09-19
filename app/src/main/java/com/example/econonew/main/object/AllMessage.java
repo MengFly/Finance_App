@@ -26,6 +26,7 @@ import java.util.Map;
  */
 public class AllMessage implements InterMessage<MsgItemEntity> {
 
+    private static final String TAG = "AllMessage";
     private static Map<String, AllMessage> msgManager = new HashMap<>();
 
     private JSONObject info; // 关于信息的介绍
@@ -160,11 +161,7 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
         AllMessage channelMessage = AllMessage.getInstance("自定义");
         if(channelMessage!= null) {
             List<ChannelEntity> channels = channelMessage.getChannelList();
-            Log.d("json", "isDingZhiMsg: " + channels.size());
             for (ChannelEntity channelEntity : channels) {
-                Log.d("json", "isDingZhiMsg: " + channelEntity.getBusinessDomainId() + "&" + entity.getBusinessDomainId()
-                        + " " + channelEntity.getBusinessTypeId() + "&" + entity.getBusinessTypeId() + " "
-                        + channelEntity.getStairId() + "&" + entity.getStairId());
                 boolean isAddMsg = channelEntity.getBusinessDomainId() == entity.getBusinessDomainId() &&
                         channelEntity.getBusinessTypeId() == entity.getBusinessTypeId() &&
                         channelEntity.getStairId() == entity.getStairId();
@@ -250,11 +247,12 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
      */
     public void removeChannel(ChannelEntity item) {
         if (this.mChannelList.contains(item)) {
+            Log.d(TAG, "removeChannel: " + mChannelList.indexOf(item));
+            Log.d(TAG, "removeChannel: " + this.mChannelList.get(0).toString() + " item " + item.toString());
+            dataBaseManager.removeChannel(item);
             this.mChannelList.remove(item);
             sentMsgToUiAndVoice();
-            dataBaseManager.removeChannel(item);
         }
-
     }
 
     /**
@@ -276,23 +274,6 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
     }
 
     /**
-     * 移除消息
-     *
-     * @param items
-     *            要移除的消息
-     */
-    public void removeAllItem(MsgItemEntity... items) {
-        for (MsgItemEntity msgItemEntity : items) {
-            if (this.mAllList.contains(msgItemEntity)) {
-                this.mAllList.remove(msgItemEntity);
-            }
-        }
-        if (items.length > 0) {// 如果修改的列表里面的数据量为0的话，就不需要重新设置数据
-            sentMsgToUiAndVoice();
-        }
-    }
-
-    /**
      * 刷新所有公共频道的信息（防止语音和显示不同步）
      */
     public static void refreshPublicMsg() {
@@ -305,8 +286,6 @@ public class AllMessage implements InterMessage<MsgItemEntity> {
 
     /**
      * 获得管理消息列表的map
-     *
-     * @return
      */
     public static HashMap<String, AllMessage> getAllMsgManager() {
         return (HashMap<String, AllMessage>) msgManager;

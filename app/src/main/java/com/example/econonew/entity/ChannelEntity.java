@@ -98,32 +98,7 @@ public class ChannelEntity {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof ChannelEntity) {
-			// 检查是否所有的属性是不是都为空
-			boolean isAllNull = this.name == null && this.type == null && this.attribute == null;
-			boolean codeIsNull = this.code == null;
-			ChannelEntity objEntity = (ChannelEntity) o;
-			String thisName = this.name == null ? "" : this.name;
-			String thisType = this.type == null ? "" : this.type;
-			String thisAttr = this.attribute == null ? "" : this.attribute;
-			String thisCode = this.code == null ? "" : this.code;
-
-			String objName = objEntity.name == null ? "" : objEntity.name;
-			String objType = objEntity.type == null ? "" : objEntity.type;
-			String objAttr = objEntity.attribute == null ? "" : objEntity.attribute;
-			String objCode = objEntity.code == null ? "" : objEntity.code;
-			// 判断除了code的属性是不是所有的属性都相同
-			boolean notCodeIsEquals = thisName.equals(objName) && thisAttr.equals(objAttr) && thisType.equals(objType);
-			if (!isAllNull && notCodeIsEquals) {
-				return true;
-			} else if (!codeIsNull && thisCode.equals(objCode)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
+		return o instanceof ChannelEntity && o.toString().equals(this.toString());
 	}
 
 	/**
@@ -148,8 +123,10 @@ public class ChannelEntity {
 
 	@Override
 	public String toString() {
-		if (code != null) {
-			return "code:" + code;
+		if (!TextUtils.isEmpty(code)) {
+			if(TextUtils.isEmpty(code.trim())) {
+				return "code:" + code;
+			}
 		}
 		return name + " " + type + " " + attribute + " ";
 	}

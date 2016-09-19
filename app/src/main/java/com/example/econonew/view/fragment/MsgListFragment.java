@@ -1,12 +1,12 @@
 package com.example.econonew.view.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -22,18 +22,18 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
-import com.example.econonew.tools.ChannelListViewAdapter;
-import com.example.econonew.tools.MsgListViewAdapter;
-import com.example.econonew.tools.URLManager;
-import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.activity.main.MsgContentActivity;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.main.object.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.tools.ChannelListViewAdapter;
+import com.example.econonew.tools.MsgListViewAdapter;
+import com.example.econonew.tools.URLManager;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.FinanceApplication;
+import com.example.econonew.view.activity.main.MsgContentActivity;
 
 import org.json.JSONObject;
 
@@ -50,10 +50,10 @@ import java.util.Map;
 public class MsgListFragment extends Fragment implements OnItemClickListener,
         OnItemLongClickListener,AbsListView.OnScrollListener {
 
-    private static final String TAG = "MsgListFragment";
-
     //用于存储已经实例化的Fragment，下次再需要的时候可以直接从Map里面进行获取，提高效率
     private static Map<String, MsgListFragment> fragmentManager = new HashMap<>();
+
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private String fragmentName;
     private AllMessage mMessage;
@@ -70,23 +70,6 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
 
     private TextView noMsgTip;
 
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            if (msg.what == FinanceApplication.HANDLER_STATE_OK) {
-                if (fragmentName != null) {
-                    if (fragmentName.equals("自定义")) {
-                        channelAdapter.notifyDataSetChanged();
-                    } else {
-                        msgAdapter.notifyDataSetChanged();
-                    }
-                }
-                stopFresh();
-                hintProDialog();
-            }
-        }
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         bindMessage();
@@ -94,10 +77,8 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_main_view_page, container,
-                false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_main_view_page, container, false);
         if (savedInstanceState != null) {
             fragmentName = savedInstanceState.getString("name");
         }
@@ -108,25 +89,32 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
         return view;
     }
 
+    //刷新界面数据进行显示
+    private void refreshDatas() {
+        if (fragmentName != null) {
+            if (fragmentName.equals("自定义")) {
+                channelAdapter.notifyDataSetChanged();
+            } else {
+                msgAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
     // 初始化界面的控件
     private void initView(View view) {
 
         noMsgTip = (TextView) view.findViewById(R.id.msg_no_tip_tv);
-
         msgListLV = (ListView) view.findViewById(R.id.msg_listview);
+
         if (fragmentName.equals("自定义")) {
-            channelAdapter = new ChannelListViewAdapter(getActivity(),
-                    channelList);
+            channelAdapter = new ChannelListViewAdapter(getActivity(), channelList);
             msgListLV.setAdapter(channelAdapter);
         } else {
-            msgAdapter = new MsgListViewAdapter(getActivity(), msgList,
-                    msgListLV, fragmentName);
+            msgAdapter = new MsgListViewAdapter(getActivity(), msgList, msgListLV, fragmentName);
             msgListLV.setAdapter(msgAdapter);
         }
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.msg_fresh);
-        refreshLayout.setColorSchemeResources(R.color.swipe_color_1,
-                R.color.swipe_color_2, R.color.swipe_color_3);
-        refreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        refreshLayout.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2, R.color.swipe_color_3);
 
         initListener();
     }
@@ -138,25 +126,23 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
             msgListLV.setOnItemClickListener(this);
         }
         msgListLV.setOnScrollListener(this);
-        refreshLayout
-                .setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
-                    @Override
-                    public void onRefresh() {
-                        if (fragmentName.equals("自定义")) {
-                            FinanceApplication.getInstance().refreshUserData(
-                                    Constant.user);
-                        } else {
-                            FinanceApplication.getInstance().refreshPublicData();
-                        }
+                @Override
+                public void onRefresh() {
+                    if (fragmentName.equals("自定义")) {
+                        FinanceApplication.getInstance().refreshUserData(
+                                Constant.user);
+                    } else {
+                        FinanceApplication.getInstance().refreshPublicData();
                     }
-                });
-
+                }
+            });
     }
 
     //从本地数据库加载数据
     private void loadDatasFromDatabases() {
-        //TODO 还没有实现的方法
+        //TODO 还没有实现的方法,从本地数据库加载历史信息
     }
 
     /**
@@ -164,10 +150,16 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
      *
      * @param list 列表项的内容
      */
-    public void setList(final List<MsgItemEntity> list) {
+    public void setList(List<MsgItemEntity> list) {
         this.msgList.clear();
         this.msgList.addAll(list);
-        handler.sendEmptyMessage(FinanceApplication.HANDLER_STATE_OK);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshDatas();//刷新界面
+                stopFresh();//停止刷新提示
+            }
+        });
     }
 
     /**
@@ -178,7 +170,13 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
     public void setChannelList(List<ChannelEntity> list) {
         this.channelList.clear();
         this.channelList.addAll(list);
-        handler.sendEmptyMessage(FinanceApplication.HANDLER_STATE_OK);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshDatas();//刷新界面
+                stopFresh();//停止刷新提示
+            }
+        });
     }
 
     @Override
@@ -215,8 +213,7 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
     public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
         final ChannelEntity entity = channelList.get(position);
         ((BaseActivity) getActivity()).showTipDialog("提示！",
-                "是否要删除频道" + entity.getName() + ":" + entity.getType() + ":"
-                        + entity.getAttribute(), new OnClickListener() {
+                "是否要删除频道" + entity.toString(), new OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -236,8 +233,7 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
             deleteChannelThread(entity);// 开启一个删除频道的线程
             mMessage.removeChannel(entity);
         } else {
-            Toast.makeText(getContext(), "当前还没有登录，不能进行删除频道的操作",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "当前还没有登录，不能进行删除频道的操作", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -330,23 +326,15 @@ public class MsgListFragment extends Fragment implements OnItemClickListener,
      * 停止刷新
      */
     public void stopFresh() {
-        handler.post(new Runnable() {
-
-            @Override
-            public void run() {
-                if (refreshLayout != null) {
-                    refreshLayout.setRefreshing(false);
-                }
-                if (msgList.isEmpty() && channelList.isEmpty()
-                        && noMsgTip != null) {
-                    noMsgTip.setVisibility(View.VISIBLE);
-                } else if (noMsgTip != null) {
-                    noMsgTip.setVisibility(View.GONE);
-                }
-
-            }
-        });
-
+        hintProDialog();
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(false);
+        }
+        if (msgList.isEmpty() && channelList.isEmpty() && noMsgTip != null) {
+            noMsgTip.setVisibility(View.VISIBLE);
+        } else if (noMsgTip != null) {
+            noMsgTip.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.example.econonew.view.activity.channel;
 
 
-import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,39 +10,24 @@ import android.widget.TextView;
 
 import com.example.econonew.R;
 import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.activity.main.MainActivity;
 
 /**
- * ChannelAddActivity ������Ҫ��ʵ��ѡ���ǩ������Ƶ�������ҷ��ؽ����MainActivity
- * ������DialogTool�����ɶԻ�ѡ������DataThread���Ѿ����ر�������� ��Ƶ��������ɵķ���������Ҫ��ϸ̸��ϸ��
- * 
+ * 添加频道的Activity，点击各种添加频道的Activity
  * @author agnes
  */
 public class ChannelAddActivity extends BaseActivity implements OnClickListener {
-
-	private Button exchange_choose;
-	private Button stock_choose;
-	private Button money_choose;
-	private Button futures_choose;
-	private Button special_choose;
-	private Button funds_choose;
-	private Button channel_quit;
-
-	private TextView addMoreChannelTV;
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_addchannel);
 
-		exchange_choose = (Button) findViewById(R.id.exchange_choose);
-		stock_choose = (Button) findViewById(R.id.stock_choose);
-		money_choose = (Button) findViewById(R.id.money_choose);
-		funds_choose = (Button) findViewById(R.id.funds_choose);
-		futures_choose = (Button) findViewById(R.id.futures_choose);
-		special_choose = (Button) findViewById(R.id.special_choose);
-		channel_quit = (Button) findViewById(R.id.channel_quit);
-		
-		addMoreChannelTV = (TextView) findViewById(R.id.act_add_channel_add_more_channel);
+		Button exchange_choose = (Button) findViewById(R.id.exchange_choose);
+		Button stock_choose = (Button) findViewById(R.id.stock_choose);
+		Button money_choose = (Button) findViewById(R.id.money_choose);
+		Button funds_choose = (Button) findViewById(R.id.funds_choose);
+		Button futures_choose = (Button) findViewById(R.id.futures_choose);
+		Button special_choose = (Button) findViewById(R.id.special_choose);
+		Button channel_quit = (Button) findViewById(R.id.channel_quit);
 
 		exchange_choose.setOnClickListener(this);
 		stock_choose.setOnClickListener(this);
@@ -51,6 +36,9 @@ public class ChannelAddActivity extends BaseActivity implements OnClickListener 
 		money_choose.setOnClickListener(this);
 		futures_choose.setOnClickListener(this);
 		channel_quit.setOnClickListener(this);
+
+		TextView addMoreChannelTV = (TextView) findViewById(R.id.act_add_channel_add_more_channel);
+		addMoreChannelTV.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 		addMoreChannelTV.setOnClickListener(this);
 
 	}
@@ -60,44 +48,37 @@ public class ChannelAddActivity extends BaseActivity implements OnClickListener 
 
 	}
 
-	/*
-	 * ���ü����¼�
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onClick(View view) {
-		int id = view.getId();
-		Intent intent = new Intent();
-		switch (id) {
+		switch (view.getId()) {
 		case R.id.exchange_choose:
-			intent.setClass(ChannelAddActivity.this, ExchangeActivity.class);
+			openOtherActivity(ExchangeActivity.class, false);
 			break;
 		case R.id.stock_choose:
-			intent.setClass(ChannelAddActivity.this, StockActivity.class);
+			openOtherActivity(StockActivity.class, false);
 			break;
 		case R.id.funds_choose:
-			intent.setClass(ChannelAddActivity.this, FundsActivity.class);
+			openOtherActivity(FundsActivity.class, false);
 			break;
 		case R.id.futures_choose:
-			intent.setClass(ChannelAddActivity.this, FuturesActivity.class);
+			openOtherActivity(FuturesActivity.class, false);
 			break;
 		case R.id.money_choose:
-			intent.setClass(ChannelAddActivity.this, MoneyActivity.class);
+			openOtherActivity(MoneyActivity.class, false);
 			break;
 		case R.id.special_choose:
-			intent.setClass(ChannelAddActivity.this, SpecialActivity.class);
+			openOtherActivity(SpecialActivity.class, false);
 			break;
 		case R.id.channel_quit:
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.setClass(ChannelAddActivity.this, MainActivity.class);
-			finish();
+			backHomeActivity();
 			break;
 		case R.id.act_add_channel_add_more_channel :
-			intent.setClass(ChannelAddActivity.this, AddMoreChannelActivity.class);
+			openOtherActivity(AddMoreChannelActivity.class, false);
 			break;
 		default:
 			break;
 		}
-		startActivity(intent);
 	}
 
 }

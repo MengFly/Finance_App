@@ -41,7 +41,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	private List<ChannelEntity> mNotAddChannelList;// 没有添加过的频道
 	private List<ChannelEntity> mWantAddChannelList;// 想要添加的频道列表
 
-	String tipMessage = "";// 添加多个频道过程中的提示信息
+	private String tipMessage = "";// 添加多个频道过程中的提示信息
 	private int count = 0;// 已经添加的数据
 
 	@Override
@@ -88,14 +88,11 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 		checkBox.setPadding(10, 10, 10, 10);
 		MarginLayoutParams params = new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT,
 				MarginLayoutParams.WRAP_CONTENT);
-		params.leftMargin = 8;
-		params.topMargin = 3;
-		params.rightMargin = 3;
-		params.bottomMargin = 3;
+		params.leftMargin = params.topMargin = params.rightMargin = params.bottomMargin = 8;
 		checkBox.setLayoutParams(params);
 		checkBox.setBackgroundResource(R.drawable.show_channel_back);
 		checkBox.setButtonDrawable(R.drawable.none);
-		checkBox.setText(entity.getName() + " " + entity.getType() + " " + entity.getAttribute());
+		checkBox.setText(entity.toString());
 		return checkBox;
 	}
 
@@ -122,7 +119,9 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	// 判断频道是否添加过了
 	private boolean isAdded(ChannelEntity channel) {
 		for (ChannelEntity addedChannel : mAddedChannelList) {
-			return addedChannel.equals(channel);
+			if(addedChannel.equals(channel)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -141,17 +140,12 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 		channelTv.setPadding(10, 10, 10, 10);
 		MarginLayoutParams params = new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT,
 				MarginLayoutParams.WRAP_CONTENT);
-		params.leftMargin = 3;
-		params.topMargin = 3;
-		params.rightMargin = 3;
-		params.bottomMargin = 3;
+		params.leftMargin = params.topMargin = params.rightMargin = params.bottomMargin = 5;
 		channelTv.setLayoutParams(params);
 		channelTv.setBackgroundResource(R.drawable.tv_back);
 		channelTv.setTextColor(getResources().getColor(R.color.text_white));
 		channelTv.setTextSize(12.0f);
-		String code = addedChannel.getCode() == null ? "" : addedChannel.getCode();
-		channelTv.setText(
-				addedChannel.getName() + " " + addedChannel.getType() + " " + addedChannel.getAttribute() + " " + code);
+		channelTv.setText(addedChannel.toString());
 		return channelTv;
 	}
 
@@ -167,7 +161,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 				mWantAddChannelList.remove(entity);
 			}
 		}
-		selectChannelCountTv.setText("" + mWantAddChannelList.size());
+		selectChannelCountTv.setText(String.valueOf(mWantAddChannelList.size()));
 	}
 
 	@Override
@@ -206,8 +200,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 									AllMessage.getInstance("自定义").setChannels(Arrays.asList(entity), true, true);
 									updateProMessage(count, max, entity + "添加成功");
 								} else {
-									updateProMessage(count, max,
-											"频道添加失败：" + entity + JsonCast.getString(obj, "result"));
+									updateProMessage(count, max, "频道添加失败：" + entity + JsonCast.getString(obj, "result"));
 								}
 							} else {
 								updateProMessage(count, max, "频道添加失败" + entity);
@@ -222,7 +215,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 						}
 					});
 				}
-			};
+			}
 		}.start();
 
 	}

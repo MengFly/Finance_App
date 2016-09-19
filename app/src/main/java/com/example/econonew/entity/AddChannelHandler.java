@@ -1,10 +1,8 @@
 package com.example.econonew.entity;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
@@ -12,12 +10,11 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.activity.channel.ChannelAddActivity;
-import com.example.econonew.view.activity.main.MainActivity;
 import com.example.econonew.main.object.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.channel.ChannelAddActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +32,7 @@ import java.util.List;
  */
 public class AddChannelHandler extends Handler {
 
-	private Context mContext;
+	private BaseActivity mContext;
 
 	// 各频道的父类，用于初始化频道
 	private ChannelEntity mAddChannel;
@@ -51,8 +48,6 @@ public class AddChannelHandler extends Handler {
 	 *            context
 	 * @param addChannel
 	 *            各频道的管理类
-	 * @param pro
-	 *            提示用户的ProgressDialog
 	 */
 	public AddChannelHandler(BaseActivity context, ChannelEntity addChannel) {
 		super();
@@ -76,7 +71,7 @@ public class AddChannelHandler extends Handler {
 		}
 
 
-		((BaseActivity) mContext).hintProDialog();
+		mContext.hintProDialog();
 	}
 
 	private void addData(String name, ChannelEntity entity) {
@@ -94,7 +89,7 @@ public class AddChannelHandler extends Handler {
 			list.add(entity);
 			AllMessage.getInstance("自定义").setChannels(list, true, false);// 将设置的频道信息设置到自定义信息里面
 			initListener();
-			((BaseActivity) mContext).showTipDialog(null, "设置成功，是否再次设置",
+			mContext.showTipDialog(null, "设置成功，是否再次设置",
 					okListener, cancelListener);
 			Toast.makeText(mContext, "频道添加成功", Toast.LENGTH_SHORT).show();
 		} else {
@@ -111,20 +106,14 @@ public class AddChannelHandler extends Handler {
 
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.setClass(mContext, MainActivity.class);
-				mContext.startActivity(intent);
+				mContext.backHomeActivity();
 			}
 		};
 		okListener = new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.setClass(mContext, ChannelAddActivity.class);
-				mContext.startActivity(intent);
+				mContext.openOtherActivity(ChannelAddActivity.class, false);
 			}
 		};
 	}
@@ -143,13 +132,10 @@ public class AddChannelHandler extends Handler {
 		Cursor cursor = db.rawQuery(sql, null);
 		int count = cursor.getCount();
 		if (count > 0) {
-			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor
-					.moveToNext()) {
+			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 				String name = cursor.getString(cursor.getColumnIndex("name"));
 				String type = cursor.getString(cursor.getColumnIndex("type"));
-				String attribute = cursor.getString(cursor
-						.getColumnIndex("attribute"));
-
+				String attribute = cursor.getString(cursor.getColumnIndex("attribute"));
 				if (data.getName().equals(name) && data.getType().equals(type)
 						&& data.getAttribute().equals(attribute))
 					return true;

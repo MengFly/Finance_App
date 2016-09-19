@@ -193,6 +193,8 @@ public class DB_Information extends SQLiteOpenHelper {
         db.close();
     }
 
+
+
     /**
      * 从数据库里面获取用户定制的信息
      *

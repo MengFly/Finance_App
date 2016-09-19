@@ -1,25 +1,18 @@
 package com.example.econonew.entity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.activity.channel.ChannelAddActivity;
-import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.activity.main.MainActivity;
 import com.example.econonew.main.object.AllMessage;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.DB_Information;
 import com.example.econonew.server.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.tools.URLManager;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.FinanceApplication;
+import com.example.econonew.view.activity.channel.ChannelAddActivity;
 
 import org.json.JSONObject;
 
@@ -38,7 +31,7 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 
 	private ChannelEntity mAddChannel;
 
-	private Context mContext;
+	private BaseActivity mContext;
 
 	private String mTableName;
 
@@ -66,7 +59,7 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 	}
 
 	private void addChannelThread() {
-		((BaseActivity) mContext).showProDialog();
+		mContext.showProDialog();
 		final String url = URLManager.getSetChannelURL(Constant.user.getName(), mAddChannel);
 		final NetClient.OnResultListener responseListener = new NetClient.OnResultListener() {
 
@@ -80,19 +73,19 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 						addData(mAddChannel);
 					} else {
 						Toast.makeText(mContext, JsonCast.getString(obj, "result"), Toast.LENGTH_LONG).show();
-						((BaseActivity) mContext).showTipDialog(null, JsonCast.getString(obj, "result"), null, null);
+						mContext.showTipDialog(null, JsonCast.getString(obj, "result"), null, null);
 					}
 				} else {
 					Toast.makeText(FinanceApplication.app, "添加频道失败", Toast.LENGTH_SHORT).show();
 				}
 
-				((BaseActivity) mContext).hintProDialog();
+				mContext.hintProDialog();
 			}
 
 			@Override
 			public void onError(VolleyError error) {
 				super.onError(error);
-				((BaseActivity) mContext).hintProDialog();
+                mContext.hintProDialog();
 			}
 		};
 		// 给服务器发送定制信息
@@ -111,7 +104,7 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 		AllMessage.getInstance("自定义").setChannels(list, true, true);// 将设置的频道信息设置到自定义信息里面并进行存储
 		FinanceApplication.getInstance().refreshUserData(Constant.user);
 		initListener();
-		((BaseActivity) mContext).showTipDialog(null, "设置成功，是否再次设置", okListener, cancelListener);
+		mContext.showTipDialog(null, "设置成功，是否再次设置", okListener, cancelListener);
 	}
 
 	// 初始化点击事件
@@ -120,49 +113,25 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.setClass(mContext, MainActivity.class);
-				mContext.startActivity(intent);
+				mContext.backHomeActivity();
 			}
 		};
 		okListener = new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent();
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.setClass(mContext, ChannelAddActivity.class);
-				mContext.startActivity(intent);
+				mContext.openOtherActivity(ChannelAddActivity.class, true);
 			}
 		};
 	}
 
 	/**
-	 * 判断数据库中 是不是已经添加过这个频道
-	 *
-	 * @param data
-	 *            频道信息
+	 * 判断是不是已经添加过这个频道
+	 * @param data 频道信息
 	 */
 	private boolean isHaveData(ChannelEntity data) {
-		SQLiteDatabase db = new DB_Information(mContext).getReadableDatabase();
-		String sql = "select * from " + mTableName + " where user_name=" + Constant.user.getName();
-		Log.v("testUtils", sql);
-		Cursor cursor = db.rawQuery(sql, null);
-		int count = cursor.getCount();
-		if (count > 0) {
-			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-				String name = cursor.getString(cursor.getColumnIndex("name"));
-				String type = cursor.getString(cursor.getColumnIndex("type"));
-				String attribute = cursor.getString(cursor.getColumnIndex("attribute"));
-
-				if (data.getName().equals(name) && data.getType().equals(type) && data.getAttribute().equals(attribute))
-					return true;
-			}
-			return false;
-		} else {
-			return false;
-		}
+		AllMessage channelMessage = AllMessage.getInstance("自定义");
+		return channelMessage != null && channelMessage.getChannelList().contains(data);
 	}
 
 }

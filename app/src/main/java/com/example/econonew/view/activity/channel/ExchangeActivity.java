@@ -71,10 +71,8 @@ public class ExchangeActivity extends BaseActivity implements OnClickListener {
                 channelEntity.setAttribute(channelAttribute);
                 channelEntity.setCode(code);
                 if (channelEntity.isAddChannel(type, attribute, code, this)) {
-                    DialogInterface.OnClickListener listener = new AddChannelClickListener(channelEntity,
-                            ExchangeActivity.this);
-                    showTipDialog(null, "是否确定添加频道：" + channelEntity.getName() + "," + channelEntity.getType() + ","
-                            + channelEntity.getAttribute() + "," + channelEntity.getCode(), listener, null);
+                    DialogInterface.OnClickListener listener = new AddChannelClickListener(channelEntity, mContext);
+                    showTipDialog(null, "是否确定添加频道：" + channelAttribute, listener, null);
                 }
                 break;
             case R.id.exchange_name:

@@ -157,7 +157,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	/**
 	 * 打开另一个Activity
 	 * @param actClass	另一个Activity
-	 * @param isFinish	打开另一个Activit后此Activity是否退出
+	 * @param isFinish	打开另一个Activity后此Activity是否退出
      */
 	public void openOtherActivity(Class<?> actClass, boolean isFinish) {
 		Intent intent = new Intent(mContext, actClass);
