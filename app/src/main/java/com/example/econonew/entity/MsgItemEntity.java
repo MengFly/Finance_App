@@ -1,5 +1,7 @@
 package com.example.econonew.entity;
 
+import com.example.econonew.tools.URLManager;
+
 import java.io.Serializable;
 
 
@@ -89,7 +91,7 @@ public class MsgItemEntity implements Serializable {
 	}
 
 	public String getImageTitleUrl() {
-		return imageTitleUrl;
+		return URLManager.getCaiBianURL() + imageTitleUrl;
 	}
 
 	public String getMsgGeneral() {

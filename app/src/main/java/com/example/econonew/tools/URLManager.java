@@ -30,6 +30,12 @@ public class URLManager {
     public static final String OPERATION_SET_VIP = "setvip.action";
     public static final String OPERATION_DELETE_CHANNEL = "delchnl.action";// 删除频道操作
 
+    public static final String CAI_BIAN_URL = "http://115.29.139.72/caibian1";
+
+    public static String getCaiBianURL() {
+        return CAI_BIAN_URL;
+    }
+
     public static String  getURL() {
         if(Constant.isDeBug) {
             SharedPreferences spf = FinanceApplication.getInstance().getSharedPreferences("ip", Context.MODE_PRIVATE);

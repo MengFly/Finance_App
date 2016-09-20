@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -36,6 +37,7 @@ import java.util.Set;
  */
 public class ImageLoader {
 
+	private static final String TAG = "ImageLoader";
 	// 本地缓存的类
 	private LruCache<String, Bitmap> mCaches;
 
@@ -48,7 +50,7 @@ public class ImageLoader {
 	private DiskLruCache mDiskLruCache;
 
 	public ImageLoader(Context context, ListView listView) {
-		taskCollection = new HashSet<MsgItemsAsyncTask>();
+		taskCollection = new HashSet<>();
 		this.msgItemList = listView;
 		// 获取最大可用内存
 		int maxMemory = (int) Runtime.getRuntime().maxMemory();
@@ -89,9 +91,6 @@ public class ImageLoader {
 
 	/**
 	 * 使用MD5算法对传入的key进行加密并返回
-	 *
-	 * @param key
-	 * @return
 	 */
 	public String hashKeyForDisk(String key) {
 		String cacheKey;
@@ -107,8 +106,8 @@ public class ImageLoader {
 
 	private String bytesToHexString(byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < bytes.length; i++) {
-			String hex = Integer.toHexString(0xFF & bytes[i]);
+		for (byte b : bytes) {
+			String hex = Integer.toHexString(0xFF & b);
 			if (hex.length() == 1) {
 				sb.append('0');
 			}
@@ -124,7 +123,6 @@ public class ImageLoader {
 	 *            context
 	 * @param uniqueName
 	 *            缓存路径下的文件夹，用于给缓存进行分类
-	 * @return
 	 */
 	@SuppressLint("NewApi")
 	public File getDiskCacheDir(Context context, String uniqueName) {
@@ -148,6 +146,7 @@ public class ImageLoader {
 	 *            图片的url地址
 	 */
 	public void showImageFromURL(ImageView imageView, String imageUrl) {
+		Log.d(TAG, "showImageFromURL: imageUrl : " + imageUrl);
 		if (imageUrl == null) {
 			return;
 		}
@@ -270,9 +269,6 @@ public class ImageLoader {
 
 		/**
 		 * 从网络上下载资源到指定的输出流里面
-		 *
-		 * @param urlString
-		 * @param outputStream
 		 * @return 下载成功返回true 下载失败返回false
 		 */
 		public boolean downloadFromUrl(String urlString, OutputStream outputStream) {
