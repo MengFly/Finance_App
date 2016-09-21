@@ -1,1 +1,4 @@
-/build
+# 不忽略outputs，方便从github上面下载apk
+/build/generated
+/build/intermediates
+/build/tmp
