@@ -36,7 +36,7 @@ public class ExchangeActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_addchannel_exchange);
+        setContentView(R.layout.act_addchannel_exchange);
 
         exchange_name = (Button) findViewById(R.id.exchange_name);
         exchange_info = (Button) findViewById(R.id.exchange_info);

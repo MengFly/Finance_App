@@ -34,7 +34,6 @@
             android:stretchColumns="0,1" >
 
             <TableRow>
-
                 <LinearLayout
                     android:gravity="center"
                     android:orientation="vertical" >
@@ -147,15 +146,10 @@
     </ScrollView>
 
     <TextView
+        style="@style/app_base_text.clickable_tv"
         android:id="@+id/act_add_channel_add_more_channel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
         android:text="添加多个频道"
-        android:layout_gravity="end"
-        android:linksClickable="true"
-        android:clickable="true"
-        android:textColor="@color/text_link_color" />
+        android:layout_gravity="end" />
 
     <Button
         android:id="@+id/channel_quit"

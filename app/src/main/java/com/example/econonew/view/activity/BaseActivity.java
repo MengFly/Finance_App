@@ -14,10 +14,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.econonew.R;
-import com.example.econonew.view.activity.main.MainActivity;
 import com.example.econonew.presenter.BasePresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
+import com.example.econonew.view.activity.main.MainActivity;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -44,6 +44,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 		mContext = this;
 		initView(savedInstanceState);
 		initDatas();
+
+
 		FinanceApplication.getInstance().getmActManager().add(this);
 	}
 

@@ -1,6 +1,6 @@
 package com.example.econonew.tools;
 
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 
 import java.util.Map;
 

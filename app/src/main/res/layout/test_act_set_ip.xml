@@ -36,9 +36,8 @@
 </LinearLayout>
 
    <Button
+        style="@style/app_base_btn.ok"
         android:id="@+id/test_act_set_ip_btn"
-        android:layout_width="match_parent"
-       android:text="确定"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent" />
 
 </LinearLayout>

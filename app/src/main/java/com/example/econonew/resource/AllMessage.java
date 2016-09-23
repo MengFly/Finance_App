@@ -1,12 +1,10 @@
-package com.example.econonew.main.object;
+package com.example.econonew.resource;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
-import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.DB_Information;
 import com.example.econonew.view.fragment.MsgListFragment;
 import com.example.econonew.tools.Voice;
 

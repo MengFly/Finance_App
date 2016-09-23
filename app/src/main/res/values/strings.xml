@@ -73,4 +73,6 @@
     <string name="act_add_channel_money_tv">理财</string>
     <string name="act_add_channel_funds_tv">基金</string>
     <string name="copyright_fiance">CopyRight©Fiance</string>
+    <string name="no_source">没有信息</string>
+    <string name="check_login_user_name">用户名格式（11位）：1**********</string>
 </resources>

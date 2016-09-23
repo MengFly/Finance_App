@@ -5,46 +5,20 @@
     android:orientation="vertical">
 
     <EditText
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/icon_act_user_setpass"
-        android:drawableLeft="@drawable/icon_act_user_setpass"
+        style="@style/app_base_text.drawable.pass_et"
         android:id="@+id/act_set_password_old_pwd_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/et_back"
-        android:textColorHint="@color/text_black"
         android:hint="@string/act_set_password_old_pwd_et"
-        android:inputType="textVisiblePassword"
-        android:padding="10dp" />
-
+        android:inputType="textVisiblePassword" />
 
     <EditText
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/icon_act_user_setpass"
-        android:drawableLeft="@drawable/icon_act_user_setpass"
+        style="@style/app_base_text.drawable.pass_et"
         android:id="@+id/act_set_password_new_pwd_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/et_back"
-        android:hint="@string/act_set_password_new_pwd_et"
-        android:inputType="textPassword"
-        android:padding="10dp" />
-
+        android:hint="@string/act_set_password_new_pwd_et" />
 
     <EditText
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/icon_act_user_setpass"
-        android:drawableLeft="@drawable/icon_act_user_setpass"
         android:id="@+id/act_set_password_new_pwd2_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/et_back"
-        android:hint="@string/act_set_password_new_pwd2_tv"
-        android:inputType="textPassword"
-        android:padding="10dp" />
+        style="@style/app_base_text.drawable.pass_et"
+        android:hint="@string/act_set_password_new_pwd2_tv" />
 
     <TextView
         android:id="@+id/act_set_pwd_is_ok_tv"
@@ -56,11 +30,8 @@
         android:textSize="16sp" />
 
     <Button
+        style="@style/app_base_btn.ok"
         android:id="@+id/user_setpwd_sure"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/btn_back"
-        android:text="@string/btn_ok" />
+        android:layout_width="fill_parent" />
 
 </LinearLayout>

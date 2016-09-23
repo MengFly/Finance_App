@@ -1,4 +1,4 @@
-package com.example.econonew.tools;
+package com.example.econonew.tools.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.econonew.tools.ImageLoader;
+import com.example.econonew.tools.ShareTool;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.R;
 import com.example.econonew.entity.MsgItemEntity;
@@ -28,8 +30,6 @@ import java.util.List;
  * @author agnes 是显示信息的ListView的适配器 在MyFragment中引用
  */
 public class MsgListViewAdapter extends BaseAdapter {
-
-	public static boolean dataSurplus = true;
 
 	private List<MsgItemEntity> msgItems;
 	private LayoutInflater inflater;
@@ -50,15 +50,6 @@ public class MsgListViewAdapter extends BaseAdapter {
 		return msgItems.size();
 	}
 
-	/**
-	 * 停止加载数据
-	 */
-	public void cancelLoad() {
-		if (mImageLoader != null) {
-			mImageLoader.cacelAllTasks();
-		}
-	}
-
 	@Override
 	public Object getItem(int arg0) {
 		return msgItems.get(arg0);
@@ -69,12 +60,12 @@ public class MsgListViewAdapter extends BaseAdapter {
 		return arg0;
 	}
 
-	@Override // 根据getcount的数据逐一绘制
+	@Override
 	public View getView(int arg0, View view, ViewGroup arg2) {
 		if (msgItems.size() == 0) {
 			return null;
 		}
-		ViewHolder holder = null;
+		ViewHolder holder;
 		final MsgItemEntity item = msgItems.get(arg0);
 		if (view == null) {
 			view = inflater.inflate(R.layout.item_msg_list, null);

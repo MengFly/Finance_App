@@ -1,4 +1,4 @@
-package com.example.econonew.server;
+package com.example.econonew.server.json;
 
 
 import android.content.Context;
@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.example.econonew.server.JsonCast.*;
 
 
 /**
@@ -36,13 +35,13 @@ public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 	@Override
 	public List<ChannelEntity> getItemAllFromJson(String jsonString) {
 		List<ChannelEntity> channels = new ArrayList<>();
-		JSONObject channelObj = getJsonObject(jsonString);
-		JSONArray channelArray = getJsonArray(channelObj, "result");
+		JSONObject channelObj = JsonCast.getJsonObject(jsonString);
+		JSONArray channelArray = JsonCast.getJsonArray(channelObj, "result");
 		if(channelArray == null) {
 			return channels;
 		}
 		for (int i = 0; i < channelArray.length(); i++) {
-			JSONObject obj = getJsonObject(channelArray, i);
+			JSONObject obj = JsonCast.getJsonObject(channelArray, i);
 			ChannelEntity entity = getChannel(obj);
 			channels.add(entity);
 		}
@@ -50,17 +49,17 @@ public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 	}
 
 	private ChannelEntity getChannel(JSONObject obj) {
-		JSONObject businessTypeObj = getJSONObject(obj, "businessType");
-		JSONObject businessDomainObj = getJSONObject(obj, "businessDomain");
-		JSONObject stairObj = getJSONObject(obj, "stair");
-		String channelName = getString(businessTypeObj, "name");;
-		String channelType =  getString(businessDomainObj, "name");
-		String channelAttribute = getString(stairObj, "name");
-		int channelId = getInt(obj, "id");
-		int businessTypeId = getInt(businessTypeObj, "id");
-		int businessDomainId = getInt(businessDomainObj, "id");
-		int stairId = getInt(stairObj, "id");
-		String code = getString(obj, "stock");
+		JSONObject businessTypeObj = JsonCast.getJSONObject(obj, "businessType");
+		JSONObject businessDomainObj = JsonCast.getJSONObject(obj, "businessDomain");
+		JSONObject stairObj = JsonCast.getJSONObject(obj, "stair");
+		String channelName = JsonCast.getString(businessTypeObj, "name");;
+		String channelType =  JsonCast.getString(businessDomainObj, "name");
+		String channelAttribute = JsonCast.getString(stairObj, "name");
+		int channelId = JsonCast.getInt(obj, "id");
+		int businessTypeId = JsonCast.getInt(businessTypeObj, "id");
+		int businessDomainId = JsonCast.getInt(businessDomainObj, "id");
+		int stairId = JsonCast.getInt(stairObj, "id");
+		String code = JsonCast.getString(obj, "stock");
 		Log.d(TAG, "getChannel: " + "channelId " + channelId + " typeId " + businessTypeId + "domainId " + businessDomainId + " stairId " + stairId);
 		
 		ChannelEntity entity = new ChannelEntity();

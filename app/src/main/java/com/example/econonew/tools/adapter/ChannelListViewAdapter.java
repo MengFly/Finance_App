@@ -1,6 +1,5 @@
-package com.example.econonew.tools;
+package com.example.econonew.tools.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,6 @@ import java.util.List;
  *
  * @author agnes 是显示信息的ListView的适配器 在MyFragment中引用
  */
-@SuppressLint("InflateParams")
 public class ChannelListViewAdapter extends BaseAdapter {
 
 	private List<ChannelEntity> msgItems;
@@ -45,10 +43,10 @@ public class ChannelListViewAdapter extends BaseAdapter {
 		return arg0;
 	}
 
-	@Override // 根据getcount的数据逐一绘制
+	@Override // 根据getCount的数据逐一绘制
 	public View getView(int arg0, View view, ViewGroup arg2) {
-		ViewHolder holder = null;
-		ChannelEntity item = null;
+		ViewHolder holder;
+		ChannelEntity item;
 		if (msgItems.size() == 0) {
 			return null;
 		}
@@ -94,10 +92,10 @@ public class ChannelListViewAdapter extends BaseAdapter {
 	}
 
 	// 存放控件的viewHolder
-	class ViewHolder {
-		public LinearLayout parentLy;
-		public TextView channelNameTv;
-		public TextView channelTypeTv;
-		public TextView channelAttributeTv;
+ 	private class ViewHolder {
+		LinearLayout parentLy;
+		TextView channelNameTv;
+		TextView channelTypeTv;
+		TextView channelAttributeTv;
 	}
 }

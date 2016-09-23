@@ -1,9 +1,6 @@
 
 package com.example.econonew.resource;
 
-import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.entity.MsgItemEntity;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,17 +14,12 @@ public class Constant {
     public static final String SPF_KEY_USER = "userInfo";
     public static final String SPF_KEY_UPDATE_DATE = "updateDate";
 
-    public static boolean isDeBug = true;
+    public static boolean isDeBug = false;
 
     public static final List<String> tabList = Arrays.asList("股票", "理财", "基金", "期货", "外汇", "自定义");
 
     // 用户对象
     public static UserInfo user;
-
-    //对用户频道的缓存
-    public static List<ChannelEntity> cacheUserChannelList;
-    //对公共信息的缓存
-    public static Map<String, List<MsgItemEntity>> cachePublicMsgList;
 
     /**
      * 各个公共栏目的名称
@@ -43,7 +35,6 @@ public class Constant {
         publicDataTableNames.put("外汇", "exchange_info");
     }
 
-    ;
 
     /**
      * 根据消息的名称获取公共消息有关的数据库

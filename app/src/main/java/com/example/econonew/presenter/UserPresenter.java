@@ -6,12 +6,12 @@ import android.text.TextUtils;
 import com.android.volley.VolleyError;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.User.BaseUserActivity;
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
-import com.example.econonew.server.JsonCast;
+import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
-import com.example.econonew.server.UserJsonHelper;
+import com.example.econonew.server.json.UserJsonHelper;
 import com.example.econonew.tools.EncodeStrTool;
 import com.example.econonew.tools.URLManager;
 

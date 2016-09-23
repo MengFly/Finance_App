@@ -11,6 +11,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.example.econonew.server.json.JsonHelperImpl;
 import com.example.econonew.view.activity.FinanceApplication;
 
 import java.util.List;
@@ -65,8 +66,6 @@ public class NetClient {
 	/**
 	 * 执行get请求，并且返回我们想要的解析过的Item
 	 *
-	 * @param context
-	 *            context
 	 * @param url
 	 *            请求的Url
 	 * @param listener

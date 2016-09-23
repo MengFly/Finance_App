@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.example.econonew.R;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.User.UserLoginActivity;
-import com.example.econonew.jpush.ExampleUtil;
-import com.example.econonew.jpush.PushSwitch;
+import com.example.econonew.server.jpush.ExampleUtil;
+import com.example.econonew.server.jpush.PushSwitch;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.tools.URLManager;
@@ -37,7 +37,7 @@ public class SplashActivity extends BaseActivity {
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_splash);
+		setContentView(R.layout.act_splash);
 		textTipTv = (TextView) findViewById(R.id.act_splash_test_tip_tv);
 		versionNameTv = (TextView) findViewById(R.id.act_splash_version);
 		versionNameTv.setText(getVersionName());

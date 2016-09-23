@@ -1,70 +1,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="5dp"
     android:orientation="vertical">
 
-
     <EditText
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/icon_act_user_user"
-        android:drawableLeft="@drawable/icon_act_user_user"
-        android:layout_margin="5dp"
+        style="@style/app_base_text.drawable.user_et"
         android:id="@+id/act_regist_user_name_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/et_back"
         android:hint="@string/act_regist_username_et"
-        android:inputType="number"
-        android:padding="5dp"
-        android:textColorHint="@color/text_black"
         android:textSize="@dimen/text_size_small" />
 
     <TextView
-    android:layout_marginEnd="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_width="match_parent"
-    android:textColor="@color/text_hint_color"
-    android:gravity="end"
-    android:text="手机号格式（11位）：1**********"
-    android:layout_height="wrap_content" />
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/text_hint_color"
+        android:gravity="end"
+        android:text="@string/check_login_user_name"
+        android:layout_height="wrap_content" />
 
 
     <EditText
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/icon_act_user_setpass"
-        android:drawableLeft="@drawable/icon_act_user_setpass"
-        android:layout_margin="5dp"
+        style="@style/app_base_text.drawable.pass_et"
         android:id="@+id/act_regist_user_password_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/et_back"
         android:hint="@string/act_regist_password_et"
-        android:inputType="textPassword"
-        android:padding="5dp"
-        android:textColorHint="@color/text_black"
         android:textSize="@dimen/text_size_small" />
 
 
     <EditText
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/icon_act_user_setpass"
-        android:drawableLeft="@drawable/icon_act_user_setpass"
-        android:layout_margin="5dp"
+        style="@style/app_base_text.drawable.pass_et"
         android:id="@+id/act_regist_user_password2_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/et_back"
         android:hint="@string/act_regist_password_ok_et"
-        android:inputType="textPassword"
-        android:textColorHint="@color/text_black"
-        android:padding="5dp"
         android:textSize="@dimen/text_size_small" />
 
 
     <Button
         android:id="@+id/act_regist_sure_btn"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/btn_back"

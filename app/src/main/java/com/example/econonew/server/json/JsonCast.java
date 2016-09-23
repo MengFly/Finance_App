@@ -1,4 +1,4 @@
-package com.example.econonew.server;
+package com.example.econonew.server.json;
 
 import android.util.Log;
 

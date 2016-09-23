@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:text="没有信息"
+        android:text="@string/no_source"
         android:textSize="20sp" />
     
 </FrameLayout>

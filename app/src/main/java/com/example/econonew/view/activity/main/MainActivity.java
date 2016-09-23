@@ -16,9 +16,9 @@ import com.example.econonew.view.activity.User.UserActivity;
 import com.example.econonew.view.activity.User.UserLoginActivity;
 import com.example.econonew.view.activity.channel.ChannelAddActivity;
 import com.example.econonew.view.customview.ViewPagerIndicator;
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.tools.FragmentAdapter;
+import com.example.econonew.tools.adapter.FragmentAdapter;
 import com.example.econonew.view.fragment.MsgListFragment;
 import com.example.econonew.tools.SettingManager;
 import com.example.econonew.tools.ShareTool;
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.act_main);
 
 		Button voiceBtn = (Button) findViewById(R.id.act_main_voice_btn);
 		Button addChannelBtn = (Button) findViewById(R.id.add_channel_btn);

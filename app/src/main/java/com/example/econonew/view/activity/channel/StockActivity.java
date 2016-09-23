@@ -34,7 +34,7 @@ public class StockActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_addchannel_stock);
+		setContentView(R.layout.act_addchannel_stock);
 		stock_name = (Button) findViewById(R.id.stock_name);
 		stock_info = (Button) findViewById(R.id.stock_info);
 		channel_sure = (Button) findViewById(R.id.stock_channel_sure);

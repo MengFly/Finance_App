@@ -1,4 +1,4 @@
-package com.example.econonew.tools;
+package com.example.econonew.tools.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,11 +14,6 @@ import java.util.List;
 public class FragmentAdapter extends FragmentStatePagerAdapter {
 
 	private List<Fragment> list;
-
-	public FragmentAdapter(FragmentManager fm) {
-		super(fm);
-	}
-
 	public FragmentAdapter(FragmentManager fm, List<Fragment> list) {
 		super(fm);
 		this.list = list;

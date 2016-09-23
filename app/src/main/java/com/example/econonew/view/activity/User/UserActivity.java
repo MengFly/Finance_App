@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.jpush.SettingActivity;
+import com.example.econonew.server.jpush.SettingActivity;
 import com.example.econonew.presenter.UserPresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.utils.URLSettingActivity;
@@ -38,7 +38,7 @@ public class UserActivity extends BaseUserActivity {
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_user);
+		setContentView(R.layout.act_user);
 
 		regist_btn = (Button) findViewById(R.id.user_regist);
 		text_user = (TextView) findViewById(R.id.user_name);

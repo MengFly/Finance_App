@@ -35,7 +35,7 @@ public class FuturesActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_addchannel_futures);
+		setContentView(R.layout.act_addchannel_futures);
 
 		futures_name = (Button) findViewById(R.id.futures_name);
 		futures_info = (Button) findViewById(R.id.futures_info);

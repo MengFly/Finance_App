@@ -1,7 +1,7 @@
-package com.example.econonew.server;
+package com.example.econonew.server.json;
 
 import com.example.econonew.entity.MsgItemEntity;
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.tools.URLManager;
 

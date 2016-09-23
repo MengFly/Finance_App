@@ -12,16 +12,16 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
-import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.customview.FlowLayout;
 import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.server.JsonCast;
+import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.tools.ChannelListManager;
 import com.example.econonew.tools.URLManager;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.FinanceApplication;
+import com.example.econonew.view.customview.FlowLayout;
 
 import org.json.JSONObject;
 
@@ -86,8 +86,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	private CheckBox getChannelCheckBox(ChannelEntity entity) {
 		CheckBox checkBox = new CheckBox(mContext);
 		checkBox.setPadding(10, 10, 10, 10);
-		MarginLayoutParams params = new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT,
-				MarginLayoutParams.WRAP_CONTENT);
+		MarginLayoutParams params = new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT, MarginLayoutParams.WRAP_CONTENT);
 		params.leftMargin = params.topMargin = params.rightMargin = params.bottomMargin = 8;
 		checkBox.setLayoutParams(params);
 		checkBox.setBackgroundResource(R.drawable.show_channel_back);
@@ -108,7 +107,6 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 					entity.setName(channelName);
 					entity.setType(channelFistLabel);
 					entity.setAttribute(secondLabel);
-					entity.setCode(null);
 					totalChannelList.add(entity);
 				}
 			}
@@ -138,8 +136,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	private TextView getChannelTextView(ChannelEntity addedChannel) {
 		TextView channelTv = new TextView(mContext);
 		channelTv.setPadding(10, 10, 10, 10);
-		MarginLayoutParams params = new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT,
-				MarginLayoutParams.WRAP_CONTENT);
+		MarginLayoutParams params = new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT, MarginLayoutParams.WRAP_CONTENT);
 		params.leftMargin = params.topMargin = params.rightMargin = params.bottomMargin = 5;
 		channelTv.setLayoutParams(params);
 		channelTv.setBackgroundResource(R.drawable.tv_back);

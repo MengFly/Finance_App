@@ -1,4 +1,4 @@
-package com.example.econonew.jpush;
+package com.example.econonew.server.jpush;
 
 import android.app.Notification;
 import android.content.BroadcastReceiver;
@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.example.econonew.view.activity.main.SplashActivity;
 import com.example.econonew.entity.MsgItemEntity;
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 
 import org.json.JSONException;
 import org.json.JSONObject;

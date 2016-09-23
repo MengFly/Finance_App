@@ -34,7 +34,7 @@ public class FundsActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.activity_addchannel_funds);
+		setContentView(R.layout.act_addchannel_funds);
 
 		funds_name = (Button) findViewById(R.id.funds_name);
 		funds_info = (Button) findViewById(R.id.funds_info);

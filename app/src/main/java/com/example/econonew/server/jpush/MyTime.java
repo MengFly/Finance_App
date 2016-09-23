@@ -1,4 +1,4 @@
-package com.example.econonew.jpush;
+package com.example.econonew.server.jpush;
 
 public class MyTime {
 	private int week;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Base TextView(TextView and It's Child)-->
+    <style name="app_base_text">
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
+    <!--drawable_editText-->
+    <style name="app_base_text.drawable">
+        <item name="android:background">@drawable/et_back</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColorHint">@color/text_black</item>
+    </style>
+
+    <!--显示密码的editText-->
+    <style name="app_base_text.drawable.pass_et">
+        <item name="android:inputType">textPassword</item>
+        <item name="android:drawableLeft">@drawable/icon_act_user_setpass</item>
+        <item name="android:drawableStart">@drawable/icon_act_user_setpass</item>
+    </style>
+
+    <!--显示用户的EditText-->
+    <style name="app_base_text.drawable.user_et">
+        <item name="android:inputType">number</item>
+        <item name="android:drawableLeft">@drawable/icon_act_user_user</item>
+        <item name="android:drawableStart">@drawable/icon_act_user_user</item>
+    </style>
+
+    <!--可点击的TextView-->
+    <style name="app_base_text.clickable_tv">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/text_link_color</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+</resources>

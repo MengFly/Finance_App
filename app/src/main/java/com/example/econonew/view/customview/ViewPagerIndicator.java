@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
 
 import java.util.List;

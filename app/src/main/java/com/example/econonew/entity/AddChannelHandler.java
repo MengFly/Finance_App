@@ -10,7 +10,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;
 import com.example.econonew.view.activity.BaseActivity;

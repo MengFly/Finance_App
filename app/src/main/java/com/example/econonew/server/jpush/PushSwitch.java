@@ -1,4 +1,4 @@
-package com.example.econonew.jpush;
+package com.example.econonew.server.jpush;
 
 import android.content.Context;
 import android.database.Cursor;

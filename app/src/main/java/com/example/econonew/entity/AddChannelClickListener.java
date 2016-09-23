@@ -5,9 +5,9 @@ import android.content.DialogInterface.OnClickListener;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.econonew.main.object.AllMessage;
+import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.server.JsonCast;
+import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.tools.URLManager;
 import com.example.econonew.view.activity.BaseActivity;

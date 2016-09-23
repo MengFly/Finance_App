@@ -1,4 +1,4 @@
-package com.example.econonew.jpush;
+package com.example.econonew.server.jpush;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -28,8 +28,9 @@ public class ExampleUtil {
             return true;
         if (s.length() == 0)
             return true;
-        if (s.trim().length() == 0)
+        if (s.trim().length() == 0) {
             return true;
+        }
         return false;
     }
 

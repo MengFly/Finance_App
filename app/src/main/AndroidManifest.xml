@@ -104,7 +104,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.econonew.jpush.SettingActivity"
+            android:name=".server.jpush.SettingActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -112,7 +112,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".jpush.TestActivity"
+            android:name=".server.jpush.TestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -206,7 +206,7 @@
 
         <!-- User defined.    用户自定义的广播接收器 -->
         <receiver
-            android:name="com.example.econonew.jpush.MyReceiver"
+            android:name=".server.jpush.MyReceiver"
             android:enabled="true"
             android:exported="false" >
             <intent-filter>

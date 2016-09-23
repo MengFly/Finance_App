@@ -23,7 +23,7 @@ public class SpecialActivity extends BaseActivity implements OnClickListener {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_addchannel_special);
+        setContentView(R.layout.act_addchannel_special);
         channel_sure = (Button) findViewById(R.id.special_channel_sure);
         expert_info = (Button) findViewById(R.id.expert_info);
         expert_info_show = (TextView) findViewById(R.id.expert_info_show);
