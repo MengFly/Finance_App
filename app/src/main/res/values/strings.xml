@@ -21,7 +21,7 @@
     <string name="act_user_login_password_ev">密码</string>
     <string name="act_user_login_login_btn">登录</string>
     <string name="act_user_login_nologin_tv">跳过登录</string>
-    <string name="act_user_login_regist_tv">点击注册</string>
+    <string name="act_user_login_registe_tv">点击注册</string>
 
     <!-- 用户注册界面 -->
     <string name="act_regist_title_tv">注册</string>
@@ -75,4 +75,5 @@
     <string name="copyright_fiance">CopyRight©Fiance</string>
     <string name="no_source">没有信息</string>
     <string name="check_login_user_name">用户名格式（11位）：1**********</string>
+    <string name="act_login_forget_pass_tv">忘记密码</string>
 </resources>

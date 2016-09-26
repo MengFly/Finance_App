@@ -42,7 +42,6 @@ public class UserSetPwdActivity extends BaseUserActivity {
 
 	private void initListener() {
 		setpwdSureBtn.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				setPwdClick();
@@ -69,8 +68,7 @@ public class UserSetPwdActivity extends BaseUserActivity {
 	private class ContentExchangeListener implements TextWatcher {
 
 		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-									  int after) {
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
 		}
 

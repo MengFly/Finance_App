@@ -164,8 +164,6 @@ public class NetClient {
 
 	/**
 	 * 获取VooleyDemo实例
-	 *
-	 * @return
 	 */
 	public static NetClient getInstance() {
 		if (mClient == null) {
@@ -198,11 +196,10 @@ public class NetClient {
 	 * @author mengfei
 	 *
 	 */
-	public static abstract class OnResultItemListener {
+	 static abstract class OnResultItemListener {
+		 abstract <T> void onSuccess(T item);
 
-		public abstract <T> void onSuccess(T item);
-
-		public void onError(VolleyError error) {
+		 void onError(VolleyError error) {
 			error(error);
 		}
 	}
@@ -213,11 +210,11 @@ public class NetClient {
 	 * @author mengfei
 	 *
 	 */
-	public static abstract class OnResultItemsListener {
+	 static abstract class OnResultItemsListener {
 
-		public abstract <T> void onSuccess(List<T> items);
+		 abstract <T> void onSuccess(List<T> items);
 
-		public void onError(VolleyError error) {
+		 void onError(VolleyError error) {
 			error(error);
 		}
 	}
@@ -228,7 +225,7 @@ public class NetClient {
 	 * @param error
 	 *            错误类型
 	 */
-	public static final void error(VolleyError error) {
+	 private static void error(VolleyError error) {
 		if (error instanceof NoConnectionError) {
 			Toast.makeText(FinanceApplication.getInstance(), "网络链接失败，请检查网络设置", Toast.LENGTH_SHORT).show();
 		} else if (error instanceof TimeoutError) {

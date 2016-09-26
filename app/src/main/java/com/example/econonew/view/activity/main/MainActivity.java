@@ -10,19 +10,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.econonew.R;
+import com.example.econonew.resource.AllMessage;
+import com.example.econonew.resource.Constant;
+import com.example.econonew.tools.SettingManager;
+import com.example.econonew.tools.ShareTool;
+import com.example.econonew.tools.Voice;
+import com.example.econonew.tools.adapter.FragmentAdapter;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.User.UserActivity;
 import com.example.econonew.view.activity.User.UserLoginActivity;
 import com.example.econonew.view.activity.channel.ChannelAddActivity;
 import com.example.econonew.view.customview.ViewPagerIndicator;
-import com.example.econonew.resource.AllMessage;
-import com.example.econonew.resource.Constant;
-import com.example.econonew.tools.adapter.FragmentAdapter;
 import com.example.econonew.view.fragment.MsgListFragment;
-import com.example.econonew.tools.SettingManager;
-import com.example.econonew.tools.ShareTool;
-import com.example.econonew.tools.Voice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +66,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onBackPressed() {
 		showTipDialog(null, "是否要退出应用？", new DialogInterface.OnClickListener() {
-
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				FinanceApplication.getInstance().exit();
 			}
-		}, null);
+		},null);
 	}
 
 	// 初始化ViewPager
@@ -100,10 +99,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				if (Constant.user == null) {
 					showTipDialog(null, "你还没有登陆,是否登录", new DialogInterface.OnClickListener() {
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							openOtherActivity(UserLoginActivity.class, false);
-						}
-					}, null);
+						public void onClick(DialogInterface dialog, int which) {openOtherActivity(UserLoginActivity.class, false);}
+					},null);
 				} else {
 					openOtherActivity(ChannelAddActivity.class, false);
 				}

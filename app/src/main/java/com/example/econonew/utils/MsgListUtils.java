@@ -12,8 +12,6 @@ public class MsgListUtils {
 
 	/**
 	 * 获取测试的列表项
-	 * @param context
-	 * @return
 	 */
 	public static String getUtliMsgList(Context context) {
 		AssetManager manager = context.getAssets();

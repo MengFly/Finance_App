@@ -46,7 +46,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 		initDatas();
 
 
-		FinanceApplication.getInstance().getmActManager().add(this);
+		FinanceApplication.getInstance().getActManager().add(this);
 	}
 
 
@@ -199,7 +199,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 	@Override
 	protected void onDestroy() {
-		FinanceApplication.getInstance().getmActManager().remove(this);
+		FinanceApplication.getInstance().getActManager().remove(this);
 		if(mPresenter != null) {
 			mPresenter.onDestroy();
 		}

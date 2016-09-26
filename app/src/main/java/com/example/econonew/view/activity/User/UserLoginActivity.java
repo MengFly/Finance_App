@@ -1,15 +1,14 @@
 package com.example.econonew.view.activity.User;
 
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.econonew.R;
 import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.view.customview.UnderLineTextView;
+
 
 /**
  * UserLoginActivity 此类是用户管理用户登录的类，并且提供用户注册的接口
@@ -23,7 +22,9 @@ public class UserLoginActivity extends BaseUserActivity {
 
     private Button registBtn;
     private Button loginSureBtn;
-    private TextView noLoginTv;
+
+    private UnderLineTextView noLoginTv;
+    private UnderLineTextView forgetPassTv;
 
     // 判断登陆界面是刚开始进入应用的登陆界面还是用户点击UserActivity里面的登陆按钮进入的登陆界面
     // 如果是刚进入应用的界面就自动设置用户名和 密码，并显示跳过登陆按钮
@@ -35,35 +36,37 @@ public class UserLoginActivity extends BaseUserActivity {
         setContentView(R.layout.act_user_login);
         userNameET = (EditText) findViewById(R.id.act_login_user_name_et);
         userPasswordET = (EditText) findViewById(R.id.act_login_password_et);
-
         loginSureBtn = (Button) findViewById(R.id.act_login_sure_btn);
         registBtn = (Button) findViewById(R.id.act_login_regist_btn);
-        noLoginTv = (TextView) findViewById(R.id.act_user_login_not_login_tv);
-        noLoginTv.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        noLoginTv = (UnderLineTextView) findViewById(R.id.act_user_login_not_login_tv);
+        forgetPassTv = (UnderLineTextView) findViewById(R.id.act_login_forget_pass_tv);
         initListener();
     }
 
     private void initListener() {
-        registBtn.setOnClickListener(new OnClickListener() {
+        registBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
-                openOtherActivity(UserRegistActivity.class, true);
+            public void onClick(View v) {openOtherActivity(UserRegistActivity.class, true);
             }
         });
-        loginSureBtn.setOnClickListener(new OnClickListener() {
+        loginSureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginBtnClick();
             }
         });
-        noLoginTv.setOnClickListener(new OnClickListener() {
-
+        noLoginTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 backHomeActivity();
             }
         });
-
+        forgetPassTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2016/9/24 点击进入找回密码的界面
+            }
+        });
     }
 
     @Override

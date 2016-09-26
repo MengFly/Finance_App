@@ -1,107 +1,659 @@
 {
-	"理财":[
+	"理财": [
 		{
-			"context":"理财",
-			"id":7,
-			"level":0,
-			"picture":"\/Uploads.png",
-			"title":"理财",
-			"url":"www"
-		},
-		{
-			"context":"理财VIP",
-			"id":8,
-			"level":1,
-			"picture":"\/Uploads.png",
-			"title":"理财VIP","url":"www"
-		}
-	],
-	"期货":[
-		{
-			"context":"期货",
-			"id":3,
-			"level":0,
-			"picture":"\/Uploads.png",
-			"title":"期货",
-			"url":"www"
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
 			},
-		{
-			"context":"期货VIP",
-			"id":4,
-			"level":1,
-			"picture":"\/Uploads.png",
-			"title":"期货VIP",
-			"url":"www"
+			"businessType": {
+				"id": 4,
+				"name": "理财"
+			},
+			"context": "理财",
+			"id": 7,
+			"level": 0,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "理财",
+			"url": "www"
 		},
 		{
-			"context":"周一(7月18日)商品跌多涨少，黑色系全线暴跌，热卷、螺纹钢、铁矿石跌停，焦炭暴跌5.27%，沥青大跌3.97%，焦煤大跌3.77%，豆粕大跌3.75%，玻璃大跌3.66%，菜粕大跌3.64%，甲醇大跌3.4%，淀粉大跌3.05%，玉米下跌2.24%，橡胶、沪锡、白银、沪铜、丙烯、豆一、PTA、沪铝、沪铅跌逾1%，涨幅方面，棕榈油上涨1.36%。",
-			"id":180,
-			"level":0,
-			"picture":"",
-			"title":"黑色系遭遇黑色星期一尾盘跳水掀起跌停潮",
-			"url":""
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 4,
+				"name": "理财"
+			},
+			"context": "理财VIP",
+			"id": 8,
+			"level": 1,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "理财VIP",
+			"url": "www"
 		}
 	],
-	"股票":[
+	"期货": [
 		{
-			"context":"股票",
-			"id":1,
-			"level":0,
-			"picture":"\/Uploads.png",
-			"title":"股票",
-			"url":"www"
-		},
-		{"context":"股票VIP",
-		"id":2,
-		"level":1,
-		"picture":"\/Uploads.png",
-		"title":"股票VIP",
-		"url":"www"
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 2,
+				"name": "期货"
+			},
+			"context": "期货",
+			"id": 3,
+			"level": 0,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "期货",
+			"url": "www"
 		},
 		{
-			"context":"沪指今日延续震荡整理态势，最终小幅收跌0.35%结束一天交易，收报3043.56点，日K线遭遇三连阴。两市成交量依然低迷，合计成交5576亿元。行业板块涨跌互现，券商股领跌，板块指数跌幅达到2%。",
-			"id":179,
-			"level":0,
-			"picture":"",
-			"title":"沪指震荡收跌遇三连阴 成交量低迷券商股领跌",
-			"url":""
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 2,
+				"name": "期货"
+			},
+			"context": "期货VIP",
+			"id": 4,
+			"level": 1,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "期货VIP",
+			"url": "www"
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 2,
+					"name": "期货"
+				},
+				"id": 11,
+				"name": "金属"
+			},
+			"businessType": {
+				"id": 2,
+				"name": "期货"
+			},
+			"context": "是不是觉得傻傻分不清？\r\n\r\n如今，智能手机技术革命已基本完成，显示屏、摄像头以及处理器之类的元器件能轻易从上游厂商获取，五英寸左右的屏幕已经成了普遍共识，外观设计上腾挪空间也不大……如果说还有什么花样，可能也就是少一个耳机孔、多一个镜头的差别。\r\n\r\n在产品如此趋同的市场上，各大手机厂商不约而同地把预算烧向了营销。\r\n\r\n营销大战的号角，吹响在市场成熟期\r\n\r\n在人们以往的印象中，广告营销的重要性一向是在日化、汽车等传统消费品行业被频繁提及。因为这些产业已经高度成熟，产品自身的发挥空间较窄，因此需要通过这种的手段来争取用户。\r\n\r\n如今，智能手机也开始走入这个阶段。\r\n\r\n在出货量上，整个市场的表现已经趋于饱和；广告营销方面，各大厂商的投入却越来越高：",
+			"id": 210,
+			"level": 1,
+			"picture": "",
+			"pushLevel": 1,
+			"stair": {
+				"id": 2,
+				"name": "数据"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "中国智能手机变局：终于到了拼广告的时代",
+			"url": ""
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 2,
+					"name": "期货"
+				},
+				"id": 8,
+				"name": "国债"
+			},
+			"businessType": {
+				"id": 2,
+				"name": "期货"
+			},
+			"context": "参考消息网9月21日报道 日媒称，8月1日是中国人民解放军建军节，中国海军这天在东海实施了大规模实弹对抗演习。中国海军三大舰队（北海舰队、东海舰队和南海舰队）百余艘舰艇、数十架战机以及电子对抗兵力等参加了演习。然而，对于中国，比起大规模战斗，日本更应担心的是“卷心菜战略”。\r\n据日本《东洋经济周刊》9月17日发表题为《中国切实扩大海洋支配的“卷心菜战略”》的文章称，“卷心菜战略”是中国军事评论家张召忠在北京电视台2013年5月播出的节目中用到的概念。该战略是从菲律宾手中夺走黄岩岛和仁爱礁的有效手段。“卷心菜战略”是指，中国可以用一层层的船只包围岛礁，在最内侧水域由渔船进行渔业活动，其外层海域由渔政和海监等执法机构巡逻船进行巡逻，最外层由中国海军舰艇守护。\r\n文章称，位于“卷心菜”中心部分的是，对岛礁进行实效支配的菲律宾舰艇、军人等。周围被层层环绕的情况下，如果支援物资无法送到，他们就不得不逃出去。",
+			"id": 214,
+			"level": 1,
+			"picture": "",
+			"pushLevel": 1,
+			"stair": {
+				"id": 5,
+				"name": "定制"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "日媒忧中国“卷心菜战略”延伸到东海",
+			"url": ""
 		}
 	],
-	"外汇":[
+	"股票": [
 		{
-			"context":"外汇",
-			"id":9,
-			"level":0,
-			"picture":"\/Uploads.png",
-			"title":"外汇",
-			"url":"www"
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 1,
+				"name": "股票"
+			},
+			"context": "股票",
+			"id": 1,
+			"level": 0,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "股票",
+			"url": "www"
 		},
 		{
-			"context":"外汇VIP",
-			"id":10,
-			"level":1,
-			"picture":"\/Uploads.png",
-			"title":"外汇VIP",
-			"url":"www"
-		}
-	],
-	"基金":[
-		{
-			"context":"基金",
-			"id":5,
-			"level":0,
-			"picture":"\/Uploads.png",
-			"title":"基金",
-			"url":"www"
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 1,
+				"name": "股票"
+			},
+			"context": "股票VIP",
+			"id": 2,
+			"level": 1,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "股票VIP",
+			"url": "www"
 		},
 		{
-			"context":"基金VIP",
-			"id":6,
-			"level":1,
-			"picture":"\/Uploads.png",
-			"title":"基金VIP",
-			"url":"www"
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 3,
+				"name": "港股"
+			},
+			"businessType": {
+				"id": 1,
+				"name": "股票"
+			},
+			"context": "早前，马云旗下的春华资本和蚂蚁金服以4.6亿美元收购肯德基和必胜客的母公司百胜集团(Yum Brands)在华业务的新闻，让段子手们兴致大发：纷纷揣测马云是为了报当年去肯德基面试被拒的仇。真相真的是这样吗？\r\n　　其实，你们太小看马云了，收购肯德基和必胜客，是马云下的一盘大棋：醉瓮之意不在酒，马云看重的并不是快餐连锁，而是背后国人生活场景的大数据。阿里巴巴也不仅仅是一家电商公司，而是一家洞察中国人所有生活秘密的信息公司。通过你在网上的消费数据，阿里巴巴不仅知道你在哪儿工作、收入多少、结没结婚、开什么车、住多少钱的房子；还会知道你的生活习惯、甚至什么时候想生孩子……有专家称：阿里巴巴的大数据和云计算是有史以来最强大的情报搜集和分析系统——通过其大数据和云计算，中国人的一举一动及行为偏好都尽在其掌握之中。",
+			"id": 208,
+			"level": 0,
+			"picture": "",
+			"pushLevel": 1,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "002230",
+				"id": 2,
+				"name": "科大讯飞"
+			},
+			"title": "阿里市值登顶亚洲第一，马云葫芦里究竟卖的什么药",
+			"url": ""
 		}
 	],
-	"status":"success"
+	"外汇": [
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 5,
+				"name": "外汇"
+			},
+			"context": "外汇",
+			"id": 9,
+			"level": 0,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "外汇",
+			"url": "www"
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 5,
+				"name": "外汇"
+			},
+			"context": "外汇VIP",
+			"id": 10,
+			"level": 1,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "外汇VIP",
+			"url": "www"
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 5,
+					"name": "外汇"
+				},
+				"id": 23,
+				"name": "欧元"
+			},
+			"businessType": {
+				"id": 5,
+				"name": "外汇"
+			},
+			"context": "原标题：2016年9月19日外交部发言人陆慷主持例行记者会\r\n\r\n问：据报道，日本防卫大臣近日在访问华盛顿时称，日本将和美国海军在南海进行联合训练演习，同时也会同南海周边国家加强合作。中方对此有何回应？\r\n\r\n答：关于日本一段时间以来在南海问题上异乎寻常的一些表现，我在7月28日答记者问时曾说过，日本给人的感觉有点儿“哀莫大于心不死”。从上述报道可以看出，日本方面仍然没有看清、或者说还是不愿正视大势所趋。",
+			"id": 212,
+			"level": 1,
+			"picture": "",
+			"pushLevel": 1,
+			"stair": {
+				"id": 4,
+				"name": "分析"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "002230",
+				"id": 2,
+				"name": "科大讯飞"
+			},
+			"title": "日方称将与美在南海举行军演 外交部：哀莫大于心不死",
+			"url": "http://news.ifeng.com/a/20160919/49989926_0.shtml?_zbs_baidu_news"
+		}
+	],
+	"基金": [
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 3,
+				"name": "基金"
+			},
+			"context": "基金",
+			"id": 5,
+			"level": 0,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "基金",
+			"url": "www"
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 1,
+					"name": "股票"
+				},
+				"id": 1,
+				"name": "沪深"
+			},
+			"businessType": {
+				"id": 3,
+				"name": "基金"
+			},
+			"context": "基金VIP",
+			"id": 6,
+			"level": 1,
+			"picture": "/Uploads.png",
+			"pushLevel": 0,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "基金VIP",
+			"url": "www"
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 3,
+					"name": "基金"
+				},
+				"id": 15,
+				"name": "债券"
+			},
+			"businessType": {
+				"id": 3,
+				"name": "基金"
+			},
+			"context": "【独家权威发布！国内油价终结“二连涨” 明起，每升便宜一毛钱！】9月18日24时，我国成品油调价时间窗口再次开启，国内油价终结“二连涨”，迎来年内第四次下调：汽油每吨下调155元，柴油每吨下调150元。全国平均来看，折合90号汽油每升下调0.1元，92号汽油每升下调0.11元，95号下调0.11元，0号柴油每升下调0.13元。按一般家用汽车油箱50L容量估测，加满一箱92号汽油将少花5块5毛钱。而降价之后，多地油价重回“5元时代”。扩散周知！（记者 平凡",
+			"id": 209,
+			"level": 1,
+			"picture": "",
+			"pushLevel": 1,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "国内油价终结“二连涨” 明起每升便宜一毛钱",
+			"url": ""
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 3,
+					"name": "基金"
+				},
+				"id": 13,
+				"name": "股票"
+			},
+			"businessType": {
+				"id": 3,
+				"name": "基金"
+			},
+			"context": "新京报快讯(记者王硕 戴轩)北京将取消农业户口和非农业户口性质区分，统一登记为居民户口。9月19日，北京市关于《进一步推进户籍制度改革的实施意见》正式出台。\r\n　　据不完全统计，截至目前，包括北京在内已经有30个省份出台户籍制度改革方案，具体为河北、河南、山东、山西、陕西、江西、湖南、湖北、广东、广西、黑龙江、吉林、辽宁、重庆、云南、甘肃、青海、福建、江苏、安徽、贵州、四川、新疆、宁夏、浙江、海南、内蒙古、天津、上海、北京，各地普遍提出取消农业户口与非农业户口性质区分。\r\n　　农业户口和非农业户口各自有哪些权益?人口专家、北京大学社会学系教授陆杰华说，农业户口的权益，主要是宅基地和责任田，特别是在城市化过程中，通过拆迁，可以获得更多的收益;非农业户口的权益主要是依附在户籍上的一些社会福利，包括教育、医疗、就业、保险、住房等方面。",
+			"id": 211,
+			"level": 1,
+			"picture": "/Uploads/20160920/1474358501_529066100.jpg",
+			"pushLevel": 1,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "30省已取消农业户口 专家：农转非不一定放弃土地",
+			"url": "http://china.huanqiu.com/article/2016-09/9460499.html?from=bdwz"
+		},
+		{
+			"businessDomain": {
+				"businessType": {
+					"id": 3,
+					"name": "基金"
+				},
+				"id": 14,
+				"name": "货币"
+			},
+			"businessType": {
+				"id": 3,
+				"name": "基金"
+			},
+			"context": "中新网北京9月22日电（记者 张尼）本月18日起，北京开始就本市的社会抚养费征收管理办法展开为期1月的征求意见。中新网（微信公众号：cns2012）记者梳理各地政策文件发现，目前，已有20余省份针对“超生”现象明确了社会抚养费标准。不少地区的标准与超生人群收入、职业等挂钩，对于3胎以上的超生、重婚超生等，更是加大征收力度。\r\n日前，北京市人民政府关于修改《北京市社会抚养费征收管理办法》的决定（草案送审稿）开始在市政府法制办官网公开征求意见。\r\n此次改动取消了原来条款中对违反规定生育第二个子女的夫妻或者非婚生育子女的公民征收社会抚养费的规定，改为对不符合规定生育第三个及三个以上子女的夫妻或者非婚生育第三个及三个以上子女的公民，每多生育一个子女，按照市统计部门公布的城镇居民或者农村居民年人均可支配收入的3至10倍征收。\r\n据记者不完全统计，“全面两孩”政策正式落地以来，除新疆、西藏两地外，全国已经有29个省份陆续修订了本地区的计生条例。",
+			"id": 213,
+			"level": 0,
+			"picture": "",
+			"pushLevel": 1,
+			"stair": {
+				"id": 3,
+				"name": "公告"
+			},
+			"stock": {
+				"businessDomain": {
+					"businessType": {
+						"id": 1,
+						"name": "股票"
+					},
+					"id": 1,
+					"name": "沪深"
+				},
+				"code": "300496",
+				"id": 1,
+				"name": "中科创达"
+			},
+			"title": "20余省份明确社会抚养费标准 各地对超生罚多少？",
+			"url": ""
+		}
+	],
+	"status": "success"
 }

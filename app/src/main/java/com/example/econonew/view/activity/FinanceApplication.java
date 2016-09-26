@@ -73,10 +73,10 @@ public class FinanceApplication extends Application {
 						super.onError(error);
 						JSONObject map = JsonCast.getJsonObject(MsgListUtils.getUtliMsgList(app));
 						new ResponseJsonHelper().handleInfomation(map);
-					};
+					}
 				};
 				NetClient.getInstance().excuteGetForString(app, url, listener);
-			};
+			}
 		}.start();
 	}
 
@@ -167,7 +167,7 @@ public class FinanceApplication extends Application {
 		return mRequestQueue;
 	}
 
-	public List<BaseActivity> getmActManager() {
+	public List<BaseActivity> getActManager() {
 		return mActManager;
 	}
 

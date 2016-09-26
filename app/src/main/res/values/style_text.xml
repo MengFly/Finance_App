@@ -3,16 +3,17 @@
 
     <!--Base TextView(TextView and It's Child)-->
     <style name="app_base_text">
-        <item name="android:drawablePadding">10dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
     </style>
 
     <!--drawable_editText-->
     <style name="app_base_text.drawable">
+        <item name="android:drawablePadding">10dp</item>
         <item name="android:background">@drawable/et_back</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
         <item name="android:textColorHint">@color/text_black</item>
     </style>
 
@@ -30,13 +31,17 @@
         <item name="android:drawableStart">@drawable/icon_act_user_user</item>
     </style>
 
+    <!--hint类型的TextView-->
+    <style name="app_base_text.hint_tv">
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/text_hint_color</item>
+    </style>
+
     <!--可点击的TextView-->
     <style name="app_base_text.clickable_tv">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
         <item name="android:textColor">@color/text_link_color</item>
         <item name="android:clickable">true</item>
-        <item name="android:padding">10dp</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

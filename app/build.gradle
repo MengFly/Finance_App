@@ -10,7 +10,9 @@ android {
         targetSdkVersion 24
         versionCode 5
         versionName "1.0.4"
+        //开启jack编译，来支持java8的lambda表达式
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,9 +30,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
     compile files('libs/volley.jar')
-    compile 'com.android.support:cardview-v7:24.2.0'
+    compile 'com.android.support:cardview-v7:24.2.1'
     compile files('libs/Msc.jar')
     compile files('libs/jpush-android-2.1.5.jar')
     compile 'org.jetbrains:annotations-java5:15.0'

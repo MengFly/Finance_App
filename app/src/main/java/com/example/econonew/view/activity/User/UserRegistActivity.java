@@ -2,7 +2,6 @@ package com.example.econonew.view.activity.User;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,14 +27,13 @@ public class UserRegistActivity extends BaseUserActivity {
         user_regist_password1 = (EditText) findViewById(R.id.act_regist_user_password_et);
         user_regist_password2 = (EditText) findViewById(R.id.act_regist_user_password2_et);
         Button user_regist_sure = (Button) findViewById(R.id.act_regist_sure_btn);
-        user_regist_sure.setOnClickListener(new OnClickListener() {
 
+        user_regist_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userRegistBtnClick();
             }
         });
-
     }
 
     @Override

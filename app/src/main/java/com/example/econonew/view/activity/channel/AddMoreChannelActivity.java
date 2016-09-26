@@ -15,8 +15,8 @@ import com.example.econonew.R;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.tools.ChannelListManager;
 import com.example.econonew.tools.URLManager;
 import com.example.econonew.view.activity.BaseActivity;
@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 public class AddMoreChannelActivity extends BaseActivity implements OnCheckedChangeListener, OnClickListener {
 
 	private FlowLayout addedChannelLy;
