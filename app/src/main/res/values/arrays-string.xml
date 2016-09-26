@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="UserMiBaoQuestion">
+        <item>您父亲的名字</item>
+        <item>您母亲的名字</item>
+        <item>您爱人的名字</item>
+        <item>您的生日</item>
+        <item>您爱人的生日</item>
+        <item>对您影响最深的一个人的名字</item>
+    </string-array>
+</resources>

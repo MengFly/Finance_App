@@ -1,45 +1,61 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:padding="5dp">
 
-    <EditText
-        style="@style/app_base_text.drawable.user_et"
-        android:id="@+id/act_regist_user_name_et"
-        android:hint="@string/act_regist_username_et"
-        android:textSize="@dimen/text_size_small" />
-
-    <TextView
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:textColor="@color/text_hint_color"
-        android:gravity="end"
-        android:text="@string/check_login_user_name"
-        android:layout_height="wrap_content" />
-
-
-    <EditText
-        style="@style/app_base_text.drawable.pass_et"
-        android:id="@+id/act_regist_user_password_et"
-        android:hint="@string/act_regist_password_et"
-        android:textSize="@dimen/text_size_small" />
-
-
-    <EditText
-        style="@style/app_base_text.drawable.pass_et"
-        android:id="@+id/act_regist_user_password2_et"
-        android:hint="@string/act_regist_password_ok_et"
-        android:textSize="@dimen/text_size_small" />
-
-
-    <Button
-        android:id="@+id/act_regist_sure_btn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/btn_back"
-        android:text="@string/act_regist_title_tv" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/act_regist_user_name_et"
+            style="@style/app_base_text.drawable.user_et"
+            android:hint="@string/act_regist_username_et"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            style="@style/app_base_text.hint_tv"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/check_login_user_name" />
+
+
+        <EditText
+            android:id="@+id/act_regist_user_password_et"
+            style="@style/app_base_text.drawable.pass_et"
+            android:hint="@string/act_regist_password_et"
+            android:textSize="@dimen/text_size_small" />
+
+        <EditText
+            android:id="@+id/act_regist_user_password2_et"
+            style="@style/app_base_text.drawable.pass_et"
+            android:hint="@string/act_regist_password_ok_et"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            style="@style/app_base_text.hint_tv"
+            android:text="设置密保问题" />
+
+        <Spinner
+            style="@style/MySpinner"
+            android:id="@+id/act_user_regist_quest_Sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/act_user_regist_get_pass_et"
+            android:textSize="12sp"
+            android:textColorHint="@color/text_hint_color"
+            style="@style/app_base_text.drawable" />
+
+        <Button
+            android:id="@+id/act_regist_sure_btn"
+            style="@style/app_base_btn"
+            android:layout_width="match_parent"
+            android:text="@string/act_regist_title_tv" />
+
+    </LinearLayout>
+
+</ScrollView>

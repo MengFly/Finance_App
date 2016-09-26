@@ -3,6 +3,7 @@
 
     <!--Base TextView(TextView and It's Child)-->
     <style name="app_base_text">
+        <item name="android:inputType">text</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
