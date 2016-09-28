@@ -111,7 +111,6 @@ public class DialogTool implements DialogInterface.OnClickListener {
 		builder.setPositiveButton("确定", this);
 		builder.setNegativeButton("取消", null);
 		showDialog();
-
 	}
 
 	@Override

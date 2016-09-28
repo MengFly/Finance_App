@@ -29,7 +29,8 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     private Thread userLogoutThread;//用户注销线程
     private Thread userRigistThread;//用户注册线程
     private Thread userSetPassThread;//用户修改密码线程
-    private Thread userSetVipThread;//用户设置Vip线程
+    private Thread userSetVipThread;//用户设置Vip线
+    
 
     public UserPresenter(BaseUserActivity activity) {
         super(activity);

@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/act_add_one_channel_title_tv"
+        style="@style/app_base_text"
+        android:layout_width="match_parent"
+        android:background="@drawable/tv_back"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:text="定制方式"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/act_add_one_channel_name_btn"
+                style="@style/app_base_btn.drawable"
+                android:drawableTop="@drawable/icon_funds_name"
+                android:text="名称" />
+
+            <TextView
+                style="@style/app_base_text"
+                android:id="@+id/act_add_one_channel_name_tv"
+                android:text="请选择"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/app_base_btn.drawable"
+                android:id="@+id/act_add_one_channel_info_btn"
+                android:drawableTop="@drawable/icon_category"
+                android:text="信息类型" />
+
+            <TextView
+                style="@style/app_base_text"
+                android:id="@+id/act_add_one_channel_info_tv"
+                android:text="请选择"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/act_add_one_channel_sure_btn"
+            style="@style/app_base_btn.ok"
+            android:layout_width="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

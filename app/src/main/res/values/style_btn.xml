@@ -9,6 +9,12 @@
         <item name="android:background">@drawable/btn_back</item>
     </style>
 
+    <!--DrawableBtn-->
+    <style name="app_base_btn.drawable">
+        <item name="android:padding">5dp</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
     <!--取消按钮-->
     <style name="app_base_btn.cancel">
         <item name="android:text">@string/btn_back</item>
@@ -21,7 +27,7 @@
 
     <style name="MySpinner" parent="@android:style/Widget.Spinner">
         <item name="android:layout_margin">10dp</item>
-        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:spinnerMode">dialog</item>
         <item name="android:dropDownVerticalOffset">10dip</item>
     </style>
 </resources>

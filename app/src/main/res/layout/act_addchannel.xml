@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="15dip"
@@ -145,7 +144,7 @@
         </TableLayout>
     </ScrollView>
 
-    <TextView
+    <com.example.econonew.view.customview.UnderLineTextView
         style="@style/app_base_text.clickable_tv"
         android:id="@+id/act_add_channel_add_more_channel"
         android:text="添加多个频道"

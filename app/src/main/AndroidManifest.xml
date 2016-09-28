@@ -79,25 +79,8 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name=".view.activity.channel.ExchangeActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".view.activity.channel.StockActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".view.activity.channel.FundsActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".view.activity.channel.MoneyActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".view.activity.channel.FuturesActivity"
-            android:screenOrientation="portrait" >
+        <activity android:name=".view.activity.channel.AddOneChannelActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".view.activity.channel.SpecialActivity"

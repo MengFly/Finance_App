@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--用户的密保问题的问题-->
     <string-array name="UserMiBaoQuestion">
         <item>您父亲的名字</item>
         <item>您母亲的名字</item>
@@ -7,5 +8,16 @@
         <item>您的生日</item>
         <item>您爱人的生日</item>
         <item>对您影响最深的一个人的名字</item>
+    </string-array>
+
+    <!--主界面显示的几个Tab-->
+    <!--依次为:"股票", "理财", "基金", "期货", "外汇", "自定义"-->
+    <string-array name="PublicTab">
+        <item>股票</item>
+        <item>理财</item>
+        <item>基金</item>
+        <item>期货</item>
+        <item>外汇</item>
+        <item>自定义</item>
     </string-array>
 </resources>
