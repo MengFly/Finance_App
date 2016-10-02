@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import com.android.volley.VolleyError;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.User.BaseUserActivity;
-import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
 import com.example.econonew.server.json.JsonCast;
@@ -227,7 +226,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
                     Constant.user.setVIP(user.isVIP());
                     if (!isStartLogin) {
                         FinanceApplication.getInstance().refreshUserData(Constant.user);
-                        AllMessage.refreshPublicMsg();
+                        FinanceApplication.getInstance().refreshPublicData();
                     }
                     mActivity.saveUserInfo(Constant.user);
                     mActivity.backHomeActivity();
@@ -252,7 +251,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     }
 
     /** 开启一个用户注销的线程 启动线程链接服务器根据用户名以及电话号码进行注销操作 */
-    public void initLogoutThread(UserInfo user) {
+    private void initLogoutThread(UserInfo user) {
         final String url = URLManager.getLogoutURL(user.getName());
         final NetClient.OnResultListener requestListener = new NetClient.OnResultListener() {// 注销成功后的回调事件
 
@@ -262,7 +261,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
                 if (responseObject != null) {
                     mActivity.removeUserAndCookie();
                     FinanceApplication.getInstance().refreshUserData(Constant.user);
-                    AllMessage.refreshPublicMsg();
+                    FinanceApplication.getInstance().refreshPublicData();
                     String result = JsonCast.getString(responseObject, "result");
                     if (result != null) {
                         if ("success".equals(result)) {
@@ -283,7 +282,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
                 mActivity.hintProDialog();
                 mActivity.removeUserAndCookie();
                 FinanceApplication.getInstance().refreshUserData(Constant.user);
-                AllMessage.refreshPublicMsg();
+                FinanceApplication.getInstance().refreshPublicData();
             }
         };
         userLogoutThread = new Thread() {

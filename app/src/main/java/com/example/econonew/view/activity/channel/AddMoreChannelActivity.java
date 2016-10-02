@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
 import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.tools.ChannelListManager;
@@ -65,9 +65,13 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	}
 
 	private void initChannelList() {
-		mAddedChannelList = AllMessage.getInstance("自定义").getChannelList();
+		mAddedChannelList = new ArrayList<>();
 		mNotAddChannelList = new ArrayList<>();
 		mWantAddChannelList = new ArrayList<>();
+		ChannelMessage message = ChannelMessage.getInstance("自定义");
+		if (message != null) {
+			mAddedChannelList.addAll(message.getMessage());
+		}
 	}
 
 	// 初始化未添加过的频道
@@ -195,7 +199,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 								if ("success".equals(JsonCast.getString(obj, "status"))) {
 									int id = JsonCast.getInt(obj, "result");
 									entity.setId(id);
-									AllMessage.getInstance("自定义").setChannels(Arrays.asList(entity), true, true);
+									ChannelMessage.getInstance("自定义").setMessage(Arrays.asList(entity), true, true);
 									updateProMessage(count, max, entity + "添加成功");
 								} else {
 									updateProMessage(count, max, "频道添加失败：" + entity + JsonCast.getString(obj, "result"));

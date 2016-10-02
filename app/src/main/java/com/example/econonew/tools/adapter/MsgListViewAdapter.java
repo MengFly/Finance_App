@@ -114,11 +114,11 @@ public class MsgListViewAdapter extends BaseAdapter {
 	}
 
 	// 存放控件的viewHolder
-	class ViewHolder {
-		public TextView titleTv;
-		public ImageView titleIv;
-		public TextView isVipTv;
-		public CheckBox isLoveCb;
-		public TextView shareTv;
+	private class ViewHolder {
+		TextView titleTv;
+		ImageView titleIv;
+		TextView isVipTv;
+		CheckBox isLoveCb;
+		TextView shareTv;
 	}
 }

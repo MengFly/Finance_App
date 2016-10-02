@@ -1,8 +1,8 @@
 package com.example.econonew.server.json;
 
 import com.example.econonew.entity.MsgItemEntity;
-import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.tools.URLManager;
 
 import org.json.JSONArray;
@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 /**
@@ -35,19 +34,20 @@ public class ResponseJsonHelper {
 	 *
 	 * @param json
 	 */
-	public void initMsgItemList(JSONObject json) {
-		HashMap<String, AllMessage> manager = AllMessage.getAllMsgManager();
-		for (int i = 0; i < Constant.publicItemNames.length; i++) {
-			AllMessage allMessage = manager.get(Constant.publicItemNames[i]);
+	private void initMsgItemList(JSONObject json) {
+		for (String itemName : Constant.publicItemNames) {
+			MainMessage msgManager = MainMessage.getInstance(itemName);
 			try {
 				ArrayList<MsgItemEntity> msgList = new ArrayList<>();
-				JSONArray array = json.getJSONArray(allMessage.getName());
+				JSONArray array = json.getJSONArray(itemName);
 				for (int j = 0; j < array.length(); j++) {
 					JSONObject object =  array.getJSONObject(j);
 					MsgItemEntity mi = getEntityFromJson(object);
 					msgList.add(mi);
 				}
-				allMessage.setMsg(msgList, false, true);
+				if (msgManager != null) {
+					msgManager.setMessage(msgList, false, true);
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -58,7 +58,6 @@ public class ResponseJsonHelper {
 	/**
 	 * 从JsonObject里面获取Msg实例
 	 * @param object	JsonObject
-	 * @return
 	 * @throws JSONException
 	 */
 	private MsgItemEntity getEntityFromJson(JSONObject object) throws JSONException {
@@ -82,11 +81,8 @@ public class ResponseJsonHelper {
 		return entity;
 	}
 
-	public String getMsgGeneralByContent(String msgContent) {
+	private String getMsgGeneralByContent(String msgContent) {
 		return null;
 	}
 
-	public void handleChannel(JSONObject json) {
-
-	}
 }

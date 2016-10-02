@@ -12,10 +12,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;
 import com.example.econonew.resource.UserInfo;
+import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.json.ChannelJsonHelper;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
@@ -37,7 +37,6 @@ import java.util.List;
 
 public class FinanceApplication extends Application {
 
-	public static final int HANDLER_STATE_OK = 0x09786;
 
 	private static final String TAG = "FinanceApplication";
 
@@ -91,9 +90,9 @@ public class FinanceApplication extends Application {
 //				AllMessage.getInstance("自定义").setChannels(channelList, false, false);
 //			}
 		} else {
-			if (SettingManager.getInstance().isInitDataFinsh()) {
+			if (SettingManager.getInstance().isInitDataFinish()) {
 				List<ChannelEntity> channelList = new DB_Information(app).getChannel(user);
-				AllMessage.getInstance("自定义").setChannels(channelList, false, false);
+				ChannelMessage.getInstance("自定义").setMessage(channelList, false, false);
 			}
 		}
 	}
@@ -129,7 +128,7 @@ public class FinanceApplication extends Application {
 					Toast.makeText(app, jsonHelper.getErrorTip(), Toast.LENGTH_SHORT).show();
 				} else {
 					new DB_Information(app).removeSelfChannel(user.getName());
-					AllMessage.getInstance("自定义").setChannels(channels, false, true);
+					ChannelMessage.getInstance("自定义").setMessage(channels, false, true);
 				}
 				FinanceApplication.getInstance().refreshPublicData();
 			}
@@ -137,7 +136,7 @@ public class FinanceApplication extends Application {
 			@Override
 			public void onError(VolleyError error) {
 				super.onError(error);
-				AllMessage.getInstance("自定义").stopFreash();
+				ChannelMessage.getInstance("自定义").stopFresh();
 			}
 		};
 		new Thread() {

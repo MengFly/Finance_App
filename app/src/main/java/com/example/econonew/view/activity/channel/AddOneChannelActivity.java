@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.entity.AddChannelClickListener;
+import com.example.econonew.tools.listener.AddChannelClickListener;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.tools.ChannelListManager;
 import com.example.econonew.tools.DialogTool;

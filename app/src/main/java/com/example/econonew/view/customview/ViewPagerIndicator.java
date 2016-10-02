@@ -19,8 +19,8 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.resource.msg.MainMessage;
 
 import java.util.List;
 
@@ -207,7 +207,10 @@ public class ViewPagerIndicator extends LinearLayout {
 				}
 				heightLightTextView(arg0);
 				Constant.read_tab = arg0;
-				AllMessage.getAllMsgManager().get(Constant.tabList.get(arg0)).resetVoice();
+				MainMessage messageManager = MainMessage.getInstance(Constant.tabList.get(arg0));
+				if (messageManager != null) {
+					messageManager.resetVoice();
+				}
 			}
 
 			@Override
@@ -232,11 +235,11 @@ public class ViewPagerIndicator extends LinearLayout {
 	private PageOnChangeListener mListener;
 
 	private interface PageOnChangeListener {
-		public void onPageSelected(int arg0);
+		void onPageSelected(int arg0);
 
-		public void onPageScrolled(int arg0, float arg1, int arg2);
+		void onPageScrolled(int arg0, float arg1, int arg2);
 
-		public void onPageScrollStateChanged(int arg0);
+		void onPageScrollStateChanged(int arg0);
 	}
 
 	/**

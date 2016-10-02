@@ -1,12 +1,13 @@
-package com.example.econonew.entity;
+package com.example.econonew.tools.listener;
 
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.econonew.resource.AllMessage;
+import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.tools.URLManager;
@@ -101,7 +102,10 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 
 	private void addData(ChannelEntity entity) {
 		List<ChannelEntity> list = Arrays.asList(entity);
-		AllMessage.getInstance("自定义").setChannels(list, true, true);// 将设置的频道信息设置到自定义信息里面并进行存储
+		ChannelMessage messageManager = ChannelMessage.getInstance("自定义");// 将设置的频道信息设置到自定义信息里面并进行存储
+		if (messageManager != null) {
+			messageManager.setMessage(list, true, true);
+		}
 		FinanceApplication.getInstance().refreshUserData(Constant.user);
 		initListener();
 		mContext.showTipDialog(null, "设置成功，是否再次设置", okListener, cancelListener);
@@ -130,8 +134,8 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 	 * @param data 频道信息
 	 */
 	private boolean isHaveData(ChannelEntity data) {
-		AllMessage channelMessage = AllMessage.getInstance("自定义");
-		return channelMessage != null && channelMessage.getChannelList().contains(data);
+		ChannelMessage channelMessage = ChannelMessage.getInstance("自定义");
+		return channelMessage != null && channelMessage.getMessage().contains(data);
 	}
 
 }

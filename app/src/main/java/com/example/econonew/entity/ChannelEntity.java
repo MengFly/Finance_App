@@ -3,8 +3,6 @@ package com.example.econonew.entity;
 
 import android.text.TextUtils;
 
-import com.example.econonew.view.activity.BaseActivity;
-
 public class ChannelEntity {
 
 	private String name;// 频道名称
@@ -99,26 +97,6 @@ public class ChannelEntity {
 	@Override
 	public boolean equals(Object o) {
 		return o instanceof ChannelEntity && o.toString().equals(this.toString());
-	}
-
-	/**
-	 * 判断是否应该添加频道
-	 *
-	 * @param type 频道的类型
-	 * @param attribute 频道的子类型
-	 * @param code 频道的代码
-	 */
-	public boolean isAddChannel(String type, String attribute, String code, BaseActivity context) {
-		if (TextUtils.isEmpty(code)) {
-			if (!type.equals("请选择") && !attribute.equals("请选择")) {
-				return true;
-			} else {
-				context.showTipDialog(null, "请先选择外汇信息或填写交易代码", null, null);
-				return false;
-			}
-		} else {
-			return true;
-		}
 	}
 
 	@Override

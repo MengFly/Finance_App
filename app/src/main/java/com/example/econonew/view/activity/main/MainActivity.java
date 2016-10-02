@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.econonew.R;
-import com.example.econonew.resource.AllMessage;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.tools.SettingManager;
 import com.example.econonew.tools.ShareTool;
 import com.example.econonew.tools.Voice;
@@ -22,7 +22,8 @@ import com.example.econonew.view.activity.User.UserActivity;
 import com.example.econonew.view.activity.User.UserLoginActivity;
 import com.example.econonew.view.activity.channel.ChannelAddActivity;
 import com.example.econonew.view.customview.ViewPagerIndicator;
-import com.example.econonew.view.fragment.MsgListFragment;
+import com.example.econonew.view.fragment.ChannelMessageFragment;
+import com.example.econonew.view.fragment.MainMessageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		mViewPager = (ViewPager) findViewById(R.id.act_main_viewpager);
 		List<Fragment> list = new ArrayList<>();
 		for (String tabName : Constant.tabList) {
-			list.add(MsgListFragment.newInstance(this, tabName));
+			if("自定义".equals(tabName)) {
+				list.add(ChannelMessageFragment.newInstance(this, tabName));
+			} else {
+				list.add(MainMessageFragment.newInstance(this, tabName));
+			}
 		}
 		mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), list));
 		initTabLine();
@@ -121,13 +126,15 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	// 设置朗读项
 	public void setRead(int tab) {
-		AllMessage messageManager = AllMessage.getInstance(Constant.tabList.get(tab));
-		if (messageManager != null &&"自定义".equals(messageManager.getName())) {
+		if ("自定义".equals(Constant.tabList.get(tab))) {
 			if (Constant.user == null) {
 				new Voice(this).readStr("您还没有登陆，请登陆后在查看自定义信息");
 			}
-		} else if(messageManager != null){
-			messageManager.readMsgList();
+		} else {
+			MainMessage message = MainMessage.getInstance(Constant.tabList.get(tab));
+			if (message != null) {
+				message.readMsgList();
+			}
 		}
 	}
 

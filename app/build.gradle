@@ -10,12 +10,11 @@ android {
         targetSdkVersion 24
         versionCode 5
         versionName "1.0.4"
-        //开启jack编译，来支持java8的lambda表达式
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true;
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
