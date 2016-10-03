@@ -12,20 +12,22 @@ public class SettingManager {
     }
 
     public boolean isInitDataFinish() {
-        // TODO: 2016/10/2  等会实现这个方法，实现判断Fragment是否已经加载 
-        return true;
+        for (String tabName : Constant.publicItemNames) {
+            if (MainMessage.getInstance(tabName) != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isLoadedDatas() {
-        boolean isLoadedDatas = false;
         for (String tabName : Constant.publicItemNames) {
             MainMessage message = MainMessage.getInstance(tabName);
-            if(message != null && message.getMsgCount() > 0) {
-                isLoadedDatas = true;
-                break;
+            if (message != null && message.getMsgCount() > 0) {
+               return true;
             }
         }
-        return isLoadedDatas;
+        return false;
     }
 
     public static SettingManager getInstance() {

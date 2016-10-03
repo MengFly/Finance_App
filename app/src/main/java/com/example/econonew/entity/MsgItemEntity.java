@@ -120,4 +120,15 @@ public class MsgItemEntity implements Serializable {
 		this.isVip = isVip;
 	}
 
+	/**
+	 * 判断此消息是否是这个频道的定制消息
+	 * @param entity 要判断的频道
+	 * @return 返回这条消息是否是这个频道的定制消息
+     */
+	public boolean isDingZhi(ChannelEntity entity) {
+		return this.getBusinessDomainId() == entity.getBusinessDomainId() &&
+				this.getBusinessTypeId() == entity.getBusinessTypeId() &&
+				this.getStairId() == entity.getStairId();
+	}
+
 }

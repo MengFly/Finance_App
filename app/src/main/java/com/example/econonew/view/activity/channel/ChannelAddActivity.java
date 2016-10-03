@@ -80,7 +80,7 @@ public class ChannelAddActivity extends BaseActivity implements OnClickListener 
 			openAddOneChannelActivity("理财");
 			break;
 		case R.id.special_choose:
-			openOtherActivity(SpecialActivity.class, false);
+			openOtherActivity(AddChannelFromCodeActivity.class, false);
 			break;
 		case R.id.act_add_channel_add_more_channel :
 			openOtherActivity(AddMoreChannelActivity.class, false);

@@ -76,4 +76,6 @@
     <string name="no_source">没有信息</string>
     <string name="check_login_user_name">用户名格式（11位）：1**********</string>
     <string name="act_login_forget_pass_tv">忘记密码</string>
+    <string name="act_add_channel_from_code_title_tv">特殊定制方式</string>
+    <string name="act_add_channel_from_code_hint_et">请输入股票代码</string>
 </resources>

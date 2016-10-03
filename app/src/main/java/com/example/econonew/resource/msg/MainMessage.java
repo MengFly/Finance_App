@@ -101,20 +101,17 @@ public class MainMessage implements IMessage<MsgItemEntity> {
     //是否是定制的消息
     private boolean isDingZhiMsg(MsgItemEntity entity) {
         ChannelMessage channelMessage = ChannelMessage.getInstance("自定义");
+        boolean isDingZhi = false;
         if (channelMessage != null) {
             List<ChannelEntity> channels = channelMessage.getMessage();
             for (ChannelEntity channelEntity : channels) {
-                boolean isAddMsg = channelEntity.getBusinessDomainId() == entity.getBusinessDomainId() &&
-                        channelEntity.getBusinessTypeId() == entity.getBusinessTypeId() &&
-                        channelEntity.getStairId() == entity.getStairId();
-                if (isAddMsg) {
-                    return true;
+                if (entity.isDingZhi(channelEntity)) {
+                    isDingZhi =  true;
+                    break;
                 }
             }
-            return false;
-        } else {
-            return false;
         }
+        return  isDingZhi;
     }
 
     //清除消息列表

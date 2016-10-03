@@ -153,8 +153,7 @@ public class DB_Information extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         String selection = "contentUrl=?";
         String[] selectionArgs = new String[]{entity.getMsgContentUrl()};
-        Cursor cursor = db.query(tableName, null, selection, selectionArgs,
-                null, null, null, null);
+        Cursor cursor = db.query(tableName, null, selection, selectionArgs, null, null, null, null);
         boolean isSave = !(cursor.getCount() == 0);
         cursor.close();
         db.close();

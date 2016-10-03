@@ -72,14 +72,13 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
 
     //刷新界面数据进行显示
     private void refreshDatas() {
-        if(msgAdapter != null) {
+        if (msgAdapter != null) {
             msgAdapter.notifyDataSetChanged();
         }
     }
 
     // 初始化界面的控件
     private void initView(View view) {
-
         noMsgTip = (TextView) view.findViewById(R.id.msg_no_tip_tv);
         msgListLV = (ListView) view.findViewById(R.id.msg_listview);
         msgAdapter = new MsgListViewAdapter(getActivity(), msgList, msgListLV, fragmentName);
@@ -96,7 +95,9 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
             @Override
-            public void onRefresh() {FinanceApplication.getInstance().refreshPublicData();}
+            public void onRefresh() {
+                FinanceApplication.getInstance().refreshPublicData();
+            }
         });
     }
 
@@ -130,9 +131,9 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     }
 
     private void bindMessage() {
-       if(msgManager == null) {
-           bindMsgManager(MainMessage.getInstance(fragmentName));
-       }
+        if (msgManager == null) {
+            bindMsgManager(MainMessage.getInstance(fragmentName));
+        }
     }
 
     @Override

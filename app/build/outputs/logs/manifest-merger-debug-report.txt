@@ -191,12 +191,12 @@ ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:83:13-49
 	android:name
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:82:19-78
-activity#com.example.econonew.view.activity.channel.SpecialActivity
+activity#com.example.econonew.view.activity.channel.AddChannelFromCodeActivity
 ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:85:9-88:20
 	android:screenOrientation
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:87:13-49
 	android:name
-		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:86:13-66
+		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:86:13-77
 activity#com.example.econonew.server.jpush.SettingActivity
 ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:89:9-92:20
 	android:screenOrientation

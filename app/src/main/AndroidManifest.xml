@@ -83,7 +83,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".view.activity.channel.SpecialActivity"
+            android:name=".view.activity.channel.AddChannelFromCodeActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

@@ -70,19 +70,19 @@ public class ChannelEntity {
 	}
 
 	public String getName() {
-		return name;
+		return name == null ? "null" : name;
 	}
 
 	public String getType() {
-		return type;
+		return type == null ? "null" : type;
 	}
 
 	public String getAttribute() {
-		return attribute;
+		return attribute == null ? "null" : attribute;
 	}
 
 	public String getCode() {
-		return code;
+		return code == null ? "null" : code;
 	}
 
 	@Override
