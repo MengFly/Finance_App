@@ -35,4 +35,5 @@ dependencies {
     compile files('libs/Msc.jar')
     compile files('libs/jpush-android-2.1.5.jar')
     compile 'org.jetbrains:annotations-java5:15.0'
+    compile files('libs/Sunflower.jar')
 }

@@ -8,18 +8,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.tools.listener.AddChannelClickListener;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.tools.ChannelListManager;
 import com.example.econonew.tools.DialogTool;
-import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.tools.listener.AddChannelClickListener;
 
 /**
  * 添加频道的Activity
  * Created by mengfei on 2016/9/28.
  */
 
-public class AddOneChannelActivity extends BaseActivity {
+public class AddOneChannelActivity extends BaseChannelActivity {
 
     public static final String CHANNEL_NAME = "channel_name";
 

@@ -68,13 +68,13 @@
             <com.example.econonew.view.customview.UnderLineTextView
                 android:id="@+id/act_user_login_not_login_tv"
                 style="@style/app_base_text.clickable_tv"
-                android:layout_gravity="end"
+                android:layout_gravity="center"
                 android:text="@string/act_user_login_nologin_tv" />
 
             <com.example.econonew.view.customview.UnderLineTextView
                 android:id="@+id/act_login_forget_pass_tv"
                 style="@style/app_base_text.clickable_tv"
-                android:layout_gravity="end"
+                android:layout_gravity="center"
                 android:text="@string/act_login_forget_pass_tv" />
 
         </LinearLayout>

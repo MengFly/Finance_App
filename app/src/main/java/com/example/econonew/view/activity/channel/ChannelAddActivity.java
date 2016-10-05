@@ -8,14 +8,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.example.econonew.R;
-import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.customview.UnderLineTextView;
 
 /**
  * 添加频道的Activity，点击各种添加频道的Activity
  * @author agnes
  */
-public class ChannelAddActivity extends BaseActivity implements OnClickListener {
+public class ChannelAddActivity extends BaseChannelActivity implements OnClickListener {
 
 	private Button exchange_choose ;
 	private Button stock_choose;
