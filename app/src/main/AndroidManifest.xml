@@ -40,10 +40,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name=".view.activity.FinanceApplication"
-        android:theme="@style/AppNoActionBarTheme">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.main.SplashActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppNoActionBarTheme"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,42 +53,43 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/AppNoActionBarTheme"
             android:name=".view.activity.channel.ChannelAddActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:theme="@style/AppNoActionBarTheme"
             android:name=".view.activity.main.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".view.activity.User.UserActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".view.activity.User.UserSetPwdActivity"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".view.activity.User.UserLoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".view.activity.User.UserRegistActivity"
-            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" >
         </activity>
         <activity android:name=".view.activity.channel.AddOneChannelActivity"
+            android:label="@string/label_add_one_channel"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".view.activity.channel.AddChannelFromCodeActivity"
+            android:label="@string/label_add_one_channel"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".server.jpush.SettingActivity"
+            android:label="@string/label_set_push_time"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -96,23 +98,21 @@
         </activity>
         <activity
             android:name=".server.jpush.TestActivity"
+            android:theme="@style/AppNoActionBarTheme"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:theme="@style/AppTheme"
             android:name=".view.activity.channel.AddMoreChannelActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".view.activity.User.UserSetVipActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".utils.URLSettingActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Required SDK核心功能 -->

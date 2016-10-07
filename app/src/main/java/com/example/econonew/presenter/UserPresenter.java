@@ -72,10 +72,10 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     }
 
     //开启一个用户修改密码的线程
-    public void userSetPassThread(String oldPass, String newPass1, String newPass2) {
-        if(checkPass(oldPass, newPass1, newPass2)) {
+    public void userSetPassThread(String newPass1, String newPass2) {
+        if(checkPass(newPass1, newPass2)) {
             mActivity.showProDialog();
-            initUserSetPassThread(oldPass, newPass1);
+            initUserSetPassThread(newPass1);
             userSetPassThread.start();
         }
     }
@@ -123,10 +123,9 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     }
 
     //初始化修改密码的线程
-    private void initUserSetPassThread(String oldPass, String newPass1) {
-        String oldEncodePass = EncodeStrTool.getInstance().getEncodeMD5Str(oldPass);
+    private void initUserSetPassThread(String newPass1) {
         String newEncodePass = EncodeStrTool.getInstance().getEncodeMD5Str(newPass1);
-        final String url = URLManager.getSetPassWordURL(Constant.user.getName(), oldEncodePass, newEncodePass);
+        final String url = URLManager.getSetPassWordURL(Constant.user.getName(), Constant.user.getPwd(), newEncodePass);
 
         final DialogInterface.OnClickListener setPwdOkListener = new DialogInterface.OnClickListener() {
 
@@ -146,6 +145,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
                     if ("success".equals(JsonCast.getString(obj, "status"))) {
                         mActivity.showTipDialog(null, "修改成功，请重新登录", setPwdOkListener, setPwdOkListener);
                         mActivity.removeUserAndCookie();//修改密码成功的时候移除用户和之前的Cookie信息
+                        FinanceApplication.getInstance().refreshUserData(Constant.user);
                     } else {
                         mActivity.showTipDialog(null, result, null, null);
                     }
@@ -331,21 +331,15 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     }
 
     // 判断用户密码是否符合标准
-    private boolean checkPass(String oldPassWord, String newPassWord, String newPassWord1) {
-        String encodePass = EncodeStrTool.getInstance().getEncodeMD5Str(oldPassWord);
-        if (!encodePass.equals(Constant.user.getPwd())) {
-            mActivity.showToast("输入旧密码错误");
+    private boolean checkPass(String newPassWord, String newPassWord1) {
+        if (!newPassWord.equals(newPassWord1)) {
+            mActivity.showToast("两次输入新密码不一样");
+            return false;
+        } else if (newPassWord.length() > 10 || newPassWord.length() < 6) {
+            mActivity.showToast("密码长度必须在6-10之间");
             return false;
         } else {
-            if (!newPassWord.equals(newPassWord1)) {
-                mActivity.showToast("两次输入新密码不一样");
-                return false;
-            } else if (newPassWord.length() > 10 || newPassWord.length() < 6) {
-                mActivity.showToast("密码长度必须在6-10之间");
-                return false;
-            } else {
-                return true;
-            }
+            return true;
         }
     }
 

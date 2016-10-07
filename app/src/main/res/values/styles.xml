@@ -14,5 +14,7 @@
         <item name="windowActionBarOverlay">false</item>
         <item name="actionBarSize">50dp</item>
         <item name="titleTextColor">#fff</item>
+
     </style>
+
 </resources>

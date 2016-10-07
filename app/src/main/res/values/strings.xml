@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Finance_App</string>
 
-    <string name="versionName">1.0.4</string>
+    <string name="versionName">1.0.5</string>
 
     <!-- 全局的一些字符串 -->
     <string name="btn_back">退出</string>
@@ -78,4 +78,8 @@
     <string name="act_login_forget_pass_tv">忘记密码</string>
     <string name="act_add_channel_from_code_title_tv">特殊定制方式</string>
     <string name="act_add_channel_from_code_hint_et">请输入股票代码</string>
+    <string name="label_add_one_channel">添加频道</string>
+    <string name="label_set_push_time">设置推送时间</string>
+    <string name="menu_refresh">刷新</string>
+    <string name="menu_open_with_browser">在浏览器中打开</string>
 </resources>

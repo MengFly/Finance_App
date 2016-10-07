@@ -1,37 +1,86 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="10dp"
     android:orientation="vertical">
 
-    <EditText
-        style="@style/app_base_text.drawable.pass_et"
-        android:id="@+id/act_set_password_old_pwd_et"
-        android:hint="@string/act_set_password_old_pwd_et"
-        android:inputType="textVisiblePassword" />
-
-    <EditText
-        style="@style/app_base_text.drawable.pass_et"
-        android:id="@+id/act_set_password_new_pwd_et"
-        android:hint="@string/act_set_password_new_pwd_et" />
-
-    <EditText
-        android:id="@+id/act_set_password_new_pwd2_tv"
-        style="@style/app_base_text.drawable.pass_et"
-        android:hint="@string/act_set_password_new_pwd2_tv" />
-
-    <TextView
-        android:id="@+id/act_set_pwd_is_ok_tv"
+    <RadioGroup
+        android:id="@+id/act_set_pass_rg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="5dp"
-        android:textColor="#ff00ff"
-        android:textSize="16sp" />
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/act_set_pwd_use_pass_rb"
+            android:text="通过密码修改"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/act_set_pass_use_quest_rb"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="通过密保问题修改"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/act_set_pass_use_pass_ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            style="@style/app_base_text.drawable.pass_et"
+            android:id="@+id/act_set_password_old_pwd_et"
+            android:hint="@string/act_set_password_old_pwd_et"
+            android:inputType="textVisiblePassword" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/act_set_pass_use_quest_ly"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            style="@style/app_base_text.drawable.pass_et"
+            android:hint="请输入您的密保答案" />
+    </LinearLayout>
+
+    <!--<EditText-->
+        <!--style="@style/app_base_text.drawable.pass_et"-->
+        <!--android:id="@+id/act_set_password_new_pwd_et"-->
+        <!--android:hint="@string/act_set_password_new_pwd_et" />-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/act_set_password_new_pwd2_tv"-->
+        <!--style="@style/app_base_text.drawable.pass_et"-->
+        <!--android:hint="@string/act_set_password_new_pwd2_tv" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/act_set_pwd_is_ok_tv"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:padding="5dp"-->
+        <!--android:textColor="#ff00ff"-->
+        <!--android:textSize="16sp" />-->
 
     <Button
         style="@style/app_base_btn.ok"
         android:id="@+id/user_setpwd_sure"
         android:layout_width="fill_parent" />
+
+    <FrameLayout
+        android:id="@+id/act_set_pass_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

@@ -63,9 +63,7 @@ public class UserLoginActivity extends BaseUserActivity {
         });
         forgetPassTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // TODO: 2016/9/24 点击进入找回密码的界面
-            }
+            public void onClick(View v) {openOtherActivity(UserSetPwdActivity.class, true);}
         });
     }
 

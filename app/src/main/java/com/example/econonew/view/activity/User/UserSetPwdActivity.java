@@ -1,17 +1,19 @@
 package com.example.econonew.view.activity.User;
 
+
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 
 import com.example.econonew.R;
 import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.resource.Constant;
+import com.example.econonew.tools.EncodeStrTool;
+import com.example.econonew.view.fragment.UserSetPassFragment;
 
 /**
  * UserRegistActivity
@@ -20,36 +22,90 @@ import com.example.econonew.presenter.UserPresenter;
  */
 public class UserSetPwdActivity extends BaseUserActivity {
 
+	private LinearLayout setPassUsePassLy, setPassUseQuestLy;
+
 	private EditText oldPwdEt;
-	private EditText newPwdEt;
-	private EditText newPwd2Et;
 
-	private TextView isFormatPwdTv;
+	private RadioGroup setPassRg;
 
-	private Button setpwdSureBtn;
+	private Button setPwdSureBtn;
+
+	private UserSetPassFragment setPassFrag;
+
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_user_setpwd);
 
+		setPassUsePassLy = (LinearLayout) findViewById(R.id.act_set_pass_use_pass_ly);
+		setPassUseQuestLy = (LinearLayout)findViewById(R.id.act_set_pass_use_quest_ly);
+
 		oldPwdEt = (EditText) findViewById(R.id.act_set_password_old_pwd_et);
-		newPwdEt = (EditText) findViewById(R.id.act_set_password_new_pwd_et);
-		newPwd2Et = (EditText) findViewById(R.id.act_set_password_new_pwd2_tv);
-		isFormatPwdTv = (TextView) findViewById(R.id.act_set_pwd_is_ok_tv);
-		setpwdSureBtn = (Button) findViewById(R.id.user_setpwd_sure);
+		setPwdSureBtn = (Button) findViewById(R.id.user_setpwd_sure);
+		setPassRg = (RadioGroup) findViewById(R.id.act_set_pass_rg);
 		initListener();
+		initFragment();
+		hideFrag();
+	}
+
+	private void initFragment() {
+		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction transa = manager.beginTransaction();
+		setPassFrag = new UserSetPassFragment();
+		transa.replace(R.id.act_set_pass_fl, setPassFrag);
+		transa.commit();
+	}
+
+	private void hideFrag() {
+		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction transa = manager.beginTransaction();
+		transa.hide(setPassFrag);
+		transa.commit();
+	}
+
+	private void showFrag() {
+		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+		android.support.v4.app.FragmentTransaction transa = manager.beginTransaction();
+		transa.show(setPassFrag);
+		transa.commit();
+	}
+
+	//显示用密码修改密码的布局
+	private void showUsePassLy() {
+		setPassUsePassLy.setVisibility(View.VISIBLE);
+		setPassUseQuestLy.setVisibility(View.GONE);
+		setPwdSureBtn.setVisibility(View.VISIBLE);
+		hideFrag();
+	}
+
+	//显示用密保修改密码布局
+	private void showUseQuestLy() {
+		setPassUsePassLy.setVisibility(View.GONE);
+		setPassUseQuestLy.setVisibility(View.VISIBLE);
+		setPwdSureBtn.setVisibility(View.VISIBLE);
+		hideFrag();
 	}
 
 	private void initListener() {
-		setpwdSureBtn.setOnClickListener(new OnClickListener() {
+		setPwdSureBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				setPwdClick();
 			}
 		});
-		newPwdEt.addTextChangedListener(new ContentExchangeListener());
-		newPwd2Et.addTextChangedListener(new ContentExchangeListener());
+		setPassRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if(checkedId == R.id.act_set_pass_use_quest_rb) {
+					showUseQuestLy();
+				} else if (checkedId == R.id.act_set_pwd_use_pass_rb) {
+					showUsePassLy();
+				}
+			}
+		});
 	}
+
+
 
 	@Override
 	protected void initDatas() {
@@ -59,38 +115,21 @@ public class UserSetPwdActivity extends BaseUserActivity {
 
 	// 修改按钮的按钮点击事件的处理函数
 	private void setPwdClick() {
-		final String old_pwd = oldPwdEt.getText().toString();
-		final String new_pwd1 = newPwdEt.getText().toString();
-		final String new_pwd2 = newPwd2Et.getText().toString();
-		mPresenter.userSetPassThread(old_pwd, new_pwd1, new_pwd2);
-	}
-
-	private class ContentExchangeListener implements TextWatcher {
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			String pass1 = newPwdEt.getText().toString();
-			String pass2 = newPwd2Et.getText().toString();
-			if (!TextUtils.isEmpty(pass1)) {
-				if (TextUtils.isEmpty(pass2)) {
-					isFormatPwdTv.setText("请再次输入新密码");
-				} else if (pass1.equals(pass2)) {
-					isFormatPwdTv.setText("两次输入的密码一致");
-				} else {
-					isFormatPwdTv.setText("两次输入密码不一致");
-				}
+		if(setPassUsePassLy.getVisibility() == View.VISIBLE) {
+			String oldPwd = oldPwdEt.getText().toString();
+			if(EncodeStrTool.getInstance().getEncodeMD5Str(oldPwd).equals(Constant.user.getPwd())) {
+				showToast("密码正确，请设置密码");
+				setPassUsePassLy.setVisibility(View.GONE);
+				setPwdSureBtn.setVisibility(View.GONE);
+				showFrag();
+			} else {
+				showToast("密码错误");
 			}
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
+		} else {
+			// TODO: 2016/10/7 使用密保修改密码的逻辑 
 		}
 
 	}
+
 
 }

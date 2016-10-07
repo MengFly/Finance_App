@@ -2,28 +2,27 @@ package com.example.econonew.view.activity.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.econonew.R;
 import com.example.econonew.view.activity.BaseActivity;
 
+
 @SuppressLint("SetJavaScriptEnabled")
 public class MsgContentActivity extends BaseActivity {
 
-	private ImageButton backBtn, refreshBtn;
-	private TextView msgTitle;
 	private ProgressBar progressBar;
 
 	private WebView msgContent;
@@ -34,13 +33,11 @@ public class MsgContentActivity extends BaseActivity {
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_msg_item_content);
 
-		msgTitle = (TextView) findViewById(R.id.msg_item_content_title);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 		msgContent = (WebView) findViewById(R.id.msg_item_content_view);
 		msgContent.setWebViewClient(new MsgWebViewClient());
 		msgContent.setWebChromeClient(new MsgWebChromeClient());
-		backBtn = (ImageButton) findViewById(R.id.act_msg_content_back_ib);
-		refreshBtn = (ImageButton) findViewById(R.id.act_msg_content_refresh_ib);
+
 		WebSettings webSettings = msgContent.getSettings();
 		webSettings.setJavaScriptEnabled(true);// 启用JavaScript
 		webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);// 设置缓存
@@ -48,28 +45,40 @@ public class MsgContentActivity extends BaseActivity {
 	}
 
 	private void initListener() {
-		backBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				MsgContentActivity.this.finish();
-			}
-		});
-		refreshBtn.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				loadUrl(msgContentUrl);
-			}
-		});
 	}
 
 	@Override
 	protected void initDatas() {
 		Intent intent = getIntent();
-		msgTitle.setText(intent.getStringExtra("msgTitle"));// 设置title
 		msgContentUrl = intent.getStringExtra("msgContentUrl");
+		initActionBar(intent.getStringExtra("msgTitle"), true);
 		loadUrl(msgContentUrl);
+	}
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.act_msg_content_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_refresh :
+				loadUrl(msgContentUrl);
+				return true;
+			case R.id.menu_open_with_browser :
+				openWithBrowser();
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	private void openWithBrowser() {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(msgContentUrl));
+		startActivity(intent);
 	}
 
 	private void loadUrl(String url) {

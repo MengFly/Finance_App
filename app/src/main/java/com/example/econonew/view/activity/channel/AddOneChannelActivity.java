@@ -26,8 +26,6 @@ public class AddOneChannelActivity extends BaseChannelActivity {
     private String[] channelFirstLabel;//频道的一级标签
     private String[] channelSecondLabel;//频道的二级标签
 
-    private TextView titleTv;//Activity的标题
-
     private Button channelNameBtn;
     private Button channelInfoBtn;
     private Button sureAddChannelBtn;
@@ -37,13 +35,13 @@ public class AddOneChannelActivity extends BaseChannelActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.act_add_one_channel);
-        titleTv = (TextView) findViewById(R.id.act_add_one_channel_title_tv);
         channelNameBtn = (Button) findViewById(R.id.act_add_one_channel_name_btn);
         channelInfoBtn = (Button) findViewById(R.id.act_add_one_channel_info_btn);
         sureAddChannelBtn = (Button) findViewById(R.id.act_add_one_channel_sure_btn);
         channelNameTv = (TextView) findViewById(R.id.act_add_one_channel_name_tv);
         channelInfoTv = (TextView) findViewById(R.id.act_add_one_channel_info_tv);
         initListener();
+
     }
 
     private void initListener() {
@@ -99,13 +97,12 @@ public class AddOneChannelActivity extends BaseChannelActivity {
         channelName = getIntent().getStringExtra(CHANNEL_NAME);
         channelFirstLabel = ChannelListManager.getChannelFirstLable(channelName);
         channelSecondLabel = ChannelListManager.getChannelSecondLabel();
+        initActionBar(getString(R.string.label_add_one_channel) + "\t\t" +channelName, true);
         updateUI();
     }
 
     //根据获取的信息来更新UI
     private void updateUI() {
-        String activityTitle = channelName + titleTv.getText();
-        titleTv.setText(activityTitle);
         String channelNameBtnText = channelName + channelNameBtn.getText();
         channelNameBtn.setText(channelNameBtnText);
     }
