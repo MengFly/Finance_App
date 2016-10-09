@@ -117,11 +117,13 @@ public class UserSetPwdActivity extends BaseUserActivity {
 	private void setPwdClick() {
 		if(setPassUsePassLy.getVisibility() == View.VISIBLE) {
 			String oldPwd = oldPwdEt.getText().toString();
-			if(EncodeStrTool.getInstance().getEncodeMD5Str(oldPwd).equals(Constant.user.getPwd())) {
+			if(Constant.user != null && EncodeStrTool.getInstance().getEncodeMD5Str(oldPwd).equals(Constant.user.getPwd())) {
 				showToast("密码正确，请设置密码");
 				setPassUsePassLy.setVisibility(View.GONE);
 				setPwdSureBtn.setVisibility(View.GONE);
 				showFrag();
+			} else if(Constant.user == null) {
+				showToast("当前还没有登录，要登录之后才能通过密码进行修改密码");
 			} else {
 				showToast("密码错误");
 			}
