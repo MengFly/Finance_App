@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
@@ -271,8 +270,11 @@ public class DB_Information extends SQLiteOpenHelper {
             SQLiteDatabase db = getWritableDatabase();
             db.beginTransaction();
             for (int i = 0; i < valueses.size(); i++) {
-                Log.v("testUtils", tableNames.get(i));
-                db.insert(tableNames.get(i), null, valueses.get(i));
+                String tableName = tableNames.get(i);
+                if (tableName == null) {
+                    tableName = "stock_channel";
+                }
+                db.insert(tableName, null, valueses.get(i));
             }
             db.setTransactionSuccessful();
             db.endTransaction();

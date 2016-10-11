@@ -38,6 +38,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	/** Activity的对象。这样就不需要再使用XXActivity.this了 */
 	protected BaseActivity mContext;
 
+	private Toast mToast;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -153,7 +155,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	}
 
 	public void showToast(String toastStr) {
-		Toast.makeText(this, toastStr, Toast.LENGTH_SHORT).show();
+		if(mToast == null) {
+			mToast = Toast.makeText(this, toastStr, Toast.LENGTH_SHORT);
+		}
+		mToast.show();
 	}
 
 	/**

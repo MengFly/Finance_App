@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.example.econonew.R;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.tools.URLManager;
@@ -21,6 +22,9 @@ import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AddChannelFromCodeActivity
@@ -53,7 +57,7 @@ public class AddChannelFromCodeActivity extends BaseActivity {
             new Thread(){
                 @Override
                 public void run() {
-                    ChannelEntity entity = new ChannelEntity();
+                    final ChannelEntity entity = new ChannelEntity();
                     entity.setCode(s);
                     String setChannelURL = URLManager.getSetChannelURL(Constant.user.getName(), entity);
                     Log.d("url", "run: " + setChannelURL);
@@ -63,9 +67,13 @@ public class AddChannelFromCodeActivity extends BaseActivity {
                             JSONObject obj = JsonCast.getJsonObject(response);
                             if (obj != null) {
                                 if ("success".equals(JsonCast.getString(obj, "status"))) {
+                                    List<ChannelEntity> list = new ArrayList<>(1);
+                                    list.add(entity);
+                                    ChannelMessage.getInstance("自定义").setMessage(list, true, true);
+                                    mContext.showTipDialog(null, "频道添加成功", null, null);
+                                    expert_info_show.setText("");
                                     FinanceApplication.getInstance().refreshUserData(Constant.user);
                                 } else {
-                                    Toast.makeText(mContext, JsonCast.getString(obj, "result"), Toast.LENGTH_LONG).show();
                                     mContext.showTipDialog(null, JsonCast.getString(obj, "result"), null, null);
                                 }
                             } else {

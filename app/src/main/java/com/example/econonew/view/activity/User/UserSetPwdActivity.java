@@ -48,6 +48,7 @@ public class UserSetPwdActivity extends BaseUserActivity {
 		hideFrag();
 	}
 
+	//初始化修改密码的Fragment
 	private void initFragment() {
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transa = manager.beginTransaction();
@@ -56,6 +57,7 @@ public class UserSetPwdActivity extends BaseUserActivity {
 		transa.commit();
 	}
 
+	//隐藏修改密码的Fragment
 	private void hideFrag() {
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transa = manager.beginTransaction();
@@ -63,6 +65,7 @@ public class UserSetPwdActivity extends BaseUserActivity {
 		transa.commit();
 	}
 
+	//显示修改密码的Fragment
 	private void showFrag() {
 		android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
 		android.support.v4.app.FragmentTransaction transa = manager.beginTransaction();

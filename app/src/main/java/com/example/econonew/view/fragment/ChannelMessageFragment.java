@@ -159,7 +159,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
                     if (result != null) {
                         if ("success".equals(result)) {
                             if (channelAdapter != null) {
-                                showTipDialog("频道删除成功");
+                                showToast("频道删除成功");
                             }
                         } else {
                             showTipDialog("删除频道失败:" + result);
