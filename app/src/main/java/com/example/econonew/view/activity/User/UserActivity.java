@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.example.econonew.R;
 import com.example.econonew.presenter.UserPresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.jpush.SettingActivity;
+import com.example.econonew.tools.Voice;
 import com.example.econonew.utils.URLSettingActivity;
 
 
@@ -23,6 +25,7 @@ import com.example.econonew.utils.URLSettingActivity;
 public class UserActivity extends BaseUserActivity {
 
     private Button registBtn;
+    private ViewStub isVipVS;
 
     private TextView userLogout, settingPush, setPwd, voice_repeat;
 
@@ -31,8 +34,6 @@ public class UserActivity extends BaseUserActivity {
     private TextView userTv, userLoginTv, userRegistTv, userSetVipTv;
 
     private TextView text_user;
-
-    private TextView vipTv;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -52,8 +53,10 @@ public class UserActivity extends BaseUserActivity {
         userRegistTv = (TextView) findViewById(R.id.act_user_regist_tv);
         userSetVipTv = (TextView) findViewById(R.id.act_user_setVip_tv);
 
-        vipTv = (TextView) findViewById(R.id.vip_tv);
-        vipTv.setVisibility(View.GONE);
+        isVipVS = (ViewStub) findViewById(R.id.act_user_isVip_vs);
+        if(Constant.user != null && Constant.user.isVIP()) {
+            isVipVS.inflate();
+        }
 
         TextView setIpTv = (TextView) findViewById(R.id.act_user_set_ip_tv);
         if (Constant.isDeBug) {
@@ -103,7 +106,7 @@ public class UserActivity extends BaseUserActivity {
             public void onClick(View v) {
                 mPresenter.userLogoutThread(Constant.user);
                 text_user.setText("未登录");
-                vipTv.setVisibility(View.GONE);
+//                vipTv.setVisibility(View.GONE);
             }
         });
 
@@ -136,11 +139,7 @@ public class UserActivity extends BaseUserActivity {
 
     private void userSetVipClick() {
         if (Constant.user == null) {
-            showTipDialog(null, "当前还未登录，是否登录？", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {userLoginClick();
-                }
-            }, null);
+            showNoLoginDialog();
         } else {
             openOtherActivity(UserSetVipActivity.class, true);
         }
@@ -163,13 +162,13 @@ public class UserActivity extends BaseUserActivity {
     protected void initDatas() {
         if (Constant.user != null) {
             text_user.setText(Constant.user.getName());
-            vipTv.setVisibility(Constant.user.isVIP() ? View.VISIBLE : View.GONE);
         }
         bindPresenter(new UserPresenter(this));
     }
 
     // 消息重置的按钮点击事件
     private void voiceResetClick() {
+        Voice.getInstance().resetVoice();
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {backHomeActivity();
@@ -190,7 +189,7 @@ public class UserActivity extends BaseUserActivity {
     // 点击修改密码的处理事件函数
     private void setPwdClick() {
         if (Constant.user == null) {
-            showTipDialog(null, "您当前未登录，请先登录", null, null);
+            showNoLoginDialog();
         } else {
             openOtherActivity(UserSetPwdActivity.class, true);
         }

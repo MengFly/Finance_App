@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.msg.MainMessage;
 
 import java.util.List;
 
@@ -207,10 +206,6 @@ public class ViewPagerIndicator extends LinearLayout {
 				}
 				heightLightTextView(arg0);
 				Constant.read_tab = arg0;
-				MainMessage messageManager = MainMessage.getInstance(Constant.tabList.get(arg0));
-				if (messageManager != null) {
-					messageManager.resetVoice();
-				}
 			}
 
 			@Override

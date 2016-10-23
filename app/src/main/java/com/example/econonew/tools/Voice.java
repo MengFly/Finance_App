@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.econonew.entity.MsgItemEntity;
+import com.example.econonew.view.activity.FinanceApplication;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechSynthesizer;
-import com.iflytek.cloud.SpeechUtility;
 import com.iflytek.cloud.SynthesizerListener;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 
@@ -28,77 +28,119 @@ import java.util.List;
  *
  */
 public class Voice {
+	private static final String TAG = "Voice";
 
-	// 讯飞语音的设置
-	private SpeechSynthesizer mTts = null;
+	private static volatile Voice mInstance;
+
+	public static final int VOICE_STAT_NO_READ = 0;//当前没有在阅读
+	public static final int VOICE_STAT_READING = 1;//当前正在阅读
+	public static final int VOICE_STAT_PAUSE = 2;//当前暂停中
+
+	// 讯飞语音的设置// 1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
+	private SpeechSynthesizer mTts;
+
 	// 用HashMap存储听写结果
 	private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
-	// 语音听写UI
-	private ArrayList<MsgItemEntity> list = new ArrayList<>();
-	public int readNum;
-	public int flag;// 朗读标志 0代表当前没有读信息, 1代表朗读中暂停。2代表正在朗读
 
-	public Voice(Context context) {
-		SpeechUtility.createUtility(context, SpeechConstant.APPID + "=552a964f");
-		// 1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
+	private ArrayList<List<MsgItemEntity>> readList;//这里面存储着要进行阅读的list
+
+	private int flag;// 朗读标志,分别是上面的三种状态
+
+	/**
+	 * 获取语音播放类的实例
+	 * @return 语音播放类的实例
+     */
+	public static Voice getInstance() {
+		if (mInstance == null) {
+			synchronized (Voice.class) {
+				if (mInstance == null) {
+					mInstance = new Voice(FinanceApplication.app);
+				}
+			}
+		}
+		return mInstance;
+	}
+
+	private Voice(Context context) {
 		mTts = SpeechSynthesizer.createSynthesizer(context, null);
 		// 2.合成参数设置，详见《科大讯飞MSC API手册(Android)》SpeechSynthesizer 类
 		mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoqi");// 设置发音人
 		mTts.setParameter(SpeechConstant.SPEED, "50");// 设置语速
 		mTts.setParameter(SpeechConstant.VOLUME, "70");// 设置音量，范围0~100
 		mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); // 设置云端
-		flag = 0;
+
+		flag = VOICE_STAT_NO_READ;
+		readList = new ArrayList<>();
 	}
 
-	public void read() {
-		if (flag == 0) {
-			readList();
-			flag = 2;
-		} else if (flag == 2) {
-			pauseList();
-			flag = 1;
-		} else {
-			resumeList();
-			flag = 2;
-		}
+
+	/**
+	 * 设置要进行阅读的列表，可以进行链式设置，设置好的列表将会依次进行阅读
+     */
+	public Voice setList(List<MsgItemEntity> list) {
+		readList.add(list);
+		return this;
+	}
+
+	public void resetVoice() {
+		flag = VOICE_STAT_NO_READ;
+		readList.clear();
+		currentReadPoint = 0;
 	}
 
 	/**
-	 * 为阅读器设置消息内容
-	 *
-	 * @param list
+	 * 获取当前正在阅读的状态
 	 */
-	public void setList(List<MsgItemEntity> list) {
-		this.list.clear();
-		this.list.addAll(list);
+	public int getReadStat() {
+		return flag;
 	}
 
+	public void read() {
+		if (flag == VOICE_STAT_NO_READ) {
+			readList();
+			flag = VOICE_STAT_READING;
+		} else if (flag == VOICE_STAT_READING) {
+			pauseList();
+			flag = VOICE_STAT_PAUSE;
+		} else {
+			resumeList();
+			flag = VOICE_STAT_READING;
+		}
+	}
+
+
+	private int currentReadPoint;//当前阅读的位置
 	// 列表朗读
 	private void readList() {
-		flag = 2;
-		StringBuilder readString = new StringBuilder();
-		for (int i = 0; i < list.size(); i++) {
-			readString.append(list.get(i).getMsgTitle() + "。");
+		if(currentReadPoint >= readList.size()) {
+			resetVoice();
+		} else {
+			StringBuilder readString = new StringBuilder();
+			for (MsgItemEntity entity : readList.get(currentReadPoint)) {
+				readString.append(entity.getMsgTitle());
+				readString.append(" ");
+				readStr(readString.toString());
+			}
 		}
-		readStr(readString.toString());
 	}
 
 	// 列表暂停朗读
 	private void pauseList() {
 		mTts.pauseSpeaking();
-		flag = 1;
+		flag = VOICE_STAT_PAUSE;
 	}
 
-	// 恢复列表
+	// 恢复阅读
 	private void resumeList() {
 		mTts.resumeSpeaking();
-		flag = 2;
+		flag = VOICE_STAT_READING;
 	}
 
 	// 读单句话
 	public void readStr(String str) {
 		mTts.startSpeaking(str, mSynListener);
 	}
+
 
 	private void printResult(RecognizerResult results) {
 		String text = JsonHelper.parseIatResult(results.getResultString());
@@ -133,13 +175,18 @@ public class Voice {
 		 * 识别回调错误.
 		 */
 		public void onError(SpeechError error) {
+
 		}
 
 	};
+
 	// 合成监听器
 	private SynthesizerListener mSynListener = new SynthesizerListener() {
 		// 会话结束回调接口，没有错误时，error为null
 		public void onCompleted(SpeechError error) {
+			currentReadPoint ++;
+			Log.d(TAG, "onCompleted: " + currentReadPoint);
+			readList();
 		}
 
 		// 缓冲进度回调

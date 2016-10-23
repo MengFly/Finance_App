@@ -33,12 +33,12 @@
                 android:textColor="#fff"
                 android:textStyle="bold" />
 
-            <include
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/user_name"
+            <ViewStub
+                android:layout="@layout/vip_layout"
+                android:id="@+id/act_user_isVip_vs"
                 android:layout_toRightOf="@id/user_name"
-                layout="@layout/vip_layout" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
     </LinearLayout>
 

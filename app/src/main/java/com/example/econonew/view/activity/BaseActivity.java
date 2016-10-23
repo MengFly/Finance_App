@@ -2,6 +2,7 @@ package com.example.econonew.view.activity;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import com.example.econonew.R;
 import com.example.econonew.presenter.BasePresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.UserInfo;
+import com.example.econonew.view.activity.User.UserLoginActivity;
 import com.example.econonew.view.activity.main.MainActivity;
 
 import cn.jpush.android.api.JPushInterface;
@@ -95,12 +97,14 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 	/** 显示一个带提示文字的对话框 */
 	public void showProDialog(String showContent) {
-		if (mProDialog == null) {
-			mProDialog = ProgressDialog.show(this, null, showContent);
-			mProDialog.setCancelable(true);
-		} else {
-			mProDialog.setMessage(showContent);
-			mProDialog.show();
+		if(!this.isFinishing()) {
+			if (mProDialog == null) {
+				mProDialog = ProgressDialog.show(this, null, showContent);
+				mProDialog.setCancelable(true);
+			} else {
+				mProDialog.setMessage(showContent);
+				mProDialog.show();
+			}
 		}
 	}
 
@@ -215,5 +219,15 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	protected void onPause() {
 		JPushInterface.onPause(this);
 		super.onPause();
+	}
+
+	/**
+	 * 当用户没有登录的时候弹出的提示框
+	 */
+	public void showNoLoginDialog() {
+		showTipDialog(null, "你还没有登陆,是否登录", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {openOtherActivity(UserLoginActivity.class, false);}
+		},null);
 	}
 }

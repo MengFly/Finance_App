@@ -6,7 +6,6 @@ import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.DB_Information;
-import com.example.econonew.tools.Voice;
 import com.example.econonew.view.fragment.MainMessageFragment;
 
 import java.util.ArrayList;
@@ -23,8 +22,6 @@ public class MainMessage implements IMessage<MsgItemEntity> {
 
     private static Map<String, MainMessage> msgManager = new HashMap<>();
 
-    private Voice voice;//用于语音阅读
-
     private String msgName;//消息管理的名称，用于获取具体的消息管理的实例
     private MainMessageFragment mFragment;//视图的管理类，提供一些更新UI的方法
 
@@ -37,7 +34,6 @@ public class MainMessage implements IMessage<MsgItemEntity> {
     public MainMessage(Context context, MainMessageFragment fragment, String allMsgName) {
         this.msgName = allMsgName;
         this.mFragment = fragment;
-        voice = new Voice(context);
         mAllList = new ArrayList<>();
         mVipList = new ArrayList<>();
         mNotVipList = new ArrayList<>();
@@ -135,23 +131,6 @@ public class MainMessage implements IMessage<MsgItemEntity> {
         return getMessage().size();
     }
 
-    /**
-     * 重置语音状态
-     */
-    public void resetVoice() {
-        voice.flag = 0;
-    }
-
-    /**
-     * 阅读消息列表
-     */
-    public void readMsgList() {
-        if (getMsgCount() == 0) {
-            voice.readStr("当前没有信息，刷新后再查看");
-        } else {
-            voice.read();
-        }
-    }
 
     @Override//Not Use This Method
     public boolean removeMsg(MsgItemEntity item) {
@@ -161,7 +140,6 @@ public class MainMessage implements IMessage<MsgItemEntity> {
     //向UI线程和Voice发送消息
     private void sentMsgToUiAndVoice() {
         this.mFragment.setList(getMessage());
-        this.voice.setList(getMessage());
     }
 
 
