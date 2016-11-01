@@ -1,9 +1,8 @@
 package com.example.econonew.resource.msg;
 
-import android.content.Context;
-
+import com.example.econonew.db.ChannelTable;
+import com.example.econonew.db.DBManager;
 import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.resource.DB_Information;
 import com.example.econonew.view.fragment.ChannelMessageFragment;
 
 import java.util.ArrayList;
@@ -25,21 +24,21 @@ public class ChannelMessage implements IMessage<ChannelEntity> {
 
     private List<ChannelEntity> mChannelList; // 自定义频道的列表
 
-    private DB_Information dataBaseManager;
+    private DBManager dataBaseManager;
+    private ChannelTable table;
 
     /**
      * 定义消息管理的类
-     *
-     * @param context
-     *            context
+
      * @param allMsgName
      *            每一栏消息的名称，可以通过消息的名称获得具体消息的实例
      */
-    public ChannelMessage(Context context, ChannelMessageFragment fragment, String allMsgName) {
+    public ChannelMessage( ChannelMessageFragment fragment, String allMsgName) {
         this.allMsgName = allMsgName;
         this.mFragment = fragment;
         mChannelList = new ArrayList<>();
-        this.dataBaseManager = new DB_Information(context);
+        this.dataBaseManager = new DBManager();
+        table = new ChannelTable();
         msgManager.put(allMsgName, this);
     }
 
@@ -71,7 +70,7 @@ public class ChannelMessage implements IMessage<ChannelEntity> {
     public boolean removeMsg(ChannelEntity item) {
         boolean isRemove = false;
         if (this.mChannelList.contains(item)) {
-            dataBaseManager.removeChannel(item);
+            dataBaseManager.deleteItem(table,item);
             isRemove = this.mChannelList.remove(item);
             sentMsgToUiAndVoice();
         }
@@ -95,7 +94,7 @@ public class ChannelMessage implements IMessage<ChannelEntity> {
         }
         sentMsgToUiAndVoice();
         if (isSaveToDatabase) {
-            dataBaseManager.saveAllChannel(msgList);
+            dataBaseManager.insertItems(table,msgList);
         }
     }
 

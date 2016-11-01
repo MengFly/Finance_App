@@ -1,6 +1,8 @@
 
 package com.example.econonew.resource;
 
+import com.example.econonew.entity.UserEntity;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -19,32 +21,13 @@ public class Constant {
     public static final List<String> tabList = Arrays.asList("股票", "理财", "基金", "期货", "外汇", "自定义");
 
     // 用户对象
-    public static UserInfo user;
+    public static UserEntity user;
 
     /**
      * 各个公共栏目的名称
      */
     public static final String[] publicItemNames = new String[]{"股票", "理财", "基金", "期货", "外汇"};
-    private static final Map<String, String> publicDataTableNames = new HashMap<>();
 
-    static {
-        publicDataTableNames.put("股票", "stock_info");
-        publicDataTableNames.put("理财", "money_info");
-        publicDataTableNames.put("基金", "funds_info");
-        publicDataTableNames.put("期货", "futures_info");
-        publicDataTableNames.put("外汇", "exchange_info");
-    }
-
-
-    /**
-     * 根据消息的名称获取公共消息有关的数据库
-     *
-     * @param messageName 消息名称
-     * @return 数据库名称
-     */
-    public static String getTableName(String messageName) {
-        return publicDataTableNames.get(messageName);
-    }
 
     /**
      * 用户自定义的频道信息的各表名称 其顺序依次为： "stock_channel", "money_channel",

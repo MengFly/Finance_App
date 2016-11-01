@@ -5,15 +5,15 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.econonew.db.ChannelTable;
+import com.example.econonew.db.DBManager;
 import com.example.econonew.entity.ChannelEntity;
+import com.example.econonew.entity.UserEntity;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.DB_Information;
-import com.example.econonew.resource.UserInfo;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.json.ChannelJsonHelper;
-import com.example.econonew.tools.SettingManager;
 import com.example.econonew.tools.URLManager;
 import com.example.econonew.tools.Voice;
 import com.example.econonew.view.activity.FinanceApplication;
@@ -40,14 +40,9 @@ public class MsgPresenter extends BasePresenter<MainActivity> {
         super(activity);
     }
 
-    public void refreshUserData(UserInfo user) {
+    public void refreshUserData(UserEntity user) {
         if (user != null && user.isVIP()) {
             getChannelFromNet(user);
-        } else {
-            if (SettingManager.getInstance().isInitDataFinish()) {
-                List<ChannelEntity> channelList = new DB_Information(app).getChannel(user);
-                ChannelMessage.getInstance("自定义").setMessage(channelList, false, false);
-            }
         }
     }
 
@@ -55,7 +50,7 @@ public class MsgPresenter extends BasePresenter<MainActivity> {
      * 	从网络上面获取用户的频道信息
      * @param user 用户
      */
-    private void getChannelFromNet(final UserInfo user) {
+    private void getChannelFromNet(final UserEntity user) {
         final String url = URLManager.getChannelURL(user.getName());
         final NetClient.OnResultListener responseListener = new NetClient.OnResultListener() {
 
@@ -67,7 +62,7 @@ public class MsgPresenter extends BasePresenter<MainActivity> {
                 if (channels == null) {
                     Toast.makeText(app, jsonHelper.getErrorTip(), Toast.LENGTH_SHORT).show();
                 } else {
-                    new DB_Information(app).removeSelfChannel(user.getName());
+                    new DBManager().deleteAllItem(new ChannelTable());//删除所有的用户数据，重新进行缓存
                     ChannelMessage.getInstance("自定义").setMessage(channels, false, true);
                 }
                 FinanceApplication.getInstance().refreshPublicData();

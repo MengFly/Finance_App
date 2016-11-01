@@ -64,7 +64,10 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_main_view_page, container, false);
         channelLv = (ListView) view.findViewById(R.id.msg_listview);
-
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            fragmentName = arguments.getString("name");
+        }
         if (savedInstanceState != null) {
             fragmentName = savedInstanceState.getString("name");
         }
@@ -200,7 +203,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
             bundle.putString("name", fragmentName);
             ChannelMessageFragment fragment = new ChannelMessageFragment();
             fragment.setArguments(bundle);
-            new ChannelMessage(context, fragment, fragmentName);
+            new ChannelMessage(fragment, fragmentName);
             fragmentManager.put(fragmentName, fragment);
             return fragment;
         }

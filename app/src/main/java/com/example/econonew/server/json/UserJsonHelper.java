@@ -3,7 +3,7 @@ package com.example.econonew.server.json;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.econonew.resource.UserInfo;
+import com.example.econonew.entity.UserEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,20 +16,20 @@ import java.util.List;
  * @author mengfei
  *
  */
-public class UserJsonHelper extends JsonHelperImpl<UserInfo> {
+public class UserJsonHelper extends JsonHelperImpl<UserEntity> {
 
 	public UserJsonHelper(Context context) {
 		super(context);
 	}
 
 	@Override
-	public UserInfo getItemFromJson(String jsonString) {
+	public UserEntity getItemFromJson(String jsonString) {
 		Log.v("testLog", "get User");
-		UserInfo user = null;
+		UserEntity user = null;
 		Log.v("testLog", jsonString);
 		try {
 			JSONObject object = new JSONObject(jsonString);
-			user = new UserInfo("", "");
+			user = new UserEntity("", "");
 			JSONObject result = object.getJSONObject("result");
 			int isVip = result.getInt("isVIP");
 			Log.v("testLog", isVip + "isVip");
@@ -42,7 +42,7 @@ public class UserJsonHelper extends JsonHelperImpl<UserInfo> {
 	}
 
 	@Override
-	public List<UserInfo> getItemAllFromJson(String jsonString) {
+	public List<UserEntity> getItemAllFromJson(String jsonString) {
 		return null;
 	}
 

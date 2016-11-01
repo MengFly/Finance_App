@@ -1,54 +1,72 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/app_base_layout"
+        android:layout_marginTop="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/act_regist_user_name_et"
-            style="@style/app_base_text.drawable.user_et"
-            android:hint="@string/act_regist_username_et"
-            android:textSize="@dimen/text_size_small" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/act_regist_user_name_ly"
+            style="@style/app_base_layout"
+            app:counterEnabled="true"
+            app:counterMaxLength="11"
+            app:counterOverflowTextAppearance="@style/app_base_text"
+            app:errorEnabled="true">
 
-        <TextView
-            style="@style/app_base_text.hint_tv"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/check_login_user_name" />
+            <EditText
+                style="@style/app_base_text.drawable.user_et"
+                android:hint="@string/act_regist_username_et"
+                android:textSize="@dimen/text_size_small" />
+        </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/act_regist_password_ly"
+            style="@style/app_base_layout"
+            app:counterEnabled="true">
 
-        <EditText
-            android:id="@+id/act_regist_user_password_et"
-            style="@style/app_base_text.drawable.pass_et"
-            android:hint="@string/act_regist_password_et"
-            android:textSize="@dimen/text_size_small" />
+            <EditText
+                style="@style/app_base_text.drawable.pass_et"
+                android:hint="@string/act_regist_password_et"
+                android:textSize="@dimen/text_size_small" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/act_regist_user_password2_et"
-            style="@style/app_base_text.drawable.pass_et"
-            android:hint="@string/act_regist_password_ok_et"
-            android:textSize="@dimen/text_size_small" />
+        <android.support.design.widget.TextInputLayout
+            style="@style/app_base_layout"
+            android:id="@+id/act_regist_password2_ly"
+            app:counterEnabled="true">
+
+            <EditText
+                style="@style/app_base_text.drawable.pass_et"
+                android:hint="@string/act_regist_password_ok_et"
+                android:textSize="@dimen/text_size_small" />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             style="@style/app_base_text.hint_tv"
             android:text="设置密保问题" />
 
         <Spinner
-            style="@style/MySpinner"
             android:id="@+id/act_user_regist_quest_Sp"
+            style="@style/MySpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/act_user_regist_get_pass_et"
-            android:textSize="12sp"
-            android:textColorHint="@color/text_hint_color"
-            style="@style/app_base_text.drawable" />
+        <android.support.design.widget.TextInputLayout
+            style="@style/app_base_layout"
+            android:id="@+id/act_user_regist_get_pass_ly"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true">
+
+            <EditText
+                style="@style/app_base_text.drawable"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/act_regist_sure_btn"

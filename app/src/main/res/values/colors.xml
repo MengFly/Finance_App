@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#1296db</color>
+    <color name="colorPrimaryDark">#1296db</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--<color name="app_theme_back">#5CACEE</color>-->
+    <color name="app_theme_back">#1296db</color>
 
     <color name="default_btn_back">#00B2EE</color>
     <color name="select_btn_back">#00868B</color>
@@ -13,7 +16,7 @@
     <color name="lightGray">#fccc</color>
     <color name="HeightLightGray">#5dacee</color>
     <color name="white">#fff</color>
-    <color name="app_theme_back">#5CACEE</color>
+
     <color name="item_back_1">#AAEA025F</color>
     <color name="item_back_2">#AA029ABC</color>
     <color name="item_back_3">#AA754EA9</color>

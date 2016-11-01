@@ -1,11 +1,10 @@
 package com.example.econonew.resource.msg;
 
-import android.content.Context;
-
+import com.example.econonew.db.DBManager;
+import com.example.econonew.db.MsgTable;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.DB_Information;
 import com.example.econonew.view.fragment.MainMessageFragment;
 
 import java.util.ArrayList;
@@ -29,15 +28,17 @@ public class MainMessage implements IMessage<MsgItemEntity> {
     private List<MsgItemEntity> mVipList;//Vip消息列表
     private List<MsgItemEntity> mNotVipList; // 不是VIP的列表
 
-    private DB_Information dbManager;
+    private DBManager dbManager;
+    private MsgTable table;
 
-    public MainMessage(Context context, MainMessageFragment fragment, String allMsgName) {
+    public MainMessage(MainMessageFragment fragment, String allMsgName) {
         this.msgName = allMsgName;
         this.mFragment = fragment;
         mAllList = new ArrayList<>();
         mVipList = new ArrayList<>();
         mNotVipList = new ArrayList<>();
-        dbManager = new DB_Information(context);
+        dbManager = new DBManager();
+        table = new MsgTable(allMsgName);
         msgManager.put(allMsgName, this);
     }
 
@@ -58,7 +59,7 @@ public class MainMessage implements IMessage<MsgItemEntity> {
         addList(msgList);
         sentMsgToUiAndVoice();
         if (isSaveToDatabase) {
-            dbManager.saveAllMsg(Constant.getTableName(msgName), msgList);// 如果保存，就保存道数据库面
+            dbManager.insertItems(table, msgList);// 如果保存，就保存到数据库面
         }
     }
 

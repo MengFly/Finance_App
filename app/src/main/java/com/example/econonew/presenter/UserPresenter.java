@@ -4,10 +4,10 @@ import android.content.DialogInterface;
 import android.text.TextUtils;
 
 import com.android.volley.VolleyError;
+import com.example.econonew.entity.UserEntity;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.User.BaseUserActivity;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.UserInfo;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.json.UserJsonHelper;
@@ -45,7 +45,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     }
 
     //开启一个用户注销的线程
-    public void userLogoutThread(UserInfo user) {
+    public void userLogoutThread(UserEntity user) {
         if (user != null) {
             initLogoutThread(user);
             mActivity.showProDialog();
@@ -220,9 +220,9 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
             @Override
             public void onSuccess(String response) {
                 UserJsonHelper helper = new UserJsonHelper(mActivity);
-                UserInfo user = helper.excuteJsonForItem(response);// 通过Json数据获取User
+                UserEntity user = helper.excuteJsonForItem(response);// 通过Json数据获取User
                 if (user != null) {
-                    Constant.user = new UserInfo(userName, encodePass);
+                    Constant.user = new UserEntity(userName, encodePass);
                     Constant.user.setVIP(user.isVIP());
                     if (!isStartLogin) {
                         FinanceApplication.getInstance().refreshUserData(Constant.user);
@@ -251,7 +251,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     }
 
     /** 开启一个用户注销的线程 启动线程链接服务器根据用户名以及电话号码进行注销操作 */
-    private void initLogoutThread(UserInfo user) {
+    private void initLogoutThread(UserEntity user) {
         final String url = URLManager.getLogoutURL(user.getName());
         final NetClient.OnResultListener requestListener = new NetClient.OnResultListener() {// 注销成功后的回调事件
 

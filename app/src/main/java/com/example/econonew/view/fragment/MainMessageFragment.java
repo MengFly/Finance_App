@@ -60,6 +60,10 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_main_view_page, container, false);
+        Bundle arguments = getArguments();
+        if(arguments != null) {
+            fragmentName =  arguments.getString("name");
+        }
         if (savedInstanceState != null) {
             fragmentName = savedInstanceState.getString("name");
         }
@@ -156,7 +160,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
             bundle.putString("name", fragmentName);
             MainMessageFragment fragment = new MainMessageFragment();
             fragment.setArguments(bundle);
-            new MainMessage(context, fragment, fragmentName);
+            new MainMessage(fragment, fragmentName);
             fragmentManager.put(fragmentName, fragment);
             return fragment;
         }

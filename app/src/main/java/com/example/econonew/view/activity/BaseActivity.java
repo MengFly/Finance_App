@@ -2,6 +2,7 @@ package com.example.econonew.view.activity;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -12,12 +13,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.econonew.R;
 import com.example.econonew.presenter.BasePresenter;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.UserInfo;
+import com.example.econonew.entity.UserEntity;
 import com.example.econonew.view.activity.User.UserLoginActivity;
 import com.example.econonew.view.activity.main.MainActivity;
 
@@ -66,7 +69,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	/**
 	 * 调用MobileApi获取数据
 	 */
-	abstract protected void initDatas();
+	protected void initDatas(){
+		hideKeyboard();
+	}
 
 	/**
 	 * 展示一个Dialog给用户提示这几个参数均可为空
@@ -134,12 +139,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 	// 从缓存中获取用户信息，如果用户之前注销过，则缓存中没有用户信息
 	// 此时获取信息信息为空
-	protected UserInfo getUserInfo() {
+	protected UserEntity getUserInfo() {
 		SharedPreferences pref = getSharedPreferences(Constant.SPF_KEY_USER, MODE_PRIVATE);
 		String userName = pref.getString("userName", null);
 		String userPassWord = pref.getString("userPassWord", null);
 		if (userName != null && userPassWord != null) {
-			UserInfo user = new UserInfo(userName, userPassWord);
+			UserEntity user = new UserEntity(userName, userPassWord);
 			user.setVIP(pref.getBoolean("user_vip", false));
 			return user;
 		}
@@ -229,5 +234,16 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 			@Override
 			public void onClick(DialogInterface dialog, int which) {openOtherActivity(UserLoginActivity.class, false);}
 		},null);
+	}
+
+	/**
+	 * 隐藏键盘
+	 */
+	protected void hideKeyboard() {
+		View view = getCurrentFocus();
+		if (view != null) {
+			((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+					hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+		}
 	}
 }

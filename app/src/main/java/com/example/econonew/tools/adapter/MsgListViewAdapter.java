@@ -14,13 +14,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.econonew.R;
+import com.example.econonew.db.DBManager;
+import com.example.econonew.db.MsgTable;
+import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.tools.ImageLoader;
 import com.example.econonew.tools.ShareTool;
 import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.R;
-import com.example.econonew.entity.MsgItemEntity;
-import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.DB_Information;
 
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class MsgListViewAdapter extends BaseAdapter {
 			holder.titleIv = (ImageView) view.findViewById(R.id.itemImage);
 			holder.isVipTv = (TextView) view.findViewById(R.id.vip_tv);
 			holder.isLoveCb = (CheckBox) view.findViewById(R.id.item_is_love_cb);
-			holder.shareTv = (TextView) view.findViewById(R.id.item_share_tv);
+			holder.shareTv = (ImageView) view.findViewById(R.id.item_share_tv);
 			view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
@@ -86,19 +86,16 @@ public class MsgListViewAdapter extends BaseAdapter {
 	private void initUi(ViewHolder holder, final MsgItemEntity item) {
 		holder.titleTv.setText(item.getMsgTitle());
 		holder.titleIv.setTag(item.getImageTitleUrl());
-		holder.titleIv.setImageResource(R.drawable.default_title);
-
 		mImageLoader.showImageFromURL(holder.titleIv, item.getImageTitleUrl());
 		holder.isLoveCb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (item.isLove() == isChecked)
-					return;
-				item.setLove(isChecked);
-				Toast.makeText(FinanceApplication.app, "设置成功", Toast.LENGTH_SHORT).show();
-				DB_Information db = new DB_Information(FinanceApplication.app);
-				db.upDateMsgContentIsLove(item.getMsgContentUrl(), Constant.getTableName(msgName), isChecked);
+				if (item.isLove() != isChecked) {
+					item.setLove(isChecked);
+					Toast.makeText(FinanceApplication.app, "设置成功", Toast.LENGTH_SHORT).show();
+					new DBManager().updateItem(new MsgTable(msgName), item, "contentUrl=?", new String[]{item.getMsgContentUrl()});
+				}
 			}
 		});
 		holder.shareTv.setOnClickListener(new OnClickListener() {
@@ -110,7 +107,6 @@ public class MsgListViewAdapter extends BaseAdapter {
 		});
 		holder.isVipTv.setVisibility(item.isVip() ? View.VISIBLE : View.GONE);
 		holder.isLoveCb.setChecked(item.isLove());
-
 	}
 
 	// 存放控件的viewHolder
@@ -119,6 +115,6 @@ public class MsgListViewAdapter extends BaseAdapter {
 		ImageView titleIv;
 		TextView isVipTv;
 		CheckBox isLoveCb;
-		TextView shareTv;
+		ImageView shareTv;
 	}
 }

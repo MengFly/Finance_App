@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.UserInfo;
+import com.example.econonew.entity.UserEntity;
 import com.example.econonew.view.activity.FinanceApplication;
 
 import java.net.URLEncoder;
@@ -74,7 +74,7 @@ public class URLManager {
      * @param user 用户
      * @return 用户登录的URL
      */
-    public static String getLoginURL(UserInfo user) {
+    public static String getLoginURL(UserEntity user) {
         return getLoginURL(user.getName(), user.getPwd());
     }
 

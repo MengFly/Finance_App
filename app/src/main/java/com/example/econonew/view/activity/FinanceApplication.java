@@ -1,7 +1,6 @@
 package com.example.econonew.view.activity;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -11,27 +10,27 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.example.econonew.db.ChannelTable;
+import com.example.econonew.db.DBManager;
+import com.example.econonew.db.MsgTable;
 import com.example.econonew.entity.ChannelEntity;
+import com.example.econonew.entity.MsgItemEntity;
+import com.example.econonew.entity.UserEntity;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.DB_Information;
-import com.example.econonew.resource.UserInfo;
 import com.example.econonew.resource.msg.ChannelMessage;
+import com.example.econonew.resource.msg.MainMessage;
+import com.example.econonew.server.NetClient;
 import com.example.econonew.server.json.ChannelJsonHelper;
 import com.example.econonew.server.json.JsonCast;
-import com.example.econonew.server.NetClient;
 import com.example.econonew.server.json.ResponseJsonHelper;
-import com.example.econonew.tools.SettingManager;
 import com.example.econonew.tools.URLManager;
-import com.example.econonew.utils.MsgListUtils;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 
 import org.json.JSONObject;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -70,8 +69,7 @@ public class FinanceApplication extends Application {
 
 					public void onError(VolleyError error) {
 						super.onError(error);
-						JSONObject map = JsonCast.getJsonObject(MsgListUtils.getUtliMsgList(app));
-						new ResponseJsonHelper().handleInfomation(map);
+						loadDatasFromDatabase();
 					}
 				};
 				NetClient.getInstance().excuteGetForString(app, url, listener);
@@ -79,56 +77,50 @@ public class FinanceApplication extends Application {
 		}.start();
 	}
 
-	public void refreshUserData(UserInfo user) {
-//		List<ChannelEntity> channelList = null;
-		if (user != null && user.isVIP()) {
-			getChannelFromNet(user);
-//			channelList = new DB_Information(app).getChannel(user);
-//			if (!todayIsUppdate(user.getName())) {
-//				getChannelFromNet(user);
-//			} else {
-//				AllMessage.getInstance("自定义").setChannels(channelList, false, false);
-//			}
-		} else {
-			if (SettingManager.getInstance().isInitDataFinish()) {
-				List<ChannelEntity> channelList = new DB_Information(app).getChannel(user);
-				ChannelMessage.getInstance("自定义").setMessage(channelList, false, false);
+	//从数据库里面加载数据
+	private void loadDatasFromDatabase() {
+		for(String tabName : Constant.publicItemNames) {
+			MsgTable table = new MsgTable(tabName);
+			MainMessage message = MainMessage.getInstance(tabName);
+			List<MsgItemEntity> list = new DBManager().getDbItems(table, null, null);
+			if (message != null) {
+				message.setMessage(list, false, false);
 			}
 		}
 	}
 
-	private boolean todayIsUppdate(String userName) {
-		SharedPreferences spf = getSharedPreferences(Constant.SPF_KEY_UPDATE_DATE, MODE_PRIVATE);
-		String updateDate = spf.getString(userName, null);
-		String nowDate = SimpleDateFormat.getDateInstance().format(new Date());
-		return nowDate.equals(updateDate);
+	public void refreshUserData(UserEntity user) {
+		if (user != null && user.isVIP()) {
+			getChannelFromNet(user);
+		} else {
+			ChannelMessage message = ChannelMessage.getInstance("自定义");
+			if (message != null) {
+				message.setMessage(new ArrayList<ChannelEntity>(), false, false);
+			}
+		}
 	}
 
-	private void saveUpdateDate(String userName) {
-		SharedPreferences spf = getSharedPreferences(Constant.SPF_KEY_UPDATE_DATE, MODE_PRIVATE);
-		SharedPreferences.Editor edit = spf.edit();
-		edit.putString(userName, SimpleDateFormat.getDateInstance().format(new Date()));
-		edit.apply();
-	}
 
 	/**
 	 * 	从网络上面获取用户的频道信息
 	 * @param user 用户
 	 */
-	public void getChannelFromNet(final UserInfo user) {
+	public void getChannelFromNet(final UserEntity user) {
 		final String url = URLManager.getChannelURL(user.getName());
+		final ChannelMessage message = ChannelMessage.getInstance("自定义");
 		final NetClient.OnResultListener responseListener = new NetClient.OnResultListener() {
 
 			@Override
 			public void onSuccess(String response) {
-				saveUpdateDate(user.getName());
 				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
 				List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
 				if (channels == null) {
 					Toast.makeText(app, jsonHelper.getErrorTip(), Toast.LENGTH_SHORT).show();
 				} else {
-					new DB_Information(app).removeSelfChannel(user.getName());
-					ChannelMessage.getInstance("自定义").setMessage(channels, false, true);
+					new DBManager().deleteAllItem(new ChannelTable());
+					if (message != null) {
+						message.setMessage(channels, false, true);
+					}
 				}
 				FinanceApplication.getInstance().refreshPublicData();
 			}
@@ -136,7 +128,10 @@ public class FinanceApplication extends Application {
 			@Override
 			public void onError(VolleyError error) {
 				super.onError(error);
-				ChannelMessage.getInstance("自定义").stopFresh();
+				List<ChannelEntity> channels = new DBManager().getDbItems(new ChannelTable(), "user_name=?",new String[]{Constant.user.getName()});
+				if (message != null) {
+					message.setMessage(channels, false, false);
+				}
 			}
 		};
 		new Thread() {
