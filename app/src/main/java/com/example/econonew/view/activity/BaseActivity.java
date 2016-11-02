@@ -18,9 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.econonew.R;
+import com.example.econonew.entity.UserEntity;
 import com.example.econonew.presenter.BasePresenter;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.entity.UserEntity;
 import com.example.econonew.view.activity.User.UserLoginActivity;
 import com.example.econonew.view.activity.main.MainActivity;
 
@@ -125,13 +125,17 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	 * @param title	ActionBar的标题
 	 * @param isBack	是否可以返回到MainActivity
      */
-	protected void initActionBar(String title, boolean isBack) {
+	protected void initActionBar(boolean isHide,String title, boolean isBack) {
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
-			actionBar.setTitle(title);
-			if (isBack) {
-				actionBar.setHomeButtonEnabled(true);
-				actionBar.setDisplayHomeAsUpEnabled(true);
+			if(isHide) {//如果设置了隐藏标题栏就隐藏
+				actionBar.hide();
+			} else {
+				actionBar.setTitle(title);
+				if (isBack) {
+					actionBar.setHomeButtonEnabled(true);
+					actionBar.setDisplayHomeAsUpEnabled(true);
+				}
 			}
 		}
 	}
@@ -246,4 +250,5 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 					hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 		}
 	}
+
 }

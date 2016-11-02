@@ -110,7 +110,7 @@ public class MsgItemEntity implements Serializable {
 		this.isLove = isLove;
 	}
 
-	private boolean isVip; // 是否是VIP信息
+	private boolean isVip = false; // 是否是VIP信息
 
 	public boolean isVip() {
 		return isVip;

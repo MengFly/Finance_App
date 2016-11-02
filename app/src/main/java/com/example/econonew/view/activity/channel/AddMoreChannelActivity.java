@@ -48,7 +48,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_add_more_channel);
-		initActionBar("添加多个频道", true);
+		initActionBar(false , "添加多个频道", true);
 		addedChannelLy = (FlowLayout) findViewById(R.id.act_add_more_channel_added_ly);
 		notAddChannelLy = (FlowLayout) findViewById(R.id.act_add_more_channel_notadd_ly);
 		selectChannelCountTv = (TextView) findViewById(R.id.act_add_more_channel_select_count);

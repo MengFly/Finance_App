@@ -31,7 +31,7 @@ public class UserSetVipActivity extends BaseUserActivity {
 
     @Override
     protected void initDatas() {
-        initActionBar("注册VIP", true);
+        initActionBar(false, "注册VIP", true);
         bindPresenter(new UserPresenter(this));
         userNameEt.setText(Constant.user == null ? "" : Constant.user.getName());
     }
@@ -51,7 +51,10 @@ public class UserSetVipActivity extends BaseUserActivity {
                                 showTipDialog("提示", "输入的用户名和当前用户名不一致，请确认，是否要为" + userName + "开启会员？",
                                         new DialogInterface.OnClickListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which) {mPresenter.userSetVipThread(userName);}}, null);
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                mPresenter.userSetVipThread(userName);
+                                            }
+                                        }, null);
                             }
                         }
                     }

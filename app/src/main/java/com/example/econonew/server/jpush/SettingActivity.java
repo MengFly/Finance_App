@@ -2,7 +2,6 @@ package com.example.econonew.server.jpush;
 
 import android.content.ContentValues;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,20 +12,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.econonew.R;
 import com.example.econonew.resource.DB_Information;
+import com.example.econonew.view.activity.BaseActivity;
 
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import cn.jpush.android.api.InstrumentedActivity;
-
-public class SettingActivity extends InstrumentedActivity {
+public class SettingActivity extends BaseActivity {
 	TimePicker startTime;
 	TimePicker endTime;
 	CheckBox mMonday;
@@ -38,40 +34,15 @@ public class SettingActivity extends InstrumentedActivity {
 	CheckBox mSunday;
 	Button mSetTime;
 	SharedPreferences mSettings;
-	Editor mEditor;
 	CheckBox timeRule;
 
+
 	@Override
-	public void onCreate(Bundle icicle) {
-		super.onCreate(icicle);
+	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_set_push_time);
-		initView();
-		initListener();
-		Calendar c = Calendar.getInstance();
-		Log.v("System.week", c.get(Calendar.DAY_OF_WEEK) + "");
-		Log.v("System.hour", c.get(Calendar.HOUR_OF_DAY) + "");
-		Log.v("System.week", c.get(Calendar.MINUTE) + "");
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		initData();
-	}
-
-	private void initView() {
 		startTime = (TimePicker) findViewById(R.id.start_time);
 		endTime = (TimePicker) findViewById(R.id.end_time);
 		timeRule = (CheckBox) findViewById(R.id.timeRule);
-		timeRule.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-				startTime.setIs24HourView(isChecked);
-				endTime.setIs24HourView(isChecked);
-			}
-		});
 
 		mSetTime = (Button) findViewById(R.id.bu_setTime);
 		mMonday = (CheckBox) findViewById(R.id.act_set_time_monday_cb);
@@ -81,7 +52,15 @@ public class SettingActivity extends InstrumentedActivity {
 		mFriday = (CheckBox) findViewById(R.id.act_set_time_friday_cb);
 		mSaturday = (CheckBox) findViewById(R.id.act_set_time_saturday_cb);
 		mSunday = (CheckBox) findViewById(R.id.act_set_time_sunday_cb);
+		initListener();
 	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		initData();
+	}
+
 
 	private void initListener() {
 		mSetTime.setOnClickListener(new OnClickListener() {
@@ -91,6 +70,15 @@ public class SettingActivity extends InstrumentedActivity {
 				v.requestFocus();
 				v.requestFocusFromTouch();
 				setPushTime();
+			}
+		});
+		timeRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+				startTime.setIs24HourView(isChecked);
+				endTime.setIs24HourView(isChecked);
 			}
 		});
 	}
@@ -109,9 +97,9 @@ public class SettingActivity extends InstrumentedActivity {
 			initAllWeek(true);
 		}
 		int startTimeStr = mSettings.getInt(ExampleUtil.PREFS_START_TIME, 0);
-		startTime.setCurrentHour(Integer.valueOf(startTimeStr));
+		startTime.setCurrentHour(startTimeStr);
 		int endTimeStr = mSettings.getInt(ExampleUtil.PREFS_END_TIME, 23);
-		endTime.setCurrentHour(Integer.valueOf(endTimeStr));
+		endTime.setCurrentHour(endTimeStr);
 	}
 
 	/**
@@ -119,13 +107,13 @@ public class SettingActivity extends InstrumentedActivity {
 	 */
 	@SuppressWarnings("deprecation")
 	private void setPushTime() {
-		double startime = startTime.getCurrentHour() + startTime.getCurrentMinute() * 0.01;
-		double endtime = endTime.getCurrentHour() + endTime.getCurrentMinute() * 0.01;
-		if (startime > endtime) {
+		double starTime = startTime.getCurrentHour() + startTime.getCurrentMinute() * 0.01;
+		double endTime = this.endTime.getCurrentHour() + this.endTime.getCurrentMinute() * 0.01;
+		if (starTime > endTime) {
 			Toast.makeText(SettingActivity.this, "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		Set<Integer> days = new HashSet<Integer>();
+		Set<Integer> days = new HashSet<>();
 		if (mSunday.isChecked()) {
 			days.add(1);
 		}
@@ -149,16 +137,13 @@ public class SettingActivity extends InstrumentedActivity {
 		}
 
 		// 调用JPush api设置Push时间
-		Log.v("startime", startime + "");
-		Log.v("endtime", endtime + "");
-		Log.v("days", days + "");
 		SQLiteDatabase db = new DB_Information(SettingActivity.this).getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put("weekend", days + "");
-		values.put("startTime", startime + "");
-		values.put("endTime", endtime + "");
-
+		values.put("startTime", starTime + "");
+		values.put("endTime", endTime + "");
 		Cursor cursor = db.rawQuery("select * from time", null);
+		db.beginTransaction();
 		int n = cursor.getCount();
 		Log.v("n", n + "");
 		if (n == 0) {
@@ -166,6 +151,10 @@ public class SettingActivity extends InstrumentedActivity {
 		} else {
 			db.update("time", values, "_id=?", new String[] { "1" });
 		}
+		db.setTransactionSuccessful();
+		db.endTransaction();
+		cursor.close();
+		db.close();
 		Toast.makeText(SettingActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
 	}
 

@@ -47,7 +47,7 @@ public class AddChannelFromCodeActivity extends BaseActivity {
                 addChannelFromCode(expert_info_show.getText().toString());
             }
         });
-        initActionBar(getResources().getString(R.string.label_add_one_channel), true);
+        initActionBar(false,getResources().getString(R.string.label_add_one_channel), true);
     }
 
     private void addChannelFromCode(final String s) {

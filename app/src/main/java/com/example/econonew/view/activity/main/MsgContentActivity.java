@@ -51,7 +51,7 @@ public class MsgContentActivity extends BaseActivity {
 	protected void initDatas() {
 		Intent intent = getIntent();
 		msgContentUrl = intent.getStringExtra("msgContentUrl");
-		initActionBar(intent.getStringExtra("msgTitle"), true);
+		initActionBar(false, intent.getStringExtra("msgTitle"), true);
 		loadUrl(msgContentUrl);
 	}
 

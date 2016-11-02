@@ -3,6 +3,7 @@ package com.example.econonew.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.econonew.entity.MsgItemEntity;
 
@@ -48,14 +49,23 @@ public class MsgTable extends BaseTable<MsgItemEntity> {
         SQLiteDatabase db = db_information.getReadableDatabase();
         Cursor query = db.query(tableName, null, selection, selectionArgs,null, null, null);
         ArrayList<MsgItemEntity> msgList = new ArrayList<>();
-        for (query.moveToFirst(); query.moveToNext(); ) {
-            String msgTitle = query.getString(query.getColumnIndex("title"));
-            String titleImageUrl = query.getString(query.getColumnIndex("image_title"));
-            String contentUrl = query.getString(query.getColumnIndex("contentUrl"));
-            int isLove = query.getInt(query.getColumnIndex("is_love"));
-            MsgItemEntity entity = new MsgItemEntity(msgTitle, null, contentUrl, null, titleImageUrl);
-            entity.setVip(isLove == 1);
-            msgList.add(entity);
+        if(query.getCount() > 0) {
+            query.moveToFirst();
+            do {
+                String msgTitle = query.getString(query.getColumnIndex("title"));
+                String titleImageUrl = query.getString(query.getColumnIndex("image_title"));
+                String contentUrl = query.getString(query.getColumnIndex("contentUrl"));
+                String isLoveStr = query.getString(query.getColumnIndex("is_love"));
+                String isVipStr = query.getString(query.getColumnIndex("is_vip"));
+                boolean isLove = Boolean.parseBoolean(isLoveStr) || isLoveStr.equals("1");
+                boolean isVip = Boolean.parseBoolean(isVipStr) || isVipStr.equals("1");
+                Log.d("db", "queryForItems: " + msgTitle + " is_love " + isLove);
+                Log.d("db", "queryForItems: " + msgTitle + " is_Vip " + isVip);
+                MsgItemEntity entity = new MsgItemEntity(msgTitle, null, contentUrl, null, titleImageUrl);
+                entity.setLove(isLove);
+                entity.setVip(isVip);
+                msgList.add(entity);
+            } while (query.moveToNext());
         }
         query.close();
         db.close();
@@ -76,7 +86,7 @@ public class MsgTable extends BaseTable<MsgItemEntity> {
                 values.put("context", entity.getMsgContent() == null ? "" : entity.getMsgContent());
                 values.put("title", entity.getMsgTitle() == null ? "" : entity.getMsgTitle());
                 values.put("image_title", entity.getImageTitleUrl() == null ? "" : entity.getImageTitleUrl());
-                values.put("is_love", false);
+                values.put("is_love", entity.isLove());
                 values.put("contentUrl", entity.getMsgContentUrl());
                 values.put("is_vip", entity.isVip());
                 values.put("businessDomain_id", entity.getBusinessDomainId());
@@ -89,6 +99,7 @@ public class MsgTable extends BaseTable<MsgItemEntity> {
         db.beginTransaction();
         for (ContentValues contentValues : valueses) {
             db.insert(tableName, null, contentValues);
+            Log.d("db", "insertItems: success");
         }
         db.setTransactionSuccessful();
         db.endTransaction();
@@ -103,14 +114,17 @@ public class MsgTable extends BaseTable<MsgItemEntity> {
      * @return 是否已经添加过这条消息
      */
     private boolean dataHasSave(String tableName, MsgItemEntity entity) {
+        boolean isHadSave = false;
         SQLiteDatabase db = db_information.getReadableDatabase();
         String selection = "contentUrl=?";
         String[] selectionArgs = new String[]{entity.getMsgContentUrl()};
         Cursor cursor = db.query(tableName, null, selection, selectionArgs, null, null, null, null);
-        boolean isSave = !(cursor.getCount() == 0);
+        if(cursor.getCount() != 0) {//如果结果不为0,那么说明已经存储过这个信息了
+            isHadSave = true;
+        }
         cursor.close();
         db.close();
-        return isSave;
+        return isHadSave;
     }
 
     @Override

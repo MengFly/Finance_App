@@ -71,6 +71,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
             bindMessage();
         }
         initView(view);
+        refreshDatas();
         return view;
     }
 

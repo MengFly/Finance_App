@@ -38,7 +38,6 @@ public class UserActivity extends BaseUserActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.act_user);
-
         registBtn = (Button) findViewById(R.id.user_regist);
         text_user = (TextView) findViewById(R.id.user_name);
 
@@ -69,7 +68,7 @@ public class UserActivity extends BaseUserActivity {
             });
         }
         initListener();
-        initActionBar("用户", true);
+        initActionBar(true ,"用户", true);
     }
 
     private void initListener() {
@@ -106,7 +105,6 @@ public class UserActivity extends BaseUserActivity {
             public void onClick(View v) {
                 mPresenter.userLogoutThread(Constant.user);
                 text_user.setText("未登录");
-//                vipTv.setVisibility(View.GONE);
             }
         });
 

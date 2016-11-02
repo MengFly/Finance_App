@@ -112,7 +112,7 @@ public class UserSetPwdActivity extends BaseUserActivity {
 
 	@Override
 	protected void initDatas() {
-		initActionBar("修改密码",true);
+		initActionBar(false, "修改密码",true);
 		bindPresenter(new UserPresenter(this));
 	}
 

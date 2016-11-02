@@ -1,40 +1,42 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/app_base_layout"
+    android:orientation="vertical">
 
     <LinearLayout
-       style="@style/app_base_layout"
-        android:orientation="vertical">
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/icon_user_back"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/act_login_regist_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/user_login_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/tv_back"
+            android:padding="5dp"
+            android:text="@string/act_user_login_registe_tv"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/icon_user_back"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <Button
-                android:id="@+id/act_login_regist_btn"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/user_login_btn" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/tv_back"
-                android:gravity="center"
-                android:text="@string/act_user_login_registe_tv"
-                android:textColor="#fff"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             style="@style/app_base_layout"
             android:orientation="vertical">
 
@@ -69,12 +71,12 @@
 
             <Button
                 android:id="@+id/act_login_sure_btn"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/app_theme_back"
-                android:text="@string/act_user_login_login_btn" />
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/act_user_login_login_btn"
+                android:textColor="@color/app_theme_back" />
 
             <com.example.econonew.view.customview.UnderLineTextView
                 android:id="@+id/act_user_login_not_login_tv"
@@ -89,5 +91,5 @@
                 android:text="@string/act_login_forget_pass_tv" />
 
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

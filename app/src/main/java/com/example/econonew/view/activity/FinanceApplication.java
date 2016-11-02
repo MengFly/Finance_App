@@ -83,6 +83,7 @@ public class FinanceApplication extends Application {
 			MsgTable table = new MsgTable(tabName);
 			MainMessage message = MainMessage.getInstance(tabName);
 			List<MsgItemEntity> list = new DBManager().getDbItems(table, null, null);
+			Log.e(TAG, "loadDatasFromDatabase: " + tabName + " " + list.size());
 			if (message != null) {
 				message.setMessage(list, false, false);
 			}
@@ -169,6 +170,7 @@ public class FinanceApplication extends Application {
 		for (BaseActivity act : mActManager) {
 			act.finish();
 		}
+		System.exit(1);
 	}
 
 }

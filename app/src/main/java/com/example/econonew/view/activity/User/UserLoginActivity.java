@@ -71,7 +71,7 @@ public class UserLoginActivity extends BaseUserActivity {
     protected void initDatas() {
         isStartLogin = getIntent().getBooleanExtra("isStartLogin", true);
         bindPresenter(new UserPresenter(this));
-        initActionBar("登录", !isStartLogin);
+        initActionBar(true , "登录", !isStartLogin);
     }
 
     // 登陆按钮的事件的处理逻辑

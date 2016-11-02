@@ -83,7 +83,7 @@ public class UserRegistActivity extends BaseUserActivity implements ActEditChang
 
     @Override
     protected void initDatas() {
-        initActionBar("用户注册", true);
+        initActionBar(false ,"用户注册", true);
         bindPresenter(new UserPresenter(this));
     }
 

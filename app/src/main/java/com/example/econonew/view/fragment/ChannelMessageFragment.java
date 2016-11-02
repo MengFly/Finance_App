@@ -132,7 +132,6 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
                         deleteChannel(entity);
                     }
                 }, null);
-
         return false;
     }
 
