@@ -1,8 +1,6 @@
 package com.example.econonew.presenter;
 
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.db.ChannelTable;
@@ -13,17 +11,14 @@ import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.server.json.ChannelJsonHelper;
-import com.example.econonew.tools.URLManager;
 import com.example.econonew.tools.Voice;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.main.MainActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.econonew.view.activity.FinanceApplication.app;
 
 /**
@@ -56,12 +51,9 @@ public class MsgPresenter extends BasePresenter<MainActivity> {
 
             @Override
             public void onSuccess(String response) {
-                saveUpdateDate(user.getName());
                 ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
                 List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
-                if (channels == null) {
-                    Toast.makeText(app, jsonHelper.getErrorTip(), Toast.LENGTH_SHORT).show();
-                } else {
+                if (channels != null) {
                     new DBManager().deleteAllItem(new ChannelTable());//删除所有的用户数据，重新进行缓存
                     ChannelMessage.getInstance("自定义").setMessage(channels, false, true);
                 }
@@ -76,16 +68,9 @@ public class MsgPresenter extends BasePresenter<MainActivity> {
         };
         new Thread() {
             public void run() {
-                NetClient.getInstance().excuteGetForString(app, url, responseListener);
+                NetClient.getInstance().executeGetForString(app, url, responseListener);
             }
         }.start();
-    }
-
-    private void saveUpdateDate(String userName) {
-        SharedPreferences spf = mActivity.getSharedPreferences(Constant.SPF_KEY_UPDATE_DATE, MODE_PRIVATE);
-        SharedPreferences.Editor edit = spf.edit();
-        edit.putString(userName, SimpleDateFormat.getDateInstance().format(new Date()));
-        edit.apply();
     }
 
     /**

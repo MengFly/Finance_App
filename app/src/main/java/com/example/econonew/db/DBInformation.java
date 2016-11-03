@@ -1,10 +1,10 @@
-package com.example.econonew.resource;
+package com.example.econonew.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.econonew.db.MsgTable;
+import com.example.econonew.resource.Constant;
 
 /**
  * 修改了类名 将建表语句拆分分在了两个方法里面 createPublicTable 创建公共信息表 createSelfTable
@@ -12,12 +12,12 @@ import com.example.econonew.db.MsgTable;
  * <p/>
  * 另外修改了自定义信息表的内容： 增加了用户名这一列 用于根据用户命来加载数据
  */
-public class DB_Information extends SQLiteOpenHelper {
+public class DBInformation extends SQLiteOpenHelper {
 
     // 数据库的名称
     private static final String DB_NAME = "db_information";
 
-    public DB_Information(Context context) {
+    public DBInformation(Context context) {
         super(context, DB_NAME, null, 1);
     }
 

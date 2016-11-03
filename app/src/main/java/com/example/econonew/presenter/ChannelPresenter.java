@@ -2,18 +2,14 @@ package com.example.econonew.presenter;
 
 import android.content.DialogInterface;
 
-import com.android.volley.VolleyError;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
-import com.example.econonew.server.json.JsonCast;
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.channel.BaseChannelActivity;
 import com.example.econonew.view.activity.channel.ChannelAddActivity;
-
-import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -35,10 +31,11 @@ public class ChannelPresenter extends BasePresenter<BaseChannelActivity> {
 
     /**
      * 开启添加频道的线程
+     *
      * @param channelEntity 频道类个体
      */
     public void openAddChannelThread(ChannelEntity channelEntity) {
-        if(!isHaveData(channelEntity)) {
+        if (!isHaveData(channelEntity)) {
             initAddChannelThread(channelEntity);
             addChannelThread.start();
         } else {
@@ -53,30 +50,15 @@ public class ChannelPresenter extends BasePresenter<BaseChannelActivity> {
 
             @Override
             public void onSuccess(String response) {
-                JSONObject obj = JsonCast.getJsonObject(response);
-                if (obj != null) {
-                    if ("success".equals(JsonCast.getString(obj, "status"))) {
-                        // TODO: 2016/10/5  这里添加解析json的逻辑
-                        addData(channelEntity);
-                    } else {
-                        mActivity.showToast(JsonCast.getString(obj, "result"));
-                    }
-                } else {
-                    mActivity.showToast("添加频道失败");
-                }
-                mActivity.hintProDialog();
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
+                // TODO: 2016/10/5  这里添加解析json的逻辑
+                addData(channelEntity);
                 mActivity.hintProDialog();
             }
         };
         addChannelThread = new Thread() {
             @Override
             public void run() {
-                NetClient.getInstance().excuteGetForString(mActivity, url, responseListener);
+                NetClient.getInstance().executeGetForString(mActivity, url, responseListener);
             }
         };
     }
@@ -102,6 +84,7 @@ public class ChannelPresenter extends BasePresenter<BaseChannelActivity> {
 
     /**
      * 判断是不是已经添加过这个频道
+     *
      * @param data 频道信息
      */
     private boolean isHaveData(ChannelEntity data) {

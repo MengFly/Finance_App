@@ -16,7 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.econonew.R;
-import com.example.econonew.resource.DB_Information;
+import com.example.econonew.db.DBInformation;
 import com.example.econonew.view.activity.BaseActivity;
 
 import java.util.HashSet;
@@ -137,7 +137,7 @@ public class SettingActivity extends BaseActivity {
 		}
 
 		// 调用JPush api设置Push时间
-		SQLiteDatabase db = new DB_Information(SettingActivity.this).getWritableDatabase();
+		SQLiteDatabase db = new DBInformation(SettingActivity.this).getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put("weekend", days + "");
 		values.put("startTime", starTime + "");

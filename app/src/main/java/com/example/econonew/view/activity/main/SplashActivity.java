@@ -16,7 +16,7 @@ import com.example.econonew.server.jpush.ExampleUtil;
 import com.example.econonew.server.jpush.PushSwitch;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.NetClient;
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -78,7 +78,7 @@ public class SplashActivity extends BaseActivity {
 				} else {
 					Constant.user = getUserInfo();
 					String url = URLManager.getLoginURL(Constant.user);
-					NetClient.getInstance().excuteGetForString(mContext, url, null);// 模拟登录
+					NetClient.getInstance().executeGetForString(mContext, url, null);// 模拟登录
 					intent.setClass(mContext, MainActivity.class);
 				}
 				startActivity(intent);

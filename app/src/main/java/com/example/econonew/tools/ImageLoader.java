@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -89,40 +87,13 @@ public class ImageLoader {
     }
 
     /**
-     * 使用MD5算法对传入的key进行加密并返回
-     */
-    public String hashKeyForDisk(String key) {
-        String cacheKey;
-        try {
-            MessageDigest mDigest = MessageDigest.getInstance("MD5");
-            mDigest.update(key.getBytes());
-            cacheKey = bytesToHexString(mDigest.digest());
-        } catch (NoSuchAlgorithmException e) {
-            cacheKey = String.valueOf(key.hashCode());
-        }
-        return cacheKey;
-    }
-
-    private String bytesToHexString(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            String hex = Integer.toHexString(0xFF & b);
-            if (hex.length() == 1) {
-                sb.append('0');
-            }
-            sb.append(hex);
-        }
-        return sb.toString();
-    }
-
-    /**
      * 根据传入的uniqueName来获取硬盘缓存路径
      *
      * @param context    context
      * @param uniqueName 缓存路径下的文件夹，用于给缓存进行分类
      */
     @SuppressLint("NewApi")
-    public File getDiskCacheDir(Context context, String uniqueName) {
+    private File getDiskCacheDir(Context context, String uniqueName) {
 
         String cachePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
@@ -189,7 +160,7 @@ public class ImageLoader {
     /**
      * 同步缓存
      */
-    public void fluchCache() {
+    public void flushCache() {
         if (mDiskLruCache != null) {
             try {
                 mDiskLruCache.flush();
@@ -215,7 +186,7 @@ public class ImageLoader {
             FileInputStream fileInputStream = null;
             DiskLruCache.Snapshot snapShot;
             try {
-                final String key = hashKeyForDisk(imageUrl);
+                final String key = EncodeStrTool.getInstance().getEncodeMD5Str(imageUrl);
                 snapShot = mDiskLruCache.get(key);
                 if (snapShot == null) {
                     // 如果没有找到对应缓存，则从网络上下载
@@ -227,7 +198,7 @@ public class ImageLoader {
                         } else {
                             edit.abort();
                         }
-                        fluchCache();
+                        flushCache();
                     }
                     // 缓存被写入后，再次查找key对应的缓存
                     snapShot = mDiskLruCache.get(key);
@@ -264,7 +235,7 @@ public class ImageLoader {
          *
          * @return 下载成功返回true 下载失败返回false
          */
-        public boolean downloadFromUrl(String urlString, OutputStream outputStream) {
+        private boolean downloadFromUrl(String urlString, OutputStream outputStream) {
             HttpURLConnection urlConnection = null;
             BufferedOutputStream out = null;
             BufferedInputStream in = null;

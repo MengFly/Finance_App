@@ -8,7 +8,9 @@ import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.econonew.resource.Constant.user;
 
@@ -32,6 +34,24 @@ import static com.example.econonew.resource.Constant.user;
 
 public class ChannelTable extends BaseTable<ChannelEntity> {
 
+    private static final Map<String, String> _channelDataTableNames = new HashMap<>();
+    static {
+        _channelDataTableNames.put("股票", "stock_channel");
+        _channelDataTableNames.put("理财", "money_channel");
+        _channelDataTableNames.put("基金", "funds_channel");
+        _channelDataTableNames.put("期货", "futures_channel");
+        _channelDataTableNames.put("外汇", "exchange_channel");
+    }
+
+    /**
+     * 根据频道的类型名称获取相应的数据表名称
+     *
+     * @param channelName 频道类型
+     * @return 频道相关的数据表的名称
+     */
+    public static String getChannelTableName(String channelName) {
+        return _channelDataTableNames.get(channelName);
+    }
 
     @Override
     public List<ChannelEntity> queryForItems(String selection, String[] selectionArgs) {
@@ -95,7 +115,7 @@ public class ChannelTable extends BaseTable<ChannelEntity> {
                 values.put("businessType_id", entity.getBusinessTypeId());
                 values.put("stair_id", entity.getStairId());
                 valueses.add(values);
-                tableNames.add(Constant.getSelfTableName(entity.getName()));
+                tableNames.add(getChannelTableName(entity.getName()));
             }
             SQLiteDatabase db = db_information.getWritableDatabase();
             db.beginTransaction();
@@ -117,7 +137,7 @@ public class ChannelTable extends BaseTable<ChannelEntity> {
     @Override
     public void deleteItem(ChannelEntity channelEntity) {
         SQLiteDatabase writableDatabase = db_information.getWritableDatabase();
-        writableDatabase.delete(Constant.getSelfTableName(channelEntity.getName()),
+        writableDatabase.delete(getChannelTableName(channelEntity.getName()),
                 "channel_id=? and type=?",
                 new String[]{String.valueOf(channelEntity.getId()), channelEntity.getType()});
         writableDatabase.close();
@@ -135,4 +155,5 @@ public class ChannelTable extends BaseTable<ChannelEntity> {
         writableDatabase.endTransaction();
         writableDatabase.close();
     }
+
 }

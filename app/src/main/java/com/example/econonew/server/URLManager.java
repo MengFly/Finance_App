@@ -1,4 +1,4 @@
-package com.example.econonew.tools;
+package com.example.econonew.server;
 
 import android.content.Context;
 import android.content.SharedPreferences;

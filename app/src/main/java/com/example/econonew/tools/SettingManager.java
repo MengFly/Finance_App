@@ -6,21 +6,10 @@ import com.example.econonew.resource.msg.MainMessage;
 
 public class SettingManager {
 
-    private static SettingManager mInstance;
-
-    private SettingManager() {
-    }
-
-    public boolean isInitDataFinish() {
-        for (String tabName : Constant.publicItemNames) {
-            if (MainMessage.getInstance(tabName) != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isLoadedDatas() {
+    /**
+     * 判断主界面的数据是否已经加载过了
+     */
+    public static boolean isLoadedDatas() {
         for (String tabName : Constant.publicItemNames) {
             MainMessage message = MainMessage.getInstance(tabName);
             if (message != null && message.getMsgCount() > 0) {
@@ -28,16 +17,5 @@ public class SettingManager {
             }
         }
         return false;
-    }
-
-    public static SettingManager getInstance() {
-        if (mInstance == null) {
-            synchronized (SettingManager.class) {
-                if (mInstance == null) {
-                    mInstance = new SettingManager();
-                }
-            }
-        }
-        return mInstance;
     }
 }

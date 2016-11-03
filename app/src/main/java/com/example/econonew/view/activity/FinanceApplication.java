@@ -5,7 +5,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
@@ -20,10 +19,10 @@ import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.server.json.ChannelJsonHelper;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.json.ResponseJsonHelper;
-import com.example.econonew.tools.URLManager;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 
@@ -68,11 +67,10 @@ public class FinanceApplication extends Application {
 					}
 
 					public void onError(VolleyError error) {
-						super.onError(error);
 						loadDatasFromDatabase();
 					}
 				};
-				NetClient.getInstance().excuteGetForString(app, url, listener);
+				NetClient.getInstance().executeGetForString(app, url, listener);
 			}
 		}.start();
 	}
@@ -115,9 +113,7 @@ public class FinanceApplication extends Application {
 			public void onSuccess(String response) {
 				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
 				List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
-				if (channels == null) {
-					Toast.makeText(app, jsonHelper.getErrorTip(), Toast.LENGTH_SHORT).show();
-				} else {
+				if (channels != null) {
 					new DBManager().deleteAllItem(new ChannelTable());
 					if (message != null) {
 						message.setMessage(channels, false, true);
@@ -137,7 +133,7 @@ public class FinanceApplication extends Application {
 		};
 		new Thread() {
 			public void run() {
-				NetClient.getInstance().excuteGetForString(app, url, responseListener);
+				NetClient.getInstance().executeGetForString(app, url, responseListener);
 			}
 		}.start();
 	}

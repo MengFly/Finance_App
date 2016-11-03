@@ -5,16 +5,13 @@ import android.text.TextUtils;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.entity.UserEntity;
-import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.activity.User.BaseUserActivity;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.server.json.UserJsonHelper;
 import com.example.econonew.tools.EncodeStrTool;
-import com.example.econonew.tools.URLManager;
-
-import org.json.JSONObject;
+import com.example.econonew.view.activity.FinanceApplication;
+import com.example.econonew.view.activity.User.BaseUserActivity;
 
 import java.util.regex.Pattern;
 
@@ -29,7 +26,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
     private Thread userRigistThread;//用户注册线程
     private Thread userSetPassThread;//用户修改密码线程
     private Thread userSetVipThread;//用户设置Vip线
-    
+
 
     public UserPresenter(BaseUserActivity activity) {
         super(activity);
@@ -37,7 +34,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
 
     //开启一个用户登录的线程
     public void userLoginThread(String userName, String userPass, boolean isStartLogin) {
-        if(checkUserNameAndPass(userName, userPass)) {
+        if (checkUserNameAndPass(userName, userPass)) {
             mActivity.showProDialog();
             initUserLoginThread(userName, userPass, isStartLogin);
             userLoginThread.start();
@@ -64,7 +61,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
 
     //开启一个用户注册的线程
     public void userRegistThread(String userName, String userPass1, String userPass2) {
-        if (checkUserAndPass(userName,userPass1, userPass2)) {
+        if (checkUserAndPass(userName, userPass1, userPass2)) {
             mActivity.showProDialog();
             initUserRegistThread(userName, userPass1);
             userRigistThread.start();
@@ -73,7 +70,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
 
     //开启一个用户修改密码的线程
     public void userSetPassThread(String newPass1, String newPass2) {
-        if(checkPass(newPass1, newPass2)) {
+        if (checkPass(newPass1, newPass2)) {
             mActivity.showProDialog();
             initUserSetPassThread(newPass1);
             userSetPassThread.start();
@@ -94,30 +91,14 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
 
             @Override
             public void onSuccess(String response) {
-                JSONObject obj = JsonCast.getJsonObject(response);
-                if (obj == null) {
-                    mActivity.showToast("链接失败");
-                } else {
-                    String result = JsonCast.getString(obj, "result");
-                    if ("success".equals(result)) {
-                        mActivity.showTipDialog(null, "Vip注册成功", null, null);
-                        Constant.user.setVIP(true);
-                        mActivity.saveUserInfo(Constant.user);
-                    } else {
-                        mActivity.showTipDialog(null, result, null, null);
-                    }
-                }
-                mActivity.hintProDialog();
-            }
-
-            public void onError(com.android.volley.VolleyError error) {
-                super.onError(error);
-                mActivity.hintProDialog();
+                mActivity.showTipDialog(null, "Vip注册成功", null, null);
+                Constant.user.setVIP(true);
+                mActivity.saveUserInfo(Constant.user);
             }
         };
-        userSetVipThread =  new Thread() {
+        userSetVipThread = new Thread() {
             public void run() {
-                NetClient.getInstance().excuteGetForString(mActivity, setVipUrl, listener);
+                NetClient.getInstance().executeGetForString(mActivity, setVipUrl, listener);
             }
         };
     }
@@ -139,31 +120,14 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
 
             @Override
             public void onSuccess(String response) {
-                JSONObject obj = JsonCast.getJsonObject(response);
-                if (obj != null) {
-                    String result = JsonCast.getString(obj, "result");
-                    if ("success".equals(JsonCast.getString(obj, "status"))) {
-                        mActivity.showTipDialog(null, "修改成功，请重新登录", setPwdOkListener, setPwdOkListener);
-                        mActivity.removeUserAndCookie();//修改密码成功的时候移除用户和之前的Cookie信息
-                        FinanceApplication.getInstance().refreshUserData(Constant.user);
-                    } else {
-                        mActivity.showTipDialog(null, result, null, null);
-                    }
-                } else {
-                    mActivity.showToast("密码修改失败");
-                }
-                mActivity.hintProDialog();
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                mActivity.hintProDialog();
+                mActivity.showTipDialog(null, "修改成功，请重新登录", setPwdOkListener, setPwdOkListener);
+                mActivity.removeUserAndCookie();//修改密码成功的时候移除用户和之前的Cookie信息
+                FinanceApplication.getInstance().refreshUserData(Constant.user);
             }
         };
         userSetPassThread = new Thread() {
             public void run() {
-                NetClient.getInstance().excuteGetForString(mActivity, url, listener);
+                NetClient.getInstance().executeGetForString(mActivity, url, listener);
             }
         };
     }
@@ -184,30 +148,12 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
 
             @Override
             public void onSuccess(String response) {
-                JSONObject obj = JsonCast.getJsonObject(response);
-                if (obj != null) {
-                    String status = JsonCast.getString(obj, "status");
-                    if ("success".equals(status)) {
-                        mActivity.showTipDialog(null, "注册成功", listener, null);
-                    } else {
-                        mActivity.showToast(JsonCast.getString(obj, "result"));
-                    }
-                } else {
-                    mActivity.showToast("注册失败");
-                }
-                mActivity.hintProDialog();
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                mActivity.hintProDialog();
+                mActivity.showTipDialog(null, "注册成功", listener, null);
             }
         };
         userRigistThread = new Thread() {
             public void run() {
-                NetClient.getInstance()
-                        .excuteGetForString(mActivity, url, resultListener);
+                NetClient.getInstance().executeGetForString(mActivity, url, resultListener);
             }
         };
     }
@@ -231,55 +177,37 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
                     mActivity.saveUserInfo(Constant.user);
                     mActivity.backHomeActivity();
                 } else {
-                    mActivity.showToast("登录失败");
+                    mActivity.showToast("登陆失败");
                 }
-                mActivity.hintProDialog();
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                mActivity.hintProDialog();
             }
         };
         userLoginThread = new Thread() {
             @Override
             public void run() {
-                NetClient.getInstance().excuteGetForString(mActivity, loginUrl, userLoginListener);
+                NetClient.getInstance().executeGetForString(mActivity, loginUrl, userLoginListener);
             }
         };
     }
 
-    /** 开启一个用户注销的线程 启动线程链接服务器根据用户名以及电话号码进行注销操作 */
+    /**
+     * 开启一个用户注销的线程 启动线程链接服务器根据用户名以及电话号码进行注销操作
+     */
     private void initLogoutThread(UserEntity user) {
         final String url = URLManager.getLogoutURL(user.getName());
         final NetClient.OnResultListener requestListener = new NetClient.OnResultListener() {// 注销成功后的回调事件
 
             @Override
             public void onSuccess(String response) {
-                JSONObject responseObject = JsonCast.getJsonObject(response);
-                if (responseObject != null) {
-                    mActivity.removeUserAndCookie();
-                    FinanceApplication.getInstance().refreshUserData(Constant.user);
-                    FinanceApplication.getInstance().refreshPublicData();
-                    String result = JsonCast.getString(responseObject, "result");
-                    if (result != null) {
-                        if ("success".equals(result)) {
-                            mActivity.showTipDialog(null, "注销成功", null, null);
-                        } else {
-                            mActivity.showTipDialog(null, result, null, null);
-                        }
-                    } else {
-                        mActivity.showToast("注销失败");
-                    }
-                }
+                mActivity.removeUserAndCookie();
+                FinanceApplication.getInstance().refreshUserData(Constant.user);
+                FinanceApplication.getInstance().refreshPublicData();
+                mActivity.showTipDialog(null, "注销成功", null, null);
                 mActivity.hintProDialog();
             }
 
             @Override
             public void onError(VolleyError error) {
                 super.onError(error);
-                mActivity.hintProDialog();
                 mActivity.removeUserAndCookie();
                 FinanceApplication.getInstance().refreshUserData(Constant.user);
                 FinanceApplication.getInstance().refreshPublicData();
@@ -287,8 +215,7 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
         };
         userLogoutThread = new Thread() {
             public void run() {
-                NetClient.getInstance().excuteGetForString(mActivity, url,
-                        requestListener);
+                NetClient.getInstance().executeGetForString(mActivity, url, requestListener);
             }
         };
     }

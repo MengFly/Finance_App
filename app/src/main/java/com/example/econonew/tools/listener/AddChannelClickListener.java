@@ -5,12 +5,13 @@ import android.content.DialogInterface.OnClickListener;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.econonew.db.ChannelTable;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
-import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.NetClient;
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
+import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.channel.ChannelAddActivity;
@@ -46,7 +47,7 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 	public AddChannelClickListener(ChannelEntity addChannel, BaseActivity context) {
 		this.mAddChannel = addChannel;
 		this.mContext = context;
-		mTableName = Constant.getSelfTableName(addChannel.getName());
+		mTableName = ChannelTable.getChannelTableName(addChannel.getName());
 		initListener();
 	}
 
@@ -67,32 +68,18 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 			@Override
 			public void onSuccess(String response) {
 				JSONObject obj = JsonCast.getJsonObject(response);
-				if (obj != null) {
-					if ("success".equals(JsonCast.getString(obj, "status"))) {
-						int id = JsonCast.getInt(obj, "result");
-						mAddChannel.setId(id);
-						addData(mAddChannel);
-					} else {
-						Toast.makeText(mContext, JsonCast.getString(obj, "result"), Toast.LENGTH_LONG).show();
-						mContext.showTipDialog(null, JsonCast.getString(obj, "result"), null, null);
-					}
-				} else {
-					Toast.makeText(FinanceApplication.app, "添加频道失败", Toast.LENGTH_SHORT).show();
-				}
-
-				mContext.hintProDialog();
+				int id = JsonCast.getInt(obj, "result");
+				mAddChannel.setId(id);
+				addData(mAddChannel);
 			}
 
 			@Override
-			public void onError(VolleyError error) {
-				super.onError(error);
-                mContext.hintProDialog();
-			}
+			public void onError(VolleyError error){}
 		};
 		// 给服务器发送定制信息
 		new Thread() {
 			public void run() {
-				NetClient.getInstance().excuteGetForString(mContext, url, responseListener);
+				NetClient.getInstance().executeGetForString(mContext, url, responseListener);
 			};
 		}.start();
 

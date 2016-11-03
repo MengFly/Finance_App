@@ -11,10 +11,11 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.example.econonew.server.json.JsonHelperImpl;
+import com.example.econonew.server.json.JsonCast;
+import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 
-import java.util.List;
+import org.json.JSONObject;
 
 /**
  * 实现网络操作的类
@@ -29,7 +30,7 @@ public class NetClient {
 	private NetClient() {
 	}
 
-	public void excuteGetForString(Context context, final String url, final OnResultListener listener) {
+	public void executeGetForString(final Context context, final String url, final OnResultListener listener) {
 		Log.v("NetClient", "url-->" + url);
 		final Handler handler = new Handler(context.getMainLooper());
 		MyStringRequest request = new MyStringRequest(context, Method.GET, url, new Listener<String>() {
@@ -41,8 +42,11 @@ public class NetClient {
 					@Override
 					public void run() {
 						Log.v("json", "response-->" + response);
+						if(context instanceof BaseActivity) {
+							((BaseActivity) context).hintProDialog();
+						}
 						if (listener != null)
-							listener.onSuccess(response);
+							listener.success(response);
 					}
 				});
 			}
@@ -54,99 +58,9 @@ public class NetClient {
 
 					@Override
 					public void run() {
-						if (listener != null)
-							listener.onError(error);
-					}
-				});
-			}
-		});
-		FinanceApplication.getRequestQueue().add(request);
-	}
-
-	/**
-	 * 执行get请求，并且返回我们想要的解析过的Item
-	 *
-	 * @param url
-	 *            请求的Url
-	 * @param listener
-	 *            请求的回调方法
-	 * @param jsonHelper
-	 *            解析器，用于解析传输过来的Json字符串 这个解析器必须实现的方法是里面的getItem 方法
-	 */
-	public <T> void excuteGetForItem(Context context, final String url, final OnResultItemListener listener,
-									 final JsonHelperImpl<T> jsonHelper) {
-		Log.v("NetClient", "url-->" + url);
-		final Handler handler = new Handler(context.getMainLooper());
-		MyStringRequest request = new MyStringRequest(context, Method.GET, url, new Listener<String>() {
-
-			@Override
-			public void onResponse(final String response) {
-				handler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						Log.v("NetClient", "response-->" + response);
-						if (listener != null)
-							listener.onSuccess(jsonHelper.excuteJsonForItem(response));
-					}
-				});
-			}
-		}, new ErrorListener() {
-
-			@Override
-			public void onErrorResponse(final VolleyError error) {
-				handler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						if (listener != null)
-							listener.onError(error);
-					}
-				});
-			}
-		});
-		FinanceApplication.getRequestQueue().add(request);
-
-	}
-
-	/**
-	 * 执行get请求，并且返回我们想要的解析过的Item
-	 *
-	 * @param context
-	 *            context
-	 * @param url
-	 *            请求的Url
-	 * @param listener
-	 *            请求的回调方法
-	 * @param jsonHelper
-	 *            解析器，用于解析传输过来的Json字符串 这个解析器必须实现的方法是里面的getItems 方法
-	 */
-	public <T> void excuteGetForItems(Context context, final String url, final OnResultItemsListener listener,
-									  final JsonHelperImpl<T> jsonHelper) {
-		Log.v("NetClient", "url-->" + url);
-		final Handler handler = new Handler(context.getMainLooper());
-		MyStringRequest request = new MyStringRequest(context, Method.GET, url, new Listener<String>() {
-
-			@Override
-			public void onResponse(final String response) {
-				handler.post(new Runnable() {
-
-					@Override
-					public void run() {
-						Log.v("NetClient", "response-->" + response);
-						if (listener != null)
-							listener.onSuccess(jsonHelper.excuteJsonForItems(response));
-					}
-				});
-			}
-		}, new ErrorListener() {
-
-			@Override
-			public void onErrorResponse(final VolleyError error) {
-				handler.post(new Runnable() {
-
-					@Override
-					public void run() {
+						if(context instanceof BaseActivity) {
+							((BaseActivity) context).hintProDialog();
+						}
 						if (listener != null)
 							listener.onError(error);
 					}
@@ -185,55 +99,31 @@ public class NetClient {
 	public static abstract class OnResultListener {
 		public abstract void onSuccess(String response);
 
-		public void onError(VolleyError error) {
-			error(error);
-		}
-	}
-
-	/**
-	 * Item请求的回调方法
-	 *
-	 * @author mengfei
-	 *
-	 */
-	 static abstract class OnResultItemListener {
-		 abstract <T> void onSuccess(T item);
-
-		 void onError(VolleyError error) {
-			error(error);
-		}
-	}
-
-	/**
-	 * Item请求的回调方法
-	 *
-	 * @author mengfei
-	 *
-	 */
-	 static abstract class OnResultItemsListener {
-
-		 abstract <T> void onSuccess(List<T> items);
-
-		 void onError(VolleyError error) {
-			error(error);
-		}
-	}
-
-	/**
-	 * 解析错误信息，并产生相应的提示
-	 *
-	 * @param error
-	 *            错误类型
-	 */
-	 private static void error(VolleyError error) {
-		if (error instanceof NoConnectionError) {
-			Toast.makeText(FinanceApplication.getInstance(), "网络链接失败，请检查网络设置", Toast.LENGTH_SHORT).show();
-		} else if (error instanceof TimeoutError) {
-			Toast.makeText(FinanceApplication.getInstance(), "链接超时，请稍后重试", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(FinanceApplication.getInstance(), "网络链接错误" + error, Toast.LENGTH_SHORT).show();
+		public void onError(VolleyError error){
+			if (error instanceof NoConnectionError) {
+				Toast.makeText(FinanceApplication.getInstance(), "网络链接失败，请检查网络设置", Toast.LENGTH_SHORT).show();
+			} else if (error instanceof TimeoutError) {
+				Toast.makeText(FinanceApplication.getInstance(), "链接超时，请稍后重试", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(FinanceApplication.getInstance(), "网络链接错误" + error, Toast.LENGTH_SHORT).show();
+			}
 		}
 
+		//程序的统一接收到数据的处理逻辑
+		private void success(String response) {
+			JSONObject jsonObject = JsonCast.getJsonObject(response);
+			String status = JsonCast.getString(jsonObject, "status");
+			if("success".equals(status)) {
+				onSuccess(response);
+			} else {
+				String result = JsonCast.getString(jsonObject, "result");
+				if(result != null) {
+					Toast.makeText(FinanceApplication.getInstance(), result, Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(FinanceApplication.getInstance(), "请求失败,请稍后在进行请求", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}
 	}
 
 }

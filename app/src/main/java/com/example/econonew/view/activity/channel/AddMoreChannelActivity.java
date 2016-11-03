@@ -18,7 +18,7 @@ import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.tools.ChannelListManager;
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.customview.FlowLayout;
@@ -104,7 +104,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 	private List<ChannelEntity> getTotalChannel() {
 		List<ChannelEntity> totalChannelList = new ArrayList<>();
 		for (String channelName : Constant.publicItemNames) {
-			String[] channelFistLabels = ChannelListManager.getChannelFirstLable(channelName);
+			String[] channelFistLabels = ChannelListManager.getChannelFirstLabel(channelName);
 			for (String channelFistLabel : channelFistLabels) {
 				String[] secondLabels = ChannelListManager.getChannelSecondLabel();
 				for (String secondLabel : secondLabels) {
@@ -187,7 +187,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 					final int max = addList.size();
 					final ChannelEntity entity = addList.get(i);
 					final String url = URLManager.getSetChannelURL(Constant.user.getName(), entity);
-					NetClient.getInstance().excuteGetForString(mContext, url, new NetClient.OnResultListener() {
+					NetClient.getInstance().executeGetForString(mContext, url, new NetClient.OnResultListener() {
 
 						@Override
 						public void onSuccess(String response) {

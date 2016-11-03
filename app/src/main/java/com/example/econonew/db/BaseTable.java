@@ -1,6 +1,5 @@
 package com.example.econonew.db;
 
-import com.example.econonew.resource.DB_Information;
 import com.example.econonew.view.activity.FinanceApplication;
 
 import java.util.List;
@@ -12,10 +11,10 @@ import java.util.List;
 
 public abstract class BaseTable<T> {
 
-    protected DB_Information db_information;
+    protected DBInformation db_information;
 
     public BaseTable() {
-        db_information = new DB_Information(FinanceApplication.getInstance());
+        db_information = new DBInformation(FinanceApplication.getInstance());
     }
 
     /**

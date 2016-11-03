@@ -1,6 +1,6 @@
 package com.example.econonew.entity;
 
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
 
 import java.io.Serializable;
 

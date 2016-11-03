@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickL
 
 	// 初始化公共信息
 	private void initPublicData() {
-		boolean isLoadedData = SettingManager.getInstance().isLoadedDatas();
+		boolean isLoadedData = SettingManager.isLoadedDatas();
 		if (!isLoadedData) {// 如果之前没有加载过数据，则加载数据
 			showProDialog();
 			FinanceApplication.getInstance().refreshUserData(Constant.user);//先初始化用户数据，便于对以后的数据过滤
@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickL
 		List<Fragment> list = new ArrayList<>();
 		for (String tabName : Constant.tabList) {
 			if("自定义".equals(tabName)) {
-				list.add(ChannelMessageFragment.newInstance(this, tabName));
+				list.add(ChannelMessageFragment.newInstance(tabName));
 			} else {
 				list.add(MainMessageFragment.newInstance(this, tabName));
 			}

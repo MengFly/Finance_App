@@ -95,7 +95,7 @@ public class AddOneChannelActivity extends BaseChannelActivity {
     @Override
     protected void initDatas() {
         channelName = getIntent().getStringExtra(CHANNEL_NAME);
-        channelFirstLabel = ChannelListManager.getChannelFirstLable(channelName);
+        channelFirstLabel = ChannelListManager.getChannelFirstLabel(channelName);
         channelSecondLabel = ChannelListManager.getChannelSecondLabel();
         initActionBar(false , getString(R.string.label_add_one_channel) + "\t\t" +channelName, true);
         updateUI();

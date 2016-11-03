@@ -3,7 +3,7 @@ package com.example.econonew.server.json;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.MainMessage;
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;

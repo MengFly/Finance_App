@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.econonew.resource.DB_Information;
+import com.example.econonew.db.DBInformation;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +41,7 @@ public class PushSwitch {
 		boolean flag = false;
 		List<String> days = new ArrayList<>();
 		String str;
-		SQLiteDatabase db = new DB_Information(context).getReadableDatabase();
+		SQLiteDatabase db = new DBInformation(context).getReadableDatabase();
 		Cursor time_cursor = db.query("time", null, null, null, null, null, null);
 		Cursor cursor = db.rawQuery("select * from time", null);
 		if (cursor.getCount() != 0) {
@@ -71,7 +71,7 @@ public class PushSwitch {
 
 	public long timeSurplus() {
 		long timeSur = 0;
-		SQLiteDatabase db = new DB_Information(context).getReadableDatabase();
+		SQLiteDatabase db = new DBInformation(context).getReadableDatabase();
 		Cursor time_cursor = db.query("time", null, null, null, null, null, null);
 		Cursor cursor = db.rawQuery("select * from time", null);
 		if (cursor.getCount() != 0) {

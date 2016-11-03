@@ -1,14 +1,14 @@
 package com.example.econonew.tools;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import android.content.Context;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class FileTools {
+	
 	static public void writeFile(Context context, String fileName,
 			String content) {
 		File file = new File(context.getExternalCacheDir(), fileName);
@@ -26,8 +26,6 @@ public class FileTools {
 		try {
 			out = new FileOutputStream(file);
 			out.write(content.getBytes(), 0, content.getBytes().length);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 

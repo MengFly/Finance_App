@@ -44,7 +44,7 @@ public class Voice {
 
 	private ArrayList<List<MsgItemEntity>> readList;//这里面存储着要进行阅读的list
 
-	private int flag;// 朗读标志,分别是上面的三种状态
+	private int readStat;// 朗读标志,分别是上面的三种状态
 
 	/**
 	 * 获取语音播放类的实例
@@ -69,7 +69,7 @@ public class Voice {
 		mTts.setParameter(SpeechConstant.VOLUME, "70");// 设置音量，范围0~100
 		mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); // 设置云端
 
-		flag = VOICE_STAT_NO_READ;
+		readStat = VOICE_STAT_NO_READ;
 		readList = new ArrayList<>();
 	}
 
@@ -82,8 +82,11 @@ public class Voice {
 		return this;
 	}
 
+	/**
+	 * 重置要进行阅读的数据
+	 */
 	public void resetVoice() {
-		flag = VOICE_STAT_NO_READ;
+		readStat = VOICE_STAT_NO_READ;
 		readList.clear();
 		currentReadPoint = 0;
 	}
@@ -92,24 +95,25 @@ public class Voice {
 	 * 获取当前正在阅读的状态
 	 */
 	public int getReadStat() {
-		return flag;
+		return readStat;
 	}
 
 	public void read() {
-		if (flag == VOICE_STAT_NO_READ) {
+		if (readStat == VOICE_STAT_NO_READ) {
 			readList();
-			flag = VOICE_STAT_READING;
-		} else if (flag == VOICE_STAT_READING) {
+			readStat = VOICE_STAT_READING;
+		} else if (readStat == VOICE_STAT_READING) {
 			pauseList();
-			flag = VOICE_STAT_PAUSE;
+			readStat = VOICE_STAT_PAUSE;
 		} else {
 			resumeList();
-			flag = VOICE_STAT_READING;
+			readStat = VOICE_STAT_READING;
 		}
 	}
 
 
 	private int currentReadPoint;//当前阅读的位置
+
 	// 列表朗读
 	private void readList() {
 		if(currentReadPoint >= readList.size()) {
@@ -127,13 +131,13 @@ public class Voice {
 	// 列表暂停朗读
 	private void pauseList() {
 		mTts.pauseSpeaking();
-		flag = VOICE_STAT_PAUSE;
+		readStat = VOICE_STAT_PAUSE;
 	}
 
 	// 恢复阅读
 	private void resumeList() {
 		mTts.resumeSpeaking();
-		flag = VOICE_STAT_READING;
+		readStat = VOICE_STAT_READING;
 	}
 
 	// 读单句话
@@ -167,7 +171,6 @@ public class Voice {
 	private RecognizerDialogListener recognizerDialogListener = new RecognizerDialogListener() {
 		public void onResult(RecognizerResult results, boolean isLast) {
 			Log.v("ihg", "" + results.getResultString());
-			// mytext.setText(results.getResultString());
 			printResult(results);
 		}
 

@@ -1,6 +1,5 @@
 package com.example.econonew.view.fragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,13 +19,10 @@ import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
-import com.example.econonew.server.json.JsonCast;
-import com.example.econonew.tools.URLManager;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.tools.adapter.ChannelListViewAdapter;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +34,7 @@ import java.util.Map;
  * Created by mengfei on 2016/10/2.
  */
 
-public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, ChannelEntity> implements AdapterView.OnItemLongClickListener{
+public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, ChannelEntity> implements AdapterView.OnItemLongClickListener {
 
 
     //用于存储已经实例化的Fragment，下次再需要的时候可以直接从Map里面进行获取，提高效率
@@ -65,7 +61,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
         View view = inflater.inflate(R.layout.frag_main_view_page, container, false);
         channelLv = (ListView) view.findViewById(R.id.msg_listview);
         Bundle arguments = getArguments();
-        if(arguments != null) {
+        if (arguments != null) {
             fragmentName = arguments.getString("name");
         }
         if (savedInstanceState != null) {
@@ -78,7 +74,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
     //刷新界面数据进行显示
     private void refreshDatas() {
-        if(channelAdapter != null) {
+        if (channelAdapter != null) {
             channelAdapter.notifyDataSetChanged();
         }
     }
@@ -155,22 +151,8 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
             @Override
             public void onSuccess(String response) {
-                JSONObject obj = JsonCast.getJsonObject(response);
-                if (obj != null) {
-                    String result = JsonCast.getString(obj, "result");
-                    if (result != null) {
-                        if ("success".equals(result)) {
-                            if (channelAdapter != null) {
-                                showToast("频道删除成功");
-                            }
-                        } else {
-                            showTipDialog("删除频道失败:" + result);
-                        }
-                    } else {
-                        showToast("删除频道失败");
-                    }
-                } else {
-                    showToast("删除频道失败");
+                if (channelAdapter != null) {
+                    showToast("频道删除成功");
                 }
                 hintProDialog();
                 stopFresh();
@@ -186,7 +168,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
         new Thread() {
             @Override
             public void run() {
-                NetClient.getInstance().excuteGetForString(getContext(), url, listener);
+                NetClient.getInstance().executeGetForString(getContext(), url, listener);
             }
         }.start();
     }
@@ -194,7 +176,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
     /**
      * 获取Fragment实例
      */
-    public static ChannelMessageFragment newInstance(Context context, String fragmentName) {
+    public static ChannelMessageFragment newInstance(String fragmentName) {
         if (fragmentManager.containsKey(fragmentName)) {
             return fragmentManager.get(fragmentName);
         } else {
