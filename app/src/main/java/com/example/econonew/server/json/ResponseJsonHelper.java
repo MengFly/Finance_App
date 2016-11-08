@@ -61,26 +61,20 @@ public class ResponseJsonHelper {
      */
     private MsgItemEntity getEntityFromJson(JSONObject object) throws JSONException {
         String msgItemTitle = object.getString("title");
-        String msgItemContent = object.getString("context");
+        String context = object.getString("context");
         int msgItemId = object.getInt("id");
-        String msgItemContentUrl = URLManager.getMsgContentURL(msgItemId);
-        String msgItemGeneral = getMsgGeneralByContent(msgItemContent);
+//        String msgItemContentUrl = URLManager.getMsgContentURL(msgItemId);
+        String msgItemContentUrl = URLManager.getMsgContentUrl(context);
         String msgItemImageUrl = object.getString("picture");
         int level = object.getInt("level");
         int businessDomainId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessDomain"), "id");
         int businessTypeId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessType"), "id");
         int stairId = JsonCast.getInt(JsonCast.getJSONObject(object, "stair"), "id");
-        MsgItemEntity entity = new MsgItemEntity(msgItemTitle, msgItemContent, msgItemContentUrl, msgItemGeneral, msgItemImageUrl);
+        MsgItemEntity entity = new MsgItemEntity(msgItemTitle, context, msgItemContentUrl, null, msgItemImageUrl);
         entity.setBusinessDomainId(businessDomainId);
         entity.setBusinessTypeId(businessTypeId);
         entity.setStairId(stairId);
         entity.setVip(level == 1);
         return entity;
     }
-
-    // TODO: 2016/11/2 这里要添加获取摘要信息的逻辑 
-    private String getMsgGeneralByContent(String msgContent) {
-        return null;
-    }
-
 }

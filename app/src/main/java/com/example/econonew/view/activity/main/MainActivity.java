@@ -45,8 +45,8 @@ public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickL
 		addChannelBtn = (Button) findViewById(R.id.add_channel_btn);
 		userBtn = (Button) findViewById(R.id.act_main_user_btn);
 		shareBtn = (ImageButton) findViewById(R.id.act_main_title_bar_share);
-		initListener();
 		bindPresenter(new MsgPresenter(this));
+		initListener();
 	}
 
 	private void initListener() {
@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickL
 			if("自定义".equals(tabName)) {
 				list.add(ChannelMessageFragment.newInstance(tabName));
 			} else {
-				list.add(MainMessageFragment.newInstance(this, tabName));
+				list.add(MainMessageFragment.newInstance(tabName));
 			}
 		}
 		mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), list));

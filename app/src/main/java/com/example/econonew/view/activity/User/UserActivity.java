@@ -1,12 +1,10 @@
 package com.example.econonew.view.activity.User;
 
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.econonew.R;
@@ -29,9 +27,7 @@ public class UserActivity extends BaseUserActivity {
 
     private TextView userLogout, settingPush, setPwd, voice_repeat;
 
-    // 用户登录的一系列选项
-    private LinearLayout userLayout;
-    private TextView userTv, userLoginTv, userRegistTv, userSetVipTv;
+    private TextView  userLoginTv, userRegistTv, userSetVipTv;
 
     private TextView text_user;
 
@@ -46,8 +42,6 @@ public class UserActivity extends BaseUserActivity {
         voice_repeat = (TextView) findViewById(R.id.repeat_voice);
         setPwd = (TextView) findViewById(R.id.setPwd);
 
-        userTv = (TextView) findViewById(R.id.act_user_user_user_tv);
-        userLayout = (LinearLayout) findViewById(R.id.act_user_user_ly);
         userLoginTv = (TextView) findViewById(R.id.act_user_login_tv);
         userRegistTv = (TextView) findViewById(R.id.act_user_regist_tv);
         userSetVipTv = (TextView) findViewById(R.id.act_user_setVip_tv);
@@ -76,12 +70,6 @@ public class UserActivity extends BaseUserActivity {
                                          @Override
                                          public void onClick(View v) {registClick();}
                                      });
-        userTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandUserItem(v);
-            }
-        });
         userLoginTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,18 +131,6 @@ public class UserActivity extends BaseUserActivity {
         }
     }
 
-    /**
-     * 展开或是收起用户的选项
-     */
-    protected void expandUserItem(View v) {
-        if (userLayout.getVisibility() == View.GONE) {
-            v.setBackgroundColor(Color.GRAY);
-            userLayout.setVisibility(View.VISIBLE);
-        } else {
-            v.setBackgroundColor(Color.WHITE);
-            userLayout.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     protected void initDatas() {

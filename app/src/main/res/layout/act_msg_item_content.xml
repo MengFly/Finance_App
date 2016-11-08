@@ -18,7 +18,7 @@
 
         <!-- 显示消息内容的WebView -->
 
-        <WebView
+        <com.example.econonew.view.customview.DefaultWebView
             android:id="@+id/msg_item_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

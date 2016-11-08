@@ -29,11 +29,10 @@ public class ChannelMessage implements IMessage<ChannelEntity> {
 
     /**
      * 定义消息管理的类
-
-     * @param allMsgName
-     *            每一栏消息的名称，可以通过消息的名称获得具体消息的实例
+     *
+     * @param allMsgName 每一栏消息的名称，可以通过消息的名称获得具体消息的实例
      */
-    public ChannelMessage( ChannelMessageFragment fragment, String allMsgName) {
+    public ChannelMessage(ChannelMessageFragment fragment, String allMsgName) {
         this.allMsgName = allMsgName;
         this.mFragment = fragment;
         mChannelList = new ArrayList<>();
@@ -43,7 +42,7 @@ public class ChannelMessage implements IMessage<ChannelEntity> {
     }
 
     public static ChannelMessage getInstance(String name) {
-        if(msgManager.containsKey(name)) {
+        if (msgManager.containsKey(name)) {
             return msgManager.get(name);
         } else {
             return null;
@@ -70,7 +69,7 @@ public class ChannelMessage implements IMessage<ChannelEntity> {
     public boolean removeMsg(ChannelEntity item) {
         boolean isRemove = false;
         if (this.mChannelList.contains(item)) {
-            dataBaseManager.deleteItem(table,item);
+            dataBaseManager.deleteItem(table, item);
             isRemove = this.mChannelList.remove(item);
             sentMsgToUiAndVoice();
         }
@@ -94,7 +93,7 @@ public class ChannelMessage implements IMessage<ChannelEntity> {
         }
         sentMsgToUiAndVoice();
         if (isSaveToDatabase) {
-            dataBaseManager.insertItems(table,msgList);
+            dataBaseManager.insertItems(table, msgList);
         }
     }
 

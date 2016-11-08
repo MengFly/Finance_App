@@ -14,6 +14,19 @@ import java.util.Map;
 
 /**
  * 主界面的消息数据表
+ * ================================================
+ * _id 数据库Id
+ * context 排版网页的url
+ * contentUrl 排版网页的url
+ * businessDomain_id
+ * businessType_id
+ * stair_id integer
+ * is_love 是否是收藏消息
+ * id  频道id"
+ * is_vip 是否是VIP消息
+ * image_title 标题图片的URL
+ * title 标题
+ =========================================================
  * Created by mengfei on 2016/11/1.
  */
 

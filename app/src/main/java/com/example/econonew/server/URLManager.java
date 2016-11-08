@@ -35,6 +35,9 @@ public class URLManager {
         return CAI_BIAN_URL;
     }
 
+    public static String getMsgContentUrl(String context) {
+        return CAI_BIAN_URL + "\\" + context;
+    }
     public static String getURL() {
         if (Constant.isDeBug) {
             SharedPreferences spf = FinanceApplication.getInstance().getSharedPreferences("ip", Context.MODE_PRIVATE);
@@ -173,16 +176,16 @@ public class URLManager {
         return getURL() + "/" + OPERATION_DELETE_CHANNEL + "?phone="
                 + userName + "&channelId=" + entity.getId();
     }
-
-    /**
-     * 获取查看消息内容的URL
-     *
-     * @param msgId 消息ID
-     * @return 消息内容的URL
-     */
-    public static String getMsgContentURL(int msgId) {
-        return getURL() + "/" + OPERATION_MSG + "?id=" + msgId;
-    }
+//
+//    /**
+//     * 获取查看消息内容的URL
+//     *
+//     * @param msgId 消息ID
+//     * @return 消息内容的URL
+//     */
+//    public static String getMsgContentURL(int msgId) {
+//        return getURL() + "/" + OPERATION_MSG + "?id=" + msgId;
+//    }
 
 
 }

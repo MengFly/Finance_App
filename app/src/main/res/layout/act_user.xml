@@ -2,7 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/user_layout"
@@ -10,7 +10,7 @@
         android:layout_height="200dp"
         android:background="@drawable/icon_user_back"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/user_regist"
@@ -19,8 +19,7 @@
             android:background="@drawable/user_login_btn" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            style="@style/app_base_layout">
 
             <TextView
                 android:id="@+id/user_name"
@@ -33,165 +32,101 @@
                 android:textStyle="bold" />
 
             <ViewStub
-                android:layout="@layout/vip_layout"
                 android:id="@+id/act_user_isVip_vs"
-                android:layout_toRightOf="@id/user_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/user_name"
+                android:layout="@layout/vip_layout" />
         </RelativeLayout>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none" >
+        android:background="@color/lightGray"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            style="@style/app_base_layout"
+            android:divider="@android:drawable/divider_horizontal_dark"
             android:orientation="vertical"
-            android:padding="10dp" >
+            android:showDividers="middle|beginning|end">
 
             <TextView
-                android:id="@+id/act_user_user_user_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
+                android:id="@+id/act_user_login_tv"
+                style="@style/main_item"
                 android:drawableLeft="@drawable/icon_act_user_user"
-                android:drawablePadding="10dp"
                 android:drawableStart="@drawable/icon_act_user_user"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:text="@string/act_user_userlogin_tv"
-                android:textSize="@dimen/text_size_default" />
-
-            <include layout="@layout/line_imageview" />
-
-            <LinearLayout
-                android:id="@+id/act_user_user_ly"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:orientation="vertical"
-                android:visibility="gone" >
-
-                <TextView
-                    android:id="@+id/act_user_login_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="登录"
-                    android:textSize="@dimen/text_size_small" />
-
-                <include layout="@layout/line_imageview" />
-
-                <TextView
-                    android:id="@+id/act_user_regist_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="注册"
-                    android:textSize="@dimen/text_size_small" />
-
-                <include layout="@layout/line_imageview" />
-
-                <TextView
-                    android:id="@+id/act_user_setVip_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="Vip"
-                    android:textSize="@dimen/text_size_small" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/settingPush"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:drawableLeft="@drawable/icon_act_user_settime"
-                android:drawablePadding="10dp"
-                android:drawableStart="@drawable/icon_act_user_settime"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:text="@string/act_user_settingpush_tv"
-                android:textSize="@dimen/text_size_default" />
-
-            <include layout="@layout/line_imageview" />
-
-            <TextView
-                android:id="@+id/repeat_voice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:drawableLeft="@drawable/icon_act_user_resetvoice"
-                android:drawablePadding="10dp"
-                android:drawableStart="@drawable/icon_act_user_resetvoice"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:text="@string/act_user_repeatvoice_tv"
-                android:textSize="@dimen/text_size_default" />
-
-            <include layout="@layout/line_imageview" />
+                android:text="@string/act_user_item_login_tv" />
 
             <TextView
                 android:id="@+id/setPwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
+                style="@style/main_item"
                 android:drawableLeft="@drawable/icon_act_user_setpass"
-                android:drawablePadding="10dp"
                 android:drawableStart="@drawable/icon_act_user_setpass"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:text="@string/act_user_setpwd_tv"
-                android:textSize="@dimen/text_size_default" />
+                android:text="@string/act_user_item_setpwd_tv" />
 
-            <include layout="@layout/line_imageview" />
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:id="@+id/act_user_regist_tv"
+                style="@style/main_item"
+                android:drawableLeft="@drawable/ic_act_user_regist"
+                android:drawableStart="@drawable/ic_act_user_regist"
+                android:text="@string/act_user_item_regist_tv" />
+
+            <TextView
+                android:id="@+id/act_user_setVip_tv"
+                style="@style/main_item"
+                android:drawableLeft="@drawable/ic_act_user_vip"
+                android:drawableStart="@drawable/ic_act_user_vip"
+                android:text="@string/act_user_item_vip_tv" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:id="@+id/settingPush"
+                style="@style/main_item"
+                android:drawableLeft="@drawable/icon_act_user_settime"
+                android:drawableStart="@drawable/icon_act_user_settime"
+                android:text="@string/act_user_item_push_tv" />
+
+
+            <TextView
+                android:id="@+id/repeat_voice"
+                style="@style/main_item"
+                android:drawableLeft="@drawable/icon_act_user_resetvoice"
+                android:drawableStart="@drawable/icon_act_user_resetvoice"
+                android:text="@string/act_user_item_reset_voice_tv" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
 
             <TextView
                 android:id="@+id/logout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
+                style="@style/main_item"
                 android:drawableLeft="@drawable/icon_act_user_logout"
-                android:drawablePadding="10dp"
                 android:drawableStart="@drawable/icon_act_user_logout"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:text="@string/act_user_logout_tv"
-                android:textSize="@dimen/text_size_default" />
+                android:text="@string/act_user_logout_tv" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/act_user_set_ip_tv"
-                android:textColor="@color/colorAccent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:drawablePadding="10dp"
+                style="@style/main_item"
                 android:gravity="end"
-                android:padding="10dp"
-                android:text="设置IP地址"
-                android:textSize="@dimen/text_size_default" />
+                android:text="@string/act_user_item_set_ip_tv"
+                android:textColor="@color/colorAccent"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 

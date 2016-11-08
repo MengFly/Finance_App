@@ -1,6 +1,5 @@
 package com.example.econonew.view.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,7 +44,6 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     private MsgListViewAdapter msgAdapter;
     private List<MsgItemEntity> msgList = new ArrayList<>();
 
-
     // 刷新视图
     private SwipeRefreshLayout refreshLayout;
 
@@ -71,7 +69,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
             bindMessage();
         }
         initView(view);
-        refreshDatas();
+        stopFresh();
         return view;
     }
 
@@ -126,7 +124,6 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
                 stopFresh();//停止刷新提示
             }
         });
-
     }
 
     @Override
@@ -153,7 +150,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     /**
      * 获取Fragment实例
      */
-    public static MainMessageFragment newInstance(Context context, String fragmentName) {
+    public static MainMessageFragment newInstance(String fragmentName) {
         if (fragmentManager.containsKey(fragmentName)) {
             return fragmentManager.get(fragmentName);
         } else {
@@ -166,7 +163,6 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
             return fragment;
         }
     }
-
 
     private void hintProDialog() {
         if (getActivity() != null) {

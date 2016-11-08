@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Finance_App</string>
-
     <string name="versionName">1.0.6</string>
 
     <!-- 全局的一些字符串 -->
@@ -8,6 +7,8 @@
     <string name="text_vip">VIP</string>
     <string name="btn_ok">确定</string>
     <string name="user_login_name">用户名（注册时的手机号）</string>
+    <string name="copyright_fiance">CopyRight©Fiance</string>
+    <string name="no_source">没有信息</string>
 
     <!-- Splash界面 -->
     <string name="act_splash_text_tip_tv">ENew\n\n不一样的生活</string>
@@ -22,6 +23,8 @@
     <string name="act_user_login_login_btn">登录</string>
     <string name="act_user_login_nologin_tv">跳过登录</string>
     <string name="act_user_login_registe_tv">点击注册</string>
+    <string name="check_login_user_name">用户名格式（11位）：1**********</string>
+    <string name="act_login_forget_pass_tv">忘记密码</string>
 
     <!-- 用户注册界面 -->
     <string name="act_regist_title_tv">注册</string>
@@ -31,11 +34,14 @@
 
     <!-- 用户界面 -->
     <string name="act_user_username_tv">未登录</string>
-    <string name="act_user_userlogin_tv">用户</string>
-    <string name="act_user_settingpush_tv">设置消息接收时间</string>
-    <string name="act_user_repeatvoice_tv">消息重读</string>
-    <string name="act_user_setpwd_tv">修改密码</string>
+    <string name="act_user_item_push_tv">设置消息接收时间</string>
+    <string name="act_user_item_reset_voice_tv">消息重读</string>
+    <string name="act_user_item_setpwd_tv">修改密码</string>
     <string name="act_user_logout_tv">用户注销</string>
+    <string name="act_user_item_login_tv">用户登录</string>
+    <string name="act_user_item_regist_tv">用户注册</string>
+    <string name="act_user_item_vip_tv">注册VIP</string>
+    <string name="act_user_item_set_ip_tv">设置IP地址</string>
 
     <!-- 添加频道界面 -->
     <string name="act_add_channel_title_tv">自定义频道</string>
@@ -72,14 +78,13 @@
     <string name="act_add_channel_special_tv">特殊</string>
     <string name="act_add_channel_money_tv">理财</string>
     <string name="act_add_channel_funds_tv">基金</string>
-    <string name="copyright_fiance">CopyRight©Fiance</string>
-    <string name="no_source">没有信息</string>
-    <string name="check_login_user_name">用户名格式（11位）：1**********</string>
-    <string name="act_login_forget_pass_tv">忘记密码</string>
     <string name="act_add_channel_from_code_title_tv">特殊定制方式</string>
     <string name="act_add_channel_from_code_hint_et">请输入股票代码</string>
     <string name="label_add_one_channel">添加频道</string>
     <string name="label_set_push_time">设置推送时间</string>
+
+    <!--查看消息界面-->
     <string name="menu_refresh">刷新</string>
     <string name="menu_open_with_browser">在浏览器中打开</string>
+
 </resources>
