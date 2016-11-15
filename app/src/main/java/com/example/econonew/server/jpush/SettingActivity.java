@@ -53,6 +53,7 @@ public class SettingActivity extends BaseActivity {
 		mSaturday = (CheckBox) findViewById(R.id.act_set_time_saturday_cb);
 		mSunday = (CheckBox) findViewById(R.id.act_set_time_sunday_cb);
 		initListener();
+		initActionBar(false, "设置消息推送时间", true);
 	}
 
 	@Override

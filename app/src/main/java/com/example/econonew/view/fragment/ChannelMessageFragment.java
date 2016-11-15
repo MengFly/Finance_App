@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
 import com.example.econonew.entity.ChannelEntity;
+import com.example.econonew.presenter.ChannelPresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
@@ -42,6 +43,8 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    private ChannelPresenter presenter;
+
     private ListView channelLv;
     private TextView noMsgTip;
     private SwipeRefreshLayout refreshLayout;
@@ -49,6 +52,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
     private String fragmentName;
     private List<ChannelEntity> channelList = new ArrayList<>();
     private ChannelListViewAdapter channelAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +100,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
             @Override
             public void onRefresh() {
-                FinanceApplication.getInstance().refreshUserData(Constant.user);
+
             }
         });
     }

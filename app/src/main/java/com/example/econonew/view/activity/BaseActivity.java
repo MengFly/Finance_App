@@ -159,7 +159,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
-				backHomeActivity();
+				super.onBackPressed();//返回上一个界面
+//				backHomeActivity();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

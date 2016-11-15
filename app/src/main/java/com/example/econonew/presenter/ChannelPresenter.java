@@ -1,17 +1,21 @@
 package com.example.econonew.presenter;
 
-import android.content.DialogInterface;
-
+import com.android.volley.VolleyError;
+import com.example.econonew.db.ChannelTable;
+import com.example.econonew.db.DBManager;
 import com.example.econonew.entity.ChannelEntity;
+import com.example.econonew.entity.UserEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.URLManager;
-import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.activity.channel.BaseChannelActivity;
-import com.example.econonew.view.activity.channel.ChannelAddActivity;
+import com.example.econonew.server.json.ChannelJsonHelper;
+import com.example.econonew.view.activity.BaseActivity;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.econonew.view.activity.FinanceApplication.app;
 
 
 /**
@@ -19,76 +23,95 @@ import java.util.Arrays;
  * Created by mengfei on 2016/9/28.
  */
 
-public class ChannelPresenter extends BasePresenter<BaseChannelActivity> {
+public class ChannelPresenter extends BasePresenter<BaseActivity> {
 
-    private Thread addChannelThread;//添加频道的线程
-    private Thread removeChannelThread;//移除频道的线程
-    private Thread getChannelsThread;//获取频道的线程
-
-    public ChannelPresenter(BaseChannelActivity activity) {
+    public ChannelPresenter(BaseActivity activity) {
         super(activity);
     }
 
     /**
-     * 开启添加频道的线程
-     *
-     * @param channelEntity 频道类个体
+     * 刷新用户的频道
      */
-    public void openAddChannelThread(ChannelEntity channelEntity) {
-        if (!isHaveData(channelEntity)) {
-            initAddChannelThread(channelEntity);
-            addChannelThread.start();
+    public void refreshUserData(UserEntity user) {
+        if (user != null && user.isVIP()) {
+            getChannelFromNet(user);
         } else {
-            mActivity.showToast("你已经添加过这个频道了，不必在此添加了");
+            ChannelMessage message = ChannelMessage.getInstance("自定义");
+            if (message != null) {
+                message.setMessage(new ArrayList<ChannelEntity>(), false, false);
+            }
         }
     }
 
-    //初始化添加频道的线程
-    private void initAddChannelThread(final ChannelEntity channelEntity) {
-        final String url = URLManager.getSetChannelURL(Constant.user.getName(), channelEntity);
+
+    /**
+     * 	从网络上面获取用户的频道信息
+     * @param user 用户
+     */
+    private void getChannelFromNet(final UserEntity user) {
+        final String url = URLManager.getChannelURL(user.getName());
+        final ChannelMessage message = ChannelMessage.getInstance("自定义");
         final NetClient.OnResultListener responseListener = new NetClient.OnResultListener() {
 
             @Override
             public void onSuccess(String response) {
-                // TODO: 2016/10/5  这里添加解析json的逻辑
-                addData(channelEntity);
-                mActivity.hintProDialog();
+                ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
+                List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
+                if (channels != null) {
+                    new DBManager().deleteAllItem(new ChannelTable());
+                    if (message != null) {
+                        message.setMessage(channels, false, true);
+                    }
+                }
             }
-        };
-        addChannelThread = new Thread() {
-            @Override
-            public void run() {
-                NetClient.getInstance().executeGetForString(mActivity, url, responseListener);
-            }
-        };
-    }
 
-    private void addData(ChannelEntity... entity) {
-        ChannelMessage messageManager = ChannelMessage.getInstance("自定义");// 将设置的频道信息设置到自定义信息里面并进行存储
-        if (messageManager != null) {
-            messageManager.setMessage(Arrays.asList(entity), true, true);
-        }
-        FinanceApplication.getInstance().refreshUserData(Constant.user);
-        mActivity.showTipDialog(null, "设置成功，是否再次设置", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mActivity.backHomeActivity();
+            public void onError(VolleyError error) {
+                super.onError(error);
+                List<ChannelEntity> channels = new DBManager().getDbItems(new ChannelTable(), "user_name=?",new String[]{Constant.user.getName()});
+                if (message != null) {
+                    message.setMessage(channels, false, false);
+                }
             }
-        }, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mActivity.openOtherActivity(ChannelAddActivity.class, true);
+        };
+        new Thread() {
+            public void run() {
+                NetClient.getInstance().executeGetForString(app, url, responseListener);
             }
-        });
+        }.start();
     }
 
     /**
-     * 判断是不是已经添加过这个频道
-     *
-     * @param data 频道信息
+     * 删除频道
      */
-    private boolean isHaveData(ChannelEntity data) {
-        ChannelMessage channelMessage = ChannelMessage.getInstance("自定义");
-        return channelMessage != null && channelMessage.getMessage().contains(data);
+    public void deleteChannel(String messageName, final ChannelEntity entity) {
+        if (Constant.user != null) {
+            mActivity.showProDialog();
+            deleteChannelThread(messageName, entity);// 开启一个删除频道的线程
+        } else {
+            mActivity.showToast("当前还没有登录，不能进行删除频道的操作");
+        }
     }
+    //请求删除频道的线程
+    private void deleteChannelThread(final String messaegName, final ChannelEntity entity) {
+        final String url = URLManager.getDeleteChannelURL(Constant.user.getName(), entity);
+        final NetClient.OnResultListener listener = new NetClient.OnResultListener() {
+
+            @Override
+            public void onSuccess(String response) {
+                mActivity.showToast("频道删除成功");
+                ChannelMessage message = ChannelMessage.getInstance(messaegName);
+                if (message != null) {
+                    message.removeMsg(entity);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                NetClient.getInstance().executeGetForString(mActivity, url, listener);
+            }
+        }.start();
+    }
+
 }

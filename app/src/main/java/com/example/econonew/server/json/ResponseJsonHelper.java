@@ -6,7 +6,6 @@ import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.server.URLManager;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -29,25 +28,21 @@ public class ResponseJsonHelper {
 
     /**
      * 初始化各栏目中的数据并进行数据库缓存
-     *
-     * @param json
      */
     private void initMsgItemList(JSONObject json) {
         for (String itemName : Constant.publicItemNames) {
             MainMessage msgManager = MainMessage.getInstance(itemName);
-            try {
-                ArrayList<MsgItemEntity> msgList = new ArrayList<>();
-                JSONArray array = json.getJSONArray(itemName);
+            ArrayList<MsgItemEntity> msgList = new ArrayList<>();
+            JSONArray array = JsonCast.getJsonArray(json, itemName);
+            if (array != null) {
                 for (int j = 0; j < array.length(); j++) {
-                    JSONObject object = array.getJSONObject(j);
+                    JSONObject object = JsonCast.getJsonObject(array, j);
                     MsgItemEntity mi = getEntityFromJson(object);
                     msgList.add(mi);
                 }
                 if (msgManager != null) {
                     msgManager.setMessage(msgList, false, true);
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -57,16 +52,15 @@ public class ResponseJsonHelper {
      * 从JsonObject里面获取Msg实例
      *
      * @param object JsonObject
-     * @throws JSONException
      */
-    private MsgItemEntity getEntityFromJson(JSONObject object) throws JSONException {
-        String msgItemTitle = object.getString("title");
-        String context = object.getString("context");
-        int msgItemId = object.getInt("id");
+    private MsgItemEntity getEntityFromJson(JSONObject object) {
+        String msgItemTitle = JsonCast.getString(object, "title");
+        String context = JsonCast.getString(object, "context");
+//        int msgItemId = JsonCast.getInt(object, "id");
 //        String msgItemContentUrl = URLManager.getMsgContentURL(msgItemId);
         String msgItemContentUrl = URLManager.getMsgContentUrl(context);
-        String msgItemImageUrl = object.getString("picture");
-        int level = object.getInt("level");
+        String msgItemImageUrl = JsonCast.getString(object, "picture");
+        int level = JsonCast.getInt(object, "level");
         int businessDomainId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessDomain"), "id");
         int businessTypeId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessType"), "id");
         int stairId = JsonCast.getInt(JsonCast.getJSONObject(object, "stair"), "id");

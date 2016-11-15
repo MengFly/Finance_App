@@ -40,7 +40,7 @@ public class Voice {
 	private SpeechSynthesizer mTts;
 
 	// 用HashMap存储听写结果
-	private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
+	private HashMap<String, String> mIatResults = new LinkedHashMap<>();
 
 	private ArrayList<List<MsgItemEntity>> readList;//这里面存储着要进行阅读的list
 
@@ -120,10 +120,17 @@ public class Voice {
 			resetVoice();
 		} else {
 			StringBuilder readString = new StringBuilder();
-			for (MsgItemEntity entity : readList.get(currentReadPoint)) {
-				readString.append(entity.getMsgTitle());
-				readString.append(" ");
-				readStr(readString.toString());
+			List<MsgItemEntity> currentReadList = readList.get(currentReadPoint);
+			//如果当前要阅读的列表为空,那么就跳过这次阅读
+			if(currentReadList == null || currentReadList.isEmpty()) {
+				currentReadPoint ++;
+				readList();
+			} else {
+				for (MsgItemEntity entity : currentReadList) {
+					readString.append(entity.getMsgTitle());
+					readString.append("\n");
+					readStr(readString.toString());
+				}
 			}
 		}
 	}
@@ -141,7 +148,7 @@ public class Voice {
 	}
 
 	// 读单句话
-	public void readStr(String str) {
+	private void readStr(String str) {
 		mTts.startSpeaking(str, mSynListener);
 	}
 
@@ -158,10 +165,6 @@ public class Voice {
 		}
 
 		mIatResults.put(sn, text);
-		StringBuffer resultBuffer = new StringBuffer();
-		for (String key : mIatResults.keySet()) {
-			resultBuffer.append(mIatResults.get(key));
-		}
 	}
 
 	/**

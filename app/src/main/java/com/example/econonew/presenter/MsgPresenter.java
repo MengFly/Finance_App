@@ -3,19 +3,19 @@ package com.example.econonew.presenter;
 import android.util.Log;
 
 import com.android.volley.VolleyError;
-import com.example.econonew.db.ChannelTable;
 import com.example.econonew.db.DBManager;
-import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.entity.UserEntity;
+import com.example.econonew.db.MsgTable;
+import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.URLManager;
-import com.example.econonew.server.json.ChannelJsonHelper;
+import com.example.econonew.server.json.JsonCast;
+import com.example.econonew.server.json.ResponseJsonHelper;
 import com.example.econonew.tools.Voice;
-import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.activity.main.MainActivity;
+import com.example.econonew.view.activity.BaseActivity;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -26,51 +26,48 @@ import static com.example.econonew.view.activity.FinanceApplication.app;
  * Created by mengfei on 2016/10/23.
  */
 
-public class MsgPresenter extends BasePresenter<MainActivity> {
+public class MsgPresenter extends BasePresenter<BaseActivity> {
 
     private static final String TAG = "MsgPresenter";
 
 
-    public MsgPresenter(MainActivity activity) {
+    public MsgPresenter(BaseActivity activity) {
         super(activity);
     }
 
-    public void refreshUserData(UserEntity user) {
-        if (user != null && user.isVIP()) {
-            getChannelFromNet(user);
-        }
-    }
-
-    /**
-     * 	从网络上面获取用户的频道信息
-     * @param user 用户
-     */
-    private void getChannelFromNet(final UserEntity user) {
-        final String url = URLManager.getChannelURL(user.getName());
-        final NetClient.OnResultListener responseListener = new NetClient.OnResultListener() {
-
-            @Override
-            public void onSuccess(String response) {
-                ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
-                List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
-                if (channels != null) {
-                    new DBManager().deleteAllItem(new ChannelTable());//删除所有的用户数据，重新进行缓存
-                    ChannelMessage.getInstance("自定义").setMessage(channels, false, true);
-                }
-                FinanceApplication.getInstance().refreshPublicData();
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                super.onError(error);
-                ChannelMessage.getInstance("自定义").stopFresh();
-            }
-        };
+    public void refreshPublicData() {
         new Thread() {
             public void run() {
-                NetClient.getInstance().executeGetForString(app, url, responseListener);
+                String url = URLManager.getConnectURL();
+                NetClient.OnResultListener listener = new NetClient.OnResultListener() {
+
+                    @Override
+                    public void onSuccess(String response) {
+                        Log.d(TAG, "onSuccess: " + response);
+                        JSONObject map = JsonCast.getJsonObject(response);
+                        new ResponseJsonHelper().handleInfomation(map);
+                    }
+
+                    public void onError(VolleyError error) {
+                        loadDatasFromDatabase();
+                    }
+                };
+                NetClient.getInstance().executeGetForString(app, url, listener);
             }
         }.start();
+    }
+
+    //从数据库里面加载数据
+    private void loadDatasFromDatabase() {
+        for(String tabName : Constant.publicItemNames) {
+            MsgTable table = new MsgTable(tabName);
+            MainMessage message = MainMessage.getInstance(tabName);
+            List<MsgItemEntity> list = new DBManager().getDbItems(table, null, null);
+            Log.e(TAG, "loadDatasFromDatabase: " + tabName + " " + list.size());
+            if (message != null) {
+                message.setMessage(list, false, false);
+            }
+        }
     }
 
     /**
