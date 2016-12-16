@@ -5,28 +5,16 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/app_base_layout"
         android:background="@color/white"
         android:padding="10dp" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="选择的频道数量：" />
 
         <TextView
             android:id="@+id/act_add_more_channel_select_count"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="0"
-            android:textColor="@color/app_theme_back"
-            android:textSize="16sp"
-            android:textStyle="bold|italic" />
+            android:gravity="center" />
 
         <Button
             style="@style/app_base_btn.ok"
@@ -40,8 +28,7 @@
         android:background="@color/white" >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/app_base_layout"
             android:orientation="vertical" >
 
             <TextView
@@ -54,8 +41,7 @@
 
             <com.example.econonew.view.customview.FlowLayout
                 android:id="@+id/act_add_more_channel_added_ly"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/app_base_layout"
                 android:background="@drawable/et_back"
                 android:padding="10dp" />
 
@@ -69,8 +55,7 @@
 
             <com.example.econonew.view.customview.FlowLayout
                 android:id="@+id/act_add_more_channel_notadd_ly"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/app_base_layout"
                 android:background="@drawable/et_back"
                 android:padding="10dp" />
         </LinearLayout>

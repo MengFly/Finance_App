@@ -1,11 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <include layout="@layout/activity_title_bar" />
-
     <com.example.econonew.view.customview.ViewPagerIndicator
         android:id="@+id/act_main_viewpager_indicator"
         android:layout_width="match_parent"
@@ -17,15 +15,14 @@
         android:id="@+id/act_main_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" >
-    </android.support.v4.view.ViewPager>
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_bottom_back"
         android:baselineAligned="false"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/act_main_voice_btn"

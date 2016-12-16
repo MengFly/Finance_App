@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.econonew.R;
@@ -14,6 +15,8 @@ import com.example.econonew.server.jpush.SettingActivity;
 import com.example.econonew.tools.Voice;
 import com.example.econonew.utils.URLSettingActivity;
 
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
+
 
 /**
  * UserActivity 此类是用户登陆界面的类
@@ -22,18 +25,21 @@ import com.example.econonew.utils.URLSettingActivity;
  */
 public class UserActivity extends BaseUserActivity {
 
+    private ScrollView userSelectSV;
+
     private Button registBtn;
     private ViewStub isVipVS;
 
     private TextView userLogout, settingPush, setPwd, voice_repeat;
-
-    private TextView  userLoginTv, userRegistTv, userSetVipTv;
-
+    private TextView userLoginTv, userRegistTv, userSetVipTv;
     private TextView text_user;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.act_user);
+        userSelectSV = (ScrollView) findViewById(R.id.act_user_select_sv);
+        OverScrollDecoratorHelper.setUpOverScroll(userSelectSV);
+
         registBtn = (Button) findViewById(R.id.user_regist);
         text_user = (TextView) findViewById(R.id.user_name);
 
@@ -47,7 +53,7 @@ public class UserActivity extends BaseUserActivity {
         userSetVipTv = (TextView) findViewById(R.id.act_user_setVip_tv);
 
         isVipVS = (ViewStub) findViewById(R.id.act_user_isVip_vs);
-        if(Constant.user != null && Constant.user.isVIP()) {
+        if (Constant.user != null && Constant.user.isVIP()) {
             isVipVS.inflate();
         }
 
@@ -62,14 +68,16 @@ public class UserActivity extends BaseUserActivity {
             });
         }
         initListener();
-        initActionBar(true ,"用户", true);
+        initActionBar(true, "用户", true);
     }
 
     private void initListener() {
         registBtn.setOnClickListener(new View.OnClickListener() {
-                                         @Override
-                                         public void onClick(View v) {registClick();}
-                                     });
+            @Override
+            public void onClick(View v) {
+                registClick();
+            }
+        });
         userLoginTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +106,8 @@ public class UserActivity extends BaseUserActivity {
 
         settingPush.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {openOtherActivity(SettingActivity.class, false);
+            public void onClick(View v) {
+                openOtherActivity(SettingActivity.class, false);
             }
         });
         setPwd.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +154,8 @@ public class UserActivity extends BaseUserActivity {
         Voice.getInstance().resetVoice();
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {backHomeActivity();
+            public void onClick(DialogInterface dialog, int which) {
+                backHomeActivity();
             }
         };
         showTipDialog(null, "重读设置成功", listener, listener);
@@ -168,4 +178,5 @@ public class UserActivity extends BaseUserActivity {
             openOtherActivity(UserSetPwdActivity.class, true);
         }
     }
+
 }

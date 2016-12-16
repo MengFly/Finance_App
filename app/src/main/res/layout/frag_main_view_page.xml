@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ListView
+        <com.twotoasters.jazzylistview.JazzyListView
             android:id="@+id/msg_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:divider="@color/none"
-            android:scrollbars="none" />
+            android:scrollbars="vertical" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView

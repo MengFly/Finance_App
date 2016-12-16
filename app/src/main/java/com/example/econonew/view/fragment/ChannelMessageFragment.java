@@ -9,14 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.econonew.R;
 import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.presenter.ChannelPresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
@@ -24,6 +22,8 @@ import com.example.econonew.server.URLManager;
 import com.example.econonew.tools.adapter.ChannelListViewAdapter;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
+import com.twotoasters.jazzylistview.JazzyListView;
+import com.twotoasters.jazzylistview.effects.WaveEffect;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,6 @@ import java.util.Map;
  * 用于显示用户频道的Fragment
  * Created by mengfei on 2016/10/2.
  */
-
 public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, ChannelEntity> implements AdapterView.OnItemLongClickListener {
 
 
@@ -43,9 +42,7 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    private ChannelPresenter presenter;
-
-    private ListView channelLv;
+    private JazzyListView channelLv;
     private TextView noMsgTip;
     private SwipeRefreshLayout refreshLayout;
 
@@ -63,7 +60,8 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_main_view_page, container, false);
-        channelLv = (ListView) view.findViewById(R.id.msg_listview);
+        channelLv = (JazzyListView) view.findViewById(R.id.msg_listview);
+        channelLv.setTransitionEffect(new WaveEffect());//为JazzyListView设置动画效果
         Bundle arguments = getArguments();
         if (arguments != null) {
             fragmentName = arguments.getString("name");
@@ -85,7 +83,6 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
     // 初始化界面的控件
     private void initView(View view) {
-
         noMsgTip = (TextView) view.findViewById(R.id.msg_no_tip_tv);
         channelAdapter = new ChannelListViewAdapter(getActivity(), channelList);
         channelLv.setAdapter(channelAdapter);
@@ -100,11 +97,10 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
             @Override
             public void onRefresh() {
-
+                FinanceApplication.getInstance().refreshUserData(Constant.user);
             }
         });
     }
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -203,12 +199,6 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
     private void hintProDialog() {
         if (getActivity() != null) {
             ((BaseActivity) getActivity()).hintProDialog();
-        }
-    }
-
-    private void showTipDialog(String message) {
-        if (getActivity() != null) {
-            ((BaseActivity) getActivity()).showTipDialog(null, message, null, null);
         }
     }
 

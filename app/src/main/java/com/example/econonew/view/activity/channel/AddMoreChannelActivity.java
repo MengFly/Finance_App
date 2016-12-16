@@ -1,6 +1,13 @@
 package com.example.econonew.view.activity.channel;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -16,9 +23,9 @@ import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
 import com.example.econonew.server.NetClient;
+import com.example.econonew.server.URLManager;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.tools.ChannelListManager;
-import com.example.econonew.server.URLManager;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.customview.FlowLayout;
@@ -29,6 +36,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 添加多个频道的界面
+ */
 public class AddMoreChannelActivity extends BaseActivity implements OnCheckedChangeListener, OnClickListener {
 
 	private FlowLayout addedChannelLy;
@@ -53,7 +63,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 		notAddChannelLy = (FlowLayout) findViewById(R.id.act_add_more_channel_notadd_ly);
 		selectChannelCountTv = (TextView) findViewById(R.id.act_add_more_channel_select_count);
 		okBtn = (Button) findViewById(R.id.act_add_channel_add_more_ok_btn);
-
+		showSelectChannelCounts(0);
 	}
 
 	@Override
@@ -163,7 +173,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 				mWantAddChannelList.remove(entity);
 			}
 		}
-		selectChannelCountTv.setText(String.valueOf(mWantAddChannelList.size()));
+		showSelectChannelCounts(mWantAddChannelList.size());
 	}
 
 	@Override
@@ -175,12 +185,24 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 		}
 	}
 
+	private void showSelectChannelCounts(int channelCounts) {
+		String constStringTip = "当前选择的频道个数 :   ";
+		SpannableString selectChannelsTipString = new SpannableString(constStringTip + channelCounts + " 个");
+		//设置字体相对大小
+		selectChannelsTipString.setSpan(new RelativeSizeSpan(2f), constStringTip.length(), selectChannelsTipString.length()-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		//设置字体类型为粗体
+		selectChannelsTipString.setSpan(new StyleSpan(Typeface.BOLD), constStringTip.length(), selectChannelsTipString.length()-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		//设置字体的前景色
+		selectChannelsTipString.setSpan(new ForegroundColorSpan(Color.RED), constStringTip.length(), selectChannelsTipString.length()-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		selectChannelCountTv.setText(selectChannelsTipString);
+	}
+
 	private void openThreadToAddChannel() {
 		final List<ChannelEntity> addList = new ArrayList<>(mWantAddChannelList);
 		mWantAddChannelList.clear();
 		tipMessage = "";
 		count = 0;
-		selectChannelCountTv.setText("0");
+		showSelectChannelCounts(0);
 		new Thread() {
 			public void run() {
 				for (int i = 0; i < addList.size(); i++) {

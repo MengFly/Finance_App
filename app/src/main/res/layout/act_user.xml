@@ -41,6 +41,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/act_user_select_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/lightGray"

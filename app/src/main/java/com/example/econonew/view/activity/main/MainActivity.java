@@ -37,10 +37,10 @@ public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickL
 	private Button userBtn;
 	private ImageButton shareBtn;
 
+
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_main);
-
 		voiceBtn = (Button) findViewById(R.id.act_main_voice_btn);
 		addChannelBtn = (Button) findViewById(R.id.add_channel_btn);
 		userBtn = (Button) findViewById(R.id.act_main_user_btn);

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:1:1-221:12
+ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:1:1-225:12
 	package
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:2:5-35
 		INJECTED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml
@@ -100,7 +100,7 @@ ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:
 	android:name
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:35:22-86
 application
-ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:37:5-220:19
+ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:37:5-224:19
 MERGED from [com.android.support:design:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-compat:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
@@ -112,6 +112,11 @@ MERGED from [com.android.support:appcompat-v7:24.2.1] D:\download\Application\Fi
 MERGED from [com.android.support:support-vector-drawable:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
 MERGED from [com.android.support:animated-vector-drawable:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:cardview-v7:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-appindexing:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\9.8.0\AndroidManifest.xml:18:5-19
+MERGED from [com.google.android.gms:play-services-base:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.8.0\AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.8.0\AndroidManifest.xml:19:5-21:19
+MERGED from [com.google.android.gms:play-services-tasks:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.8.0\AndroidManifest.xml:4:5-19
+MERGED from [com.google.firebase:firebase-common:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.8.0\AndroidManifest.xml:4:5-7:19
 	android:label
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:40:9-41
 	android:supportsRtl
@@ -406,6 +411,13 @@ ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:219:13-53
 	android:name
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:218:13-40
+meta-data#com.google.android.gms.version
+ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:221:9-223:69
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.8.0\AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:223:13-66
+	android:name
+		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:222:13-58
 uses-sdk
 INJECTED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:design:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\AndroidManifest.xml:20:5-43
@@ -420,6 +432,13 @@ MERGED from [com.android.support:support-vector-drawable:24.2.1] D:\download\App
 MERGED from [com.android.support:animated-vector-drawable:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:cardview-v7:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\AndroidManifest.xml:20:5-43
+MERGED from [com.twotoasters.jazzylistview:library:1.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.twotoasters.jazzylistview\library\1.2.1\AndroidManifest.xml:7:5-9:41
+MERGED from [me.everything:overscroll-decor-android:1.0.3] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\me.everything\overscroll-decor-android\1.0.3\AndroidManifest.xml:8:5-10:41
+MERGED from [com.google.android.gms:play-services-appindexing:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\9.8.0\AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-base:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.8.0\AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.8.0\AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-tasks:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.8.0\AndroidManifest.xml:3:5-42
+MERGED from [com.google.firebase:firebase-common:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.8.0\AndroidManifest.xml:3:5-42
 	tools:overrideLibrary
 		ADDED from [com.android.support:support-v4:24.2.1] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
@@ -428,3 +447,21 @@ MERGED from [com.android.support:cardview-v7:24.2.1] D:\download\Application\Fin
 	android:minSdkVersion
 		INJECTED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml
 		INJECTED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.8.0\AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.8.0\AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.8.0\AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.8.0\AndroidManifest.xml:19:19-85
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.8.0\AndroidManifest.xml:6:9-175
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.8.0\AndroidManifest.xml:6:19-78
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.8.0\AndroidManifest.xml:6:125-149
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.8.0\AndroidManifest.xml:6:150-173
+	android:name
+		ADDED from [com.google.firebase:firebase-common:9.8.0] D:\download\Application\Finance_App\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.8.0\AndroidManifest.xml:6:79-124
