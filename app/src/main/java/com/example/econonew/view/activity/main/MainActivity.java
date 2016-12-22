@@ -2,6 +2,7 @@ package com.example.econonew.view.activity.main;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -19,7 +20,6 @@ import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.User.UserActivity;
 import com.example.econonew.view.activity.channel.ChannelAddActivity;
-import com.example.econonew.view.customview.ViewPagerIndicator;
 import com.example.econonew.view.fragment.ChannelMessageFragment;
 import com.example.econonew.view.fragment.MainMessageFragment;
 
@@ -31,6 +31,7 @@ import java.util.List;
  */
 public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickListener {
 
+	private TabLayout mTabLayout;
 	private ViewPager mViewPager;
 	private Button voiceBtn;
 	private Button addChannelBtn;
@@ -41,6 +42,7 @@ public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickL
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		setContentView(R.layout.act_main);
+		mTabLayout = (TabLayout) findViewById(R.id.act_main_tab_ly);
 		voiceBtn = (Button) findViewById(R.id.act_main_voice_btn);
 		addChannelBtn = (Button) findViewById(R.id.add_channel_btn);
 		userBtn = (Button) findViewById(R.id.act_main_user_btn);
@@ -94,15 +96,16 @@ public class MainActivity extends BaseActivity<MsgPresenter> implements OnClickL
 			}
 		}
 		mViewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), list));
-		initTabLine();
+		mTabLayout.setupWithViewPager(mViewPager);
+//		initTabLine();
 	}
 
 	// 初始化底部导航条以及当行条上面的名称
-	private void initTabLine() {
-		ViewPagerIndicator indicator = (ViewPagerIndicator) findViewById(R.id.act_main_viewpager_indicator);
-		indicator.setTabTitles(Constant.tabList);
-		indicator.setViewPager(mViewPager, 0);
-	}
+//	private void initTabLine() {
+//		ViewPagerIndicator indicator = (ViewPagerIndicator) findViewById(R.id.act_main_viewpager_indicator);
+//		indicator.setTabTitles(Constant.tabList);
+//		indicator.setViewPager(mViewPager, 0);
+//	}
 
 	@Override
 	public void onClick(View arg0) {

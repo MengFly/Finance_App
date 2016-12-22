@@ -4,29 +4,28 @@
     <color name="colorPrimaryDark">#1296db</color>
     <color name="colorAccent">#FF4081</color>
 
-    <!--<color name="app_theme_back">#5CACEE</color>-->
-    <color name="app_theme_back">#1296db</color>
-
-    <color name="default_btn_back">#00B2EE</color>
-    <color name="select_btn_back">#00868B</color>
     <color name="swipe_color_1">#00ff00</color>
     <color name="swipe_color_2">#0000ff</color>
     <color name="swipe_color_3">#ff0000</color>
     <color name="none">#0000</color>
     <color name="lightGray">#d5ded9d9</color>
     <color name="HeightLightGray">#5dacee</color>
-    <color name="white">#fff</color>
 
+    <!--background:背景颜色-->
+    <color name="app_theme_back">#1296db</color>
     <color name="item_back_1">#AAEA025F</color>
     <color name="item_back_2">#AA029ABC</color>
     <color name="item_back_3">#AA754EA9</color>
     <color name="item_back_4">#AA127D12</color>
     <color name="item_back_5">#AAA5CC2A</color>
+    <color name="btn_default_back">#00B2EE</color>
+    <color name="btn_select_back">#00868B</color>
 
-    <!-- Color -->
-    <color name="color_red">#F60E21</color>
+    <!-- Color : App中默认的各种颜色 -->
+    <color name="color_red_app">#db0b1c</color>
+    <color name="color_white_app">#fbf1f1</color>
 
-    <!-- Text -->
+    <!-- Text:字体颜色 -->
     <color name="text_link_color">#D52FA8</color>
     <color name="text_hint_color">#aaa4a4</color>
     <color name="text_white">#fff</color>

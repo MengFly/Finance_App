@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.econonew.resource.Constant;
+
 import java.util.List;
 
 /**
@@ -29,4 +31,8 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 		return list.size();
 	}
 
+	@Override
+	public CharSequence getPageTitle(int position) {
+		return Constant.tabList.get(position);
+	}
 }

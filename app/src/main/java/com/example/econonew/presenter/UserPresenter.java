@@ -202,7 +202,6 @@ public class UserPresenter extends BasePresenter<BaseUserActivity> {
                 FinanceApplication.getInstance().refreshUserData(Constant.user);
                 FinanceApplication.getInstance().refreshPublicData();
                 mActivity.showTipDialog(null, "注销成功", null, null);
-                mActivity.hintProDialog();
             }
 
             @Override
