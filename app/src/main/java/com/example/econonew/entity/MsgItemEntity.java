@@ -15,6 +15,19 @@ public class MsgItemEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static final String ADDRESS_SERVER = "server";//中间服务器
+	public static final String ADDRESS_SERVER_BACK = "server_back";//采集服务器
+
+	public String msgType;
+
+	public String getMsgType() {
+		return msgType;
+	}
+
+	public void setMsgType(String msgType) {
+		this.msgType = msgType;
+	}
+
 	// 存储消息标题
 	private String msgTitle;
 
@@ -61,6 +74,7 @@ public class MsgItemEntity implements Serializable {
 		return stairId;
 	}
 
+
 	/**
 	 * @param msgTitle
 	 *            消息标题
@@ -73,7 +87,7 @@ public class MsgItemEntity implements Serializable {
 	 * @param imageTitleUrl
 	 *            消息列表的图片的Url地址
 	 */
-	public MsgItemEntity(String msgTitle, String msgContent, String msgContentUrl, String msgGeneral,
+	public 	MsgItemEntity(String msgTitle, String msgContent, String msgContentUrl, String msgGeneral,
 						 String imageTitleUrl) {
 		this.msgTitle = msgTitle;
 		this.msgContent = msgContent;
@@ -119,6 +133,7 @@ public class MsgItemEntity implements Serializable {
 	public void setVip(boolean isVip) {
 		this.isVip = isVip;
 	}
+
 
 	/**
 	 * 判断此消息是否是这个频道的定制消息

@@ -2,7 +2,6 @@ package com.example.econonew.server.json;
 
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.econonew.entity.ChannelEntity;
 
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 
-	private static final String TAG = "ChannelJsonHelper";
+	//private static final String TAG = "ChannelJsonHelper";
 	
 	public ChannelJsonHelper(Context context) {
 		super(context);
@@ -52,7 +51,7 @@ public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 		JSONObject businessTypeObj = JsonCast.getJSONObject(obj, "businessType");
 		JSONObject businessDomainObj = JsonCast.getJSONObject(obj, "businessDomain");
 		JSONObject stairObj = JsonCast.getJSONObject(obj, "stair");
-		String channelName = JsonCast.getString(businessTypeObj, "name");;
+		String channelName = JsonCast.getString(businessTypeObj, "name");
 		String channelType =  JsonCast.getString(businessDomainObj, "name");
 		String channelAttribute = JsonCast.getString(stairObj, "name");
 		int channelId = JsonCast.getInt(obj, "id");
@@ -60,7 +59,7 @@ public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 		int businessDomainId = JsonCast.getInt(businessDomainObj, "id");
 		int stairId = JsonCast.getInt(stairObj, "id");
 		String code = JsonCast.getString(obj, "stock");
-		Log.d(TAG, "getChannel: " + "channelId " + channelId + " typeId " + businessTypeId + "domainId " + businessDomainId + " stairId " + stairId);
+		//Log.d(TAG, "getChannel: " + "channelId " + channelId + " typeId " + businessTypeId + "domainId " + businessDomainId + " stairId " + stairId);
 		
 		ChannelEntity entity = new ChannelEntity();
 		entity.setBusinessTypeId(businessTypeId);

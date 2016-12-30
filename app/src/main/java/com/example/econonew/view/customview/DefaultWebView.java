@@ -1,6 +1,7 @@
 package com.example.econonew.view.customview;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -46,12 +47,26 @@ public class DefaultWebView extends WebView {
         setting.setDefaultTextEncodingName("utf-8");//设置默认的字符编码
         this.setWebViewClient(new DefaultWebViewClient());
         this.setWebChromeClient(new DefaultWebChromeClient());
-
     }
 
-    public void loadUrl(String url) {
+    private String getUTF8Html(String msg) {
+        String moban = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /></head><p style=\"font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';font-size: 16px;line-height: 1.5;text-align: center;\">{1}</p></html>";
+        return moban.replace("{1}", msg);
+    }
+
+    /**
+     * 加载URL，如果URL为空则显示后面的content内容，否则就去加载之前的URL地址
+     *
+     * @param url     url地址
+     * @param content 如果url为空要去加载的内容
+     */
+    public void loadUrl(String url, String content) {
         if (url == null) {
-            super.loadUrl("file:///android_asset/tip/not_fund_url_tip.html");
+            if (TextUtils.isEmpty(content.trim())) {
+                super.loadUrl("file:///android_asset/tip/not_fund_url_tip.html");
+            } else {
+                this.loadData(getUTF8Html(content), "text/html; charset=UTF-8", null);
+            }
         } else {
             super.loadUrl(url);
         }

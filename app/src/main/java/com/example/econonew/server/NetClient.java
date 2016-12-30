@@ -31,7 +31,6 @@ public class NetClient {
 	}
 
 	public void executeGetForString(final Context context, final String url, final OnResultListener listener) {
-		Log.v("NetClient", "url-->" + url);
 		final Handler handler = new Handler(context.getMainLooper());
 		MyStringRequest request = new MyStringRequest(context, Method.GET, url, new Listener<String>() {
 
@@ -41,7 +40,7 @@ public class NetClient {
 
 					@Override
 					public void run() {
-						Log.v("json", "response-->" + response);
+						Log.v("json", "url-->" + url +  "\nresponse-->" + response);
 						if(context instanceof BaseActivity) {
 							((BaseActivity) context).hintProDialog();
 						}
@@ -67,6 +66,7 @@ public class NetClient {
 				});
 			}
 		});
+		request.setTag(url);
 		FinanceApplication.getRequestQueue().add(request);
 	}
 
@@ -113,6 +113,8 @@ public class NetClient {
 		private void success(String response) {
 			JSONObject jsonObject = JsonCast.getJsonObject(response);
 			String status = JsonCast.getString(jsonObject, "status");
+			Log.e("result", "success: ---------------------------------->" + status);
+			Log.e("result", "success: ---------------------------------->" + response);
 			if("success".equals(status)) {
 				onSuccess(response);
 			} else {

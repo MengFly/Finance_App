@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.example.econonew.entity.ChannelEntity;
-import com.example.econonew.resource.Constant;
 import com.example.econonew.entity.UserEntity;
+import com.example.econonew.resource.Constant;
 import com.example.econonew.view.activity.FinanceApplication;
 
 import java.net.URLEncoder;
@@ -31,11 +31,41 @@ public class URLManager {
     private static final String OPERATION_DELETE_CHANNEL = "delchnl.action";// 删除频道操作
     private static final String CAI_BIAN_URL = "http://115.29.139.72/caibian1";
 
+    //TODO 进行备份的数据采集的地址,这个地址要进行修改
+    private static final String URL_BACK = "http://192.168.173.1:8080/DataCollector";
+    //TODO 这个地址要进行修改, 目前只是一个暂时代替的字符串地址而已
+    private static final String OPERATION_CONNECTION_BACK_SAVE = "save.action";//备份的连接存库信息
+    private static final String OPERATION_CONNECTION_BACK_CACHE = "cache.action";//备份的连接缓存信息操作
+    private static final String OPERATION_CONNECTION_BACK_CURRENT = "current.action";//备份的连接实时信息操作
+
+    public static String getBackURL() {
+        return URL_BACK;
+    }
+
+    //获取到采集器网络服务器的链接地址(当前信息)
+    public static String getBACKCurrentMsgUrl() {
+        return getBackURL() + "/" + OPERATION_CONNECTION_BACK_CURRENT;
+    }
+
+    //获取到采集器网络服务器的链接地址(缓存信息)
+    public static String getBACKCacheMsgUrl() {
+        return getBackURL() + "/" + OPERATION_CONNECTION_BACK_CACHE;
+    }
+    //获取到采集器网络服务器的链接地址(存库信息)
+    public static String getBACKSaveMsgUrl() {
+        return getBackURL() + "/" + OPERATION_CONNECTION_BACK_SAVE;
+    }
+
+
     public static String getCaiBianURL() {
         return CAI_BIAN_URL;
     }
 
     public static String getMsgContentUrl(String context) {
+        //如果传入进来的context为空，说明网页地址不可用
+        if (TextUtils.isEmpty(context.trim()) || context.length() > 50) {
+            return null;
+        }
         return CAI_BIAN_URL + "\\" + context;
     }
     public static String getURL() {

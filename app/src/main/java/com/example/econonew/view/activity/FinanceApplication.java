@@ -32,17 +32,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 用用的Application,用于提供一些全局的方法，在应用内进行调用
+ */
 public class FinanceApplication extends Application {
 
 
 	private static final String TAG = "FinanceApplication";
 
 	public static FinanceApplication app = null;
-
-	private static RequestQueue mRequestQueue;
-
-	private List<BaseActivity> mActManager;
+	private static RequestQueue mRequestQueue;//网络请求队列
+	private List<BaseActivity> mActManager;//Activity队列
 
 	@Override
 	public void onCreate() {
@@ -53,7 +53,14 @@ public class FinanceApplication extends Application {
 		SpeechUtility.createUtility(this, SpeechConstant.APPID + "=552a964f");
 	}
 
+	//刷新公共消息
 	public void refreshPublicData() {
+		refreshPublicDatasConnection();
+
+//		refreshPublicDatasSave();
+	}
+
+	public void refreshPublicDatasConnection() {
 		new Thread() {
 			public void run() {
 				String url = URLManager.getConnectURL();
@@ -61,9 +68,10 @@ public class FinanceApplication extends Application {
 
 					@Override
 					public void onSuccess(String response) {
-						Log.d(TAG, "onSuccess: " + response);
 						JSONObject map = JsonCast.getJsonObject(response);
-						new ResponseJsonHelper().handleInfomation(map);
+						new ResponseJsonHelper().handleInformation(map,false);
+						refreshPublicDatasCurrent();
+						refreshPublicDatasCache();
 					}
 
 					public void onError(VolleyError error) {
@@ -74,6 +82,71 @@ public class FinanceApplication extends Application {
 			}
 		}.start();
 	}
+
+	private void refreshPublicDatasCurrent() {
+		new Thread() {
+			public void run() {
+				String currentUrl = URLManager.getBACKCurrentMsgUrl();
+				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
+
+					@Override
+					public void onSuccess(String response) {
+						JSONObject map = JsonCast.getJsonObject(response);
+						new ResponseJsonHelper().handleInformation(map,true);
+					}
+
+					public void onError(VolleyError error) {
+						loadDatasFromDatabase();
+					}
+				};
+				NetClient.getInstance().executeGetForString(app, currentUrl, listener);
+			}
+		}.start();
+	}
+
+
+	private void refreshPublicDatasCache() {
+		new Thread() {
+			public void run() {
+				String cacheUrl = URLManager.getBACKCacheMsgUrl();
+				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
+
+					@Override
+					public void onSuccess(String response) {
+						JSONObject map = JsonCast.getJsonObject(response);
+						new ResponseJsonHelper().handleInformation(map,true);
+					}
+
+					public void onError(VolleyError error) {
+						loadDatasFromDatabase();
+					}
+				};
+				NetClient.getInstance().executeGetForString(app, cacheUrl, listener);
+			}
+		}.start();
+	}
+
+	private void refreshPublicDatasSave() {
+		new Thread() {
+			public void run() {
+				String saveUrl = URLManager.getBACKSaveMsgUrl();
+				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
+
+					@Override
+					public void onSuccess(String response) {
+						JSONObject map = JsonCast.getJsonObject(response);
+						new ResponseJsonHelper().handleInformation(map,true);
+					}
+
+					public void onError(VolleyError error) {
+						loadDatasFromDatabase();
+					}
+				};
+				NetClient.getInstance().executeGetForString(app, saveUrl, listener);
+			}
+		}.start();
+	}
+
 
 	//从数据库里面加载数据
 	private void loadDatasFromDatabase() {
@@ -88,6 +161,7 @@ public class FinanceApplication extends Application {
 		}
 	}
 
+	//刷新用户信息
 	public void refreshUserData(UserEntity user) {
 		if (user != null && user.isVIP()) {
 			getChannelFromNet(user);
@@ -142,6 +216,7 @@ public class FinanceApplication extends Application {
 		return app;
 	}
 
+	//获取到应用的安装包
 	public File getApplicationFile() {
 		File file = null;
 		PackageManager manager = this.getPackageManager();
@@ -162,6 +237,7 @@ public class FinanceApplication extends Application {
 		return mActManager;
 	}
 
+	//退出应用
 	public void exit() {
 		for (BaseActivity act : mActManager) {
 			act.finish();

@@ -142,6 +142,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         MsgItemEntity item = msgList.get(position);
         Intent intent = new Intent(getActivity(), MsgContentActivity.class);
+        intent.putExtra("msgContext", item.getMsgContent());
         intent.putExtra("msgTitle", item.getMsgTitle());
         intent.putExtra("msgContentUrl", item.getMsgContentUrl());
         getActivity().startActivity(intent);

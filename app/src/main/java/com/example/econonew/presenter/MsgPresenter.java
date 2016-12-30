@@ -45,7 +45,7 @@ public class MsgPresenter extends BasePresenter<BaseActivity> {
                     public void onSuccess(String response) {
                         Log.d(TAG, "onSuccess: " + response);
                         JSONObject map = JsonCast.getJsonObject(response);
-                        new ResponseJsonHelper().handleInfomation(map);
+                        new ResponseJsonHelper().handleInformation(map);
                     }
 
                     public void onError(VolleyError error) {

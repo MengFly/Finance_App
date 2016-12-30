@@ -1,5 +1,7 @@
 package com.example.econonew.server.json;
 
+import android.util.Log;
+
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.MainMessage;
@@ -9,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -19,29 +22,54 @@ import java.util.ArrayList;
 public class ResponseJsonHelper {
 
 
-    public void handleInfomation(JSONObject json) {
+    public void handleInformation(JSONObject json) {
+        handleInformation(json, false);
+    }
+
+    /**
+     * 解析Json字符串，并显示在主界面上面
+     * @param json 要解析的Json对象
+     * @param isAddEnd  解析后的结果是否添加到当前结果的后面， 如果为false的话，那么就会清除之前的结果，只保留这一次的结果
+     */
+    public void handleInformation(JSONObject json, boolean isAddEnd) {
         if (json == null) {
             return;
         }
-        initMsgItemList(json);
+        initMsgItemList(json, isAddEnd);
+
     }
 
     /**
      * 初始化各栏目中的数据并进行数据库缓存
      */
-    private void initMsgItemList(JSONObject json) {
-        for (String itemName : Constant.publicItemNames) {
-            MainMessage msgManager = MainMessage.getInstance(itemName);
-            ArrayList<MsgItemEntity> msgList = new ArrayList<>();
-            JSONArray array = JsonCast.getJsonArray(json, itemName);
-            if (array != null) {
-                for (int j = 0; j < array.length(); j++) {
-                    JSONObject object = JsonCast.getJsonObject(array, j);
-                    MsgItemEntity mi = getEntityFromJson(object);
-                    msgList.add(mi);
-                }
-                if (msgManager != null) {
-                    msgManager.setMessage(msgList, false, true);
+    private void initMsgItemList(JSONObject json, boolean isAddEnd) {
+//        Log.e("json", json.toString());
+        JSONObject obj = JsonCast.getJSONObject(json, "info");
+//        Log.e("isTrue", "initMsgItemList: " + String.valueOf(obj == null));
+        if (obj != null) {
+            MsgItemEntity entity = getEntityFromJson(obj);
+            Log.e("isTrue", "initMsgItemList: " + String.valueOf(entity == null));
+            MainMessage msgManager = MainMessage.getInstance(entity.getMsgType());
+            if (msgManager != null) {
+                List<MsgItemEntity>  list = new ArrayList<>(1);
+                list.add(entity);
+                msgManager.setMessage(list, true, false);
+            }
+            
+        } else {
+            for (String itemName : Constant.publicItemNames) {
+                MainMessage msgManager = MainMessage.getInstance(itemName);
+                ArrayList<MsgItemEntity> msgList = new ArrayList<>();
+                JSONArray array = JsonCast.getJsonArray(json, itemName);
+                if (array != null) {
+                    for (int j = 0; j < array.length(); j++) {
+                        JSONObject object = JsonCast.getJsonObject(array, j);
+                        MsgItemEntity mi = getEntityFromJson(object);
+                        msgList.add(mi);
+                    }
+                    if (msgManager != null) {
+                        msgManager.setMessage(msgList, isAddEnd, true);
+                    }
                 }
             }
         }
@@ -64,10 +92,12 @@ public class ResponseJsonHelper {
         int businessDomainId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessDomain"), "id");
         int businessTypeId = JsonCast.getInt(JsonCast.getJSONObject(object, "businessType"), "id");
         int stairId = JsonCast.getInt(JsonCast.getJSONObject(object, "stair"), "id");
+        String msgType = JsonCast.getString(JsonCast.getJSONObject(object, "businessType"), "name");
         MsgItemEntity entity = new MsgItemEntity(msgItemTitle, context, msgItemContentUrl, null, msgItemImageUrl);
         entity.setBusinessDomainId(businessDomainId);
         entity.setBusinessTypeId(businessTypeId);
         entity.setStairId(stairId);
+        entity.setMsgType(msgType);
         entity.setVip(level == 1);
         return entity;
     }

@@ -10,6 +10,7 @@ public class JsonCast {
 	private static final String LOG_TAG = "JsonCast";
 
 	public static JSONObject getJsonObject(String jsonStr) {
+		Log.e("json", "getJsonObject: " + jsonStr);
 		try {
 			return new JSONObject(jsonStr);
 		} catch (JSONException e) {
