@@ -204,18 +204,6 @@ public class URLManager {
      */
     public static String getDeleteChannelURL(String userName, ChannelEntity entity) {
         return getURL() + "/" + OPERATION_DELETE_CHANNEL + "?phone="
-                + userName + "&channelId=" + entity.getId();
+                + userName + "&channelId=" + entity.getChannelId();
     }
-//
-//    /**
-//     * 获取查看消息内容的URL
-//     *
-//     * @param msgId 消息ID
-//     * @return 消息内容的URL
-//     */
-//    public static String getMsgContentURL(int msgId) {
-//        return getURL() + "/" + OPERATION_MSG + "?id=" + msgId;
-//    }
-
-
 }

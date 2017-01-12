@@ -69,7 +69,7 @@ public class ChannelJsonHelper extends JsonHelperImpl<ChannelEntity> {
 		entity.setType(channelType);
 		entity.setAttribute(channelAttribute);
 		entity.setCode(code);
-		entity.setId(channelId);
+		entity.setChannelId(channelId);
 		return entity;
 	}
 

@@ -1,12 +1,8 @@
 package com.example.econonew.server.jpush;
 
-import android.content.ContentValues;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,7 +12,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.econonew.R;
-import com.example.econonew.db.DBInformation;
 import com.example.econonew.view.activity.BaseActivity;
 
 import java.util.HashSet;
@@ -138,24 +133,7 @@ public class SettingActivity extends BaseActivity {
 		}
 
 		// 调用JPush api设置Push时间
-		SQLiteDatabase db = new DBInformation(SettingActivity.this).getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put("weekend", days + "");
-		values.put("startTime", starTime + "");
-		values.put("endTime", endTime + "");
-		Cursor cursor = db.rawQuery("select * from time", null);
-		db.beginTransaction();
-		int n = cursor.getCount();
-		Log.v("n", n + "");
-		if (n == 0) {
-			db.insert("time", null, values);
-		} else {
-			db.update("time", values, "_id=?", new String[] { "1" });
-		}
-		db.setTransactionSuccessful();
-		db.endTransaction();
-		cursor.close();
-		db.close();
+
 		Toast.makeText(SettingActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
 	}
 

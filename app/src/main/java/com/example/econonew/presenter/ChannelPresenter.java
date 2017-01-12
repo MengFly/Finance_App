@@ -1,8 +1,7 @@
 package com.example.econonew.presenter;
 
 import com.android.volley.VolleyError;
-import com.example.econonew.db.ChannelTable;
-import com.example.econonew.db.DBManager;
+import com.example.econonew.db.DBHelperFactory;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.UserEntity;
 import com.example.econonew.resource.Constant;
@@ -58,7 +57,7 @@ public class ChannelPresenter extends BasePresenter<BaseActivity> {
                 ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
                 List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
                 if (channels != null) {
-                    new DBManager().deleteAllItem(new ChannelTable());
+                    DBHelperFactory.getDBHelper().deleteAll(ChannelEntity.class);
                     if (message != null) {
                         message.setMessage(channels, false, true);
                     }
@@ -68,9 +67,9 @@ public class ChannelPresenter extends BasePresenter<BaseActivity> {
             @Override
             public void onError(VolleyError error) {
                 super.onError(error);
-                List<ChannelEntity> channels = new DBManager().getDbItems(new ChannelTable(), "user_name=?",new String[]{Constant.user.getName()});
+                List<ChannelEntity> channelEntities = DBHelperFactory.getDBHelper().queryItems(ChannelEntity.class, 0, null, "username=?", Constant.user.getName());
                 if (message != null) {
-                    message.setMessage(channels, false, false);
+                    message.setMessage(channelEntities, false, false);
                 }
             }
         };

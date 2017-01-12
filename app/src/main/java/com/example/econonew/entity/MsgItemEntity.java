@@ -1,6 +1,9 @@
 package com.example.econonew.entity;
 
+import com.example.econonew.db.Saveable;
 import com.example.econonew.server.URLManager;
+
+import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
 
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * @author mengfei
  *
  */
-public class MsgItemEntity implements Serializable {
+public class MsgItemEntity extends DataSupport implements Serializable, Saveable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,6 +22,16 @@ public class MsgItemEntity implements Serializable {
 	public static final String ADDRESS_SERVER_BACK = "server_back";//采集服务器
 
 	public String msgType;
+
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getMsgType() {
 		return msgType;
@@ -146,4 +159,8 @@ public class MsgItemEntity implements Serializable {
 				this.getStairId() == entity.getStairId();
 	}
 
+	@Override
+	public boolean saveSelf() {
+		return save();
+	}
 }

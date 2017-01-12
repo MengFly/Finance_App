@@ -5,7 +5,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.econonew.db.ChannelTable;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
@@ -35,7 +34,6 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 
 	private BaseActivity mContext;
 
-	private String mTableName;
 
 	/**
 	 * 点击事件的初始化构造方法
@@ -47,7 +45,6 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 	public AddChannelClickListener(ChannelEntity addChannel, BaseActivity context) {
 		this.mAddChannel = addChannel;
 		this.mContext = context;
-		mTableName = ChannelTable.getChannelTableName(addChannel.getName());
 		initListener();
 	}
 
@@ -69,7 +66,7 @@ public class AddChannelClickListener implements DialogInterface.OnClickListener 
 			public void onSuccess(String response) {
 				JSONObject obj = JsonCast.getJsonObject(response);
 				int id = JsonCast.getInt(obj, "result");
-				mAddChannel.setId(id);
+				mAddChannel.setChannelId(id);
 				addData(mAddChannel);
 			}
 

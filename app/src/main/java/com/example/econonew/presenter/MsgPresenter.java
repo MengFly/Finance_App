@@ -3,8 +3,7 @@ package com.example.econonew.presenter;
 import android.util.Log;
 
 import com.android.volley.VolleyError;
-import com.example.econonew.db.DBManager;
-import com.example.econonew.db.MsgTable;
+import com.example.econonew.db.DBHelperFactory;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.MainMessage;
@@ -60,9 +59,8 @@ public class MsgPresenter extends BasePresenter<BaseActivity> {
     //从数据库里面加载数据
     private void loadDatasFromDatabase() {
         for(String tabName : Constant.publicItemNames) {
-            MsgTable table = new MsgTable(tabName);
             MainMessage message = MainMessage.getInstance(tabName);
-            List<MsgItemEntity> list = new DBManager().getDbItems(table, null, null);
+            List<MsgItemEntity> list = DBHelperFactory.getDBHelper().queryAllItems(MsgItemEntity.class);
             Log.e(TAG, "loadDatasFromDatabase: " + tabName + " " + list.size());
             if (message != null) {
                 message.setMessage(list, false, false);

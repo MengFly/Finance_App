@@ -1,7 +1,6 @@
 package com.example.econonew.resource.msg;
 
-import com.example.econonew.db.DBManager;
-import com.example.econonew.db.MsgTable;
+import com.example.econonew.db.DBHelperFactory;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
@@ -28,17 +27,12 @@ public class MainMessage implements IMessage<MsgItemEntity> {
     private List<MsgItemEntity> mVipList;//Vip消息列表
     private List<MsgItemEntity> mNotVipList; // 不是VIP的列表
 
-    private DBManager dbManager;
-    private MsgTable table;
-
     public MainMessage(MainMessageFragment fragment, String allMsgName) {
         this.msgName = allMsgName;
         this.mFragment = fragment;
         mAllList = new ArrayList<>();
         mVipList = new ArrayList<>();
         mNotVipList = new ArrayList<>();
-        dbManager = new DBManager();
-        table = new MsgTable(allMsgName);
         msgManager.put(allMsgName, this);
     }
 
@@ -59,7 +53,8 @@ public class MainMessage implements IMessage<MsgItemEntity> {
         addList(msgList);
         sentMsgToUiAndVoice();
         if (isSaveToDatabase) {
-            dbManager.insertItems(table, msgList);// 如果保存，就保存到数据库面
+            DBHelperFactory.getDBHelper().insertAllItems(MsgItemEntity.class, msgList);
+//            dbManager.insertItems(table, msgList);// 如果保存，就保存到数据库面
         }
     }
 

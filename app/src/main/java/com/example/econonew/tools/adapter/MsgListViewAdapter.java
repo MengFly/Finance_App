@@ -1,5 +1,6 @@
 package com.example.econonew.tools.adapter;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.econonew.R;
-import com.example.econonew.db.DBManager;
-import com.example.econonew.db.MsgTable;
+import com.example.econonew.db.DBHelperFactory;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.tools.ImageLoader;
 import com.example.econonew.tools.ShareTool;
@@ -94,7 +94,9 @@ public class MsgListViewAdapter extends BaseAdapter {
 				if (item.isLove() != isChecked) {
 					item.setLove(isChecked);
 					Toast.makeText(FinanceApplication.app, "设置成功", Toast.LENGTH_SHORT).show();
-					new DBManager().updateItem(new MsgTable(msgName), item, "contentUrl=?", new String[]{item.getMsgContentUrl()});
+					ContentValues values = new ContentValues(1);
+					values.put("isLove", isChecked);
+					DBHelperFactory.getDBHelper().updateItemById(MsgItemEntity.class, values, item.getId());
 				}
 			}
 		});

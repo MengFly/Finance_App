@@ -3,8 +3,15 @@ package com.example.econonew.entity;
 
 import android.text.TextUtils;
 
-public class ChannelEntity {
+import com.example.econonew.db.Saveable;
+import com.example.econonew.resource.Constant;
 
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
+
+public class ChannelEntity extends DataSupport implements Saveable{
+
+	@Column(nullable = false)
 	private String name;// 频道名称
 
 	private String type; // 频道类型
@@ -13,7 +20,27 @@ public class ChannelEntity {
 
 	private String code; // 交易代码
 
-	private int id;// 频道的id。删除频道的时候要用到
+	private int id;
+
+	private int channelId;// 频道的id。删除频道的时候要用到
+
+	private String userName;
+
+	public String getUserName() {
+		return Constant.user.getName();
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setChannelId(int channelId) {
+		this.channelId = channelId;
+	}
+
+	public int getChannelId() {
+		return channelId;
+	}
 
 	private int businessDomainId;
 
@@ -109,4 +136,8 @@ public class ChannelEntity {
 		return name + " " + type + " " + attribute + " ";
 	}
 
+	@Override
+	public boolean saveSelf() {
+		return save();
+	}
 }

@@ -221,6 +221,7 @@ public class AddMoreChannelActivity extends BaseActivity implements OnCheckedCha
 								if ("success".equals(JsonCast.getString(obj, "status"))) {
 									int id = JsonCast.getInt(obj, "result");
 									entity.setId(id);
+									entity.setUserName(Constant.user.getName());
 									ChannelMessage.getInstance("自定义").setMessage(Arrays.asList(entity), true, true);
 									updateProMessage(count, max, entity + "添加成功");
 								} else {

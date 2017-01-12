@@ -1,6 +1,5 @@
 package com.example.econonew.view.activity;
 
-import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -9,9 +8,7 @@ import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.example.econonew.db.ChannelTable;
-import com.example.econonew.db.DBManager;
-import com.example.econonew.db.MsgTable;
+import com.example.econonew.db.DBHelperFactory;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.entity.UserEntity;
@@ -27,6 +24,7 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 
 import org.json.JSONObject;
+import org.litepal.LitePalApplication;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ import java.util.List;
 /**
  * 用用的Application,用于提供一些全局的方法，在应用内进行调用
  */
-public class FinanceApplication extends Application {
+public class FinanceApplication extends LitePalApplication {
 
 
 	private static final String TAG = "FinanceApplication";
@@ -151,9 +149,8 @@ public class FinanceApplication extends Application {
 	//从数据库里面加载数据
 	private void loadDatasFromDatabase() {
 		for(String tabName : Constant.publicItemNames) {
-			MsgTable table = new MsgTable(tabName);
 			MainMessage message = MainMessage.getInstance(tabName);
-			List<MsgItemEntity> list = new DBManager().getDbItems(table, null, null);
+			List<MsgItemEntity> list = DBHelperFactory.getDBHelper().queryItemsByArgs(MsgItemEntity.class, "msgType=?" , tabName);
 			Log.e(TAG, "loadDatasFromDatabase: " + tabName + " " + list.size());
 			if (message != null) {
 				message.setMessage(list, false, false);
@@ -188,7 +185,7 @@ public class FinanceApplication extends Application {
 				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
 				List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
 				if (channels != null) {
-					new DBManager().deleteAllItem(new ChannelTable());
+					DBHelperFactory.getDBHelper().deleteAll(ChannelEntity.class);
 					if (message != null) {
 						message.setMessage(channels, false, true);
 					}
@@ -199,7 +196,7 @@ public class FinanceApplication extends Application {
 			@Override
 			public void onError(VolleyError error) {
 				super.onError(error);
-				List<ChannelEntity> channels = new DBManager().getDbItems(new ChannelTable(), "user_name=?",new String[]{Constant.user.getName()});
+				List<ChannelEntity> channels = DBHelperFactory.getDBHelper().queryItemsByArgs(ChannelEntity.class, "username=?" , Constant.user.getName());
 				if (message != null) {
 					message.setMessage(channels, false, false);
 				}
