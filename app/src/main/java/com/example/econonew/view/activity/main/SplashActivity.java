@@ -5,25 +5,23 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.econonew.R;
-import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.activity.User.UserLoginActivity;
-import com.example.econonew.server.jpush.ExampleUtil;
-import com.example.econonew.server.jpush.PushSwitch;
+import com.example.econonew.databinding.ActSplashBinding;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.NetClient;
 import com.example.econonew.server.URLManager;
+import com.example.econonew.server.jpush.ExampleUtil;
+import com.example.econonew.server.jpush.PushSwitch;
+import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.User.UserLoginActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.jpush.android.api.JPushInterface;
-
-
 
 /**
  * SplashActivity 此类是作为一个缓冲界面，加载数据 实现了中间服务器中下载数据
@@ -32,16 +30,13 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class SplashActivity extends BaseActivity {
 
-	private TextView textTipTv;// 显示提示的文字
-	private TextView versionNameTv;//版本信息
+	private ActSplashBinding mBinding;
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.act_splash);
-		textTipTv = (TextView) findViewById(R.id.act_splash_test_tip_tv);
-		versionNameTv = (TextView) findViewById(R.id.act_splash_version);
-		versionNameTv.setText(getVersionName());
-		ObjectAnimator animator = ObjectAnimator.ofFloat(textTipTv, "alpha", 0.0f, 1.0f);
+		mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_splash);
+		mBinding.actSplashVersion.setText(getVersionName());
+		ObjectAnimator animator = ObjectAnimator.ofFloat(mBinding.actSplashTestTipTv, "alpha", 0.0f, 1.0f);
 		animator.setDuration(1000).setStartDelay(500);
 		animator.start();
 	}
@@ -54,15 +49,14 @@ public class SplashActivity extends BaseActivity {
 		PushSwitch switchPush = new PushSwitch(getApplicationContext());
 		boolean isPush = switchPush.isReceivePush();
 		if (!isPush) {
-			Toast.makeText(SplashActivity.this, "消息推送关闭，可在配置中打开",
-					Toast.LENGTH_LONG).show();
+			showToast("消息推送关闭，可在配置中打开");
 		}
 		initTimer();
 	}
 
 	//获取版本号信息
 	public String getVersionName() {
-		return versionNameTv.getText().toString() + " V " + getResources().getString(R.string.versionName);
+		return mBinding.actSplashVersion.getText().toString() + " V " + getResources().getString(R.string.versionName);
 	}
 
 	/** 设置时间延迟 */

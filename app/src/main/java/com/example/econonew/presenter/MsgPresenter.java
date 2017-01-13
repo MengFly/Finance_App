@@ -11,7 +11,6 @@ import com.example.econonew.server.NetClient;
 import com.example.econonew.server.URLManager;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.json.ResponseJsonHelper;
-import com.example.econonew.tools.Voice;
 import com.example.econonew.view.activity.BaseActivity;
 
 import org.json.JSONObject;
@@ -66,23 +65,5 @@ public class MsgPresenter extends BasePresenter<BaseActivity> {
                 message.setMessage(list, false, false);
             }
         }
-    }
-
-    /**
-     *  对消息进行阅读
-     * @param tab   要从哪一个tab开始阅读
-     */
-    public void setRead(int tab) {
-        Log.d(TAG, "setRead: " + tab);
-        Voice voice = Voice.getInstance();
-        if(tab < Constant.publicItemNames.length && voice.getReadStat() == Voice.VOICE_STAT_NO_READ) {
-            for (int i = tab; i < Constant.publicItemNames.length; i ++) {
-                MainMessage message = MainMessage.getInstance(Constant.publicItemNames[i]);
-                if (message != null) {
-                    voice.setList(message.getMessage());//设置要进行阅读的列表
-                }
-            }
-        }
-        voice.read();
     }
 }

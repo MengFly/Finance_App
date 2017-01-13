@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.resource.Constant;
 
-public class UserSetVipActivity extends BaseUserActivity {
+public class UserSetVipActivity extends BaseUserActivity<BaseUserPresenter<UserActivity>> {
 
     private EditText userNameEt;
     private TextView setUserNameTv;
@@ -32,7 +32,7 @@ public class UserSetVipActivity extends BaseUserActivity {
     @Override
     protected void initDatas() {
         initActionBar(false, "注册VIP", true);
-        bindPresenter(new UserPresenter(this));
+        bindPresenter(new BaseUserPresenter(this));
         userNameEt.setText(Constant.user == null ? "" : Constant.user.getName());
     }
 

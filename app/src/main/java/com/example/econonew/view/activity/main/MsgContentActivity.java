@@ -1,33 +1,27 @@
 package com.example.econonew.view.activity.main;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 
 import com.example.econonew.R;
+import com.example.econonew.databinding.ActMsgItemContentBinding;
 import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.customview.DefaultWebView;
 
-
-@SuppressLint("SetJavaScriptEnabled")
 public class MsgContentActivity extends BaseActivity {
 
-	private DefaultWebView msgContentWV;
+	private ActMsgItemContentBinding mBinding;
 	private String msgContentUrl;//用于显示界面的URL地址
 	private String msgContent;
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.act_msg_item_content);
-
-		ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
-		msgContentWV = (DefaultWebView) findViewById(R.id.msg_item_content_view);
-		msgContentWV.setProgressBar(progressBar);
+		mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_msg_item_content);
+		mBinding.msgItemContentView.setProgressBar(mBinding.progressBar1);
 	}
 
 	@Override
@@ -36,7 +30,7 @@ public class MsgContentActivity extends BaseActivity {
 		msgContentUrl = intent.getStringExtra("msgContentUrl");
 		initActionBar(false, intent.getStringExtra("msgTitle"), true);
 		msgContent = intent.getStringExtra("msgContext");
-		msgContentWV.loadUrl(msgContentUrl, msgContent);
+		mBinding.msgItemContentView.loadUrl(msgContentUrl, msgContent);
 	}
 
 	@Override
@@ -49,7 +43,7 @@ public class MsgContentActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_refresh :
-				msgContentWV.loadUrl(msgContentUrl, msgContent);
+				mBinding.msgItemContentView.loadUrl(msgContentUrl, msgContent);
 				return true;
 			case R.id.menu_open_with_browser :
 				if(msgContentUrl != null) {
@@ -71,8 +65,8 @@ public class MsgContentActivity extends BaseActivity {
 	// 重写返回按键的方法
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK && msgContentWV.canGoBack()) {
-			msgContentWV.goBack();
+		if (keyCode == KeyEvent.KEYCODE_BACK && mBinding.msgItemContentView.canGoBack()) {
+			mBinding.msgItemContentView.goBack();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

@@ -1,141 +1,159 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/lightGray"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.example.econonew.presenter.UserPresenter"/>
+    </data>
 
     <LinearLayout
-        android:id="@+id/user_layout"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/icon_user_back"
-        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/lightGray"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/user_regist"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/user_login_btn" />
-
-        <RelativeLayout style="@style/app_base_layout">
-
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:padding="10dp"
-                android:text="@string/act_user_username_tv"
-                android:textColor="#fff"
-                android:textStyle="bold" />
-
-            <ViewStub
-                android:id="@+id/act_user_isVip_vs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/user_name"
-                android:layout="@layout/vip_layout" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/act_user_select_sv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/lightGray"
-        android:scrollbars="none">
-
         <LinearLayout
-            style="@style/app_base_layout"
-            android:divider="@android:drawable/divider_horizontal_dark"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:showDividers="middle|beginning|end">
+            android:id="@+id/user_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/icon_user_back"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/act_user_login_tv"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:drawableLeft="@drawable/icon_act_user_user"
-                android:drawableStart="@drawable/icon_act_user_user"
-                android:text="@string/act_user_item_login_tv" />
+            <Button
+                android:id="@+id/user_regist"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="@{presenter.registClick()}"
+                android:background="@drawable/user_login_btn" />
 
-            <TextView
-                android:id="@+id/setPwd"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:drawableLeft="@drawable/icon_act_user_setpass"
-                android:drawableStart="@drawable/icon_act_user_setpass"
-                android:text="@string/act_user_item_setpwd_tv" />
+            <RelativeLayout style="@style/app_base_layout">
 
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp"
+                    android:text="@string/act_user_username_tv"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/act_user_regist_tv"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:drawableLeft="@drawable/ic_act_user_regist"
-                android:drawableStart="@drawable/ic_act_user_regist"
-                android:text="@string/act_user_item_regist_tv" />
-
-            <TextView
-                android:id="@+id/act_user_setVip_tv"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:drawableLeft="@drawable/ic_act_user_vip"
-                android:drawableStart="@drawable/ic_act_user_vip"
-                android:text="@string/act_user_item_vip_tv" />
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
-
-            <TextView
-                android:id="@+id/settingPush"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:drawableLeft="@drawable/icon_act_user_settime"
-                android:drawableStart="@drawable/icon_act_user_settime"
-                android:text="@string/act_user_item_push_tv" />
-
-
-            <TextView
-                android:id="@+id/repeat_voice"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:drawableLeft="@drawable/icon_act_user_resetvoice"
-                android:drawableStart="@drawable/icon_act_user_resetvoice"
-                android:text="@string/act_user_item_reset_voice_tv" />
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
-
-            <TextView
-                android:id="@+id/logout"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:drawableLeft="@drawable/icon_act_user_logout"
-                android:drawableStart="@drawable/icon_act_user_logout"
-                android:text="@string/act_user_logout_tv" />
-
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
-
-            <TextView
-                android:id="@+id/act_user_set_ip_tv"
-                style="@style/main_item"
-                android:background="@drawable/select_background"
-                android:gravity="end"
-                android:text="@string/act_user_item_set_ip_tv"
-                android:textColor="@color/colorAccent"
-                android:visibility="gone" />
+                <ViewStub
+                    android:id="@+id/act_user_isVip_vs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/user_name"
+                    android:layout="@layout/vip_layout" />
+            </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
 
-</LinearLayout>
+        <ScrollView
+            android:id="@+id/act_user_select_sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/lightGray"
+            android:scrollbars="none">
+
+            <LinearLayout
+                style="@style/app_base_layout"
+                android:divider="@android:drawable/divider_horizontal_dark"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:showDividers="middle|beginning|end">
+
+                <TextView
+                    android:id="@+id/act_user_login_tv"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:drawableLeft="@drawable/icon_act_user_user"
+                    android:drawableStart="@drawable/icon_act_user_user"
+                    android:onClick="@{presenter.userLoginClick()}"
+
+                    android:text="@string/act_user_item_login_tv" />
+
+                <TextView
+                    android:id="@+id/setPwd"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:drawableLeft="@drawable/icon_act_user_setpass"
+                    android:drawableStart="@drawable/icon_act_user_setpass"
+                    android:onClick="@{presenter.setPwdClick()}"
+                    android:text="@string/act_user_item_setpwd_tv" />
+
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <TextView
+                    android:id="@+id/act_user_regist_tv"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:drawableLeft="@drawable/ic_act_user_regist"
+                    android:onClick="@{presenter.registClick()}"
+                    android:drawableStart="@drawable/ic_act_user_regist"
+                    android:text="@string/act_user_item_regist_tv" />
+
+                <TextView
+                    android:id="@+id/act_user_setVip_tv"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:drawableLeft="@drawable/ic_act_user_vip"
+                    android:onClick="@{presenter.userSetVipClick()}"
+                    android:drawableStart="@drawable/ic_act_user_vip"
+                    android:text="@string/act_user_item_vip_tv" />
+
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <TextView
+                    android:id="@+id/settingPush"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:drawableLeft="@drawable/icon_act_user_settime"
+                    android:drawableStart="@drawable/icon_act_user_settime"
+                    android:onClick="@{presenter.settingsClick()}"
+                    android:text="@string/act_user_item_push_tv" />
+
+
+                <TextView
+                    android:id="@+id/repeat_voice"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:drawableLeft="@drawable/icon_act_user_resetvoice"
+                    android:drawableStart="@drawable/icon_act_user_resetvoice"
+                    android:onClick="@{presenter.voiceResetClick()}"
+                    android:text="@string/act_user_item_reset_voice_tv" />
+
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <TextView
+                    android:id="@+id/logout"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:drawableLeft="@drawable/icon_act_user_logout"
+                    android:drawableStart="@drawable/icon_act_user_logout"
+                    android:onClick="@{presenter.logoutClick()}"
+                    android:text="@string/act_user_logout_tv" />
+
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+
+                <TextView
+                    android:id="@+id/act_user_set_ip_tv"
+                    style="@style/main_item"
+                    android:background="@drawable/select_background"
+                    android:gravity="end"
+                    android:text="@string/act_user_item_set_ip_tv"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

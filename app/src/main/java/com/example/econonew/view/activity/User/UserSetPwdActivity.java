@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.example.econonew.R;
-import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.tools.EncodeStrTool;
 import com.example.econonew.view.fragment.UserSetPassFragment;
@@ -20,7 +20,7 @@ import com.example.econonew.view.fragment.UserSetPassFragment;
  *
  * @author Agnes 此类是管理用户修改密码的类
  */
-public class UserSetPwdActivity extends BaseUserActivity {
+public class UserSetPwdActivity extends BaseUserActivity<BaseUserPresenter<UserActivity>> {
 
 	private LinearLayout setPassUsePassLy, setPassUseQuestLy;
 
@@ -113,7 +113,7 @@ public class UserSetPwdActivity extends BaseUserActivity {
 	@Override
 	protected void initDatas() {
 		initActionBar(false, "修改密码",true);
-		bindPresenter(new UserPresenter(this));
+		bindPresenter(new BaseUserPresenter(this));
 	}
 
 	// 修改按钮的按钮点击事件的处理函数

@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.econonew.R;
-import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.tools.adapter.SpinnerSelectAdapter;
 import com.example.econonew.tools.listener.TextChangeListener;
 import com.example.econonew.view.viewinterface.ActEditChangeable;
@@ -21,7 +21,7 @@ import com.example.econonew.view.viewinterface.ActEditChangeable;
  *
  * @author Agnes
  */
-public class UserRegistActivity extends BaseUserActivity implements ActEditChangeable {
+public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserActivity>> implements ActEditChangeable {
 
     private TextInputLayout userNameLy, userPassWordLy, userPassWord2Ly, userAnswerLy;
     private EditText userNameEt, userPassWordEt, userPassWord2Et;
@@ -84,7 +84,7 @@ public class UserRegistActivity extends BaseUserActivity implements ActEditChang
     @Override
     protected void initDatas() {
         initActionBar(false ,"用户注册", true);
-        bindPresenter(new UserPresenter(this));
+        bindPresenter(new BaseUserPresenter(this));
     }
 
     // 用户注册按钮的点击事件处理逻辑

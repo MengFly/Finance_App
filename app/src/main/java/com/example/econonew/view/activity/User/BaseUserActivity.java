@@ -4,17 +4,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.econonew.entity.UserEntity;
-import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.resource.Constant;
+import com.example.econonew.view.activity.BaseActivity;
 
 /**
  * 所有用户的Activity的父类
  * Created by mengfei on 2016/9/13.
  */
-public abstract class BaseUserActivity extends BaseActivity<UserPresenter>{
-
-
+public abstract class BaseUserActivity<U extends BaseUserPresenter> extends BaseActivity<U>{
     // 向缓存中设置user信息
     // 用户登录成功后调用这个方法
     public void saveUserInfo(UserEntity userEntity) {

@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.econonew.R;
-import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.view.customview.UnderLineTextView;
 
 
@@ -15,7 +15,7 @@ import com.example.econonew.view.customview.UnderLineTextView;
  *
  * @author agnes
  */
-public class UserLoginActivity extends BaseUserActivity {
+public class UserLoginActivity extends BaseUserActivity<BaseUserPresenter<UserActivity>> {
 
     private EditText userNameET;
     private EditText userPasswordET;
@@ -70,7 +70,7 @@ public class UserLoginActivity extends BaseUserActivity {
     @Override
     protected void initDatas() {
         isStartLogin = getIntent().getBooleanExtra("isStartLogin", true);
-        bindPresenter(new UserPresenter(this));
+        bindPresenter(new BaseUserPresenter(this));
         initActionBar(true , "登录", !isStartLogin);
     }
 

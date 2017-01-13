@@ -37,13 +37,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
 	protected  T mPresenter;
 
+	private Toast mToast;
 	private AlertDialog.Builder builder;
 	private ProgressDialog mProDialog;
 
 	/** Activity的对象。这样就不需要再使用XXActivity.this了 */
 	protected BaseActivity mContext;
-
-	private Toast mToast;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 		mContext = this;
 		initView(savedInstanceState);
 		initDatas();
-
-
 		FinanceApplication.getInstance().getActManager().add(this);
 	}
 

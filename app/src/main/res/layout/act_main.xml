@@ -1,74 +1,88 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include layout="@layout/activity_title_bar" />
+    <data>
+        <variable
+            name="presenter"
+            type="com.example.econonew.presenter.MainPresenter"/>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/act_main_tab_ly"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/app_theme_back"
-        app:tabGravity="fill"
-        app:tabPadding="0dp"
-        app:tabIndicatorColor="@color/color_white_app"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/color_red_app"
-        app:tabTextColor="@color/color_white_app" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/act_main_viewpager"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/main_bottom_back"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/act_main_voice_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableTop="@drawable/icon_voice"
-            android:focusable="false"
-            android:text="@string/main_activity_voice_btn"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+        <include android:id="@+id/act_main_title_bar" layout="@layout/activity_title_bar" />
 
-        <Button
-            android:id="@+id/add_channel_btn"
-            android:layout_width="0dp"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/act_main_tab_ly"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableTop="@drawable/icon_channel"
-            android:focusable="false"
-            android:text="@string/main_activity_channel_add_btn"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:background="@color/app_theme_back"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/color_white_app"
+            app:tabMode="fixed"
+            app:tabPadding="0dp"
+            app:tabSelectedTextColor="@color/color_red_app"
+            app:tabTextColor="@color/color_white_app" />
 
-        <Button
-            android:id="@+id/act_main_user_btn"
-            android:layout_width="0dp"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/act_main_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableTop="@drawable/icon_user"
-            android:focusable="false"
-            android:text="@string/main_activity_user_btn"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:background="@drawable/main_bottom_back"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/act_main_voice_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/icon_voice"
+                android:focusable="false"
+                android:text="@string/main_activity_voice_btn"
+                android:textColor="#fff"
+                android:onClick="@{presenter.onVoiceBtnClick()}"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/add_channel_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{presenter.onAddChannelBtnClick()}"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/icon_channel"
+                android:focusable="false"
+                android:text="@string/main_activity_channel_add_btn"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/act_main_user_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/icon_user"
+                android:focusable="false"
+                android:onClick="@{presenter.onUserBtnClick()}"
+                android:text="@string/main_activity_user_btn"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</layout>

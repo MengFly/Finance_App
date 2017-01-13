@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progress="30" />
-
-    <ScrollView
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp" >
+        android:orientation="vertical">
 
-        <!-- 显示消息内容的WebView -->
-
-        <com.example.econonew.view.customview.DefaultWebView
-            android:id="@+id/msg_item_content_view"
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+            android:layout_height="wrap_content"
+            android:progress="30" />
 
-</LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <!-- 显示消息内容的WebView -->
+
+            <com.example.econonew.view.customview.DefaultWebView
+                android:id="@+id/msg_item_content_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

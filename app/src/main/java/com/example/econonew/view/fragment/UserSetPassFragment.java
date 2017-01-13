@@ -14,8 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.econonew.R;
-import com.example.econonew.presenter.UserPresenter;
+import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.view.activity.User.BaseUserActivity;
+import com.example.econonew.view.activity.User.UserActivity;
 
 /**
  * 用于设置密码的Fragment
@@ -54,7 +55,7 @@ public class UserSetPassFragment extends Fragment {
             public void onClick(View v) {
 		        final String new_pwd1 = passWord1Et.getText().toString();
 		        final String new_pwd2 = passWord2Et.getText().toString();
-		        new UserPresenter((BaseUserActivity) getActivity()).userSetPassThread(new_pwd1, new_pwd2);
+		        new BaseUserPresenter((BaseUserActivity<BaseUserPresenter<UserActivity>>) getActivity()).userSetPassThread(new_pwd1, new_pwd2);
             }
         });
     }
