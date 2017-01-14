@@ -24,7 +24,7 @@
                 android:id="@+id/user_regist"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:onClick="@{presenter.registClick()}"
+                android:onClick="@{()->presenter.registClick()}"
                 android:background="@drawable/user_login_btn" />
 
             <RelativeLayout style="@style/app_base_layout">
@@ -69,7 +69,7 @@
                     android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_user"
                     android:drawableStart="@drawable/icon_act_user_user"
-                    android:onClick="@{presenter.userLoginClick()}"
+                    android:onClick="@{() -> presenter.userLoginClick()}"
 
                     android:text="@string/act_user_item_login_tv" />
 
@@ -79,7 +79,7 @@
                     android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_setpass"
                     android:drawableStart="@drawable/icon_act_user_setpass"
-                    android:onClick="@{presenter.setPwdClick()}"
+                    android:onClick="@{(v) -> presenter.setPwdClick()}"
                     android:text="@string/act_user_item_setpwd_tv" />
 
                 <android.support.v4.widget.Space
@@ -91,7 +91,7 @@
                     style="@style/main_item"
                     android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/ic_act_user_regist"
-                    android:onClick="@{presenter.registClick()}"
+                    android:onClick="@{()->presenter.registClick()}"
                     android:drawableStart="@drawable/ic_act_user_regist"
                     android:text="@string/act_user_item_regist_tv" />
 
@@ -100,7 +100,7 @@
                     style="@style/main_item"
                     android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/ic_act_user_vip"
-                    android:onClick="@{presenter.userSetVipClick()}"
+                    android:onClick="@{(v) -> presenter.userSetVipClick()}"
                     android:drawableStart="@drawable/ic_act_user_vip"
                     android:text="@string/act_user_item_vip_tv" />
 
@@ -114,7 +114,7 @@
                     android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_settime"
                     android:drawableStart="@drawable/icon_act_user_settime"
-                    android:onClick="@{presenter.settingsClick()}"
+                    android:onClick="@{()->presenter.settingsClick()}"
                     android:text="@string/act_user_item_push_tv" />
 
 
@@ -124,7 +124,7 @@
                     android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_resetvoice"
                     android:drawableStart="@drawable/icon_act_user_resetvoice"
-                    android:onClick="@{presenter.voiceResetClick()}"
+                    android:onClick="@{()->presenter.voiceResetClick()}"
                     android:text="@string/act_user_item_reset_voice_tv" />
 
                 <android.support.v4.widget.Space
@@ -137,7 +137,7 @@
                     android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_logout"
                     android:drawableStart="@drawable/icon_act_user_logout"
-                    android:onClick="@{presenter.logoutClick()}"
+                    android:onClick="@{()->presenter.logoutClick()}"
                     android:text="@string/act_user_logout_tv" />
 
                 <android.support.v4.widget.Space

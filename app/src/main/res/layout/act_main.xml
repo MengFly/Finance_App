@@ -50,7 +50,7 @@
                 android:focusable="false"
                 android:text="@string/main_activity_voice_btn"
                 android:textColor="#fff"
-                android:onClick="@{presenter.onVoiceBtnClick()}"
+                android:onClick="@{()->presenter.onVoiceBtnClick()}"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="@{presenter.onAddChannelBtnClick()}"
+                android:onClick="@{()->presenter.onAddChannelBtnClick()}"
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableTop="@drawable/icon_channel"
                 android:focusable="false"
@@ -76,7 +76,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableTop="@drawable/icon_user"
                 android:focusable="false"
-                android:onClick="@{presenter.onUserBtnClick()}"
+                android:onClick="@{()->presenter.onUserBtnClick()}"
                 android:text="@string/main_activity_user_btn"
                 android:textColor="#fff"
                 android:textSize="12sp"

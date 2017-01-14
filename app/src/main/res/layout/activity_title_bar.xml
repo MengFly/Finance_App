@@ -39,7 +39,7 @@
             android:layout_marginRight="16dp"
             android:background="?android:attr/selectableItemBackground"
             android:contentDescription="@string/menu_main_share_app"
-            android:onClick="@{presenter.onShareImageBtnClick()}"
+            android:onClick="@{()->presenter.onShareImageBtnClick()}"
             android:src="@android:drawable/ic_menu_share" />
 
     </LinearLayout>

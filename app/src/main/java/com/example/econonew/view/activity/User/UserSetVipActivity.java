@@ -1,31 +1,25 @@
 package com.example.econonew.view.activity.User;
 
 import android.content.DialogInterface;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog.Builder;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.econonew.R;
+import com.example.econonew.databinding.ActUserSetvipBinding;
 import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.resource.Constant;
 
 public class UserSetVipActivity extends BaseUserActivity<BaseUserPresenter<UserActivity>> {
 
-    private EditText userNameEt;
-    private TextView setUserNameTv;
-    private Button vipRegistBtn;
+    private ActUserSetvipBinding mBinding;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.act_user_setvip);
-        userNameEt = (EditText) findViewById(R.id.act_set_vip_user_name);
-        userNameEt.setFocusable(false);
-        setUserNameTv = (TextView) findViewById(R.id.act_set_vip_user_name_tv);
-        vipRegistBtn = (Button) findViewById(R.id.act_set_vip_regist_btn);
+        mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_user_setvip);
         initListener();
     }
 
@@ -33,15 +27,14 @@ public class UserSetVipActivity extends BaseUserActivity<BaseUserPresenter<UserA
     protected void initDatas() {
         initActionBar(false, "注册VIP", true);
         bindPresenter(new BaseUserPresenter(this));
-        userNameEt.setText(Constant.user == null ? "" : Constant.user.getName());
     }
 
     private void initListener() {
-        vipRegistBtn.setOnClickListener(
+        mBinding.actSetVipRegistBtn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final String userName = userNameEt.getText().toString();
+                        final String userName = mBinding.actSetVipUserName.getText().toString();
                         if (TextUtils.isEmpty(userName)) {
                             showToast("用户名为空");
                         } else {
@@ -60,7 +53,7 @@ public class UserSetVipActivity extends BaseUserActivity<BaseUserPresenter<UserA
                     }
                 });
 
-        setUserNameTv.setOnClickListener(new View.OnClickListener() {
+        mBinding.actSetVipUserNameTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final EditText et = new EditText(UserSetVipActivity.this);
@@ -73,7 +66,7 @@ public class UserSetVipActivity extends BaseUserActivity<BaseUserPresenter<UserA
                         if (TextUtils.isEmpty(et.getText().toString())) {
                             showToast("输入内容为空");
                         } else {
-                            userNameEt.setText(et.getText().toString());
+                            mBinding.actSetVipUserName.setText(et.getText().toString());
                         }
                     }
                 });

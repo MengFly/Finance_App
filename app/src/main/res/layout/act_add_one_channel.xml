@@ -1,51 +1,63 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="channelType"
+            type="String"/>
+        <variable
+            name="presenter"
+            type="com.example.econonew.presenter.AddOneChannelPresenter"/>
+    </data>
+    
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/act_add_one_channel_name_btn"
+                style="@style/app_base_btn.drawable"
+                android:drawableTop="@drawable/icon_funds_name"
+                android:text="@{channelType}"/>
+
+            <TextView
+                android:id="@+id/act_add_one_channel_name_tv"
+                style="@style/app_base_text"
+                android:text="请选择"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/act_add_one_channel_info_btn"
+                style="@style/app_base_btn.drawable"
+                android:drawableTop="@drawable/icon_category"
+                android:text="信息类型" />
+
+            <TextView
+                android:id="@+id/act_add_one_channel_info_tv"
+                style="@style/app_base_text"
+                android:text="请选择"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/act_add_one_channel_name_btn"
-            style="@style/app_base_btn.drawable"
-            android:drawableTop="@drawable/icon_funds_name"
-            android:text="名称" />
+            android:id="@+id/act_add_one_channel_sure_btn"
+            style="@style/app_base_btn.ok"
+            android:layout_width="match_parent" />
 
-        <TextView
-            style="@style/app_base_text"
-            android:id="@+id/act_add_one_channel_name_tv"
-            android:text="请选择"
-            android:textSize="@dimen/text_size_large" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <Button
-            style="@style/app_base_btn.drawable"
-            android:id="@+id/act_add_one_channel_info_btn"
-            android:drawableTop="@drawable/icon_category"
-            android:text="信息类型" />
-
-        <TextView
-            style="@style/app_base_text"
-            android:id="@+id/act_add_one_channel_info_tv"
-            android:text="请选择"
-            android:textSize="@dimen/text_size_large" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/act_add_one_channel_sure_btn"
-        style="@style/app_base_btn.ok"
-        android:layout_width="match_parent" />
-
-</LinearLayout>
+</layout>
