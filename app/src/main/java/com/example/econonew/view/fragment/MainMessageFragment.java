@@ -1,6 +1,7 @@
 package com.example.econonew.view.fragment;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.econonew.R;
+import com.example.econonew.databinding.FragMainViewPageBinding;
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.tools.adapter.MsgListViewAdapter;
@@ -36,18 +36,11 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     //用于存储已经实例化的Fragment，下次再需要的时候可以直接从Map里面进行获取，提高效率
     private static Map<String, MainMessageFragment> fragmentManager = new HashMap<>();
 
+    private FragMainViewPageBinding mBinding;
     private Handler mHandler = new Handler(Looper.getMainLooper());
-
     private String fragmentName;
-
-    private ListView msgListLV;
     private MsgListViewAdapter msgAdapter;
     private List<MsgItemEntity> msgList = new ArrayList<>();
-
-    // 刷新视图
-    private SwipeRefreshLayout refreshLayout;
-
-    private TextView noMsgTip;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +50,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_main_view_page, container, false);
+        mBinding = DataBindingUtil.inflate(inflater,R.layout.frag_main_view_page,container, false);
         Bundle arguments = getArguments();
         if(arguments != null) {
             fragmentName =  arguments.getString("name");
@@ -68,9 +61,9 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
         if (msgList == null) {
             bindMessage();
         }
-        initView(view);
+        initView();
         stopFresh();
-        return view;
+        return mBinding.getRoot();
     }
 
     //刷新界面数据进行显示
@@ -81,21 +74,19 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     }
 
     // 初始化界面的控件
-    private void initView(View view) {
-        noMsgTip = (TextView) view.findViewById(R.id.msg_no_tip_tv);
-        msgListLV = (ListView) view.findViewById(R.id.msg_listview);
-        msgAdapter = new MsgListViewAdapter(getActivity(), msgList, msgListLV, fragmentName);
-        msgListLV.setAdapter(msgAdapter);
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.msg_fresh);
-        refreshLayout.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2, R.color.swipe_color_3);
+    private void initView() {
+        msgAdapter = new MsgListViewAdapter(getActivity(), msgList, mBinding.msgListview, fragmentName);
+         mBinding.msgListview.setAdapter(msgAdapter);
+        mBinding.msgListview.setEmptyView(mBinding.msgNoTipTv);
+        mBinding.msgFresh.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2, R.color.swipe_color_3);
 
         initListener();
     }
 
     private void initListener() {
-        msgListLV.setOnItemClickListener(this);
-        msgListLV.setOnScrollListener(this);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mBinding.msgListview.setOnItemClickListener(this);
+        mBinding.msgListview.setOnScrollListener(this);
+        mBinding.msgFresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
             @Override
             public void onRefresh() {
@@ -176,13 +167,8 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
      */
     public void stopFresh() {
         hintProDialog();
-        if (refreshLayout != null) {
-            refreshLayout.setRefreshing(false);
-        }
-        if (msgList.isEmpty() && noMsgTip != null) {
-            noMsgTip.setVisibility(View.VISIBLE);
-        } else if (noMsgTip != null) {
-            noMsgTip.setVisibility(View.GONE);
+        if (mBinding.msgFresh != null) {
+            mBinding.msgFresh.setRefreshing(false);
         }
     }
 

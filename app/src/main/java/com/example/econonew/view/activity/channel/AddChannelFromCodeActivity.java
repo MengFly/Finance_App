@@ -1,15 +1,15 @@
 package com.example.econonew.view.activity.channel;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.econonew.R;
+import com.example.econonew.databinding.ActAddchannelFromCodeBinding;
 import com.example.econonew.entity.ChannelEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.ChannelMessage;
@@ -27,19 +27,16 @@ import java.util.List;
  */
 
 public class AddChannelFromCodeActivity extends BaseActivity {
-    private EditText expert_info_show;
-    private Button channel_sure;  //确认按钮
+
+    private ActAddchannelFromCodeBinding mBinding;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.act_addchannel_from_code);
-        channel_sure = (Button) findViewById(R.id.special_channel_sure);
-        expert_info_show = (EditText) findViewById(R.id.expert_info_show);
-
-        channel_sure.setOnClickListener(new OnClickListener() {
+        mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_addchannel_from_code);
+        mBinding.specialChannelSure.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                addChannelFromCode(expert_info_show.getText().toString());
+                addChannelFromCode(mBinding.expertInfoShow.getText().toString());
             }
         });
         initActionBar(false, getResources().getString(R.string.label_add_one_channel), true);
@@ -63,7 +60,7 @@ public class AddChannelFromCodeActivity extends BaseActivity {
                             list.add(entity);
                             ChannelMessage.getInstance("自定义").setMessage(list, true, true);
                             mContext.showTipDialog(null, "频道添加成功", null, null);
-                            expert_info_show.setText("");
+                            mBinding.expertInfoShow.setText("");
                             FinanceApplication.getInstance().refreshUserData(Constant.user);
                         }
 

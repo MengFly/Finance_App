@@ -1,29 +1,32 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        style="@style/app_base_text"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:background="@drawable/tv_back"
-        android:gravity="center_horizontal"
-        android:text="@string/act_add_channel_from_code_title_tv"
-        android:textSize="25sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/app_base_text"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/tv_back"
+            android:gravity="center_horizontal"
+            android:text="@string/act_add_channel_from_code_title_tv"
+            android:textSize="25sp" />
 
 
-    <EditText
-        android:id="@+id/expert_info_show"
-        style="@style/app_base_text.drawable"
-        android:drawableLeft="@drawable/icon_exchange_name"
-        android:drawableStart="@drawable/icon_exchange_name"
-        android:hint="@string/act_add_channel_from_code_hint_et"
-        android:inputType="number" />
+        <EditText
+            android:id="@+id/expert_info_show"
+            style="@style/app_base_text.drawable"
+            android:drawableLeft="@drawable/icon_exchange_name"
+            android:drawableStart="@drawable/icon_exchange_name"
+            android:hint="@string/act_add_channel_from_code_hint_et"
+            android:inputType="number" />
 
-    <Button
-        android:id="@+id/special_channel_sure"
-        style="@style/app_base_btn.ok"
-        android:layout_width="match_parent" />
+        <Button
+            android:id="@+id/special_channel_sure"
+            style="@style/app_base_btn.ok"
+            android:layout_width="match_parent" />
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

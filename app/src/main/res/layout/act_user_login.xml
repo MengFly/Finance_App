@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/app_base_layout"
     android:orientation="vertical">
@@ -93,3 +94,4 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
+</layout>

@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="15dip"
@@ -41,6 +42,7 @@
                         android:id="@+id/futures_choose"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:onClick="onClick"
                         android:background="@drawable/icon_futures" />
 
                     <TextView
@@ -58,6 +60,7 @@
                         android:id="@+id/stock_choose"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:onClick="onClick"
                         android:background="@drawable/icon_stock" />
 
                     <TextView
@@ -78,6 +81,7 @@
                         android:id="@+id/exchange_choose"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:onClick="onClick"
                         android:background="@drawable/icon_exchange" />
 
                     <TextView
@@ -95,6 +99,7 @@
                         android:id="@+id/funds_choose"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:onClick="onClick"
                         android:background="@drawable/icon_funds" />
 
                     <TextView
@@ -114,6 +119,7 @@
                     <Button
                         android:id="@+id/money_choose"
                         android:layout_width="60dp"
+                        android:onClick="onClick"
                         android:layout_height="60dp"
                         android:background="@drawable/icon_money" />
 
@@ -132,6 +138,7 @@
                         android:id="@+id/special_choose"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:onClick="onClick"
                         android:background="@drawable/icon_special" />
 
                     <TextView
@@ -147,7 +154,8 @@
     <com.example.econonew.view.customview.UnderLineTextView
         style="@style/app_base_text.clickable_tv"
         android:id="@+id/act_add_channel_add_more_channel"
-        android:text="添加多个频道"
+        android:text="@string/act_add_channel_more_tv"
+        android:onClick="onClick"
         android:layout_gravity="end" />
 
     <Button
@@ -158,3 +166,4 @@
         android:text="@string/btn_back" />
 
 </LinearLayout>
+</layout>

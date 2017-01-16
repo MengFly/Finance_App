@@ -24,7 +24,6 @@ public class UserSetPwdActivity extends BaseUserActivity<BaseUserPresenter<UserA
 
 	private UserSetPassFragment setPassFrag;
 
-
 	@Override
 	protected void initView(Bundle savedInstanceState) {
 		mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_user_setpwd);
@@ -75,8 +74,6 @@ public class UserSetPwdActivity extends BaseUserActivity<BaseUserPresenter<UserA
 		});
 		hideFrag();
 	}
-
-
 
 	@Override
 	protected void initDatas() {

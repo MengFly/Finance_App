@@ -43,7 +43,6 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private JazzyListView channelLv;
-    private TextView noMsgTip;
     private SwipeRefreshLayout refreshLayout;
 
     private String fragmentName;
@@ -83,9 +82,10 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
 
     // 初始化界面的控件
     private void initView(View view) {
-        noMsgTip = (TextView) view.findViewById(R.id.msg_no_tip_tv);
+        TextView noMsgTip = (TextView) view.findViewById(R.id.msg_no_tip_tv);
         channelAdapter = new ChannelListViewAdapter(getActivity(), channelList);
         channelLv.setAdapter(channelAdapter);
+        channelLv.setEmptyView(noMsgTip);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.msg_fresh);
         refreshLayout.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2, R.color.swipe_color_3);
         initListener();
@@ -214,11 +214,6 @@ public class ChannelMessageFragment extends MsgBaseFragment<ChannelMessage, Chan
         hintProDialog();
         if (refreshLayout != null) {
             refreshLayout.setRefreshing(false);
-        }
-        if (channelList.isEmpty() && noMsgTip != null) {
-            noMsgTip.setVisibility(View.VISIBLE);
-        } else if (noMsgTip != null) {
-            noMsgTip.setVisibility(View.GONE);
         }
     }
 

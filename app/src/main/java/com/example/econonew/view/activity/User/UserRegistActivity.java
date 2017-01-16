@@ -1,15 +1,14 @@
 package com.example.econonew.view.activity.User;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.example.econonew.R;
+import com.example.econonew.databinding.ActUserRegistBinding;
 import com.example.econonew.presenter.BaseUserPresenter;
 import com.example.econonew.tools.adapter.SpinnerSelectAdapter;
 import com.example.econonew.tools.listener.TextChangeListener;
@@ -23,31 +22,18 @@ import com.example.econonew.view.viewinterface.ActEditChangeable;
  */
 public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserActivity>> implements ActEditChangeable {
 
-    private TextInputLayout userNameLy, userPassWordLy, userPassWord2Ly, userAnswerLy;
+    private ActUserRegistBinding mBinding;
     private EditText userNameEt, userPassWordEt, userPassWord2Et;
-
-    private Spinner userMiBaoQuestSp;//Todo 这里要添加Spinner的处理逻辑
     private EditText userAnswerEt;
-
-    private Button userRegistSureBtn;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setContentView(R.layout.act_user_regist);
+        mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_user_regist);
 
-        userNameLy = (TextInputLayout) findViewById(R.id.act_regist_user_name_ly);
-        userPassWordLy = (TextInputLayout) findViewById(R.id.act_regist_password_ly);
-        userPassWord2Ly = (TextInputLayout) findViewById(R.id.act_regist_password2_ly);
-        userAnswerLy = (TextInputLayout) findViewById(R.id.act_user_regist_get_pass_ly);
-
-        userNameEt = userNameLy.getEditText();
-        userPassWordEt = userPassWordLy.getEditText();
-        userPassWord2Et = userPassWord2Ly.getEditText();
-        userAnswerEt = userAnswerLy.getEditText();
-
-        userRegistSureBtn = (Button) findViewById(R.id.act_regist_sure_btn);
-
-        userMiBaoQuestSp = (Spinner) findViewById(R.id.act_user_regist_quest_Sp);
+        userNameEt = mBinding.actRegistUserNameLy.getEditText();
+        userPassWordEt = mBinding.actRegistPasswordLy.getEditText();
+        userPassWord2Et = mBinding.actRegistPassword2Ly.getEditText();
+        userAnswerEt = mBinding.actUserRegistGetPassLy.getEditText();
 
         initSpinner();
         initListener();
@@ -57,12 +43,12 @@ public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserA
     private void initSpinner() {
         ArrayAdapter<CharSequence> questAdapter = ArrayAdapter.createFromResource(mContext, R.array.UserMiBaoQuestion, android.R.layout.simple_spinner_item);
         questAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        userMiBaoQuestSp.setAdapter(questAdapter);
-        userMiBaoQuestSp.setPrompt("请选择密保问题");
+        mBinding.actUserRegistQuestSp.setAdapter(questAdapter);
+        mBinding.actUserRegistQuestSp.setPrompt("请选择密保问题");
     }
 
     private void initListener() {
-        userRegistSureBtn.setOnClickListener(new View.OnClickListener() {
+        mBinding.actRegistSureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userRegistBtnClick();
@@ -72,7 +58,7 @@ public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserA
         userPassWordEt.addTextChangedListener(new TextChangeListener(this));
         userPassWord2Et.addTextChangedListener(new TextChangeListener(this));
         userAnswerEt.addTextChangedListener(new TextChangeListener(this));
-        userMiBaoQuestSp.setOnItemSelectedListener(new SpinnerSelectAdapter() {
+        mBinding.actUserRegistQuestSp.setOnItemSelectedListener(new SpinnerSelectAdapter() {
             @Override
             public void onItemSelected(String selectText) {
                 // TODO: 2016/9/26 要实现的选择密保问题的方法
@@ -101,18 +87,18 @@ public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserA
         String pass1 = userPassWordEt.getText().toString();
         String pass2 = userPassWord2Et.getText().toString();
         if (!TextUtils.isEmpty(userName) && userName.length() != 11) {
-            userNameLy.setErrorEnabled(true);
-            userNameLy.setError("用户名长度不对");
+            mBinding.actRegistUserNameLy.setErrorEnabled(true);
+            mBinding.actRegistUserNameLy.setError("用户名长度不对");
 
         } else if (!TextUtils.isEmpty(pass1) && !pass1.equals(pass2)) {
-            userPassWord2Ly.setErrorEnabled(true);
-            userPassWord2Ly.setError("两次输入的密码不一致");
+            mBinding.actRegistPassword2Ly.setErrorEnabled(true);
+            mBinding.actRegistPassword2Ly.setError("两次输入的密码不一致");
         }
         if(userName.length() == 11){
-            userNameLy.setErrorEnabled(false);
+            mBinding.actRegistUserNameLy.setErrorEnabled(false);
         }
         if(pass1.equals(pass2) || TextUtils.isEmpty(pass1)) {
-            userPassWord2Ly.setErrorEnabled(false);
+            mBinding.actRegistPassword2Ly.setErrorEnabled(false);
         }
     }
 }

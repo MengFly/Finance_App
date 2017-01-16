@@ -87,5 +87,6 @@
     <string name="menu_refresh">刷新</string>
     <string name="menu_open_with_browser">在浏览器中打开</string>
     <string name="act_add_more_channel_select_channel_counts">选择的频道数量：</string>
+    <string name="act_add_channel_more_tv">添加多个频道</string>
 
 </resources>
