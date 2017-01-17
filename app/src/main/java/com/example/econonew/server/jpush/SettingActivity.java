@@ -1,183 +1,138 @@
 package com.example.econonew.server.jpush;
 
-import android.content.SharedPreferences;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.econonew.R;
+import com.example.econonew.databinding.ActSetPushTimeBinding;
+import com.example.econonew.db.DBHelperFactory;
+import com.example.econonew.entity.PushTime;
 import com.example.econonew.view.activity.BaseActivity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class SettingActivity extends BaseActivity {
-	TimePicker startTime;
-	TimePicker endTime;
-	CheckBox mMonday;
-	CheckBox mTuesday;
-	CheckBox mWednesday;
-	CheckBox mThursday;
-	CheckBox mFriday;
-	CheckBox mSaturday;
-	CheckBox mSunday;
-	Button mSetTime;
-	SharedPreferences mSettings;
-	CheckBox timeRule;
-
+public class SettingActivity extends BaseActivity{
+	private ActSetPushTimeBinding mBinding;
 
 	@Override
 	protected void initView(Bundle savedInstanceState) {
-		setContentView(R.layout.act_set_push_time);
-		startTime = (TimePicker) findViewById(R.id.start_time);
-		endTime = (TimePicker) findViewById(R.id.end_time);
-		timeRule = (CheckBox) findViewById(R.id.timeRule);
-
-		mSetTime = (Button) findViewById(R.id.bu_setTime);
-		mMonday = (CheckBox) findViewById(R.id.act_set_time_monday_cb);
-		mTuesday = (CheckBox) findViewById(R.id.act_set_time_tuesday_cb);
-		mWednesday = (CheckBox) findViewById(R.id.act_set_time_wednesday_cb);
-		mThursday = (CheckBox) findViewById(R.id.act_set_time_thursday_cb);
-		mFriday = (CheckBox) findViewById(R.id.act_set_time_friday_cb);
-		mSaturday = (CheckBox) findViewById(R.id.act_set_time_saturday_cb);
-		mSunday = (CheckBox) findViewById(R.id.act_set_time_sunday_cb);
+		mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_set_push_time);
 		initListener();
 		initActionBar(false, "设置消息推送时间", true);
+		initDatas();
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		initData();
+	protected void initDatas() {
+		int timerCount = PushTime.count(PushTime.class);
+		PushTime timer;
+		if (timerCount > 0) {
+			timer = DBHelperFactory.getDBHelper().queryAllItems(PushTime.class).get(0);
+		} else {
+			timer = new PushTime();
+		}
+		initUI(timer);
 	}
 
+	private void initUI(PushTime timer) {
+		for (PushTime.WeekDay day : timer.getDayList()) {
+			setWeek(day);
+		}
+		mBinding.startTime.setCurrentHour(timer.getStartHour());
+		mBinding.startTime.setCurrentMinute(timer.getStartMinus());
+		mBinding.endTime.setCurrentHour(timer.getEndHour());
+		mBinding.endTime.setCurrentMinute(timer.getEndMinus());
+	}
 
 	private void initListener() {
-		mSetTime.setOnClickListener(new OnClickListener() {
+		mBinding.buSetTime.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				v.requestFocus();
-				v.requestFocusFromTouch();
 				setPushTime();
 			}
 		});
-		timeRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		mBinding.timeRule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-				startTime.setIs24HourView(isChecked);
-				endTime.setIs24HourView(isChecked);
+				mBinding.startTime.setIs24HourView(isChecked);
+				mBinding.endTime.setIs24HourView(isChecked);
 			}
 		});
 	}
-
-	@SuppressWarnings("deprecation")
-	private void initData() {
-		mSettings = getSharedPreferences(ExampleUtil.PREFS_NAME, MODE_PRIVATE);
-		String days = mSettings.getString(ExampleUtil.PREFS_DAYS, "");
-		if (!TextUtils.isEmpty(days)) {
-			initAllWeek(false);
-			String[] sArray = days.split(",");
-			for (String day : sArray) {
-				setWeek(day);
-			}
-		} else {
-			initAllWeek(true);
-		}
-		int startTimeStr = mSettings.getInt(ExampleUtil.PREFS_START_TIME, 0);
-		startTime.setCurrentHour(startTimeStr);
-		int endTimeStr = mSettings.getInt(ExampleUtil.PREFS_END_TIME, 23);
-		endTime.setCurrentHour(endTimeStr);
-	}
-
 	/**
 	 * 设置允许接收通知时间
 	 */
-	@SuppressWarnings("deprecation")
 	private void setPushTime() {
-		double starTime = startTime.getCurrentHour() + startTime.getCurrentMinute() * 0.01;
-		double endTime = this.endTime.getCurrentHour() + this.endTime.getCurrentMinute() * 0.01;
-		if (starTime > endTime) {
-			Toast.makeText(SettingActivity.this, "开始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
+
+		int startHour = mBinding.startTime.getCurrentHour();
+		int startMinute = mBinding.startTime.getCurrentMinute();
+		int endHour = mBinding.endTime.getCurrentHour();
+		int endMinute = mBinding.endTime.getCurrentMinute();
+		if (endHour < startHour || (endHour == startHour && endMinute < startMinute)) {
+			showToast("开始时间不能大于结束时间");
 			return;
 		}
-		Set<Integer> days = new HashSet<>();
-		if (mSunday.isChecked()) {
-			days.add(1);
-		}
-		if (mMonday.isChecked()) {
-			days.add(2);
-		}
-		if (mTuesday.isChecked()) {
-			days.add(3);
-		}
-		if (mWednesday.isChecked()) {
-			days.add(4);
-		}
-		if (mThursday.isChecked()) {
-			days.add(5);
-		}
-		if (mFriday.isChecked()) {
-			days.add(6);
-		}
-		if (mSaturday.isChecked()) {
-			days.add(7);
-		}
+		PushTime time = new PushTime();
+		time.setStartHour(startHour);
+		time.setStartMinus(startMinute);
+		time.setEndHour(endHour);
+		time.setEndMinus(endMinute);
 
+		if (mBinding.actSetTimeMondayCb.isChecked()) {
+			time.addWeekDay(PushTime.WeekDay.MONDAY);
+		}
+		if (mBinding.actSetTimeTuesdayCb.isChecked()) {
+			time.addWeekDay(PushTime.WeekDay.TUESDAY);
+		}
+		if (mBinding.actSetTimeWednesdayCb.isChecked()) {
+			time.addWeekDay(PushTime.WeekDay.WEDNESDAY);
+		}
+		if (mBinding.actSetTimeThursdayCb.isChecked()) {
+			time.addWeekDay(PushTime.WeekDay.THURSDAY);
+		}
+		if (mBinding.actSetTimeFridayCb.isChecked()) {
+			time.addWeekDay(PushTime.WeekDay.FRIDAY);
+		}
+		if (mBinding.actSetTimeSaturdayCb.isChecked()) {
+			time.addWeekDay(PushTime.WeekDay.SATURDAY);
+		}
+		if (mBinding.actSetTimeSundayCb.isChecked()) {
+			time.addWeekDay(PushTime.WeekDay.SUNDAY);
+		}
+		DBHelperFactory.getDBHelper().deleteAll(PushTime.class);
+		DBHelperFactory.getDBHelper().insertItems(PushTime.class, time);
 		// 调用JPush api设置Push时间
-
-		Toast.makeText(SettingActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+		showToast("设置成功");
 	}
 
 
-	private void setWeek(String day) {
-		int dayId = Integer.valueOf(day);
-		switch (dayId) {
-			case 1:
-				mSunday.setChecked(true);
+	private void setWeek(PushTime.WeekDay day) {
+		switch (day) {
+			case MONDAY:
+				mBinding.actSetTimeMondayCb.setChecked(true);
 				break;
-			case 2:
-				mMonday.setChecked(true);
+			case TUESDAY:
+				mBinding.actSetTimeTuesdayCb.setChecked(true);
 				break;
-			case 3:
-				mTuesday.setChecked(true);
+			case WEDNESDAY:
+				mBinding.actSetTimeWednesdayCb.setChecked(true);
 				break;
-			case 4:
-				mWednesday.setChecked(true);
+			case THURSDAY:
+				mBinding.actSetTimeThursdayCb.setChecked(true);
 				break;
-			case 5:
-				mThursday.setChecked(true);
+			case FRIDAY:
+				mBinding.actSetTimeFridayCb.setChecked(true);
 				break;
-			case 6:
-				mFriday.setChecked(true);
+			case SATURDAY:
+				mBinding.actSetTimeSaturdayCb.setChecked(true);
 				break;
-			case 7:
-				mSaturday.setChecked(true);
+			case SUNDAY:
+				mBinding.actSetTimeSundayCb.setChecked(true);
 				break;
 		}
-	}
-
-	private void initAllWeek(boolean isChecked) {
-		mSunday.setChecked(isChecked);
-		mMonday.setChecked(isChecked);
-		mTuesday.setChecked(isChecked);
-		mWednesday.setChecked(isChecked);
-		mThursday.setChecked(isChecked);
-		mFriday.setChecked(isChecked);
-		mSaturday.setChecked(isChecked);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		finish();
 	}
 }

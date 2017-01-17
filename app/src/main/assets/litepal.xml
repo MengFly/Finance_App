@@ -4,12 +4,13 @@
     <!--数据库名称-->
     <dbname value="information.db" />
     <!--数据库版本-->
-    <version value="1" />
+    <version value="2" />
 
     <list>
         <mapping class="com.example.econonew.entity.ChannelEntity"/>
         <mapping class="com.example.econonew.entity.MsgItemEntity"/>
         <mapping class="com.example.econonew.entity.UserEntity"/>
+        <mapping class="com.example.econonew.entity.PushTime"/>
     </list>
 
 </litepal>

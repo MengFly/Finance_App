@@ -70,6 +70,7 @@ public class FinanceApplication extends LitePalApplication {
 						new ResponseJsonHelper().handleInformation(map,false);
 						refreshPublicDatasCurrent();
 						refreshPublicDatasCache();
+						refreshPublicDatasSave();
 					}
 
 					public void onError(VolleyError error) {
@@ -89,8 +90,9 @@ public class FinanceApplication extends LitePalApplication {
 
 					@Override
 					public void onSuccess(String response) {
+						Log.e("json", "onSuccess:  Current" + response);
 						JSONObject map = JsonCast.getJsonObject(response);
-						new ResponseJsonHelper().handleInformation(map,true);
+						new ResponseJsonHelper().saveBackMsg(map, Constant.MESSAGE_CURRENT_TYPES);
 					}
 
 					public void onError(VolleyError error) {
@@ -111,8 +113,9 @@ public class FinanceApplication extends LitePalApplication {
 
 					@Override
 					public void onSuccess(String response) {
+						Log.e("json", "onSuccess:  Cache" + response);
 						JSONObject map = JsonCast.getJsonObject(response);
-						new ResponseJsonHelper().handleInformation(map,true);
+						new ResponseJsonHelper().saveBackMsg(map, Constant.MESSAGE_CACHE_TYPES);
 					}
 
 					public void onError(VolleyError error) {
@@ -132,8 +135,9 @@ public class FinanceApplication extends LitePalApplication {
 
 					@Override
 					public void onSuccess(String response) {
+						Log.e("json", "onSuccess:  Save" + response);
 						JSONObject map = JsonCast.getJsonObject(response);
-						new ResponseJsonHelper().handleInformation(map,true);
+						new ResponseJsonHelper().saveBackMsg(map, Constant.MESSAGE_SAVE_TYPES);
 					}
 
 					public void onError(VolleyError error) {

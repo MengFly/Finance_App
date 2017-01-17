@@ -64,15 +64,14 @@ public class UserSetPwdActivity extends BaseUserActivity<BaseUserPresenter<UserA
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				if(checkedId == R.id.act_set_pass_use_quest_rb) {
-					mBinding.setIsPwdLyShow(false);
-					mBinding.setIsQuestionLyShow(true);
+					mBinding.actSetPassUsePassLy.setVisibility(View.GONE);
+					mBinding.actSetPassUseQuestLy.setVisibility(View.VISIBLE);
 				} else if (checkedId == R.id.act_set_pwd_use_pass_rb) {
-					mBinding.setIsPwdLyShow(true);
-					mBinding.setIsQuestionLyShow(false);
+					mBinding.actSetPassUsePassLy.setVisibility(View.VISIBLE);
+					mBinding.actSetPassUseQuestLy.setVisibility(View.GONE);
 				}
 			}
 		});
-		hideFrag();
 	}
 
 	@Override
@@ -87,7 +86,7 @@ public class UserSetPwdActivity extends BaseUserActivity<BaseUserPresenter<UserA
 			String oldPwd = mBinding.actSetPasswordOldPwdEt.getText().toString();
 			if(Constant.user != null && EncodeStrTool.getInstance().getEncodeMD5Str(oldPwd).equals(Constant.user.getPwd())) {
 				showToast("密码正确，请设置密码");
-				mBinding.setIsPwdLyShow(false);
+				mBinding.actSetPassUsePassLy.setVisibility(View.GONE);
 				mBinding.userSetpwdSure.setVisibility(View.GONE);
 				showFrag();
 			} else if(Constant.user == null) {

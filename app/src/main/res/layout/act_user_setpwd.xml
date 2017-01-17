@@ -1,19 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <!--是否显示修改密码的界面-->
-        <variable
-            name="isPwdLyShow"
-            type="Boolean" />
-        <!--是否显示密保信息界面-->
-        <variable
-            name="isQuestionLyShow"
-            type="Boolean" />
-    </data>
-
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -47,8 +33,7 @@
         <LinearLayout
             android:id="@+id/act_set_pass_use_pass_ly"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="@{isPwdLyShow?View.VISIBLE:View.GONE}">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/act_set_password_old_pwd_et"
@@ -62,8 +47,8 @@
         <LinearLayout
             android:id="@+id/act_set_pass_use_quest_ly"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="@{isQuestionLyShow? View.VISIBLE: View.GONE}">
+            android:visibility="gone"
+            android:layout_height="wrap_content">
 
             <EditText
                 style="@style/app_base_text.drawable.pass_et"

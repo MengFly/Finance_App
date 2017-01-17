@@ -167,7 +167,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
      */
     public void stopFresh() {
         hintProDialog();
-        if (mBinding.msgFresh != null) {
+        if (mBinding != null && mBinding.msgFresh != null) {
             mBinding.msgFresh.setRefreshing(false);
         }
     }

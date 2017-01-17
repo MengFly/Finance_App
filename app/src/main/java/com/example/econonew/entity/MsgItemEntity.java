@@ -3,6 +3,7 @@ package com.example.econonew.entity;
 import com.example.econonew.db.Saveable;
 import com.example.econonew.server.URLManager;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ public class MsgItemEntity extends DataSupport implements Serializable, Saveable
 	public static final String ADDRESS_SERVER = "server";//中间服务器
 	public static final String ADDRESS_SERVER_BACK = "server_back";//采集服务器
 
-	public String msgType;
+	private String msgType;
 
 	private int id;
 
@@ -47,6 +48,7 @@ public class MsgItemEntity extends DataSupport implements Serializable, Saveable
 	// 存储消息内容
 	private String msgContent;
 
+	@Column(unique = true)
 	private String msgContentUrl;
 
 	// 存储消息摘要内容，主要用于朗读使用

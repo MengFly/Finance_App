@@ -62,7 +62,7 @@ public class UserLoginActivity extends BaseUserActivity<BaseUserPresenter<UserAc
 
     // 登陆按钮的事件的处理逻辑
     private void loginBtnClick() {
-        String userNameStr = mBinding.actLoginPasswordEt.getText().toString();
+        String userNameStr = mBinding.actLoginUserNameEt.getText().toString();
         String userPasswordStr = mBinding.actLoginPasswordEt.getText().toString();
         mPresenter.userLoginThread(userNameStr, userPasswordStr, isStartLogin);
     }

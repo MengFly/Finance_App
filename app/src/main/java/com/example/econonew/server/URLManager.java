@@ -32,11 +32,11 @@ public class URLManager {
     private static final String CAI_BIAN_URL = "http://115.29.139.72/caibian1";
 
     //TODO 进行备份的数据采集的地址,这个地址要进行修改
-    private static final String URL_BACK = "http://192.168.173.1:8080/DataCollector";
+    private static final String URL_BACK = "http://115.29.139.72:8080/DataCollector";
     //TODO 这个地址要进行修改, 目前只是一个暂时代替的字符串地址而已
-    private static final String OPERATION_CONNECTION_BACK_SAVE = "save.action";//备份的连接存库信息
-    private static final String OPERATION_CONNECTION_BACK_CACHE = "cache.action";//备份的连接缓存信息操作
-    private static final String OPERATION_CONNECTION_BACK_CURRENT = "current.action";//备份的连接实时信息操作
+    private static final String OPERATION_CONNECTION_BACK_SAVE = "save.action?";//备份的连接存库信息
+    private static final String OPERATION_CONNECTION_BACK_CACHE = "cache.action?";//备份的连接缓存信息操作
+    private static final String OPERATION_CONNECTION_BACK_CURRENT = "current.action?";//备份的连接实时信息操作
 
     public static String getBackURL() {
         return URL_BACK;

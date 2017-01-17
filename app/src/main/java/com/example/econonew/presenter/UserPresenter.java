@@ -55,6 +55,7 @@ public class UserPresenter extends BaseUserPresenter<UserActivity> {
 
     public void logoutClick() {
         userLogoutThread(Constant.user);
+        mActivity.clearUser();
     }
 
     // 消息重置的按钮点击事件

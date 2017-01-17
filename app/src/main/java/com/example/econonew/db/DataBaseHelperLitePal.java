@@ -17,7 +17,7 @@ import java.util.List;
 public class DataBaseHelperLitePal implements DataBaseManager {
     @Override
     public <T> List<T> queryAllItems(Class<T> dbEntityClass) {
-        return queryItems(dbEntityClass, 0, null, null, null);
+        return queryItems(dbEntityClass, 0, null, null);
     }
 
     @Override
