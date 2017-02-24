@@ -108,11 +108,12 @@ public class AddMoreChannelPresenter extends BasePresenter<AddMoreChannelActivit
         final List<ChannelEntity> addList = new ArrayList<>(mWantAddChannelList);
         mWantAddChannelList.clear();
         wantAddChannelCount = 0;
+        final int max = addList.size();
         mActivity.showSelectChannelCounts(0);
+        mActivity.updateProMessage(wantAddChannelCount, max, "");
         new Thread() {
             public void run() {
                 for (int i = 0; i < addList.size(); i++) {
-                    final int max = addList.size();
                     final ChannelEntity entity = addList.get(i);
                     final String url = URLManager.getSetChannelURL(Constant.user.getName(), entity);
                     NetClient.getInstance().executeGetForString(mActivity, url, new NetClient.OnResultListener() {
@@ -160,6 +161,7 @@ public class AddMoreChannelPresenter extends BasePresenter<AddMoreChannelActivit
         checkBox.setBackgroundResource(R.drawable.show_channel_back);
         checkBox.setButtonDrawable(R.drawable.none);
         checkBox.setText(entity.toString());
+        checkBox.setTag(entity);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

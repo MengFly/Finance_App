@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText"
         android:layout_gravity="center_horizontal"
-        android:text="设置IP" />
+        android:text="设置中间服务器IP" />
 
     <EditText
         android:layout_margin="5dp"
@@ -24,7 +24,7 @@
 
         <TextView
             android:padding="10dp"
-            android:text="当前IP地址："
+            android:text="当前中间服务器IP地址："
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -34,6 +34,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="设置中间服务器IP" />
+
+    <EditText
+        android:layout_margin="5dp"
+        android:id="@+id/collect_ip_et"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:background="@drawable/et_back"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:padding="10dp"
+            android:text="当前中间服务器IP地址："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/current_collect_ip"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
 
    <Button
         style="@style/app_base_btn.ok"

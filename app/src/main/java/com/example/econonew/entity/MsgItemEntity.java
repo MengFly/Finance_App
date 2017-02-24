@@ -42,6 +42,7 @@ public class MsgItemEntity extends DataSupport implements Serializable, Saveable
 		this.msgType = msgType;
 	}
 
+	@Column(unique = true)
 	// 存储消息标题
 	private String msgTitle;
 

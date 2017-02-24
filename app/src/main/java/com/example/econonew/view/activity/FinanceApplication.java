@@ -37,6 +37,7 @@ public class FinanceApplication extends LitePalApplication {
 
 
 	private static final String TAG = "FinanceApplication";
+	private static boolean isConnectSuccess = false;
 
 	public static FinanceApplication app = null;
 	private static RequestQueue mRequestQueue;//网络请求队列
@@ -59,6 +60,7 @@ public class FinanceApplication extends LitePalApplication {
 	}
 
 	public void refreshPublicDatasConnection() {
+		isConnectSuccess = false;
 		new Thread() {
 			public void run() {
 				String url = URLManager.getConnectURL();
@@ -66,6 +68,7 @@ public class FinanceApplication extends LitePalApplication {
 
 					@Override
 					public void onSuccess(String response) {
+						isConnectSuccess = true;
 						JSONObject map = JsonCast.getJsonObject(response);
 						new ResponseJsonHelper().handleInformation(map,false);
 						refreshPublicDatasCurrent();
@@ -74,6 +77,7 @@ public class FinanceApplication extends LitePalApplication {
 					}
 
 					public void onError(VolleyError error) {
+						super.onError(error);
 						loadDatasFromDatabase();
 					}
 				};
@@ -96,7 +100,10 @@ public class FinanceApplication extends LitePalApplication {
 					}
 
 					public void onError(VolleyError error) {
-						loadDatasFromDatabase();
+						super.onError(error);
+						if (!isConnectSuccess) {
+							loadDatasFromDatabase();
+						}
 					}
 				};
 				NetClient.getInstance().executeGetForString(app, currentUrl, listener);
@@ -119,7 +126,10 @@ public class FinanceApplication extends LitePalApplication {
 					}
 
 					public void onError(VolleyError error) {
-						loadDatasFromDatabase();
+						super.onError(error);
+						if (!isConnectSuccess) {
+							loadDatasFromDatabase();
+						}
 					}
 				};
 				NetClient.getInstance().executeGetForString(app, cacheUrl, listener);
@@ -141,7 +151,10 @@ public class FinanceApplication extends LitePalApplication {
 					}
 
 					public void onError(VolleyError error) {
-						loadDatasFromDatabase();
+						super.onError(error);
+						if (!isConnectSuccess) {
+							loadDatasFromDatabase();
+						}
 					}
 				};
 				NetClient.getInstance().executeGetForString(app, saveUrl, listener);

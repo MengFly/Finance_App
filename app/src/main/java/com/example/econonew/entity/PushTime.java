@@ -18,7 +18,16 @@ public class PushTime extends DataSupport implements Saveable{
     }
 
     public enum WeekDay {
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+        MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5), SATURDAY(6), SUNDAY(7);
+
+        int weekDay = 0;//星期对应的天数
+        WeekDay(int weekDay) {
+            this.weekDay = weekDay;
+        }
+
+        public int getWeekDay() {
+            return weekDay;
+        }
     }
 
     private int startHour;
@@ -97,6 +106,19 @@ public class PushTime extends DataSupport implements Saveable{
             }
         }
         return dayList;
+    }
+
+    /**
+     * 是否包含这一天
+     * @param weekDayInt
+     */
+    public boolean isContainWeekDay(int weekDayInt) {
+        for (WeekDay weekDay : dayList) {
+            if (weekDay.getWeekDay() == weekDayInt) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setDayList(List<WeekDay> dayList) {
