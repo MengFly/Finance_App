@@ -2,6 +2,7 @@ package com.example.econonew.server.json;
 
 import android.util.Log;
 
+
 import com.example.econonew.entity.MsgItemEntity;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.resource.msg.MainMessage;
@@ -103,21 +104,4 @@ public class ResponseJsonHelper {
         return entity;
     }
 
-    //保存从采集器哪里获取到的信息
-    public void saveBackMsg(JSONObject object, String[] childTypes) {
-        for (String msgType : childTypes) {
-            saveChildMessage(object, msgType);
-        }
-    }
-
-    private void saveChildMessage(JSONObject parentObj, String childType) {
-        JSONObject childMsgObj = JsonCast.getJSONObject(parentObj, childType);
-        if (childMsgObj != null) {
-            MsgItemEntity entity = getEntityFromJson(childMsgObj);
-            MainMessage message = MainMessage.getInstance(entity.getMsgType());
-            if (message != null) {
-                message.setMessage(Arrays.asList(entity), true, true);
-            }
-        }
-    }
 }

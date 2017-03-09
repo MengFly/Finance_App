@@ -54,7 +54,7 @@ public class Voice {
 		if (mInstance == null) {
 			synchronized (Voice.class) {
 				if (mInstance == null) {
-					mInstance = new Voice(FinanceApplication.app);
+					mInstance = new Voice(FinanceApplication.getInstance());
 				}
 			}
 		}

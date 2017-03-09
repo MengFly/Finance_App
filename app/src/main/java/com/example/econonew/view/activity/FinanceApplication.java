@@ -35,19 +35,17 @@ import java.util.List;
  */
 public class FinanceApplication extends LitePalApplication {
 
-
 	private static final String TAG = "FinanceApplication";
-	private static boolean isConnectSuccess = false;
 
-	public static FinanceApplication app = null;
+	public static FinanceApplication mInstance = null;
 	private static RequestQueue mRequestQueue;//网络请求队列
 	private List<BaseActivity> mActManager;//Activity队列
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		app = this;
-		mRequestQueue = Volley.newRequestQueue(app);
+		mInstance = this;
+		mRequestQueue = Volley.newRequestQueue(mInstance);
 		mActManager = new ArrayList<>();
 		SpeechUtility.createUtility(this, SpeechConstant.APPID + "=552a964f");
 	}
@@ -55,12 +53,9 @@ public class FinanceApplication extends LitePalApplication {
 	//刷新公共消息
 	public void refreshPublicData() {
 		refreshPublicDatasConnection();
-
-//		refreshPublicDatasSave();
 	}
 
 	public void refreshPublicDatasConnection() {
-		isConnectSuccess = false;
 		new Thread() {
 			public void run() {
 				String url = URLManager.getConnectURL();
@@ -68,12 +63,8 @@ public class FinanceApplication extends LitePalApplication {
 
 					@Override
 					public void onSuccess(String response) {
-						isConnectSuccess = true;
 						JSONObject map = JsonCast.getJsonObject(response);
 						new ResponseJsonHelper().handleInformation(map,false);
-						refreshPublicDatasCurrent();
-						refreshPublicDatasCache();
-						refreshPublicDatasSave();
 					}
 
 					public void onError(VolleyError error) {
@@ -81,83 +72,7 @@ public class FinanceApplication extends LitePalApplication {
 						loadDatasFromDatabase();
 					}
 				};
-				NetClient.getInstance().executeGetForString(app, url, listener);
-			}
-		}.start();
-	}
-
-	private void refreshPublicDatasCurrent() {
-		new Thread() {
-			public void run() {
-				String currentUrl = URLManager.getBACKCurrentMsgUrl();
-				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
-
-					@Override
-					public void onSuccess(String response) {
-						Log.e("json", "onSuccess:  Current" + response);
-						JSONObject map = JsonCast.getJsonObject(response);
-						new ResponseJsonHelper().saveBackMsg(map, Constant.MESSAGE_CURRENT_TYPES);
-					}
-
-					public void onError(VolleyError error) {
-						super.onError(error);
-						if (!isConnectSuccess) {
-							loadDatasFromDatabase();
-						}
-					}
-				};
-				NetClient.getInstance().executeGetForString(app, currentUrl, listener);
-			}
-		}.start();
-	}
-
-
-	private void refreshPublicDatasCache() {
-		new Thread() {
-			public void run() {
-				String cacheUrl = URLManager.getBACKCacheMsgUrl();
-				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
-
-					@Override
-					public void onSuccess(String response) {
-						Log.e("json", "onSuccess:  Cache" + response);
-						JSONObject map = JsonCast.getJsonObject(response);
-						new ResponseJsonHelper().saveBackMsg(map, Constant.MESSAGE_CACHE_TYPES);
-					}
-
-					public void onError(VolleyError error) {
-						super.onError(error);
-						if (!isConnectSuccess) {
-							loadDatasFromDatabase();
-						}
-					}
-				};
-				NetClient.getInstance().executeGetForString(app, cacheUrl, listener);
-			}
-		}.start();
-	}
-
-	private void refreshPublicDatasSave() {
-		new Thread() {
-			public void run() {
-				String saveUrl = URLManager.getBACKSaveMsgUrl();
-				NetClient.OnResultListener listener = new NetClient.OnResultListener() {
-
-					@Override
-					public void onSuccess(String response) {
-						Log.e("json", "onSuccess:  Save" + response);
-						JSONObject map = JsonCast.getJsonObject(response);
-						new ResponseJsonHelper().saveBackMsg(map, Constant.MESSAGE_SAVE_TYPES);
-					}
-
-					public void onError(VolleyError error) {
-						super.onError(error);
-						if (!isConnectSuccess) {
-							loadDatasFromDatabase();
-						}
-					}
-				};
-				NetClient.getInstance().executeGetForString(app, saveUrl, listener);
+				NetClient.getInstance().executeGetForString(mInstance, url, listener);
 			}
 		}.start();
 	}
@@ -199,7 +114,7 @@ public class FinanceApplication extends LitePalApplication {
 
 			@Override
 			public void onSuccess(String response) {
-				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
+				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(mInstance);
 				List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
 				if (channels != null) {
 					DBHelperFactory.getDBHelper().deleteAll(ChannelEntity.class);
@@ -221,13 +136,13 @@ public class FinanceApplication extends LitePalApplication {
 		};
 		new Thread() {
 			public void run() {
-				NetClient.getInstance().executeGetForString(app, url, responseListener);
+				NetClient.getInstance().executeGetForString(mInstance, url, responseListener);
 			}
 		}.start();
 	}
 
 	public static FinanceApplication getInstance() {
-		return app;
+		return mInstance;
 	}
 
 	//获取到应用的安装包

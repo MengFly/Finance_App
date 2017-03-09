@@ -12,12 +12,11 @@ import com.example.econonew.server.URLManager;
 import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.json.ResponseJsonHelper;
 import com.example.econonew.view.activity.BaseActivity;
+import com.example.econonew.view.activity.FinanceApplication;
 
 import org.json.JSONObject;
 
 import java.util.List;
-
-import static com.example.econonew.view.activity.FinanceApplication.app;
 
 /**
  * 主界面有关消息的Presenter，处理有关消息的逻辑
@@ -50,7 +49,7 @@ public class MsgPresenter extends BasePresenter<BaseActivity> {
                         loadDatasFromDatabase();
                     }
                 };
-                NetClient.getInstance().executeGetForString(app, url, listener);
+                NetClient.getInstance().executeGetForString(FinanceApplication.getInstance(), url, listener);
             }
         }.start();
     }

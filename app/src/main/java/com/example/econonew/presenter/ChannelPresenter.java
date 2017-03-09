@@ -14,8 +14,6 @@ import com.example.econonew.view.activity.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.econonew.view.activity.FinanceApplication.app;
-
 
 /**
  * 频道添加的Presenter，用于处理频道添加的一些逻辑
@@ -54,7 +52,7 @@ public class ChannelPresenter extends BasePresenter<BaseActivity> {
 
             @Override
             public void onSuccess(String response) {
-                ChannelJsonHelper jsonHelper = new ChannelJsonHelper(app);
+                ChannelJsonHelper jsonHelper = new ChannelJsonHelper(mActivity);
                 List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
                 if (channels != null) {
                     DBHelperFactory.getDBHelper().deleteAll(ChannelEntity.class);
@@ -75,7 +73,7 @@ public class ChannelPresenter extends BasePresenter<BaseActivity> {
         };
         new Thread() {
             public void run() {
-                NetClient.getInstance().executeGetForString(app, url, responseListener);
+                NetClient.getInstance().executeGetForString(mActivity, url, responseListener);
             }
         }.start();
     }

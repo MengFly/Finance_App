@@ -93,7 +93,7 @@ public class MsgListViewAdapter extends BaseAdapter {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (item.isLove() != isChecked) {
 					item.setLove(isChecked);
-					Toast.makeText(FinanceApplication.app, "设置成功", Toast.LENGTH_SHORT).show();
+					Toast.makeText(FinanceApplication.getInstance(), "设置成功", Toast.LENGTH_SHORT).show();
 					ContentValues values = new ContentValues(1);
 					values.put("isLove", isChecked);
 					DBHelperFactory.getDBHelper().updateItemById(MsgItemEntity.class, values, item.getId());

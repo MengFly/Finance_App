@@ -165,17 +165,17 @@ public class BaseUserPresenter<T extends BaseUserActivity> extends BasePresenter
             @Override
             public void onSuccess(String response) {
                 UserJsonHelper helper = new UserJsonHelper(mActivity);
-                UserEntity user = helper.excuteJsonForItem(response);// 通过Json数据获取User
-                if (user != null) {
-                    Constant.user = new UserEntity(userName, encodePass);
-                    Constant.user.setVIP(user.isVIP());
-                    if (!isStartLogin) {
-                        FinanceApplication.getInstance().refreshUserData(Constant.user);
-                        FinanceApplication.getInstance().refreshPublicData();
-                    }
-                    mActivity.saveUserInfo(Constant.user);
-                    mActivity.backHomeActivity();
-                } else {
+                    UserEntity user = helper.excuteJsonForItem(response);// 通过Json数据获取User
+                    if (user != null) {
+                        Constant.user = new UserEntity(userName, encodePass);
+                        Constant.user.setVIP(user.isVIP());
+                        if (!isStartLogin) {
+                            FinanceApplication.getInstance().refreshUserData(Constant.user);
+                            FinanceApplication.getInstance().refreshPublicData();
+                        }
+                        mActivity.saveUserInfo(Constant.user);
+                        mActivity.backHomeActivity();
+                    } else {
                     mActivity.showToast("登陆失败");
                 }
             }
