@@ -223,7 +223,7 @@ public class BaseUserPresenter<T extends BaseUserActivity> extends BasePresenter
         if (TextUtils.isEmpty(userName)) { // 没有输入用户名
             mActivity.showToast("请输入用户名");
             return false;
-        } else if (userPass.length() > 10 || userPass.length() < 6) { // 密码长度（6~10个数字之间）
+        } else if (userPass.length() < 6) { // 密码长度（6~10个数字之间）
             mActivity.showToast("密码长度不对");
             return false;
         }

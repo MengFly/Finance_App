@@ -67,14 +67,8 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 		}
 		mBinding.actMainViewpager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), list));
 		mBinding.actMainTabLy.setupWithViewPager(mBinding.actMainViewpager);
-//		initTabLine();
+		mBinding.actMainTitleBar.setPresenter(new MainPresenter(this));
 	}
 
-	// 初始化底部导航条以及当行条上面的名称
-//	private void initTabLine() {
-//		ViewPagerIndicator indicator = (ViewPagerIndicator) findViewById(R.id.act_main_viewpager_indicator);
-//		indicator.setTabTitles(Constant.tabList);
-//		indicator.setViewPager(mViewPager, 0);
-//	}
 
 }

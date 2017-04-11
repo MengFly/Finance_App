@@ -17,7 +17,7 @@ import java.util.List;
 public class DataBaseHelperLitePal implements DataBaseManager {
     @Override
     public <T> List<T> queryAllItems(Class<T> dbEntityClass) {
-        return queryItems(dbEntityClass, 0, null, null);
+        return queryItems(dbEntityClass, 0, null, new String[0]);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DataBaseHelperLitePal implements DataBaseManager {
     public <T> List<T> queryItems(Class<T> dbEntityClass, int limit, String sortStr, @Nullable String... whereConditions) {
         List<T> queryList = null;
         ClusterQuery query = null;
-        if (whereConditions != null) {
+        if (whereConditions != null || whereConditions.length == 1) {
             query = DataSupport.where(whereConditions);
         }
         if(limit != 0 && query != null) {

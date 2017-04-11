@@ -26,13 +26,6 @@ public class Constant {
     public static final String[] publicItemNames = new String[]{"股票", "理财", "基金", "期货", "外汇"};
 
 
-    /**
-     * 用户自定义的频道信息的各表名称 其顺序依次为： "stock_channel", "money_channel",
-     * "funds_channel", "exchange_channel", "futures_channel"
-     */
-    public static final String[] selfDataTableNames = new String[]{"stock_channel", "money_channel", "funds_channel",
-            "futures_channel", "exchange_channel"};
-
     // 朗读列表
     public static int read_tab = 0;
 

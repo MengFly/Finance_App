@@ -52,6 +52,6 @@ public class UserActivity extends BaseUserActivity<UserPresenter> {
 
     public void clearUser() {
         mBinding.userName.setText("未登录");
-        removeUserAndCookie();
+//        removeUserAndCookie();
     }
 }

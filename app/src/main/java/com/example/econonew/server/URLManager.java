@@ -18,7 +18,7 @@ import java.net.URLEncoder;
 public class URLManager {
 
     // 中间层服务器的常量
-    private static final String URL = "http://115.28.188.113:8080/Finance_Server1.0.0"; // 中间服务器地址
+    private static final String URL = "http://115.28.188.113:8080/Finance_Server"; // 中间服务器地址
     private static final String OPERATION_CONNECTION = "connect.action"; // 连接操作
     private static final String OPERATION_LOGIN = "login.action"; // 登录操作
     private static final String OPERATION_LOGOUT = "logout.action"; // 注销操作
@@ -49,7 +49,7 @@ public class URLManager {
             SharedPreferences spf = FinanceApplication.getInstance().getSharedPreferences("ip", Context.MODE_PRIVATE);
             String currentIp = spf.getString("current_ip", null);
             if (!TextUtils.isEmpty(currentIp)) {
-                return "http://" + currentIp + ":8080/Finance_Server1.0.0";
+                return "http://" + currentIp + ":8080/Finance_Server";
             } else {
                 return URL;
             }

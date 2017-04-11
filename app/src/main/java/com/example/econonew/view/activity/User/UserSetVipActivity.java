@@ -34,6 +34,10 @@ public class UserSetVipActivity extends BaseUserActivity<BaseUserPresenter<UserA
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (Constant.user.isVIP()) {
+                            showToast("当前用户已经是Vip了，不需要再次设置了");
+                            return;
+                        }
                         final String userName = mBinding.actSetVipUserName.getText().toString();
                         if (TextUtils.isEmpty(userName)) {
                             showToast("用户名为空");
