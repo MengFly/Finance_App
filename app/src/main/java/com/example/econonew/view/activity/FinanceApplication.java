@@ -22,6 +22,7 @@ import com.example.econonew.server.json.JsonCast;
 import com.example.econonew.server.json.ResponseJsonHelper;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
+import com.tencent.smtt.sdk.QbSdk;
 
 import org.json.JSONObject;
 import org.litepal.LitePalApplication;
@@ -37,16 +38,15 @@ public class FinanceApplication extends LitePalApplication {
 
 	private static final String TAG = "FinanceApplication";
 
-	public static FinanceApplication mInstance = null;
 	private static RequestQueue mRequestQueue;//网络请求队列
 	private List<BaseActivity> mActManager;//Activity队列
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		mInstance = this;
-		mRequestQueue = Volley.newRequestQueue(mInstance);
+		mRequestQueue = Volley.newRequestQueue(getContext());
 		mActManager = new ArrayList<>();
+		QbSdk.initX5Environment(this, null);//加载腾讯X5内核
 		SpeechUtility.createUtility(this, SpeechConstant.APPID + "=552a964f");
 	}
 
@@ -72,7 +72,7 @@ public class FinanceApplication extends LitePalApplication {
 						loadDatasFromDatabase();
 					}
 				};
-				NetClient.getInstance().executeGetForString(mInstance, url, listener);
+				NetClient.getInstance().executeGetForString(getContext(), url, listener);
 			}
 		}.start();
 	}
@@ -114,7 +114,7 @@ public class FinanceApplication extends LitePalApplication {
 
 			@Override
 			public void onSuccess(String response) {
-				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(mInstance);
+				ChannelJsonHelper jsonHelper = new ChannelJsonHelper(getContext());
 				List<ChannelEntity> channels = jsonHelper.excuteJsonForItems(response);
 				if (channels != null) {
 					DBHelperFactory.getDBHelper().deleteAll(ChannelEntity.class);
@@ -136,13 +136,13 @@ public class FinanceApplication extends LitePalApplication {
 		};
 		new Thread() {
 			public void run() {
-				NetClient.getInstance().executeGetForString(mInstance, url, responseListener);
+				NetClient.getInstance().executeGetForString(getContext(), url, responseListener);
 			}
 		}.start();
 	}
 
 	public static FinanceApplication getInstance() {
-		return mInstance;
+		return (FinanceApplication) getContext();
 	}
 
 	//获取到应用的安装包

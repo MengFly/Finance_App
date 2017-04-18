@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 		}
 		mBinding.actMainViewpager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), list));
 		mBinding.actMainTabLy.setupWithViewPager(mBinding.actMainViewpager);
-		mBinding.actMainTitleBar.setPresenter(new MainPresenter(this));
+		mBinding.actMainTitleBar.setPresenter(mPresenter);
 	}
 
 

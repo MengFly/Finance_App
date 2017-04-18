@@ -4,13 +4,13 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import com.tencent.smtt.export.external.interfaces.WebResourceError;
+import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
 
 /**
  * WebView 的功能封装类
@@ -50,8 +50,16 @@ public class DefaultWebView extends WebView {
     }
 
     private String getUTF8Html(String msg) {
-        String moban = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /></head><p style=\"font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';font-size: 16px;line-height: 1.5;text-align: center;\">{1}</p></html>";
-        return moban.replace("{1}", msg);
+        String muoban = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
+                "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
+                "<head>\n" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://mengfly.github.io/app/todo/css/style.css\">\n" +
+                "\n" +
+                "</head>\n" +
+                "\n" +
+                "<body class=\"markdown clearness\" style=\"width:90%; text-align:center; top:20px; left:auto; right:auto; margin:auto\"><p>{1}</p></body></html>";
+        return muoban.replace("{1}", msg);
     }
 
     /**
@@ -72,9 +80,10 @@ public class DefaultWebView extends WebView {
         }
     }
 
-    private class DefaultWebViewClient extends WebViewClient {
+    private class DefaultWebViewClient extends com.tencent.smtt.sdk.WebViewClient {
         @Override
-        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+        public void onReceivedError(WebView view, WebResourceRequest request,
+                                    WebResourceError error) {
             loadUrl("file:///android_asset/tip/not_fund_url_tip.html");
         }
 

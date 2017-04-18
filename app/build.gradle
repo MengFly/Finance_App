@@ -48,4 +48,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'org.litepal.android:core:1.4.1'
+    compile files('libs/tencent_x5_v3.1.0.jar')
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,18 +13,10 @@
             android:layout_height="wrap_content"
             android:progress="30" />
 
-        <ScrollView
+        <FrameLayout
+            android:id="@+id/sv_message"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
-
-            <!-- 显示消息内容的WebView -->
-
-            <com.example.econonew.view.customview.DefaultWebView
-                android:id="@+id/msg_item_content_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
