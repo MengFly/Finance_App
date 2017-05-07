@@ -54,11 +54,11 @@ public class DefaultWebView extends WebView {
                 "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                 "<head>\n" +
                 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://mengfly.github.io/app/todo/css/style.css\">\n" +
-                "\n" +
                 "</head>\n" +
                 "\n" +
-                "<body class=\"markdown clearness\" style=\"width:90%; text-align:center; top:20px; left:auto; right:auto; margin:auto\"><p>{1}</p></body></html>";
+                "<body class=\"markdown clearness\" style=\"width:90%; text-align:center; top:20px; left:auto; right:auto; margin:auto\"><p>{1}</p>" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://mengfly.github.io/app/todo/css/style.css\">\n" +
+                "</body></html>";
         return muoban.replace("{1}", msg);
     }
 

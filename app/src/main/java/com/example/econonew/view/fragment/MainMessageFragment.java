@@ -50,10 +50,10 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater,R.layout.frag_main_view_page,container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.frag_main_view_page, container, false);
         Bundle arguments = getArguments();
-        if(arguments != null) {
-            fragmentName =  arguments.getString("name");
+        if (arguments != null) {
+            fragmentName = arguments.getString("name");
         }
         if (savedInstanceState != null) {
             fragmentName = savedInstanceState.getString("name");
@@ -73,13 +73,18 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
         }
     }
 
+    public void showFreshView() {
+        if (mBinding != null && mBinding.msgFresh != null) {
+            mBinding.msgFresh.setRefreshing(true);
+        }
+    }
+
     // 初始化界面的控件
     private void initView() {
         msgAdapter = new MsgListViewAdapter(getActivity(), msgList, mBinding.msgListview, fragmentName);
-         mBinding.msgListview.setAdapter(msgAdapter);
+        mBinding.msgListview.setAdapter(msgAdapter);
         mBinding.msgListview.setEmptyView(mBinding.msgNoTipTv);
         mBinding.msgFresh.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2, R.color.swipe_color_3);
-
         initListener();
     }
 

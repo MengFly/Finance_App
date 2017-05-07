@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
@@ -18,11 +19,18 @@ public class MyStringRequest extends StringRequest {
 
 	private final SharedPreferences spf;
 
+	//链接超时时间
+	private static final int timeOutMs = 15 * 1000;
+	private static final int maxRetries = 3;//链接超时重连最大次数
+
+
 	private static String SESSIONID = null;// 本地存储的SESSIONID
 
 	public MyStringRequest(Context context, int method, String url,
 						   Listener<String> listener, ErrorListener errorListener) {
 		super(method, url, listener, errorListener);
+		//设置超时重连的机制
+		this.setRetryPolicy(new DefaultRetryPolicy(timeOutMs, maxRetries, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		spf = context.getSharedPreferences("set-cookie", Context.MODE_PRIVATE);
 	}
 

@@ -41,6 +41,12 @@ public class UserLoginActivity extends BaseUserActivity<BaseUserPresenter<UserAc
                 loginBtnClick();
             }
         });
+        mBinding.loginRegistTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginBtnClick();
+            }
+        });
         mBinding.actUserLoginNotLoginTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
