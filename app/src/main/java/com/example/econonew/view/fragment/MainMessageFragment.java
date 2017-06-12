@@ -113,6 +113,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     public void setList(List<MsgItemEntity> list) {
         this.msgList.clear();
         this.msgList.addAll(list);
+        addTestDate();
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -120,6 +121,11 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
                 stopFresh();//停止刷新提示
             }
         });
+    }
+
+    private void addTestDate() {
+        this.msgList.add(new MsgItemEntity("测试", null, "http://www.cninfo.com.cn/finalpage/2017-01-09/1202997231.PDF",
+                null, "https://image.baidu.com/search/index?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&fr=&hs=0&xthttps=111111&sf=1&fmq=&pv=&ic=0&nc=1&z=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&word=%E5%AE%A0%E7%89%A9&oq=%E5%AE%A0%E7%89%A9&rsp=-1"));
     }
 
     @Override

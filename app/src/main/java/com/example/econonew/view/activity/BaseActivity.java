@@ -168,6 +168,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	public void showToast(String toastStr) {
 		if(mToast == null) {
 			mToast = Toast.makeText(this, toastStr, Toast.LENGTH_SHORT);
+		} else {
+			mToast.setText(toastStr);
 		}
 		mToast.show();
 	}
