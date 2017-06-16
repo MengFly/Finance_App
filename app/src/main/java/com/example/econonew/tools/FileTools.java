@@ -1,103 +1,98 @@
 package com.example.econonew.tools;
 
-import android.content.Context;
 import android.os.Environment;
-import android.widget.Toast;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class FileTools {
+    private static final String DOWNLOAD_FILE_DIR = "finance";
 
-	static public void downloadFileFromNet(final String urlName, final CallBack<String> back, final CallBack<Integer> lengthCallBack) {
-		new Thread() {
-			@Override
-			public void run() {
-				HttpURLConnection connection = null;
-				FileOutputStream outputStream = null;
-				InputStream stream = null;
-				try {
-					File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-							urlName.split("/")[urlName.split("/").length - 1]);
-					if (file.exists()) {
-						back.callBack(file.getAbsolutePath(), "文件已存在");
-						return;
-					} else {
-						file.createNewFile();
-					}
-					URL url = new URL(urlName);
-					connection = (HttpURLConnection) url.openConnection();
-					stream = connection.getInputStream();
-					int fileLength = connection.getContentLength();
-					int downLoadLength = 0;
-					outputStream = new FileOutputStream(file);
-					byte[] bs = new byte[5 * 1024];
-					int length = 0;
-					while ((length = stream.read(bs)) != -1) {
-						outputStream.write(bs, 0, length);
-						downLoadLength += length/1024;
-						lengthCallBack.callBack(fileLength/1024, downLoadLength);
-					}
-					back.callBack(file.getAbsolutePath());
-				} catch (Exception e) {
-					back.callBack(null, "加载失败" + e.getMessage());
-				} finally {
-					if (stream!= null) {
-						try {
-							stream.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-					if (outputStream != null) {
+    public static File getDownLoadFileDir() {
+        return mkDir(DOWNLOAD_FILE_DIR);
+    }
 
-						try {
-							outputStream.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-					if (connection != null) {
-						connection.disconnect();
-					}
-				}
-			}
+    public static File mkDir(String dirType) {
+        File file  = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), dirType);
+        if (!file.exists() || !file.isDirectory()) {
+            file.mkdir();
+        }
+        return file;
+    }
 
-		}.start();
-	}
-	
-	static public void writeFile(Context context, String fileName,
-			String content) {
-		File file = new File(context.getExternalCacheDir(), fileName);
-		if (file.exists()) {
-			file.delete();
-		} else {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		FileOutputStream out = null;
+    static public void downloadFileFromNet(final String urlName, final CallBack<String> back,
+                                           final CallBack<Integer> lengthCallBack) {
+        new Thread() {
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;
+                FileOutputStream outputStream = null;
+                InputStream stream = null;
+                try {
+                    URL url = new URL(urlName);
+                    connection = (HttpURLConnection) url.openConnection();
+                    File file = new File(getDownLoadFileDir(), urlName.split("/")[urlName.split("/").length - 1]);
+                    if (file.exists()) {
+                        if (Math.abs(file.length() - connection.getContentLength()) < 5 * 1024) {
+                            back.callBack(file.getAbsolutePath(), "文件已存在");
+                            connection.disconnect();
+                            return;
+                        } else {
+                            file.deleteOnExit();
+                        }
+                    }
+                    if (file.createNewFile()) {
+                        back.callBack(null, "文件创建成功");
+                    } else {
+                        back.callBack(null, "文件创建失败");
+                    }
+                    stream = connection.getInputStream();
+                    int fileLength = connection.getContentLength();
+                    outputStream = new FileOutputStream(file);
+                    readContentFromStream(stream, outputStream, fileLength, lengthCallBack);
+                    back.callBack(file.getAbsolutePath());
+                } catch (Exception e) {
+                    back.callBack(null, "加载失败" + e.getMessage());
+                } finally {
+                    closeStream(stream, outputStream);
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                }
+            }
 
-		try {
-			out = new FileOutputStream(file);
-			out.write(content.getBytes(), 0, content.getBytes().length);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (out != null) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		Toast.makeText(context, "true", Toast.LENGTH_SHORT).show();
-	}
+        }.start();
+    }
+
+    private static void readContentFromStream(InputStream inputStream, OutputStream outputStream,
+                                              int length, CallBack<Integer> lengthCallBack) throws IOException {
+        int downLoadLength = 0;
+        byte[] bs = new byte[5 * 1024];
+        int buffer;
+        while ((buffer = inputStream.read(bs)) != -1) {
+            outputStream.write(bs, 0, buffer);
+            downLoadLength += buffer / 1024;
+            if (length != 0 && lengthCallBack != null) {
+                lengthCallBack.callBack(length / 1024, downLoadLength);
+            }
+        }
+    }
+
+    private static void closeStream(Closeable... closeables) {
+        for (Closeable closeable : closeables) {
+            try {
+                if (closeable != null) {
+                    closeable.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
