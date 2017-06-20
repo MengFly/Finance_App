@@ -1,4 +1,4 @@
-package com.example.econonew.view.activity.User;
+package com.example.econonew.view.activity.user;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

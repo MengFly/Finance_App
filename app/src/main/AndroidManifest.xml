@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:installLocation="auto"
-    package="com.example.econonew">
+    package="com.example.econonew"
+    android:installLocation="auto">
 
     <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,17 +36,17 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
     <application
+        android:name=".view.activity.FinanceApplication"
         android:allowBackup="true"
         android:icon="@mipmap/icon_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".view.activity.FinanceApplication"
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.main.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppNoActionBarTheme"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,74 +54,68 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/AppNoActionBarTheme"
             android:name=".view.activity.channel.ChannelAddActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBarTheme"/>
         <activity
-            android:theme="@style/AppNoActionBarTheme"
             android:name=".view.activity.main.MainActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBarTheme"/>
         <activity
-            android:name=".view.activity.User.UserActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".view.activity.user.UserActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".view.activity.User.UserSetPwdActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:name=".view.activity.user.UserSetPwdActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".view.activity.User.UserLoginActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".view.activity.user.UserLoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/AppNoActionBarTheme"/>
         <activity
-            android:name=".view.activity.User.UserRegistActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name=".view.activity.channel.AddOneChannelActivity"
+            android:name=".view.activity.user.UserRegistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBarTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity
+            android:name=".view.activity.channel.AddOneChannelActivity"
             android:label="@string/label_add_one_channel"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.activity.channel.AddChannelFromCodeActivity"
             android:label="@string/label_add_one_channel"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".server.jpush.SettingActivity"
             android:label="@string/label_set_push_time"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.activity.main.MsgContentActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".server.jpush.TestActivity"
-            android:theme="@style/AppNoActionBarTheme"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBarTheme"/>
         <activity
             android:name=".view.activity.channel.AddMoreChannelActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".view.activity.User.UserSetVipActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".view.activity.user.UserSetVipActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
+            android:name=".view.activity.main.RigestOrLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppNoActionBarTheme" />
+        <activity
             android:name=".utils.URLSettingActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
@@ -133,14 +127,13 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false" >
-        </service>
+            android:exported="false"/>
 
         <!-- Required SDK 核心功能 -->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -155,7 +148,7 @@
             android:name="cn.jpush.android.service.DaemonService"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.ACCESS_CHECKIN_PROPERTIES" >
+            android:permission="android.permission.ACCESS_CHECKIN_PROPERTIES">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
 
@@ -167,8 +160,8 @@
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true"
-            android:exported="false" >
-            <intent-filter android:priority="1000" >
+            android:exported="false">
+            <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required  显示通知栏 -->
                 <category android:name="com.example.econonew" />
@@ -193,7 +186,7 @@
         <receiver
             android:name=".server.jpush.MyReceiver"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required  用户注册SDK的intent -->

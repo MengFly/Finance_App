@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="10dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_dir_left" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40sp"
+                android:text="Login"
+                android:textColor="#aa000000"
+                android:textSize="40sp"
+                android:textStyle="italic" />
+
+            <android.support.design.widget.TextInputLayout style="@style/app_base_layout">
+
+                <EditText
+                    android:id="@+id/et_username"
+                    style="@style/et_input"
+                    android:hint="UserName（用户名）" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_show_warron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginBottom="20dp"
+                android:drawableLeft="@drawable/ic_wrron"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="当前没有输入用户名"
+                android:textColor="@color/color_red_app" />
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/app_base_layout"
+                app:counterEnabled="true"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/et_password"
+                    style="@style/et_input"
+                    android:layout_marginBottom="20dp"
+                    android:hint="PassWord（密码）"
+                    android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_foget_password"
+                style="@style/btn_flat"
+                android:layout_gravity="end"
+                android:text="忘记密码" />
+
+            <Button
+                android:id="@+id/btn_login"
+                style="@style/btn"
+                android:layout_width="match_parent"
+                android:text="登录" />
+
+        </LinearLayout>
+
+        <com.example.econonew.view.customview.UnderLineTextView
+            android:id="@+id/tv_other_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:text="其他方式登录"
+            android:textColor="#aaaaaa"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</layout>

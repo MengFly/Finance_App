@@ -2,9 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="presenter"
-            type="com.example.econonew.presenter.AddMoreChannelPresenter"/>
+            type="com.example.econonew.presenter.AddMoreChannelPresenter" />
     </data>
 
     <LinearLayout
@@ -26,9 +27,10 @@
 
             <Button
                 android:id="@+id/act_add_channel_add_more_ok_btn"
-                style="@style/app_base_btn.ok"
+                style="@style/btn"
+                android:layout_width="wrap_content"
                 android:onClick="@{() -> presenter.okBtnClick()}"
-                android:layout_width="wrap_content" />
+                android:text="确定" />
         </LinearLayout>
 
         <ScrollView

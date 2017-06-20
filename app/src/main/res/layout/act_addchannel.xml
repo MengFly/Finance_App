@@ -1,170 +1,172 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_margin="15dip"
-    android:orientation="vertical" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tv_back"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        android:text="@string/act_add_channel_title_tv"
-        android:textSize="25sp" />
+        android:layout_height="fill_parent"
+        android:layout_margin="15dip"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/act_add_channel_select_style_tv"
-        android:textSize="18sp" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="none" >
-
-        <TableLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:stretchColumns="0,1" >
+            android:background="@drawable/tv_back"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/act_add_channel_title_tv"
+            android:textSize="25sp" />
 
-            <TableRow>
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/act_add_channel_select_style_tv"
+            android:textSize="18sp" />
 
-                    <Button
-                        android:id="@+id/futures_choose"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:onClick="onClick"
-                        android:background="@drawable/icon_futures" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dip"
-                        android:text="@string/act_add_channel_futures_tv" />
-                </LinearLayout>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:stretchColumns="0,1">
 
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical" >
+                <TableRow>
 
-                    <Button
-                        android:id="@+id/stock_choose"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:onClick="onClick"
-                        android:background="@drawable/icon_stock" />
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dip"
-                        android:text="@string/act_add_channel_stock_tv" />
-                </LinearLayout>
-            </TableRow>
+                        <Button
+                            android:id="@+id/futures_choose"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/icon_futures"
+                            android:onClick="onClick" />
 
-            <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dip"
+                            android:text="@string/act_add_channel_futures_tv" />
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical" >
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/exchange_choose"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:onClick="onClick"
-                        android:background="@drawable/icon_exchange" />
+                        <Button
+                            android:id="@+id/stock_choose"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/icon_stock"
+                            android:onClick="onClick" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dip"
-                        android:text="@string/act_add_channel_exchange_tv" />
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dip"
+                            android:text="@string/act_add_channel_stock_tv" />
+                    </LinearLayout>
+                </TableRow>
 
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical" >
+                <TableRow>
 
-                    <Button
-                        android:id="@+id/funds_choose"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:onClick="onClick"
-                        android:background="@drawable/icon_funds" />
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dip"
-                        android:text="@string/act_add_channel_funds_tv" />
-                </LinearLayout>
-            </TableRow>
+                        <Button
+                            android:id="@+id/exchange_choose"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/icon_exchange"
+                            android:onClick="onClick" />
 
-            <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dip"
+                            android:text="@string/act_add_channel_exchange_tv" />
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical" >
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/money_choose"
-                        android:layout_width="60dp"
-                        android:onClick="onClick"
-                        android:layout_height="60dp"
-                        android:background="@drawable/icon_money" />
+                        <Button
+                            android:id="@+id/funds_choose"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/icon_funds"
+                            android:onClick="onClick" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dip"
-                        android:text="@string/act_add_channel_money_tv" />
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dip"
+                            android:text="@string/act_add_channel_funds_tv" />
+                    </LinearLayout>
+                </TableRow>
 
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical" >
+                <TableRow>
 
-                    <Button
-                        android:id="@+id/special_choose"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:onClick="onClick"
-                        android:background="@drawable/icon_special" />
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dip"
-                        android:text="@string/act_add_channel_special_tv" />
-                </LinearLayout>
-            </TableRow>
-        </TableLayout>
-    </ScrollView>
+                        <Button
+                            android:id="@+id/money_choose"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/icon_money"
+                            android:onClick="onClick" />
 
-    <com.example.econonew.view.customview.UnderLineTextView
-        style="@style/app_base_text.clickable_tv"
-        android:id="@+id/act_add_channel_add_more_channel"
-        android:text="@string/act_add_channel_more_tv"
-        android:onClick="onClick"
-        android:layout_gravity="end" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dip"
+                            android:text="@string/act_add_channel_money_tv" />
+                    </LinearLayout>
 
-    <Button
-        android:id="@+id/channel_quit"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:onClick="onClick"
-        android:background="@drawable/btn_back"
-        android:text="@string/btn_back" />
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-</LinearLayout>
+                        <Button
+                            android:id="@+id/special_choose"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/icon_special"
+                            android:onClick="onClick" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dip"
+                            android:text="@string/act_add_channel_special_tv" />
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+
+        <com.example.econonew.view.customview.UnderLineTextView
+            android:id="@+id/act_add_channel_add_more_channel"
+            style="@style/app_base_text.clickable_tv"
+            android:layout_gravity="end"
+            android:layout_marginBottom="10dp"
+            android:onClick="onClick"
+            android:text="@string/act_add_channel_more_tv" />
+
+        <Button
+            android:id="@+id/channel_quit"
+            style="@style/btn"
+            android:layout_width="match_parent"
+            android:onClick="onClick"
+            android:text="@string/btn_back" />
+
+    </LinearLayout>
 </layout>

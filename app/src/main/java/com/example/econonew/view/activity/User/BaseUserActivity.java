@@ -1,4 +1,4 @@
-package com.example.econonew.view.activity.User;
+package com.example.econonew.view.activity.user;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

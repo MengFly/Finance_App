@@ -79,7 +79,7 @@ public class FileTools {
             outputStream.write(bs, 0, buffer);
             downLoadLength += buffer / 1024;
             if (length != 0 && lengthCallBack != null) {
-                lengthCallBack.callBack(length / 1024, downLoadLength);
+                lengthCallBack.callBack(downLoadLength, length / 1024);
             }
         }
     }

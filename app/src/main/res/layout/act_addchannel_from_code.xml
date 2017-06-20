@@ -25,8 +25,9 @@
 
         <Button
             android:id="@+id/special_channel_sure"
-            style="@style/app_base_btn.ok"
-            android:layout_width="match_parent" />
+            style="@style/btn"
+            android:layout_width="match_parent"
+            android:text="确定" />
 
     </LinearLayout>
 </layout>

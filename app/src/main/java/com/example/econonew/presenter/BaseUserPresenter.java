@@ -11,7 +11,7 @@ import com.example.econonew.server.URLManager;
 import com.example.econonew.server.json.UserJsonHelper;
 import com.example.econonew.tools.EncodeStrTool;
 import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.activity.User.BaseUserActivity;
+import com.example.econonew.view.activity.user.BaseUserActivity;
 
 import java.util.regex.Pattern;
 

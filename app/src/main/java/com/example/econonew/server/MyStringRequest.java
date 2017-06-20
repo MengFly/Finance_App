@@ -20,7 +20,7 @@ public class MyStringRequest extends StringRequest {
 	private final SharedPreferences spf;
 
 	//链接超时时间
-	private static final int timeOutMs = 15 * 1000;
+	private static final int timeOutMs = 8 * 1000;
 	private static final int maxRetries = 3;//链接超时重连最大次数
 
 

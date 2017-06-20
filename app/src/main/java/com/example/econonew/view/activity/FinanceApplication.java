@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 
+import com.aitangba.swipeback.ActivityLifecycleHelper;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
@@ -48,6 +49,7 @@ public class FinanceApplication extends LitePalApplication {
 		mActManager = new ArrayList<>();
 		QbSdk.initX5Environment(this, null);//加载腾讯X5内核
 		SpeechUtility.createUtility(this, SpeechConstant.APPID + "=552a964f");
+		registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
 	}
 
 	//刷新公共消息

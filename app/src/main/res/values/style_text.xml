@@ -41,6 +41,17 @@
         <item name="android:textColor">@color/text_hint_color</item>
     </style>
 
+    <!--用户输入框的统一类型-->
+    <style name="et_input">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">#aaa</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/color_text_main_dark</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
     <!--可点击的TextView-->
     <style name="app_base_text.clickable_tv">
         <item name="android:textColor">@color/text_link_color</item>

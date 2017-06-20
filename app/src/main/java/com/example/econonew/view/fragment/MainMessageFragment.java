@@ -20,6 +20,7 @@ import com.example.econonew.tools.adapter.MsgListViewAdapter;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.activity.FinanceApplication;
 import com.example.econonew.view.activity.main.MsgContentActivity;
+import com.twotoasters.jazzylistview.effects.CardsEffect;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +52,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.frag_main_view_page, container, false);
+        mBinding.msgListview.setTransitionEffect(new CardsEffect());
         Bundle arguments = getArguments();
         if (arguments != null) {
             fragmentName = arguments.getString("name");
@@ -113,7 +115,7 @@ public class MainMessageFragment extends MsgBaseFragment<MainMessage, MsgItemEnt
     public void setList(List<MsgItemEntity> list) {
         this.msgList.clear();
         this.msgList.addAll(list);
-        addTestDate();
+//        addTestDate();
         mHandler.post(new Runnable() {
             @Override
             public void run() {

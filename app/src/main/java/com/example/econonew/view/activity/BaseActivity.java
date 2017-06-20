@@ -1,6 +1,7 @@
 package com.example.econonew.view.activity;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,17 +12,17 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.aitangba.swipeback.SwipeBackActivity;
 import com.example.econonew.R;
 import com.example.econonew.entity.UserEntity;
 import com.example.econonew.presenter.BasePresenter;
 import com.example.econonew.resource.Constant;
-import com.example.econonew.view.activity.User.UserLoginActivity;
+import com.example.econonew.view.activity.user.UserLoginActivity;
 import com.example.econonew.view.activity.main.MainActivity;
 
 import cn.jpush.android.api.JPushInterface;
@@ -33,7 +34,7 @@ import cn.jpush.android.api.JPushInterface;
  * @author mengfei
  *
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackActivity {
 
 	protected  T mPresenter;
 
@@ -179,7 +180,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 	 * @param actClass	另一个Activity
 	 * @param isFinish	打开另一个Activity后此Activity是否退出
      */
-	public void openOtherActivity(Class<?> actClass, boolean isFinish) {
+	public void openOtherActivity(Class<? extends Activity> actClass, boolean isFinish) {
 		Intent intent = new Intent(mContext, actClass);
 		mContext.startActivity(intent);
 		if(isFinish) {

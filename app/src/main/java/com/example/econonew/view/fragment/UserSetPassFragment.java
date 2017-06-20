@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import com.example.econonew.R;
 import com.example.econonew.databinding.FragSetPassBinding;
 import com.example.econonew.presenter.BaseUserPresenter;
-import com.example.econonew.view.activity.User.BaseUserActivity;
-import com.example.econonew.view.activity.User.UserActivity;
+import com.example.econonew.view.activity.user.BaseUserActivity;
+import com.example.econonew.view.activity.user.UserActivity;
 
 /**
  * 用于设置密码的Fragment

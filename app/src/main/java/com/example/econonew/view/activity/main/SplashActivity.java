@@ -16,7 +16,6 @@ import com.example.econonew.server.URLManager;
 import com.example.econonew.server.jpush.ExampleUtil;
 import com.example.econonew.server.jpush.PushSwitch;
 import com.example.econonew.view.activity.BaseActivity;
-import com.example.econonew.view.activity.User.UserLoginActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,7 +69,7 @@ public class SplashActivity extends BaseActivity {
                 Intent intent = new Intent();
                 // 如果用户信息过期则进入登陆界面，如果没有过期则初始化用户并进入主界面
                 if (cookieIsGuoqi()) {
-                    intent.setClass(mContext, UserLoginActivity.class);
+                    intent.setClass(mContext, RigestOrLoginActivity.class);
                 } else {
                     Constant.user = getUserInfo();
                     String url = URLManager.getLoginURL(Constant.user);

@@ -17,6 +17,7 @@ import com.example.econonew.tools.CallBack;
 import com.example.econonew.tools.FileTools;
 import com.example.econonew.view.activity.BaseActivity;
 import com.example.econonew.view.customview.DefaultWebView;
+import com.example.econonew.view.dialog.DownLoadDialog;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 
@@ -59,6 +60,7 @@ public class MsgContentActivity extends BaseActivity {
         if (showContentDW != null) {
             showContentDW.loadUrl(msgContentUrl, msgContent);
         } else {
+            final DownLoadDialog downLoadDialog = new DownLoadDialog(mContext, null);
             FileTools.downloadFileFromNet(msgContentUrl, new CallBack<String>() {
                 @Override
                 public void callBack(final String... t) {
@@ -68,6 +70,7 @@ public class MsgContentActivity extends BaseActivity {
                             if (t[0] != null) {
                                 if (t.length <= 1) {
                                     showToast("文件已保存" + t[0]);
+                                    downLoadDialog.dismiss();
                                 }
                                 File file = new File(t[0]);
                                 Uri uri = Uri.fromFile(file);
@@ -85,11 +88,13 @@ public class MsgContentActivity extends BaseActivity {
                                             @Override
                                             public void onError(Throwable t) {
                                                 showToast("文件解析失败" + t.getMessage());
+                                                downLoadDialog.dismiss();
                                             }
                                         })
                                         .load();
                             } else {
                                 showToast(t[1]);
+                                downLoadDialog.dismiss();
                             }
                         }
                     });
@@ -100,7 +105,8 @@ public class MsgContentActivity extends BaseActivity {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            showToast("已下载" + t[1] + "/" + t[0] + "K");
+                            downLoadDialog.show();
+                            downLoadDialog.setShowLength(t[0], t[1]);
                         }
                     });
                 }

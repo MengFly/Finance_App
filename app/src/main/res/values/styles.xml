@@ -17,4 +17,10 @@
 
     </style>
 
+    <!--dialog的类型-->
+    <style name="MyDialogStyle" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>

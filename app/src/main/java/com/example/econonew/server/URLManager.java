@@ -39,8 +39,10 @@ public class URLManager {
 
     public static String getMsgContentUrl(String context) {
         //如果传入进来的context为空，说明网页地址不可用
-        if (TextUtils.isEmpty(context.trim()) || context.length() > 50) {
+        if (TextUtils.isEmpty(context.trim()) || context.length() > 100) {
             return null;
+        } else if(context.toLowerCase().endsWith("pdf")) {
+            return context;
         }
         return CAI_BIAN_URL + "\\" + context;
     }

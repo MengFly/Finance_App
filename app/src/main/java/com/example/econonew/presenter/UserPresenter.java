@@ -5,10 +5,10 @@ import android.content.DialogInterface;
 import com.example.econonew.resource.Constant;
 import com.example.econonew.server.jpush.SettingActivity;
 import com.example.econonew.tools.Voice;
-import com.example.econonew.view.activity.User.UserActivity;
-import com.example.econonew.view.activity.User.UserRegistActivity;
-import com.example.econonew.view.activity.User.UserSetPwdActivity;
-import com.example.econonew.view.activity.User.UserSetVipActivity;
+import com.example.econonew.view.activity.user.UserActivity;
+import com.example.econonew.view.activity.user.UserRegistActivity;
+import com.example.econonew.view.activity.user.UserSetPwdActivity;
+import com.example.econonew.view.activity.user.UserSetVipActivity;
 
 /**
  * Created by mengfei on 2017/1/13.

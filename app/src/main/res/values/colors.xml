@@ -23,11 +23,35 @@
 
     <!-- Color : App中默认的各种颜色 -->
     <color name="color_red_app">#db0b1c</color>
-    <color name="color_white_app">#fbf1f1</color>
+    <color name="color_white_app">#f2f2f2</color>
 
     <!-- Text:字体颜色 -->
     <color name="text_link_color">#D52FA8</color>
     <color name="text_hint_color">#aaa4a4</color>
     <color name="text_white">#fff</color>
     <color name="text_black">#000</color>
+
+
+    <!--Button-->
+    <color name="app_btn_color_dark">#D81B60</color>
+
+    <!--主要文字（黑色）的颜色-->
+    <color name="color_text_main_dark">#dd000000</color>
+    <!--次要文字（黑色）的颜色-->
+    <color name="color_text_second_dark">#8a000000</color>
+    <!--禁用文字，提示文字和圖示-->
+    <color name="color_text_disabled_dark">#60000000</color>
+    <!--分隔線-->
+    <color name="color_diver_dark">#1e000000</color>
+
+    <!--主要文字（白色）的颜色-->
+    <color name="color_text_main_light">#ffffff</color>
+    <!--次要文字（白色）的颜色-->
+    <color name="color_text_second_light">#b3ffffff</color>
+    <!--禁用文字，提示文字和圖示-->
+    <color name="color_text_disabled_light">#80ffffff</color>
+    <!--分隔線-->
+    <color name="color_diver_light">#1effffff</color>
+
+    <color name="color_none">#0000</color>
 </resources>

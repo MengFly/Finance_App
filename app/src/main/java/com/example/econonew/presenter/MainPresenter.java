@@ -5,7 +5,7 @@ import com.example.econonew.resource.msg.MainMessage;
 import com.example.econonew.tools.ShareTool;
 import com.example.econonew.tools.Voice;
 import com.example.econonew.view.activity.FinanceApplication;
-import com.example.econonew.view.activity.User.UserActivity;
+import com.example.econonew.view.activity.user.UserActivity;
 import com.example.econonew.view.activity.channel.ChannelAddActivity;
 import com.example.econonew.view.activity.main.MainActivity;
 
