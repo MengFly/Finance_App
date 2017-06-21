@@ -56,11 +56,11 @@ public class UserLoginActivity extends BaseUserActivity<BaseUserPresenter<UserAc
         }
     };
 
-    public void showLoginErrorMsg(String msg) {
-        if (!TextUtils.isEmpty(msg)) {
-            mBinding.tvShowWarron.setText(msg);
-        }
-    }
+//    public void showLoginErrorMsg(String msg) {
+//        if (!TextUtils.isEmpty(msg)) {
+//            mBinding.tvShowWarron.setText(msg);
+//        }
+//    }
 
     //    private void initListener() {
 //        mBinding.actLoginRegistBtn.setOnClickListener(new View.OnClickListener() {

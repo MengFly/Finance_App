@@ -2,18 +2,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="presenter"
-            type="com.example.econonew.presenter.MainPresenter"/>
+            type="com.example.econonew.presenter.MainPresenter" />
 
     </data>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+        style="@style/app_base_linearlayout"
+        android:padding="0dp">
 
-        <include android:id="@+id/act_main_title_bar" layout="@layout/activity_title_bar" />
+        <include
+            android:id="@+id/act_main_title_bar"
+            layout="@layout/activity_title_bar" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/act_main_tab_ly"
@@ -29,7 +31,7 @@
 
         <android.support.v4.view.ViewPager
             android:id="@+id/act_main_viewpager"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
@@ -48,9 +50,9 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableTop="@drawable/icon_voice"
                 android:focusable="false"
+                android:onClick="@{()->presenter.onVoiceBtnClick()}"
                 android:text="@string/main_activity_voice_btn"
                 android:textColor="#fff"
-                android:onClick="@{()->presenter.onVoiceBtnClick()}"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -59,10 +61,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="@{()->presenter.onAddChannelBtnClick()}"
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableTop="@drawable/icon_channel"
                 android:focusable="false"
+                android:onClick="@{()->presenter.onAddChannelBtnClick()}"
                 android:text="@string/main_activity_channel_add_btn"
                 android:textColor="#fff"
                 android:textSize="12sp"

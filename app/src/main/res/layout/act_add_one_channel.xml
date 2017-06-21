@@ -17,54 +17,46 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/app_base_layout"
+            android:gravity="center_vertical">
 
             <Button
                 android:id="@+id/act_add_one_channel_name_btn"
                 style="@style/app_base_btn.drawable"
                 android:drawableTop="@drawable/icon_funds_name"
-                android:text="@{channelType}"
-                android:textColor="@color/color_text_main_light" />
+                android:text="@{channelType}" />
 
             <TextView
                 android:id="@+id/act_add_one_channel_name_tv"
                 style="@style/app_base_text"
                 android:labelFor="@id/act_add_one_channel_name_btn"
-                android:text="请选择"
+                android:text="@string/please_select"
                 android:textSize="@dimen/text_size_large" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/app_base_layout"
+            android:gravity="center_vertical">
 
             <Button
                 android:id="@+id/act_add_one_channel_info_btn"
                 style="@style/app_base_btn.drawable"
                 android:drawableTop="@drawable/icon_category"
-                android:text="信息类型"
-                android:textColor="@color/color_text_main_light" />
+                android:text="@string/message_type" />
 
             <TextView
                 android:id="@+id/act_add_one_channel_info_tv"
                 style="@style/app_base_text"
                 android:labelFor="@id/act_add_one_channel_info_btn"
-                android:text="请选择"
+                android:text="@string/please_select"
                 android:textSize="@dimen/text_size_large" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/act_add_one_channel_sure_btn"
+            android:id="@+id/btn_ok"
             style="@style/btn"
             android:layout_width="match_parent"
-            android:text="确定" />
+            android:text="@string/btn_ok" />
 
     </LinearLayout>
 </layout>

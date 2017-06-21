@@ -19,6 +19,15 @@
     <style name="app_base_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <!--App中的Root节点的LinearLayout的样式-->
+    <style name="app_base_linearlayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
     <!--显示密码的editText-->
@@ -33,6 +42,17 @@
         <item name="android:inputType">number</item>
         <item name="android:drawableLeft">@drawable/icon_act_user_user</item>
         <item name="android:drawableStart">@drawable/icon_act_user_user</item>
+    </style>
+
+    <!--用于作为标签的textView的样式-->
+    <style name="text_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/color_text_second_dark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
 
     <!--hint类型的TextView-->
@@ -64,11 +84,11 @@
     <style name="main_item">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">15dp</item>
         <item name="android:clickable">true</item>
-        <item name="android:drawablePadding">10dp</item>
-        <item name="android:background">@drawable/select_background</item>
+        <item name="android:drawablePadding">15dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:background">@drawable/select_background</item>
     </style>
 </resources>

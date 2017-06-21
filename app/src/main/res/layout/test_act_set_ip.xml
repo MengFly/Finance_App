@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:layout_gravity="center_horizontal"
+        style="@style/text_label"
+        android:padding="10dp"
         android:text="设置中间服务器IP" />
 
     <EditText
-        android:layout_margin="5dp"
         android:id="@+id/ip_et"
         android:layout_width="match_parent"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:background="@drawable/et_back"
-        android:layout_height="wrap_content" />
+        android:padding="10dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TextView
-            android:padding="10dp"
-            android:text="当前中间服务器IP地址："
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            style="@style/text_label"
+            android:text="当前服务器地址：" />
+
         <TextView
             android:id="@+id/current_ip"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-</LinearLayout>
+            style="@style/text_label"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
 
 
-   <Button
-        style="@style/app_base_btn.ok"
+    <Button
         android:id="@+id/test_act_set_ip_btn"
+        style="@style/app_base_btn.ok"
         android:layout_width="match_parent" />
 
 </LinearLayout>

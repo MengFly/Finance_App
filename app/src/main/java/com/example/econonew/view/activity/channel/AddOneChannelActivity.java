@@ -45,7 +45,7 @@ public class AddOneChannelActivity extends BaseActivity<AddOneChannelPresenter> 
                 dialogInfo.setDialog();
             }
         });
-        mBinding.actAddOneChannelSureBtn.setOnClickListener(new View.OnClickListener() {
+        mBinding.btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.addChannel(channelName,

@@ -1,26 +1,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="15dip"
-        android:orientation="vertical">
+    <LinearLayout style="@style/app_base_linearlayout">
 
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tv_back"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
+            style="@style/text_label"
+            android:layout_width="match_parent"
             android:text="@string/act_add_channel_title_tv"
             android:textSize="25sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
+            style="@style/text_label"
             android:text="@string/act_add_channel_select_style_tv"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -35,7 +26,6 @@
                 android:stretchColumns="0,1">
 
                 <TableRow>
-
                     <LinearLayout
                         android:gravity="center"
                         android:orientation="vertical">

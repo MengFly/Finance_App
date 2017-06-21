@@ -8,8 +8,7 @@
 
     <TextView
         android:id="@+id/tv_title_download"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/text_label"
         android:text="正在下载"
         android:textSize="20sp" />
 
@@ -23,10 +22,8 @@
 
     <TextView
         android:id="@+id/tv_download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/text_label"
         android:layout_gravity="end"
-        android:text="2345/2455"
-        android:textSize="14sp" />
+        android:text="0/0" />
 
 </LinearLayout>

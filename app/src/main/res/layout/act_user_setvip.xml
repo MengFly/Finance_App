@@ -2,7 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="com.example.econonew.resource.Constant"/>
+
+        <import type="com.example.econonew.resource.Constant" />
     </data>
 
     <LinearLayout
@@ -24,9 +25,10 @@
                 android:layout_centerInParent="true"
                 android:layout_marginBottom="50dp"
                 android:focusable="false"
-                android:text="@{Constant.user.getName()}"
                 android:gravity="center_horizontal"
-                android:inputType="text"/>
+                android:hint="输入账号"
+                android:inputType="text"
+                android:text="@{Constant.user.getName()}" />
 
             <TextView
                 android:id="@+id/act_set_vip_user_name_tv"
@@ -37,7 +39,6 @@
                 android:layout_centerInParent="true"
                 android:clickable="true"
                 android:gravity="end"
-                android:hint="输入账号"
                 android:text="切换账号"
                 android:textColor="#f00"
                 android:textStyle="normal" />

@@ -1,31 +1,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="presenter"
-            type="com.example.econonew.presenter.UserPresenter"/>
+            type="com.example.econonew.presenter.UserPresenter" />
     </data>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/lightGray"
-        android:orientation="vertical">
+        style="@style/app_base_linearlayout"
+        android:padding="0dp">
 
         <LinearLayout
             android:id="@+id/user_layout"
-            android:layout_width="match_parent"
+            style="@style/app_base_linearlayout"
             android:layout_height="200dp"
             android:background="@drawable/icon_user_back"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/user_regist"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:onClick="@{()->presenter.registClick()}"
-                android:background="@drawable/user_login_btn" />
+                android:background="@drawable/user_login_btn"
+                android:onClick="@{()->presenter.registClick()}" />
 
             <RelativeLayout style="@style/app_base_layout">
 
@@ -56,52 +54,43 @@
             android:scrollbars="none">
 
             <LinearLayout
-                style="@style/app_base_layout"
+                style="@style/app_base_linearlayout"
                 android:divider="@android:drawable/divider_horizontal_dark"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:padding="0dp"
                 android:showDividers="middle|beginning|end">
 
                 <TextView
                     android:id="@+id/act_user_login_tv"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
+                    android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/icon_act_user_user"
                     android:drawableStart="@drawable/icon_act_user_user"
                     android:onClick="@{() -> presenter.userLoginClick()}"
-
                     android:text="@string/act_user_item_login_tv" />
 
                 <TextView
                     android:id="@+id/setPwd"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_setpass"
                     android:drawableStart="@drawable/icon_act_user_setpass"
                     android:onClick="@{(v) -> presenter.setPwdClick()}"
                     android:text="@string/act_user_item_setpwd_tv" />
 
-                <android.support.v4.widget.Space
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp" />
-
                 <TextView
                     android:id="@+id/act_user_regist_tv"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
+                    android:layout_marginTop="15dp"
                     android:drawableLeft="@drawable/ic_act_user_regist"
-                    android:onClick="@{()->presenter.registClick()}"
                     android:drawableStart="@drawable/ic_act_user_regist"
+                    android:onClick="@{()->presenter.registClick()}"
                     android:text="@string/act_user_item_regist_tv" />
 
                 <TextView
                     android:id="@+id/act_user_setVip_tv"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/ic_act_user_vip"
-                    android:onClick="@{(v) -> presenter.userSetVipClick()}"
                     android:drawableStart="@drawable/ic_act_user_vip"
+                    android:onClick="@{(v) -> presenter.userSetVipClick()}"
                     android:text="@string/act_user_item_vip_tv" />
 
                 <android.support.v4.widget.Space
@@ -111,7 +100,6 @@
                 <TextView
                     android:id="@+id/settingPush"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_settime"
                     android:drawableStart="@drawable/icon_act_user_settime"
                     android:onClick="@{()->presenter.settingsClick()}"
@@ -121,7 +109,6 @@
                 <TextView
                     android:id="@+id/repeat_voice"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_resetvoice"
                     android:drawableStart="@drawable/icon_act_user_resetvoice"
                     android:onClick="@{()->presenter.voiceResetClick()}"
@@ -134,7 +121,6 @@
                 <TextView
                     android:id="@+id/logout"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
                     android:drawableLeft="@drawable/icon_act_user_logout"
                     android:drawableStart="@drawable/icon_act_user_logout"
                     android:onClick="@{()->presenter.logoutClick()}"
@@ -147,7 +133,6 @@
                 <TextView
                     android:id="@+id/act_user_set_ip_tv"
                     style="@style/main_item"
-                    android:background="@drawable/select_background"
                     android:gravity="end"
                     android:text="@string/act_user_item_set_ip_tv"
                     android:textColor="@color/colorAccent"
