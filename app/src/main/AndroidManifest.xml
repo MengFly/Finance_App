@@ -70,7 +70,7 @@
         <activity
             android:name=".view.activity.user.UserLoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:theme="@style/AppNoActionBarTheme"/>
         <activity
             android:name=".view.activity.user.UserRegistActivity"

@@ -36,6 +36,12 @@ public class UserLoginActivity extends BaseUserActivity<BaseUserPresenter<UserAc
         mBinding.ivBack.setOnClickListener(viewClickListener);
     }
 
+    @Override
+    protected void initDatas() {
+        isStartLogin = getIntent().getBooleanExtra("isStartLogin", true);
+        bindPresenter(new BaseUserPresenter(this));
+    }
+
     private View.OnClickListener viewClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -55,54 +61,5 @@ public class UserLoginActivity extends BaseUserActivity<BaseUserPresenter<UserAc
             }
         }
     };
-
-//    public void showLoginErrorMsg(String msg) {
-//        if (!TextUtils.isEmpty(msg)) {
-//            mBinding.tvShowWarron.setText(msg);
-//        }
-//    }
-
-    //    private void initListener() {
-//        mBinding.actLoginRegistBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {openOtherActivity(UserRegistActivity.class, true);
-//            }
-//        });
-//        mBinding.actLoginSureBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loginBtnClick();
-//            }
-//        });
-//        mBinding.loginRegistTv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loginBtnClick();
-//            }
-//        });
-//        mBinding.actUserLoginNotLoginTv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                backHomeActivity();
-//            }
-//        });
-//        mBinding.actLoginForgetPassTv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {openOtherActivity(UserSetPwdActivity.class, true);}
-//        });
-//    }
-//
-    @Override
-    protected void initDatas() {
-        isStartLogin = getIntent().getBooleanExtra("isStartLogin", true);
-        bindPresenter(new BaseUserPresenter(this));
-    }
-//
-//    // 登陆按钮的事件的处理逻辑
-//    private void loginBtnClick() {
-//        String userNameStr = mBinding.actLoginUserNameEt.getText().toString();
-//        String userPasswordStr = mBinding.actLoginPasswordEt.getText().toString();
-//        mPresenter.userLoginThread(userNameStr, userPasswordStr, isStartLogin);
-//    }
 
 }

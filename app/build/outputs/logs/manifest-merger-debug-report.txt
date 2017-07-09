@@ -187,7 +187,7 @@ ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:
 	android:screenOrientation
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:72:13-49
 	android:windowSoftInputMode
-		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:73:13-67
+		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:73:13-64
 	android:theme
 		ADDED from D:\download\Application\Finance_App\app\src\main\AndroidManifest.xml:74:13-55
 	android:name
