@@ -32,10 +32,22 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+#============ This is JPush's Proguard Settings ===================================
+-dontpreverify
 
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+#=========== This is Glide's Proguard Settings========================================
 -keepnames class * com.example.mengfei.todo.utils.image.MyGlideModule
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
+
+#========== This is TencentX5's Proguard Settings==============================================
 #-optimizationpasses 7
 #-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 -dontoptimize

@@ -1,8 +1,12 @@
 package com.example.econonew.view.customview;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -45,6 +49,28 @@ public class DefaultWebView extends WebView {
         WebSettings setting = this.getSettings();
         setting.setJavaScriptEnabled(true);// 启用JavaScript
         setting.setDefaultTextEncodingName("utf-8");//设置默认的字符编码
+        setting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        setting.setSupportZoom(true);
+        setting.setLoadWithOverviewMode(true);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        ((Activity) getContext()).getWindow().setFormat(PixelFormat.TRANSPARENT);
+        int mDensity = metrics.densityDpi;
+        Log.d("maomao", "densityDpi = " + mDensity);
+        if (mDensity == 240) {
+            setting.setDefaultZoom(WebSettings.ZoomDensity.FAR);
+        } else if (mDensity == 160) {
+            setting.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
+        } else if(mDensity == 120) {
+            setting.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
+        }else if(mDensity == DisplayMetrics.DENSITY_XHIGH){
+            setting.setDefaultZoom(WebSettings.ZoomDensity.FAR);
+        }else if (mDensity == DisplayMetrics.DENSITY_TV){
+            setting.setDefaultZoom(WebSettings.ZoomDensity.FAR);
+        }else{
+            setting.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
+        }
         this.setWebViewClient(new DefaultWebViewClient());
         this.setWebChromeClient(new DefaultWebChromeClient());
     }

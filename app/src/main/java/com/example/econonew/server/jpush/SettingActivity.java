@@ -1,5 +1,6 @@
 package com.example.econonew.server.jpush;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -91,6 +92,7 @@ public class SettingActivity extends BaseActivity {
         int startMinute = startTime.getCurrentMinute();
         int endHour = endTime.getCurrentHour();
         int endMinute = endTime.getCurrentMinute();
+//        showToast("startTime" + startHour + "shi" + startMinute + "fen" + " endTime" + endHour + "shi" + endMinute + "fen");
         if (endHour < startHour || (endHour == startHour && endMinute < startMinute)) {
             showToast("开始时间不能大于结束时间");
             return;

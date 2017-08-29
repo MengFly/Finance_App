@@ -22,17 +22,10 @@ import com.example.econonew.view.viewinterface.ActEditChangeable;
 public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserActivity>> implements ActEditChangeable {
 
     private ActUserRegist2Binding mBinding;
-//    private EditText userNameEt, userPassWordEt, userPassWord2Et;
-//    private EditText userAnswerEt;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         mBinding = DataBindingUtil.setContentView(mContext, R.layout.act_user_regist2);
-
-//        userNameEt = mBinding.actRegistUserNameLy.getEditText();
-//        userPassWordEt = mBinding.actRegistPasswordLy.getEditText();
-//        userPassWord2Et = mBinding.actRegistPassword2Ly.getEditText();
-//        userAnswerEt = mBinding.actUserRegistGetPassLy.getEditText();
 
         initSpinner();
         initListener();
@@ -44,17 +37,9 @@ public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserA
         questAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mBinding.SPMibao.setAdapter(questAdapter);
         mBinding.SPMibao.setPrompt("请选择密保问题");
-//        mBinding.actUserRegistQuestSp.setAdapter(questAdapter);
-//        mBinding.actUserRegistQuestSp.setPrompt("请选择密保问题");
     }
 
     private void initListener() {
-//        mBinding.actRegistSureBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                userRegistBtnClick();
-//            }
-//        });
         mBinding.btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,16 +56,11 @@ public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserA
         mBinding.etPassword.addTextChangedListener(new TextChangeListener(this));
         mBinding.etPasswordAgain.addTextChangedListener(new TextChangeListener(this));
         mBinding.etMibao.addTextChangedListener(new TextChangeListener(this));
-//        userNameEt.addTextChangedListener(new TextChangeListener(this));
-//        userPassWordEt.addTextChangedListener(new TextChangeListener(this));
-//        userPassWord2Et.addTextChangedListener(new TextChangeListener(this));
-//        userAnswerEt.addTextChangedListener(new TextChangeListener(this));
         mBinding.SPMibao.setOnItemSelectedListener(new SpinnerSelectAdapter() {
             @Override
             public void onItemSelected(String selectText) {
                 // TODO: 2016/9/26 要实现的选择密保问题的方法
                 mBinding.etMibao.setHint("请输入" + selectText);
-//                userAnswerEt.setHint("请输入" + selectText);
             }
         });
     }
@@ -108,22 +88,15 @@ public class UserRegistActivity extends BaseUserActivity<BaseUserPresenter<UserA
         if (!TextUtils.isEmpty(userName) && userName.length() != 11) {
             mBinding.tilUsername.setErrorEnabled(true);
             mBinding.tilUsername.setError("用户名长度不对");
-//            mBinding.actRegistUserNameLy.setErrorEnabled(true);
-//            mBinding.actRegistUserNameLy.setError("用户名长度不对");
-
         } else if (!TextUtils.isEmpty(pass1) && !pass1.equals(pass2)) {
             mBinding.tilPasswordAgain.setErrorEnabled(true);
             mBinding.tilPasswordAgain.setError("两次输入的密码不一致");
-//            mBinding.actRegistPassword2Ly.setErrorEnabled(true);
-//            mBinding.actRegistPassword2Ly.setError("两次输入的密码不一致");
         }
         if (userName.length() == 11) {
             mBinding.tilUsername.setErrorEnabled(false);
-//            mBinding.actRegistUserNameLy.setErrorEnabled(false);
         }
         if (pass1.equals(pass2) || TextUtils.isEmpty(pass1)) {
             mBinding.tilPasswordAgain.setErrorEnabled(false);
-//            mBinding.actRegistPassword2Ly.setErrorEnabled(false);
         }
     }
 }

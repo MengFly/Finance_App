@@ -36,6 +36,21 @@ public class Voice {
 	public static final int VOICE_STAT_READING = 1;//当前正在阅读
 	public static final int VOICE_STAT_PAUSE = 2;//当前暂停中
 
+	//用于监听Voice的状态改变
+	private OnVoiceStatChangeListener statChangeListener;
+
+	public static boolean isPause = false;
+	public static void onPause() {
+		isPause = true;
+	}
+
+	public static void onResume() {
+		isPause = false;
+		//重新刷新一遍
+		Voice.getInstance().statChangeListener.statChange(Voice.getInstance().readStat);
+	}
+
+
 	// 讯飞语音的设置// 1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
 	private SpeechSynthesizer mTts;
 
@@ -89,6 +104,13 @@ public class Voice {
 		readStat = VOICE_STAT_NO_READ;
 		readList.clear();
 		currentReadPoint = 0;
+		if (statChangeListener != null && !isPause) {
+			statChangeListener.statChange(readStat);
+		}
+	}
+
+	public void setStatChangeListener(OnVoiceStatChangeListener statChangeListener) {
+		this.statChangeListener = statChangeListener;
 	}
 
 	/**
@@ -108,6 +130,10 @@ public class Voice {
 		} else {
 			resumeList();
 			readStat = VOICE_STAT_READING;
+		}
+		//如果所在的Activity可见就执行
+		if (statChangeListener != null && !isPause) {
+			statChangeListener.statChange(readStat);
 		}
 	}
 
@@ -223,5 +249,12 @@ public class Voice {
 		public void onEvent(int arg0, int arg1, int arg2, Bundle arg3) {
 		}
 	};
+
+	/**
+	 * 阅读状态
+	 */
+	public static interface OnVoiceStatChangeListener {
+		void statChange(int stat);
+	}
 
 }

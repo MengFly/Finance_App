@@ -70,12 +70,6 @@ public class NetClient {
 		FinanceApplication.getRequestQueue().add(request);
 	}
 
-	// public void excutePost(Context context, String url,
-	// Map<String, String> params, OnResultListener listener) {
-	// MyStringRequest request = new MyStringRequest(context, Method.GET, url,
-	// listener, errorListener);
-	// }
-
 	/**
 	 * 获取VooleyDemo实例
 	 */

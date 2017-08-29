@@ -2,7 +2,6 @@ package com.example.econonew.view.activity.user;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.example.econonew.R;

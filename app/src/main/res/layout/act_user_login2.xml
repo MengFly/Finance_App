@@ -41,18 +41,6 @@
                     android:hint="@string/tip_username" />
             </android.support.design.widget.TextInputLayout>
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_show_warron"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:drawableLeft="@drawable/ic_wrron"-->
-                <!--android:drawablePadding="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="当前没有输入用户名"-->
-                <!--android:textColor="@color/color_red_app" />-->
-
             <android.support.design.widget.TextInputLayout
                 style="@style/app_base_layout"
                 app:counterEnabled="true"
@@ -81,15 +69,6 @@
 
         </LinearLayout>
 
-        <com.example.econonew.view.customview.UnderLineTextView
-            android:id="@+id/tv_other_login"
-            style="@style/text_label"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:text="@string/login_other"
-            android:textSize="20sp" />
     </LinearLayout>
 
 </layout>
