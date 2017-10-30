@@ -17,6 +17,7 @@ public class ChannelListManager {
 	private static final String[] MONEY_NAME = new String[] { "银行", "信托", "保险", "券商", "互联网" };
 	// 外汇定制的标签
 	private static final String[] EXCHANGE_NAME = new String[] { "美元", "欧元", "人民币", "英镑", "日元", "港币" };
+
 	// 二级信息标签
 	private static final String[] CHANNEL_LABEL = new String[] { "公告", "数据", "资讯", "分析", "定制" };
 

@@ -7,6 +7,7 @@ import com.example.econonew.resource.Constant;
 import com.example.econonew.view.fragment.MainMessageFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,11 +51,11 @@ public class MainMessage implements IMessage<MsgItemEntity> {
         if (!isAddEnd) {
             clearAllMsg();
         }
+        Collections.sort(msgList);
         addList(msgList);
         sentMsgToUiAndVoice();
         if (isSaveToDatabase) {
             DBHelperFactory.getDBHelper().insertAllItems(MsgItemEntity.class, msgList);
-//            dbManager.insertItems(table, msgList);// 如果保存，就保存到数据库面
         }
     }
 

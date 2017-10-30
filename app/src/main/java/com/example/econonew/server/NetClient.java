@@ -95,11 +95,11 @@ public class NetClient {
 
 		public void onError(VolleyError error){
 			if (error instanceof NoConnectionError) {
-				Toast.makeText(FinanceApplication.getInstance(), "网络链接失败，请检查网络设置", Toast.LENGTH_SHORT).show();
-			} else if (error instanceof TimeoutError) {
-				Toast.makeText(FinanceApplication.getInstance(), "链接超时，请稍后重试", Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(FinanceApplication.getInstance(), "网络链接错误" + error, Toast.LENGTH_SHORT).show();
+					Toast.makeText(FinanceApplication.getInstance(), "网络链接失败，请检查网络设置", Toast.LENGTH_SHORT).show();
+				} else if (error instanceof TimeoutError) {
+					Toast.makeText(FinanceApplication.getInstance(), "链接超时，请稍后重试", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(FinanceApplication.getInstance(), "网络链接错误" + error, Toast.LENGTH_SHORT).show();
 			}
 		}
 

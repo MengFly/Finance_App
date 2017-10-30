@@ -36,7 +36,7 @@ import cn.jpush.android.api.JPushInterface;
  */
 public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackActivity {
 
-	protected  T mPresenter;
+	public T mPresenter;
 
 	private Toast mToast;
 	private AlertDialog.Builder builder;

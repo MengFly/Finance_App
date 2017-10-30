@@ -60,7 +60,7 @@
                 android:showDividers="middle|beginning|end">
 
                 <TextView
-                    android:id="@+id/act_user_login_tv"
+                    android:id="@+id/tv_user_login"
                     style="@style/main_item"
                     android:layout_marginTop="10dp"
                     android:drawableLeft="@drawable/icon_act_user_user"
